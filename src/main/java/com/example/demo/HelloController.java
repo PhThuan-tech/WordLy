@@ -6,10 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 
 public class HelloController {
@@ -57,6 +56,17 @@ public class HelloController {
 
     @FXML
     public void initialize() {
+
+        String imagePath = getClass().getResource("BigBenTower.jpg").toExternalForm();
+
+        BackgroundImage BI = new BackgroundImage(
+                new Image(imagePath, mainContainer.getWidth(), mainContainer.getHeight(), false, true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT
+        );
+
+        mainContainer.setBackground(new Background(BI));
+
         searchButton.setOnAction(_ -> searching());
         bottomGrid.setVisible(true);
         centerVBox.setVisible(false);
