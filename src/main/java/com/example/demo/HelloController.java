@@ -29,6 +29,7 @@ public class HelloController {
     public Button listen;
     public VBox mainContainer;
     public Label notFoundLabel;
+    public Button favorite;
 
     /**
      * Action when click searchButton.
