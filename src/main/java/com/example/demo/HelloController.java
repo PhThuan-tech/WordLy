@@ -2,10 +2,7 @@ package com.example.demo;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -42,6 +39,12 @@ public class HelloController {
             centerVBox.setVisible(true);
             bottomGrid.setVisible(false);
             updateCenterVBox(details);
+        } else {
+            Alert notFind = new Alert(Alert.AlertType.INFORMATION);
+            notFind.setTitle("Không thể tìm thấy từ");
+            notFind.setHeaderText(null);
+            notFind.setContentText("Không tìm thấy từ của bạn mong muốn, vui lòng thử lại");
+            notFind.showAndWait();
         }
     }
 
