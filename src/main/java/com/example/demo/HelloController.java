@@ -36,7 +36,9 @@ public class HelloController {
     @FXML
     private void searching() {
         String input = searchBar.getText().trim();
+
         wordDetails details = DictionaryService.search(input);
+
         if (details != null) {
             centerVBox.setVisible(true);
             bottomGrid.setVisible(false);
@@ -52,6 +54,7 @@ public class HelloController {
             notFind.setContentText("Không tìm thấy từ của bạn mong muốn, vui lòng thử lại");
             notFind.showAndWait();
         }
+
     }
 
     private void updateCenterVBox(wordDetails details) {

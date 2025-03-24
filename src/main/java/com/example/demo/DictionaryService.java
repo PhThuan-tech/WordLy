@@ -49,4 +49,8 @@ public class DictionaryService {
             System.err.println("Khong the ghi");
         }
     }
+
+    public static void searchUseAPI (String word) throws IOException, InterruptedException {
+        API.apiRequest(word);
+    }
 }
