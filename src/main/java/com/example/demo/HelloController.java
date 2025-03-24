@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
+import java.util.Objects;
+
 
 public class HelloController {
     @FXML public HBox topHBOx;
@@ -39,6 +41,10 @@ public class HelloController {
             centerVBox.setVisible(true);
             bottomGrid.setVisible(false);
             updateCenterVBox(details);
+
+            System.out.println(details.getWord() + " " + details.getPronunciation());
+
+            DictionaryService.addHistory(details.getWord());
         } else {
             Alert notFind = new Alert(Alert.AlertType.INFORMATION);
             notFind.setTitle("Không thể tìm thấy từ");
@@ -49,7 +55,7 @@ public class HelloController {
     }
 
     private void updateCenterVBox(wordDetails details) {
-        Platform.runLater(() -> { // Đảm bảo các cập nhật UI nằm trên JavaFX thread
+        Platform.runLater(() -> {
             wordLabel.setText(details.getWord());
             wordTypeLabel.setText(details.getType());
             pronunciation.setText(details.getPronunciation());
@@ -61,7 +67,7 @@ public class HelloController {
     @FXML
     public void initialize() {
 
-        String imagePath = getClass().getResource("BigBenTower.jpg").toExternalForm();
+        String imagePath = Objects.requireNonNull(getClass().getResource("BigBenTower.jpg")).toExternalForm();
 
         BackgroundImage BI = new BackgroundImage(
                 new Image(imagePath, mainContainer.getWidth(), mainContainer.getHeight(), false, true),

@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,5 +38,15 @@ public class DictionaryService {
      */
     public static wordDetails search (String word) {
         return data.get(word);
+    }
+
+    public static void addHistory (String word) {
+        try (BufferedWriter bw = new BufferedWriter( new FileWriter("history.txt", true))) {
+            bw.write(word);
+            bw.newLine();
+            System.out.println("Da ghi " + word + " vao file");
+        } catch (IOException e) {
+            System.err.println("Khong the ghi");
+        }
     }
 }
