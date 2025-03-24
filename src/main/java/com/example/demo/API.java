@@ -5,24 +5,83 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Scanner;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class API {
-    public static void apiRequest(String input) throws IOException, InterruptedException {
-        String apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + input;
 
-        HttpClient cilent = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(apiUrl)).header("Accept", "application").build();
+    private static final Logger logger = LoggerFactory.getLogger(API.class);
 
-        HttpResponse<String> response = cilent.send(request, HttpResponse.BodyHandlers.ofString());
+    public static wordDetails searchingUsingAPI(String input) {
+        wordDetails details = new wordDetails(); // Initialize even if API fails
 
-        if (response.statusCode() == 200) {
-            String bodyWord = response.body();
-            System.out.println(bodyWord);
-        } else if (response.statusCode() == 404) {
-            System.out.println("Word not found");
-        } else {
-            System.out.println("Error");
+        try {
+            String url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + input;
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() != 200) {
+                logger.error("API request failed with status code: {}", response.statusCode());
+                return null; // Returning null indicates an API error
+            }
+
+            String jsonStr = response.body();
+            JSONArray jsonArr = new JSONArray(jsonStr);
+            JSONObject firstEntry = jsonArr.getJSONObject(0);
+
+            details.setWord(getString(firstEntry, "word")); // Use helper function for safety
+
+            // Phonetics
+            if (firstEntry.has("phonetics")) {
+                JSONArray phonetics = firstEntry.getJSONArray("phonetics");
+                if (phonetics.length() > 0) {
+                    JSONObject firstPhonetic = phonetics.getJSONObject(0);
+                    details.setPronunciation(getString(firstPhonetic, "text")); // Use helper function
+                }
+            }
+
+            // Meanings
+            if (firstEntry.has("meanings")) {
+                JSONArray meanings = firstEntry.getJSONArray("meanings");
+                if (meanings.length() > 0) {
+                    JSONObject meaning = meanings.getJSONObject(0);
+                    details.setType(getString(meaning, "partOfSpeech")); //Use helper
+
+                    if (meaning.has("definitions")) {
+                        JSONArray definitions = meaning.getJSONArray("definitions");
+                        if (definitions.length() > 0) {
+                            JSONObject definitionObj = definitions.getJSONObject(0);
+                            details.setUsage(getString(definitionObj, "definition"));//Use Helper
+                            details.setExamples(getString(definitionObj, "example")); //use Helper
+
+                        }
+                    }
+                }
+            }
+        } catch (IOException | InterruptedException e) { //Catch more specific exceptions
+            logger.error("Exception during API call", e);
+            return null; // or throw a custom exception.
+        } catch (Exception e) {
+            logger.error("Unexpected exception during API call", e);
+            return null;
         }
+
+        return details;
+    }
+
+    private static String getString(JSONObject jsonObject, String key) { // Helper function for null/empty checks
+        if (jsonObject != null && jsonObject.has(key) && !jsonObject.isNull(key)) {
+            String value = jsonObject.getString(key);
+            return (value != null && !value.isEmpty()) ? value : null;
+        }
+        return null;
     }
 }

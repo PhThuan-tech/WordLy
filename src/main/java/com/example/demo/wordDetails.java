@@ -15,6 +15,8 @@ public class wordDetails {
         this.examples = examples;
     }
 
+    public wordDetails() {}
+
     public String getWord() {
         return word;
     }

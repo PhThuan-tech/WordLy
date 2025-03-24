@@ -6,3 +6,9 @@ calculate
 calculate
 calculate
 apply
+calculate
+app
+apply
+app
+catch
+dictionary
