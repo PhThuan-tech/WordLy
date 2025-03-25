@@ -2,9 +2,8 @@ package com.example.demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 
 public class DictionaryService {
 
@@ -34,5 +33,13 @@ public class DictionaryService {
     //This now looks almost unused, is there a valid case for this function? if so it can be kept. if not, this can be removed to make the codebase easier to maintain.
     public static void searchUseAPI (String word){
         API.searchingUsingAPI(word);
+    }
+
+    public static void readHistory() throws FileNotFoundException {
+        try (BufferedReader br = new BufferedReader( new FileReader("history.txt"))) {
+            System.out.println(br.read());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

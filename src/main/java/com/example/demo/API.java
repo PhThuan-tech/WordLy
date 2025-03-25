@@ -66,7 +66,7 @@ public class API {
                     }
                 }
             }
-        } catch (IOException | InterruptedException e) { //Catch more specific exceptions
+        } catch (IOException | InterruptedException e) {
             logger.error("Exception during API call", e);
             return null; // or throw a custom exception.
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class API {
         return details;
     }
 
-    private static String getString(JSONObject jsonObject, String key) { // Helper function for null/empty checks
+    private static String getString(JSONObject jsonObject, String key) {
         if (jsonObject != null && jsonObject.has(key) && !jsonObject.isNull(key)) {
             String value = jsonObject.getString(key);
             return (value != null && !value.isEmpty()) ? value : null;
