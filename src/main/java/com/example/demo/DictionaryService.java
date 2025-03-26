@@ -9,7 +9,11 @@ public class DictionaryService {
 
     private static final Logger logger = LoggerFactory.getLogger(DictionaryService.class);
 
-    // Changed the name to match more to what this does. Also removed the `throws Exception`
+    /**
+     * Searching word.
+     * @param word input
+     * @return word u need to find.
+     */
     public static wordDetails search(String word) {
         try {
             return API.searchingUsingAPI(word);
@@ -19,7 +23,10 @@ public class DictionaryService {
         }
     }
 
-    // Added better error handling and logging.
+    /**
+     * Add to history file.
+     * @param word input
+     */
     public static void addHistory(String word) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("history.txt", true))) {
             bw.write(word);
@@ -30,6 +37,10 @@ public class DictionaryService {
         }
     }
 
+    /**
+     * Reading history file.
+     * @throws FileNotFoundException if error.
+     */
     public static void readHistory() throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader( new FileReader("history.txt"))) {
             String line;

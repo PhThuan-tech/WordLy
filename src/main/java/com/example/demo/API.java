@@ -82,21 +82,22 @@ public class API {
 
     public static void pronunciationUsingAPI(String input) {
         try {
-            String url_str = "https://api.dictionaryapi.dev/media/pronunciations/en/" + input + "-us.mp3";
-            URL audioUrl = new URL(url_str);
+            String url_str_by_us = "https://api.dictionaryapi.dev/media/pronunciations/en/" + input + "-us.mp3";
+            String url_str_by_uk = "https://api.dictionaryapi.dev/media/pronunciations/en/" + input + "-uk.mp3";
+            Media media1 = new Media(url_str_by_us);
+            Media media2 = new Media(url_str_by_uk);
 
-            HttpURLConnection connect = (HttpURLConnection) audioUrl.openConnection();
-            connect.setRequestMethod("GET");
+            MediaPlayer mediaPlayer1 = new MediaPlayer(media1);
+            MediaPlayer mediaPlayer2 = new MediaPlayer(media2);
 
-            Media media = new Media(url_str);
+            mediaPlayer1.play();
+            mediaPlayer2.play();
 
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-            mediaPlayer.play();
         } catch (Exception e) {
             logger.error("error", e);
         }
     }
+
 
     private static String getString(JSONObject jsonObject, String key) {
         if (jsonObject != null && jsonObject.has(key) && !jsonObject.isNull(key)) {
@@ -105,6 +106,5 @@ public class API {
         }
         return null;
     }
-
 
 }

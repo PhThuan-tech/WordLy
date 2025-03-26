@@ -39,11 +39,12 @@ public class HelloController {
      */
     @FXML
     private void searching() {
+
         String input = searchBar.getText().trim();
         wordDetails details = null; //Initialize to null
+
         try {
             details = DictionaryService.search(input);
-            DictionaryService.readHistory();
         } catch (Exception e) {
             logger.error("Error during search: ", e);
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -54,14 +55,10 @@ public class HelloController {
             return; // Stop the searching() execution
         }
 
-
         if (details != null) {
             centerVBox.setVisible(true);
             bottomGrid.setVisible(false);
             updateCenterVBox(details);
-
-            logger.info("Found word: {} with pronunciation: {}", details.getWord(), details.getPronunciation());
-
             DictionaryService.addHistory(details.getWord()); //Consider handling exceptions in addHistory
 
             listen.setOnAction(e-> API.pronunciationUsingAPI(input));
