@@ -1,12 +1,15 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import org.jetbrains.annotations.NotNull;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -77,6 +80,24 @@ public class API {
         return details;
     }
 
+    public static void pronunciationUsingAPI(String input) {
+        try {
+            String url_str = "https://api.dictionaryapi.dev/media/pronunciations/en/" + input + "-us.mp3";
+            URL audioUrl = new URL(url_str);
+
+            HttpURLConnection connect = (HttpURLConnection) audioUrl.openConnection();
+            connect.setRequestMethod("GET");
+
+            Media media = new Media(url_str);
+
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.play();
+        } catch (Exception e) {
+            logger.error("error", e);
+        }
+    }
+
     private static String getString(JSONObject jsonObject, String key) {
         if (jsonObject != null && jsonObject.has(key) && !jsonObject.isNull(key)) {
             String value = jsonObject.getString(key);
@@ -84,4 +105,6 @@ public class API {
         }
         return null;
     }
+
+
 }

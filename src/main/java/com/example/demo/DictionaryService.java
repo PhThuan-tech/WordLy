@@ -30,14 +30,12 @@ public class DictionaryService {
         }
     }
 
-    //This now looks almost unused, is there a valid case for this function? if so it can be kept. if not, this can be removed to make the codebase easier to maintain.
-    public static void searchUseAPI (String word){
-        API.searchingUsingAPI(word);
-    }
-
     public static void readHistory() throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader( new FileReader("history.txt"))) {
-            System.out.println(br.read());
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

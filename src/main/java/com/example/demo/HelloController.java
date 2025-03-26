@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -42,6 +43,7 @@ public class HelloController {
         wordDetails details = null; //Initialize to null
         try {
             details = DictionaryService.search(input);
+            DictionaryService.readHistory();
         } catch (Exception e) {
             logger.error("Error during search: ", e);
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -61,6 +63,8 @@ public class HelloController {
             logger.info("Found word: {} with pronunciation: {}", details.getWord(), details.getPronunciation());
 
             DictionaryService.addHistory(details.getWord()); //Consider handling exceptions in addHistory
+
+            listen.setOnAction(e-> API.pronunciationUsingAPI(input));
 
         } else {
             showAlert("Không tìm thấy từ của bạn mong muốn, vui lòng thử lại");
