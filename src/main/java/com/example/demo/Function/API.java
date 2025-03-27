@@ -1,13 +1,12 @@
-package com.example.demo;
+package com.example.demo.Function;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import com.example.demo.other.wordDetails;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;

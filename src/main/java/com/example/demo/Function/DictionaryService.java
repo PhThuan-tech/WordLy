@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.Function;
 
+import com.example.demo.other.wordDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

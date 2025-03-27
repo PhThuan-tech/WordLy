@@ -14,4 +14,8 @@ module com.example.demo {
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
+    exports com.example.demo.Function;
+    opens com.example.demo.Function to javafx.fxml;
+    exports com.example.demo.other;
+    opens com.example.demo.other to javafx.fxml;
 }

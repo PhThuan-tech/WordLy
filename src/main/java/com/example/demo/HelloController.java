@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.Function.API;
+import com.example.demo.Function.DictionaryService;
+import com.example.demo.other.wordDetails;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
