@@ -1,0 +1,12 @@
+.dialog-pane {
+    -fx-background-color: #ffcccb; /* Đổi màu nền */
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #ff6666; /* Nút đỏ */
+    -fx-text-fill: white; /* Chữ trắng */
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #cc0000; /* Màu khi hover */
+}
