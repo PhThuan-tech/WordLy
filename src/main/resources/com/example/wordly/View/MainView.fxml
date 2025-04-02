@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controller.MainController">
+   <children>
+      <Label layoutX="325.0" layoutY="73.0" prefHeight="34.0" prefWidth="250.0" text="WELLCOME TO WORDLY">
+         <font>
+            <Font name="Bodoni MT" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="menuScence" layoutX="375.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" text="Màn hình chính" />
+      <Button fx:id="HowToUse" layoutX="375.0" layoutY="274.0" mnemonicParsing="false" text="Hướng dẫn sử dụng" />
+      <Button fx:id="features" layoutX="378.0" layoutY="347.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" text="Tính năng" />
+   </children>
+</AnchorPane>
