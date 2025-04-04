@@ -13,14 +13,14 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="menuScence" layoutX="374.0" layoutY="193.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Màn hình chính" />
+      <Button fx:id="menuScence" layoutX="374.0" layoutY="193.0" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Màn hình chính" />
       <Button fx:id="HowToUse" layoutX="374.0" layoutY="420.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Hướng dẫn sử dụng" />
       <Button fx:id="features" layoutX="374.0" layoutY="313.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Tính năng" />
    </children>
 
    <!-- Dung scence builder ma ko load dc CSS thi dung cau lenh nay -->
    <stylesheets>
-      <URL value="@../styles/button.css" />
+      <URL value="@../styles/mainsce.css" />
    </stylesheets>
 
 </AnchorPane>

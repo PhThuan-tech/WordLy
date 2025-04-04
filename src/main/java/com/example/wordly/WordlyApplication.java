@@ -28,7 +28,7 @@ public class WordlyApplication extends Application {
 
         // Load them CSS trong start
         scene.getStylesheets().add(getClass()
-                .getResource("/com/example/wordly/styles/button.css").toExternalForm());
+                .getResource("/com/example/wordly/styles/mainsce.css").toExternalForm());
 
         // dat ten tieu de cua app
         stage.setTitle("Learning With Wordly <3");
