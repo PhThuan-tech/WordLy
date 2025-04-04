@@ -5,9 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
+
     <artifactId>WordLy</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>WordLy</name>
+
+    <artifactId>TamThaiTu-UETtest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>TamThaiTu-UETtest</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -99,6 +104,8 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.wordly/com.example.wordly.HelloApplication</mainClass>
+                            <mainClass>com.example.tamthaituuettest/com.example.tamthaituuettest.HelloApplication
+                            </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
