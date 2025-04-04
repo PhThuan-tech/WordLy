@@ -1,0 +1,31 @@
+.custom-button {
+    -fx-background-color: #3498db;  /* Màu xanh dương */
+    -fx-text-fill: white;           /* Màu chữ trắng */
+    -fx-font-size: 18px;            /* Cỡ chữ 16px */
+    -fx-background-radius: 10px;    /* Bo góc */
+    -fx-border-color: #2980b9;      /* Viền xanh đậm */
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px;         /* them padding de chu ko bi cat */
+    -fx-font-weight: bold;
+
+    // bi loi phan kich thuoc cua 1 nut bam
+    -fx-min-width: 200px;   /* chieu dai */
+    -fx-min-height: 50px;
+
+    -fx-pref-width: 250px;
+    -fx-pref-height: 60px;
+
+    -fx-alignment: center;  /* can giua */
+}
+
+.custom-button:hover {
+    -fx-background-color: #2980b9;  /* Đổi màu khi hover */
+}
+
+.title-text {
+    -fx-font-family: "Comic Sans MS", "Arial";  /* Chọn font chữ hoạt hình */
+    -fx-font-size: 28px;                        /* Kích thước chữ */
+    -fx-font-weight: bold;                      /* Đậm */
+    -fx-text-fill: #000080;                     /* Màu cam */
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0 , 2 , 2 ); /* Đổ bóng */
+}

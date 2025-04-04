@@ -1,0 +1,7 @@
+.title-text {
+    -fx-font-family: "Comic Sans MS", "Arial";  /* Chọn font chữ hoạt hình */
+    -fx-font-size: 28px;                        /* Kích thước chữ */
+    -fx-font-weight: bold;                      /* Đậm */
+    -fx-text-fill: #000080;                     /* Màu navy  */
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0 , 2 , 2 ); /* Đổ bóng */
+}

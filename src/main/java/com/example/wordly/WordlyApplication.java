@@ -23,9 +23,15 @@ public class WordlyApplication extends Application {
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;  // su dung giao dien chinh
 
-        FXMLLoader fxmlLoader = new FXMLLoader(WordlyApplication.class.getResource("View/TextToSpeechView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
-        stage.setTitle("Wordly");
+        FXMLLoader fxmlLoader = new FXMLLoader(WordlyApplication.class.getResource("View/MainView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+
+        // Load them CSS trong start
+        scene.getStylesheets().add(getClass()
+                .getResource("/com/example/wordly/styles/button.css").toExternalForm());
+
+        // dat ten tieu de cua app
+        stage.setTitle("Learning With Wordly <3");
         stage.setScene(scene);
         stage.setResizable(false);  // khoa cua so man hinh chinh
         stage.show();
@@ -67,7 +73,6 @@ public class WordlyApplication extends Application {
 
     // de truy cap vao cac giao dien khac thi can 1 MainController
     // gom cac nut bam de di chuyen
-
     public static void main(String[] args) {
         launch();
     }
