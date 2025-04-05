@@ -1,0 +1,90 @@
+/* Đặt màu nền cho AnchorPane */
+.anchor-pane {
+    -fx-background-color: #f0f8ff;
+}
+
+/* Đặt kiểu chữ và màu sắc cho tiêu đề */
+.title {
+    -fx-font-family: "Arial";
+    -fx-font-size: 28px;
+    -fx-text-fill: #333;
+}
+
+/* Đặt kiểu cho các nhãn */
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Đặt kiểu cho các nút menu */
+.menu-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hiệu ứng hover cho các nút menu */
+.menu-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Đặt kiểu cho các nút hành động */
+.action-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hiệu ứng hover cho các nút hành động */
+.action-button:hover {
+    -fx-background-color: #1E88E5;
+}
+
+/* Đặt kiểu cho trường tìm kiếm */
+.search-field {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
+
+/* Đặt kiểu cho nút tìm kiếm */
+.search-button {
+    -fx-background-color: #FF5722;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hiệu ứng hover cho nút tìm kiếm */
+.search-button:hover {
+    -fx-background-color: #E64A19;
+}
+
+/* Đặt kiểu cho các hộp lựa chọn */
+.choice-box {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
+
+/* Đặt kiểu cho các vùng văn bản */
+.text-area {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
