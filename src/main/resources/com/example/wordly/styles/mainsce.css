@@ -1,30 +1,41 @@
-.custom-button {
-    -fx-background-color: #3498db;  /* Màu xanh dương */
-    -fx-text-fill: white;           /* Màu chữ trắng */
-    -fx-font-size: 18px;            /* Cỡ chữ 16px */
-    -fx-background-radius: 10px;    /* Bo góc */
-    -fx-border-color: #2980b9;      /* Viền xanh đậm */
-    -fx-border-radius: 10px;
-    -fx-padding: 10px 20px;         /* them padding de chu ko bi cat */
-    -fx-font-weight: bold;
-
-    -fx-min-width: 200px;   /* chieu dai */
-    -fx-min-height: 50px;
-
-    -fx-pref-width: 250px;
-    -fx-pref-height: 60px;
-
-    -fx-alignment: center;  /* can giua */
+/* Background tổng thể */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+    -fx-font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
-.custom-button:hover {
-    -fx-background-color: #2980b9;  /* Đổi màu khi hover */
-}
-
+/* Style cho tiêu đề chính */
 .title-text {
-    -fx-font-family: "Comic Sans MS", "Arial";  /* Chọn font chữ hoạt hình */
-    -fx-font-size: 28px;                        /* Kích thước chữ */
-    -fx-font-weight: bold;                      /* Đậm */
-    -fx-text-fill: #000080;                     /* Màu cam */
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0 , 2 , 2 ); /* Đổ bóng */
+    -fx-font-size: 36px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #6C63FF; /* tím nhẹ */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.5, 0, 2);
+    -fx-padding: 10px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+/* Nút đẹp hơn */
+.custom-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 1, 1);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Hover xịn sò */
+.custom-button:hover {
+    -fx-background-color: #388E3C;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Nhấn xuống cảm giác mượt mà */
+.custom-button:pressed {
+    -fx-background-color: #2E7D32;
+    -fx-translate-y: 1px;
 }
