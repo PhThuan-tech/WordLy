@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controller.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.MainController">
    <children>
-      <Label layoutX="325.0" layoutY="78.0" prefHeight="39.0" prefWidth="361.0" styleClass="title-text" text="WELLCOME TO WORDLY">
+      <Label layoutX="299.0" layoutY="77.0" prefHeight="74.0" prefWidth="444.0" styleClass="title-text" text="WELLCOME TO WORDLY">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="menuScence" layoutX="374.0" layoutY="193.0" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Màn hình chính" />
-      <Button fx:id="HowToUse" layoutX="374.0" layoutY="420.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Hướng dẫn sử dụng" />
-      <Button fx:id="features" layoutX="374.0" layoutY="313.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" styleClass="custom-button" text="Tính năng" />
+      <Button fx:id="menuScence" layoutX="360.0" layoutY="191.0" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="67.0" prefWidth="322.0" styleClass="custom-button" text="Màn hình chính" />
+      <Button fx:id="HowToUse" layoutX="360.0" layoutY="360.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="322.0" styleClass="custom-button" text="Hướng dẫn sử dụng" />
+      <Button fx:id="features" layoutX="360.0" layoutY="276.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="322.0" styleClass="custom-button" text="Tính năng" />
    </children>
 
    <!-- Dung scence builder ma ko load dc CSS thi dung cau lenh nay -->

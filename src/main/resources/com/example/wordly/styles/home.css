@@ -1,90 +1,101 @@
-/* Đặt màu nền cho AnchorPane */
+/* === Toàn bộ AnchorPane === */
 .anchor-pane {
-    -fx-background-color: #f0f8ff;
-}
-
-/* Đặt kiểu chữ và màu sắc cho tiêu đề */
-.title {
+    -fx-background-color: #f4f9ff;
     -fx-font-family: "Arial";
-    -fx-font-size: 28px;
-    -fx-text-fill: #333;
 }
 
-/* Đặt kiểu cho các nhãn */
+/* === Tiêu đề chính === */
 .label {
-    -fx-font-family: "Arial";
     -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
-/* Đặt kiểu cho các nút menu */
-.menu-button {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+.label[text="WORDLY"] {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
 }
 
-/* Hiệu ứng hover cho các nút menu */
-.menu-button:hover {
+/* === Các nút chức năng bên trái === */
+.button {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-background-color: #4CAF50;
+    -fx-cursor: hand;
+}
+
+.button:hover {
     -fx-background-color: #45a049;
 }
 
-/* Đặt kiểu cho các nút hành động */
-.action-button {
-    -fx-background-color: #2196F3;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-/* Hiệu ứng hover cho các nút hành động */
-.action-button:hover {
-    -fx-background-color: #1E88E5;
-}
-
-/* Đặt kiểu cho trường tìm kiếm */
-.search-field {
-    -fx-font-family: "Arial";
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 5px;
-}
-
-/* Đặt kiểu cho nút tìm kiếm */
-.search-button {
+/* Nút đặc biệt (Search ở header) */
+.button[text="Search"] {
     -fx-background-color: #FF5722;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 5px 10px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
 }
 
-/* Hiệu ứng hover cho nút tìm kiếm */
-.search-button:hover {
+.button[text="Search"]:hover {
     -fx-background-color: #E64A19;
 }
 
-/* Đặt kiểu cho các hộp lựa chọn */
-.choice-box {
-    -fx-font-family: "Arial";
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 5px;
+/* Nút "Speak" */
+.button[text="Speak"] {
+    -fx-background-color: #2196F3;
 }
 
-/* Đặt kiểu cho các vùng văn bản */
-.text-area {
-    -fx-font-family: "Arial";
-    -fx-font-size: 14px;
-    -fx-padding: 10px;
+.button[text="Speak"]:hover {
+    -fx-background-color: #1E88E5;
+}
+
+/* Nút "Adding to favourite" */
+.button[text="Adding to favourite"] {
+    -fx-background-color: #9C27B0;
+}
+
+.button[text="Adding to favourite"]:hover {
+    -fx-background-color: #7B1FA2;
+}
+
+/* Nút dài ở dưới cùng */
+.button[text="Translate Paragraph Text To Speech"] {
+    -fx-background-color: #607D8B;
+    -fx-font-size: 13px;
+    -fx-padding: 8px;
+    -fx-wrap-text: true;
+}
+
+.button[text="Translate Paragraph Text To Speech"]:hover {
+    -fx-background-color: #546E7A;
+}
+
+/* === TextField === */
+.text-field {
+    -fx-background-color: white;
     -fx-border-color: #ccc;
     -fx-border-radius: 5px;
+    -fx-padding: 4px;
+}
+
+/* === TextArea === */
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+}
+
+/* === ChoiceBox === */
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+}
+
+/* === ListView (menu bên trái) === */
+.list-view {
+    -fx-background-color: #e8f5e9;
+    -fx-border-color: #c8e6c9;
 }

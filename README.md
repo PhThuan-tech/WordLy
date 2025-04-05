@@ -1,20 +1,13 @@
-Tôi đã sửa thêm giao diện các nút bấm ở màn hình chính có hướng dẫn dễ hiểu ở mỗi file tôi code xong
+Ngày 05/04/2025 
 
-9:30 tối t ngồi thêm phần giao diện homeview là phần chứa các chức năng chính như
+1 Cải thiện giao diện sử dụng CSS (Tông màu, cỡ chữ, nút bấm, ...)
 
-Search 
-History 
+2 Tạo các Controller của mỗi giao diện khác nhau (Cái này tôi xử lí đc lỗi ko thể return đc main)
 
-Add favourite
+3 Tạo được khung chương trình của mỗi giao diện chuyển đổi qua lại
 
-TextToSpeech 
+4 Xóa API của google dịch - TextToSpeechController, TextToSpeechView 
 
-Edit new Word và Game
+Mỗi hôm tôi học thêm tí Javafx và CSS để xử lí các nút bấm nữa, mấy cái chức năng và giao diện nào Bình Minh với Thái chưa làm đc thì cứ Note tại đây hoặc nhắn trong nhóm để mn còn xử lí cùng
 
-.........
-
-Tôi chưa biết cách để ảnh vào giao diện đc ấy và chuyển cảnh để thái nghiên cứu tiếp nhé =))
-
-
-
-
+Hiện tại thì merge r pull còn 1 số lỗi tôi chưa tìm đc cách xử lí ( tôi đọc trên github và chatgpt thì xóa mấy dòng ở các file lỗi sẽ fix đc, Mở github lên r mấy oog thấy có mấy chỗ bôi đỏ là dòng cần xóa)

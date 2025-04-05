@@ -1,4 +1,4 @@
-package com.example.wordly.controller;
+package com.example.wordly.controllerForUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class MainController {
 
     // chuyen giao dien man hinh home
     public void switchToHomeScence(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/view/HomeView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/SearchView.fxml"));
         Parent homeView = loader.load();
 
         // Xử lý nút bấm sau khi click
