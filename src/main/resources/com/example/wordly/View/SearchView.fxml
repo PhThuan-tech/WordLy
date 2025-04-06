@@ -18,14 +18,14 @@
       <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="50.0" prefWidth="128.0" text="History" textAlignment="CENTER" />
       <Button layoutX="21.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="50.0" prefWidth="128.0" text="Edit New Word" textAlignment="CENTER" />
       <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="50.0" prefWidth="128.0" text="Game" />
-      <TextField layoutX="183.0" layoutY="55.0" prefHeight="26.0" prefWidth="653.0" promptText="Write a new word in here!!" />
-      <Button layoutX="872.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Search" />
-      <TextArea layoutX="183.0" layoutY="249.0" prefHeight="166.0" prefWidth="774.0" promptText="Meaning in here!!" />
+      <TextField fx:id="searchBar" layoutX="183.0" layoutY="55.0" prefHeight="26.0" prefWidth="653.0" promptText="Write a new word in here!!" />
+      <Button fx:id="searchButton" layoutX="872.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Search" />
+      <TextArea fx:id="meaningText" layoutX="183.0" layoutY="249.0" prefHeight="166.0" prefWidth="774.0" promptText="Meaning in here!!" />
       <Label layoutX="183.0" layoutY="186.0" text="Pronunciation :" />
       <Label layoutX="541.0" layoutY="186.0" text="Type :" />
       <Label layoutX="183.0" layoutY="216.0" text="Meaning of word" />
       <Label layoutX="184.0" layoutY="442.0" text="Some Example :" />
-      <TextArea layoutX="183.0" layoutY="471.0" prefHeight="109.0" prefWidth="774.0" promptText="It very useful for you" />
+      <TextArea fx:id="exampleText" layoutX="183.0" layoutY="471.0" prefHeight="109.0" prefWidth="774.0" promptText="It very useful for you" />
       <Label layoutX="47.0" layoutY="20.0" text="WORDLY" />
       <Button layoutX="815.0" layoutY="181.0" mnemonicParsing="false" text="Adding to favourite" />
       <Button layoutX="472.0" layoutY="182.0" mnemonicParsing="false" text="Speak" />
@@ -33,6 +33,9 @@
       <ChoiceBox layoutX="601.0" layoutY="10.0" prefHeight="26.0" prefWidth="82.0" />
       <Label layoutX="503.0" layoutY="22.0" text="Translate to" />
       <Button layoutX="21.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" prefWidth="128.0" text="Translate &amp;&amp; Text To Speech" textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="proLabel" layoutX="304.0" layoutY="188.0" prefHeight="20.0" prefWidth="146.0" />
+      <Label fx:id="typeLabel" layoutX="601.0" layoutY="187.0" prefHeight="20.0" prefWidth="73.0" />
+      <Label fx:id="statusLabel" layoutX="471.0" layoutY="105.0" />
    </children>
 
    <stylesheets>

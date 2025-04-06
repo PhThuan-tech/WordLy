@@ -19,6 +19,12 @@ public class WordlyApplication extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    // de truy cap vao cac giao dien khac thi can 1 MainController
+    // gom cac nut bam de di chuyen
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;  // su dung giao dien chinh
@@ -58,22 +64,16 @@ public class WordlyApplication extends Application {
             });
 
             // thay doi icon cua xac nhan thoat
-            Stage alertStage =(Stage) alert.getDialogPane().getScene().getWindow();
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
             alertStage.getIcons().add(new Image(getClass().getResourceAsStream("icons/iconAlert.jpg")));
 
 
             // thay doi mau sac giao dien dua tren css
             alert.getDialogPane().getStylesheets().add(getClass().getResource("styles/alert.css").toExternalForm());
 
-            if(alert.showAndWait().get() == ButtonType.OK) {
+            if (alert.showAndWait().get() == ButtonType.OK) {
                 stage.close();
             }
         });
-    }
-
-    // de truy cap vao cac giao dien khac thi can 1 MainController
-    // gom cac nut bam de di chuyen
-    public static void main(String[] args) {
-        launch();
     }
 }
