@@ -1,11 +1,9 @@
 package com.example.wordly.getWord;
 
-import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.print.attribute.standard.Media;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,9 +13,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class GetAPI {
-    private static final String API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-    private static final int CONNECT_TIMEOUT = 50000; // five seconds
-    private static final int READ_TIMEOUT = 100000; // ten seconds
+    private static final String API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"; // URL goc de lay api
+    private static final int CONNECT_TIMEOUT = 50000; // fifty seconds
+    private static final int READ_TIMEOUT = 100000; // 1 thousand seconds
 
     /**
      * Get word details from API.
@@ -163,13 +161,13 @@ public class GetAPI {
         return details;
     }
 
+    public static void speakingUsingAPI(WordDetails details) {
+        String audioLink = details.getAudioLink();
+    }
+
     public static class WordNotFoundException extends IOException {
         public WordNotFoundException(String message) {
             super(message);
         }
-    }
-
-    public static void speakingUsingAPI(WordDetails details) {
-        String audioLink = details.getAudioLink();
     }
 }
