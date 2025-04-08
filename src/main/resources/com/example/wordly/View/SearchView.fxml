@@ -28,7 +28,7 @@
       <TextArea fx:id="exampleText" layoutX="183.0" layoutY="471.0" prefHeight="109.0" prefWidth="774.0" promptText="It very useful for you" />
       <Label layoutX="47.0" layoutY="20.0" text="WORDLY" />
       <Button layoutX="815.0" layoutY="181.0" mnemonicParsing="false" text="Adding to favourite" />
-      <Button layoutX="472.0" layoutY="182.0" mnemonicParsing="false" text="Speak" />
+      <Button fx:id="speakButton" layoutX="472.0" layoutY="182.0" mnemonicParsing="false" text="Speak" />
       <ChoiceBox layoutX="403.0" layoutY="10.0" prefHeight="26.0" prefWidth="82.0" />
       <ChoiceBox layoutX="601.0" layoutY="10.0" prefHeight="26.0" prefWidth="82.0" />
       <Label layoutX="503.0" layoutY="22.0" text="Translate to" />
