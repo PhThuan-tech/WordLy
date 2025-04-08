@@ -8,11 +8,9 @@ import javafx.concurrent.Task;
  */
 public class SearchButtonClickHandle {
     private final SearchUIUpdate uiUpdate;
-    private final GetAPI api;
 
     public SearchButtonClickHandle(SearchUIUpdate uiUpdate, GetAPI api) {
         this.uiUpdate = uiUpdate;
-        this.api = api;
     }
 
     public void handleSearch() {
@@ -33,7 +31,7 @@ public class SearchButtonClickHandle {
 
             @Override
             protected WordDetails call() throws Exception {
-                return api.fetchWordDetails(word);
+                return GetAPI.fetchWordDetails(word);
             }
         };
 

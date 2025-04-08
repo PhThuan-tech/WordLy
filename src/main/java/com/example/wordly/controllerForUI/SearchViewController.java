@@ -13,11 +13,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SearchViewController implements SearchUIUpdate{
+public class SearchViewController implements SearchUIUpdate {
+    //Goi API va xu li su kien
     public Button searchButton;
     public TextField searchBar;
     public TextArea meaningText;
@@ -25,10 +28,11 @@ public class SearchViewController implements SearchUIUpdate{
     public Label proLabel;
     public Label typeLabel;
     public Label statusLabel;
-
-    //Goi API va xu li su kien
-    private final GetAPI api = new GetAPI();
+    public Button speakButton;
     private SearchButtonClickHandle searchHandle;
+
+    private WordDetails currDetails;
+    private MediaPlayer activeMedia;
 
     @FXML
     public void handleBackMain(ActionEvent actionEvent) throws IOException {
@@ -87,14 +91,22 @@ public class SearchViewController implements SearchUIUpdate{
 
     @FXML
     public void initialize() {
-        this.searchHandle = new SearchButtonClickHandle( this, api);
+
+        // Khoi tao neu SBCH can no
+        GetAPI apiInstance = new GetAPI();
+        this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
         this.updateStatus("San sang tra tu");
 
         searchBar.setOnAction(this::handleSearchButtonOnClick);
+
+        if (speakButton != null) {
+            speakButton.setDisable(true);
+        }
     }
 
     /**
-     * Thuc hien khi searchButton duoc an
+     * Thuc hien khi searchButton duoc an.
+     *
      * @param e ac
      */
     @FXML
@@ -118,6 +130,8 @@ public class SearchViewController implements SearchUIUpdate{
 
     @Override
     public void displayResult(WordDetails details) {
+        this.currDetails = details;
+
         if (details != null) {
             proLabel.setText(details.getPhonetic());
             typeLabel.setText(details.getType());
@@ -125,6 +139,10 @@ public class SearchViewController implements SearchUIUpdate{
             meaningText.setText(details.getDefinition());
 
             System.out.println(details.getAudioLink());
+            boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
+            if (speakButton != null) {
+                speakButton.setDisable(!audio);
+            }
         } else {
             clearResult();
         }
@@ -136,12 +154,84 @@ public class SearchViewController implements SearchUIUpdate{
         typeLabel.setText("N/A");
         meaningText.setText("");
         exampleText.setText("");
+
+        this.currDetails = null;
+        speakButton.setDisable(true);
     }
 
     @Override
     public void resetSearchButton(boolean searching) {
         if (searchButton != null) {
             searchButton.setDisable(searching);
+        }
+    }
+
+
+    // ========================================
+    // ===XU LI NUT NGHE=====================
+    //========================================
+
+    @FXML
+    void handleSpeakButtonOnAction(ActionEvent e) {
+        System.out.println("Dang o handleSpeakButtonOnAction");
+        String audioURL = currDetails.getAudioLink();
+        playAudio(audioURL);
+    }
+
+    /**
+     * Phuong thuc nghe.
+     *
+     * @param audioURL link mp3
+     */
+    public void playAudio(String audioURL) {
+        updateStatus("Dang tap noi");
+
+        try {
+            stopCurrPlayer(); // Dung cai dang nghe
+
+            if (audioURL == null || audioURL.isEmpty()) {
+                updateStatus("Khong thay duong dan am thanh");
+                return;
+            }
+
+            Media media = new Media(audioURL);
+            activeMedia = new MediaPlayer(media);
+
+            activeMedia.setOnError(() -> {
+                updateStatus("Loi" + activeMedia.getError().getMessage());
+                System.out.println(activeMedia.getError().getMessage());
+            });
+
+            activeMedia.setOnReady(() -> {
+                updateStatus("Dang phat");
+                activeMedia.play();
+            });
+
+            //khi phat xong
+            activeMedia.setOnEndOfMedia(() -> {
+                updateStatus("Nghe xong roi nhe");
+                stopCurrPlayer();
+            });
+        } catch (Exception e) {
+            updateStatus("Loi " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Ham de dung nghe
+     */
+    private void stopCurrPlayer() {
+        if (activeMedia != null) {
+            try {
+                activeMedia.stop();
+                activeMedia.dispose();
+                System.out.println("Nghe thich chua");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                activeMedia = null;
+            }
         }
     }
 }

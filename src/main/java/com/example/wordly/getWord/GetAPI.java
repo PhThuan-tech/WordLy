@@ -1,9 +1,11 @@
 package com.example.wordly.getWord;
 
+import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.print.attribute.standard.Media;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,8 +34,7 @@ public class GetAPI {
             // Make connection to API
             String encodedWord = URLEncoder.encode(word, StandardCharsets.UTF_8);
             String fullUrl = API_BASE_URL + encodedWord;
-            System.out.println(encodedWord);
-            System.out.println("Dang truy cap " + fullUrl);
+            System.out.println(fullUrl);
             URL url = new URL(fullUrl);
 
             //Open connection
@@ -166,5 +167,9 @@ public class GetAPI {
         public WordNotFoundException(String message) {
             super(message);
         }
+    }
+
+    public static void speakingUsingAPI(WordDetails details) {
+        String audioLink = details.getAudioLink();
     }
 }
