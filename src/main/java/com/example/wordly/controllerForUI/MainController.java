@@ -40,4 +40,13 @@ public class MainController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.getScene().setRoot(homeView);
     }
+
+    public void handleGoToUsing(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/UsingMehodView.fxml"));
+        Parent homeView = loader.load();
+
+        // Xử lý nút bấm sau khi click
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(homeView);
+    }
 }

@@ -53,7 +53,6 @@ public class SearchViewController implements SearchUIUpdate {
         stage.getScene().setRoot(favouriteView);
     }
 
-
     @FXML
     public void handleGoToHistory(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/HistoryView.fxml"));
@@ -92,7 +91,6 @@ public class SearchViewController implements SearchUIUpdate {
 
     @FXML
     public void initialize() {
-
         // Khoi tao neu SBCH can no
         GetAPI apiInstance = new GetAPI();
         this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
@@ -138,7 +136,6 @@ public class SearchViewController implements SearchUIUpdate {
             typeLabel.setText(details.getType());
             exampleText.setText(details.getExample());
             meaningText.setText(details.getDefinition());
-
             System.out.println(details.getAudioLink());
             HistoryManage hm = new HistoryManage();
            try {
@@ -146,6 +143,7 @@ public class SearchViewController implements SearchUIUpdate {
            }catch (IOException e) {
                System.err.println(e.getMessage());
            }
+
 
             boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
             if (speakButton != null) {
@@ -176,7 +174,8 @@ public class SearchViewController implements SearchUIUpdate {
 
 
     // ========================================
-    // =========XU LI NUT NGHE===============
+    // ===XU LI NUT NGHE=====================
+    // =========XU LI NUT NGHE==============
     //========================================
 
     @FXML
@@ -204,6 +203,7 @@ public class SearchViewController implements SearchUIUpdate {
 
             Media media = new Media(audioURL);
             activeMedia = new MediaPlayer(media);
+
 
             //Neu xay ra loi
             activeMedia.setOnError(() -> {
