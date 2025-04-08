@@ -10,6 +10,7 @@ module com.example.wordly {
     requires java.net.http;
     requires java.desktop;
     requires org.json;
+    requires javafx.media;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;
