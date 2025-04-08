@@ -1,0 +1,43 @@
+/* Nền tổng thể */
+.root {
+    -fx-background-color: #e6f7f4; /* xanh pastel dịu */
+}
+
+/* Label tiêu đề */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5b3e2b; /* nâu trầm nhẹ */
+}
+
+/* Label nội dung */
+.content-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3e3e3e;
+}
+
+/* Button chính */
+.primary-button {
+    -fx-background-color: #a8d5ba; /* xanh pastel mint */
+    -fx-text-fill: #4e342e; /* nâu đậm */
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: #90c7aa; /* xanh pastel đậm hơn xíu khi hover */
+}
+
+/* Box chứa hướng dẫn */
+.guide-box {
+    -fx-background-color: #fff9f3; /* nền kem sữa */
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #d6c2b2; /* viền nâu nhạt */
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}

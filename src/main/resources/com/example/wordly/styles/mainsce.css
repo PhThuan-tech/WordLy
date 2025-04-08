@@ -1,6 +1,6 @@
 /* Background tổng thể */
 .anchor-pane {
-    -fx-background-color: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+    -fx-background-color: linear-gradient(to bottom right, #edf5e1, #f0ebe1); /* xanh lá pastel */
     -fx-font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
@@ -8,7 +8,7 @@
 .title-text {
     -fx-font-size: 36px;
     -fx-font-weight: 600;
-    -fx-text-fill: #6C63FF; /* tím nhẹ */
+    -fx-text-fill: #A1887F; /* nau pastel */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.5, 0, 2);
     -fx-padding: 10px;
     -fx-alignment: center;
@@ -38,4 +38,9 @@
 .custom-button:pressed {
     -fx-background-color: #2E7D32;
     -fx-translate-y: 1px;
+}
+
+.custom-button:active {
+    -fx-background-color: #6C63FF;
+    -fx-effect: dropshadow(gaussian, rgba(108, 99, 255, 0.4), 0, 6, 0, 3);
 }

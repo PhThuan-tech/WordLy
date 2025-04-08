@@ -4,7 +4,7 @@ package com.example.wordly.getWord;
 import javafx.concurrent.Task;
 
 /**
- * Xử lí sự kiện khi searchButton được ấn.
+ * TODO : Handles the action triggered when the search button is clicked.
  */
 public class SearchButtonClickHandle {
     private final SearchUIUpdate uiUpdate;

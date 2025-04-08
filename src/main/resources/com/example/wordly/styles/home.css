@@ -25,9 +25,16 @@
     -fx-background-color: #4CAF50;
     -fx-cursor: hand;
 }
+/* === thêm các nút bấm có hiệu ứng trong giao diện === */
+.button:pressed {
+    -fx-background-color: #2E7D32;
+    -fx-translate-y: 1px;
+}
 
 .button:hover {
-    -fx-background-color: #45a049;
+    -fx-background-color: #388E3C;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
 }
 
 /* Nút đặc biệt (Search ở header) */
