@@ -1,0 +1,3 @@
+hello,noun,/həˈləʊ/,,https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3
+ok,adjective,N/A,Do you think it's OK to stay here for the night?,
+right,adjective,/ˈɹaɪt/,a right line,https://api.dictionaryapi.dev/media/pronunciations/en/right-au.mp3
