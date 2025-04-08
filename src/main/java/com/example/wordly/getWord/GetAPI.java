@@ -1,9 +1,11 @@
 package com.example.wordly.getWord;
 
+import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.print.attribute.standard.Media;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -161,4 +163,13 @@ public class GetAPI {
         return details;
     }
 
+    public static class WordNotFoundException extends IOException {
+        public WordNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static void speakingUsingAPI(WordDetails details) {
+        String audioLink = details.getAudioLink();
+    }
 }
