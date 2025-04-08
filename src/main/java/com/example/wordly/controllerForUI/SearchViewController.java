@@ -168,7 +168,7 @@ public class SearchViewController implements SearchUIUpdate {
 
 
     // ========================================
-    // ===XU LI NUT NGHE=====================
+    // =========XU LI NUT NGHE===============
     //========================================
 
     @FXML
@@ -197,11 +197,13 @@ public class SearchViewController implements SearchUIUpdate {
             Media media = new Media(audioURL);
             activeMedia = new MediaPlayer(media);
 
+            //Neu xay ra loi
             activeMedia.setOnError(() -> {
                 updateStatus("Loi" + activeMedia.getError().getMessage());
                 System.out.println(activeMedia.getError().getMessage());
             });
 
+            //Chuan bi phat am thanh
             activeMedia.setOnReady(() -> {
                 updateStatus("Dang phat");
                 activeMedia.play();
