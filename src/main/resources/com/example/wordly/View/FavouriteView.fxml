@@ -93,7 +93,7 @@
             </HBox>
             <SplitPane dividerPositions="0.3457516339869281" layoutY="157.0" prefHeight="426.0" prefWidth="767.0">
                <items>
-                  <JFXListView fx:id="listWords" onKeyPressed="#handleKeyEnterPress" onMouseClicked="#handleMouseClicked" prefHeight="424.0" prefWidth="320.0" stylesheets="@../../../../../../../../../test/testapp_2/LearnLingo/src/main/resources/com/application/learnlingo/CSS/vu.css" />
+                  <JFXListView fx:id="listWords" onKeyPressed="#handleKeyEnterPress" onMouseClicked="#handleMouseClicked" prefHeight="424.0" prefWidth="320.0" stylesheets="" />
                   <WebView fx:id="webView" prefHeight="424.0" prefWidth="436.0" />
                </items>
             </SplitPane>

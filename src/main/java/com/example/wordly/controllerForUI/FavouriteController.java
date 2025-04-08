@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -67,5 +69,12 @@ public class FavouriteController {
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.getScene().setRoot(TranslateAndTTSView);
+    }
+
+    public void handleKeyEnterPress(KeyEvent keyEvent) {
+    }
+
+    public void handleMouseClicked(MouseEvent mouseEvent) {
+
     }
 }

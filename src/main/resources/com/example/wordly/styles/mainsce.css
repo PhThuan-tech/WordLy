@@ -39,3 +39,8 @@
     -fx-background-color: #2E7D32;
     -fx-translate-y: 1px;
 }
+
+.custom-button:active {
+    -fx-background-color: #6C63FF;
+    -fx-effect: dropshadow(gaussian, rgba(108, 99, 255, 0.4), 0, 6, 0, 3);
+}
