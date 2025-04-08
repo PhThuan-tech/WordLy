@@ -1,5 +1,6 @@
 package com.example.wordly.controllerForUI;
 
+import com.example.wordly.History.HistoryManage;
 import com.example.wordly.getWord.GetAPI;
 import com.example.wordly.getWord.SearchButtonClickHandle;
 import com.example.wordly.getWord.SearchUIUpdate;
@@ -139,6 +140,16 @@ public class SearchViewController implements SearchUIUpdate {
             meaningText.setText(details.getDefinition());
 
             System.out.println(details.getAudioLink());
+<<<<<<< HEAD
+=======
+            HistoryManage hm = new HistoryManage();
+           try {
+               hm.saveToHistory(details);
+           }catch (IOException e) {
+               System.err.println(e.getMessage());
+           }
+
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
             boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
             if (speakButton != null) {
                 speakButton.setDisable(!audio);
@@ -168,7 +179,11 @@ public class SearchViewController implements SearchUIUpdate {
 
 
     // ========================================
+<<<<<<< HEAD
     // ===XU LI NUT NGHE=====================
+=======
+    // =========XU LI NUT NGHE===============
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
     //========================================
 
     @FXML
@@ -197,11 +212,19 @@ public class SearchViewController implements SearchUIUpdate {
             Media media = new Media(audioURL);
             activeMedia = new MediaPlayer(media);
 
+<<<<<<< HEAD
+=======
+            //Neu xay ra loi
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
             activeMedia.setOnError(() -> {
                 updateStatus("Loi" + activeMedia.getError().getMessage());
                 System.out.println(activeMedia.getError().getMessage());
             });
 
+<<<<<<< HEAD
+=======
+            //Chuan bi phat am thanh
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
             activeMedia.setOnReady(() -> {
                 updateStatus("Dang phat");
                 activeMedia.play();

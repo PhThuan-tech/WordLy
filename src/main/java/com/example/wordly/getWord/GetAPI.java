@@ -15,9 +15,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class GetAPI {
-    private static final String API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-    private static final int CONNECT_TIMEOUT = 50000; // five seconds
-    private static final int READ_TIMEOUT = 100000; // ten seconds
+    private static final String API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"; // URL goc de lay api
+    private static final int CONNECT_TIMEOUT = 50000; // fifty seconds
+    private static final int READ_TIMEOUT = 100000; // 1 thousand seconds
 
     /**
      * Get word details from API.
@@ -163,6 +163,7 @@ public class GetAPI {
         return details;
     }
 
+<<<<<<< HEAD
     public static class WordNotFoundException extends IOException {
         public WordNotFoundException(String message) {
             super(message);
@@ -172,4 +173,6 @@ public class GetAPI {
     public static void speakingUsingAPI(WordDetails details) {
         String audioLink = details.getAudioLink();
     }
+=======
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
 }

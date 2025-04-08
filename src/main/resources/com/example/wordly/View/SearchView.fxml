@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1"
+            fx:controller="com.example.wordly.controllerForUI.SearchViewController">
+    <children>
+        <ListView prefHeight="600.0" prefWidth="170.0"/>
+        <Button layoutX="21.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="50.0"
+                prefWidth="128.0" text="Main"/>
+        <Button layoutX="21.0" layoutY="178.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="128.0"
+                text="Search"/>
+        <Button layoutX="21.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="50.0"
+                prefWidth="128.0" text="Favourite"/>
+        <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="50.0"
+                prefWidth="128.0" text="History" textAlignment="CENTER"/>
+        <Button layoutX="21.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="50.0"
+                prefWidth="128.0" text="Edit New Word" textAlignment="CENTER"/>
+        <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="50.0"
+                prefWidth="128.0" text="Game"/>
+        <TextField fx:id="searchBar" layoutX="183.0" layoutY="55.0" prefHeight="26.0" prefWidth="653.0"
+                   promptText="Write a new word in here!!"/>
+        <Button fx:id="searchButton" layoutX="872.0" layoutY="54.0" mnemonicParsing="false"
+                onAction="#handleSearchButtonOnClick" prefHeight="26.0" prefWidth="82.0" text="Search"/>
+        <TextArea fx:id="meaningText" layoutX="183.0" layoutY="249.0" prefHeight="166.0" prefWidth="774.0"
+                  promptText="Meaning in here!!"/>
+        <Label layoutX="183.0" layoutY="186.0" text="Pronunciation :"/>
+        <Label layoutX="541.0" layoutY="186.0" text="Type :"/>
+        <Label layoutX="183.0" layoutY="216.0" text="Meaning of word"/>
+        <Label layoutX="184.0" layoutY="442.0" text="Some Example :"/>
+        <TextArea fx:id="exampleText" layoutX="183.0" layoutY="471.0" prefHeight="109.0" prefWidth="774.0"
+                  promptText="It very useful for you"/>
+        <Label layoutX="47.0" layoutY="20.0" text="WORDLY"/>
+        <Button layoutX="815.0" layoutY="181.0" mnemonicParsing="false" text="Adding to favourite"/>
+        <Button fx:id="speakButton" layoutX="472.0" layoutY="182.0" mnemonicParsing="false"
+                onAction="#handleSpeakButtonOnAction" text="Speak"/>
+        <ChoiceBox layoutX="403.0" layoutY="10.0" prefHeight="26.0" prefWidth="82.0"/>
+        <ChoiceBox layoutX="601.0" layoutY="10.0" prefHeight="26.0" prefWidth="82.0"/>
+        <Label layoutX="503.0" layoutY="22.0" text="Translate to"/>
+        <Button layoutX="21.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS"
+                prefHeight="50.0" prefWidth="128.0" text="Translate &amp;&amp; Text To Speech" textAlignment="CENTER"
+                wrapText="true"/>
+        <Label fx:id="proLabel" layoutX="304.0" layoutY="188.0" prefHeight="20.0" prefWidth="146.0"/>
+        <Label fx:id="typeLabel" layoutX="601.0" layoutY="187.0" prefHeight="20.0" prefWidth="73.0"/>
+        <Label fx:id="statusLabel" layoutX="471.0" layoutY="105.0"/>
+    </children>
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
    <children>
       <ListView prefHeight="600.0" prefWidth="170.0" />
@@ -41,4 +80,9 @@
    <stylesheets>
       <URL value="@../styles/home.css" />
    </stylesheets>
+=======
+    <stylesheets>
+        <URL value="@../styles/home.css"/>
+    </stylesheets>
+>>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
 </AnchorPane>
