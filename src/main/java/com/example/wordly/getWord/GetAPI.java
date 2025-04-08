@@ -161,13 +161,4 @@ public class GetAPI {
         return details;
     }
 
-    public static void speakingUsingAPI(WordDetails details) {
-        String audioLink = details.getAudioLink();
-    }
-
-    public static class WordNotFoundException extends IOException {
-        public WordNotFoundException(String message) {
-            super(message);
-        }
-    }
 }

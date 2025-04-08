@@ -1,5 +1,6 @@
 package com.example.wordly.controllerForUI;
 
+import com.example.wordly.History.HistoryManage;
 import com.example.wordly.getWord.GetAPI;
 import com.example.wordly.getWord.SearchButtonClickHandle;
 import com.example.wordly.getWord.SearchUIUpdate;
@@ -139,6 +140,13 @@ public class SearchViewController implements SearchUIUpdate {
             meaningText.setText(details.getDefinition());
 
             System.out.println(details.getAudioLink());
+            HistoryManage hm = new HistoryManage();
+           try {
+               hm.saveToHistory(details);
+           }catch (IOException e) {
+               System.err.println(e.getMessage());
+           }
+
             boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
             if (speakButton != null) {
                 speakButton.setDisable(!audio);
