@@ -53,7 +53,6 @@ public class SearchViewController implements SearchUIUpdate {
         stage.getScene().setRoot(favouriteView);
     }
 
-
     @FXML
     public void handleGoToHistory(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/HistoryView.fxml"));
@@ -92,7 +91,6 @@ public class SearchViewController implements SearchUIUpdate {
 
     @FXML
     public void initialize() {
-
         // Khoi tao neu SBCH can no
         GetAPI apiInstance = new GetAPI();
         this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
@@ -138,10 +136,7 @@ public class SearchViewController implements SearchUIUpdate {
             typeLabel.setText(details.getType());
             exampleText.setText(details.getExample());
             meaningText.setText(details.getDefinition());
-
             System.out.println(details.getAudioLink());
-<<<<<<< HEAD
-=======
             HistoryManage hm = new HistoryManage();
            try {
                hm.saveToHistory(details);
@@ -149,7 +144,7 @@ public class SearchViewController implements SearchUIUpdate {
                System.err.println(e.getMessage());
            }
 
->>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
+
             boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
             if (speakButton != null) {
                 speakButton.setDisable(!audio);
@@ -179,11 +174,8 @@ public class SearchViewController implements SearchUIUpdate {
 
 
     // ========================================
-<<<<<<< HEAD
     // ===XU LI NUT NGHE=====================
-=======
-    // =========XU LI NUT NGHE===============
->>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
+    // =========XU LI NUT NGHE==============
     //========================================
 
     @FXML
@@ -212,19 +204,14 @@ public class SearchViewController implements SearchUIUpdate {
             Media media = new Media(audioURL);
             activeMedia = new MediaPlayer(media);
 
-<<<<<<< HEAD
-=======
+
             //Neu xay ra loi
->>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
             activeMedia.setOnError(() -> {
                 updateStatus("Loi" + activeMedia.getError().getMessage());
                 System.out.println(activeMedia.getError().getMessage());
             });
 
-<<<<<<< HEAD
-=======
             //Chuan bi phat am thanh
->>>>>>> 2dad98331aa1f3a44e14a5d371beabe088d1dbf8
             activeMedia.setOnReady(() -> {
                 updateStatus("Dang phat");
                 activeMedia.play();

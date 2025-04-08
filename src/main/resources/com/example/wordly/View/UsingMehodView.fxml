@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.UsingMethodController">
+   <children>
+      <Button layoutX="30.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="42.0" prefWidth="131.0" styleClass="primary-button" text="Back to main" />
+      <Label layoutX="252.0" layoutY="34.0" prefHeight="42.0" prefWidth="522.0" styleClass="title-label" text="📘 Hướng Dẫn Sử Dụng Ứng Dụng Wordly">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutX="225.0" layoutY="87.0" prefHeight="432.0" prefWidth="550.0" styleClass="guide-box">
+         <children>
+            <Label prefHeight="18.0" prefWidth="162.0" styleClass="content-label" text="Nhap o day ne ong" />
+            <Label prefWidth="107.0" styleClass="content-label" text="O day nua" />
+         </children>
+      </VBox>
+   </children>
+
+    <stylesheets>
+        <URL value="@../styles/usingsce.css" />
+    </stylesheets>
+</AnchorPane>
