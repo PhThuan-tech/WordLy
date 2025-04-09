@@ -5,40 +5,47 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-
     <artifactId>WordLy</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>WordLy</name>
-<<<<<<< HEAD
-=======
 
-
->>>>>>> testingApp
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
+        <!-- Khai báo phiên bản JavaFX tập trung -->
+        <javafx.version>23.0.1</javafx.version>
+        <!-- Khai báo phiên bản Java tập trung -->
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>
+        <!-- JavaFX Dependencies - Sử dụng biến phiên bản -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>23.0.1</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>23.0.1</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>23.0.1</version>
+            <version>${javafx.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx.version}</version> <!-- Đã đồng bộ hóa phiên bản -->
+        </dependency>
+
+        <!-- Other Dependencies -->
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.2.1</version>
+            <version>11.2.1</version> <!-- Lưu ý: Kiểm tra tính tương thích với JFX 23 nếu có lỗi -->
         </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
@@ -54,7 +61,7 @@
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
-            <version>17.3</version>
+            <version>17.3</version> <!-- Lưu ý: FXGL 17 có thể không tối ưu với JFX 23 -->
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -62,6 +69,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version> <!-- Đã xóa mục trùng lặp -->
+        </dependency>
+
+        <!-- JUnit Test Dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -73,32 +92,7 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-
         </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version> <!-- Hoặc phiên bản mới nhất -->
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jfoenix</groupId>
-            <artifactId>jfoenix</artifactId>
-            <version>9.0.10</version> <!-- Version stable mới nhất -->
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>20</version> <!-- hoặc version bạn đang dùng -->
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -108,9 +102,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>23</source>
-                    <target>23</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <!-- Sử dụng biến phiên bản Java -->
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -122,9 +116,8 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.wordly/com.example.wordly.HelloApplication</mainClass>
-                            <mainClass>com.example.tamthaituuettest/com.example.tamthaituuettest.HelloApplication
-                            </mainClass>
+                            <!-- Chỉ giữ lại mainClass đúng -->
+                            <mainClass>${project.groupId}/${project.artifactId}.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

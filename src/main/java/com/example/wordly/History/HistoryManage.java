@@ -8,7 +8,7 @@ import java.io.*;
  * TODO : To save searched word into history file
  */
 public class HistoryManage {
-    private static final String HISTORY_FILE = "history.txt";
+    private static final String HISTORY_FILE = "src/history.txt";
 
     //Ghi thong tin vao file
     public void saveToHistory(WordDetails details) throws IOException {
@@ -29,13 +29,13 @@ public class HistoryManage {
         String phonetic = escapeSpecialCharacter(details.getPhonetic());
         String definition = escapeSpecialCharacter(details.getDefinition());
 
-        return String.join(",", word, type, phonetic, definition);
+        return String.join("\t", word, type, phonetic, definition);
             }
 
     private String escapeSpecialCharacter(String input) {
         if (input == null) {
             return "";
         }
-        return input.replace("  -  ", ";");
+        return input.replace("\t", " ").replace("\n", " ").replace("\r", " ");
     }
 }
