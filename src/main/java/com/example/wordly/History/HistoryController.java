@@ -8,13 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -26,12 +26,13 @@ import java.util.ResourceBundle;
 
 public class HistoryController implements Initializable {
     private static final String History_File = "src/history.txt";
-    private static final int Max_Row = 6;
+    private static final int Max_Row = 12;
     public TableView<WordEntry> historyTable;
     public TableColumn<WordEntry, String> wordCol;
     public TableColumn<WordEntry, String> proCol;
     public TableColumn<WordEntry, String> typeCol;
     public TableColumn<WordEntry, String> meanCol;
+    public Button delHistory;
 
     @FXML
     public void handleBackMain(ActionEvent actionEvent) throws IOException {
@@ -151,4 +152,15 @@ public class HistoryController implements Initializable {
         return data;
     }
 
+    private void setDelHistory() throws IOException {
+        try (FileWriter fw = new FileWriter("src/history.txt")) {
+
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void delHistory(ActionEvent event) throws IOException {
+        setDelHistory();
+    }
 }
