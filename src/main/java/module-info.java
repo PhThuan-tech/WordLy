@@ -17,4 +17,6 @@ module com.example.wordly {
 
     exports com.example.wordly.controllerForUI;
     opens com.example.wordly.controllerForUI to javafx.fxml;
+    exports com.example.wordly.History;
+    opens com.example.wordly.History to javafx.fxml;
 }
