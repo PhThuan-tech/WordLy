@@ -21,3 +21,7 @@ Ngày 08/04/2025
 3 Chỉnh sửa giao diện Favourite, History và How to Use,
 
 Merge vào testing ko bị lỗi =)) làm vc tuần 7 lần commit là ổn r mấy ôg - tôi ngồi code đau lưng quá 
+
+
+Ngày 09/04/2025 :
+1 Thêm chức năng hiển thị lịch ở tab History
