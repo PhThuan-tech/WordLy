@@ -1,8 +1,0 @@
-hello,noun,/həˈləʊ/,,https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3
-ok,adjective,N/A,Do you think it's OK to stay here for the night?,
-right,adjective,/ˈɹaɪt/,a right line,https://api.dictionaryapi.dev/media/pronunciations/en/right-au.mp3
-hello,noun,/həˈləʊ/,,https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3
-man,noun,[mɛn],The show is especially popular with middle-aged men.,https://api.dictionaryapi.dev/media/pronunciations/en/man-uk.mp3
-person,noun,/ˈpɜːsən/,Each person is unique; both mentally and physically.,https://api.dictionaryapi.dev/media/pronunciations/en/person-uk.mp3
-ok,adjective,N/A,Do you think it's OK to stay here for the night?,
-control,noun,/kənˈtɹəʊl/,The government has complete control over the situation.,https://api.dictionaryapi.dev/media/pronunciations/en/control-us.mp3

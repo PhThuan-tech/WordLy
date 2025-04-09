@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.HistoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.History.HistoryController">
     <children>
         <ListView prefHeight="600.0" prefWidth="170.0" />
         <Button layoutX="21.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="50.0" prefWidth="128.0" text="Main" />
@@ -19,12 +19,12 @@
         <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="50.0" prefWidth="128.0" text="Game" />
         <Label layoutX="47.0" layoutY="20.0" text="WORDLY" />
         <Button layoutX="21.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" prefWidth="128.0" text="Translate &amp;&amp; Text To Speech" textAlignment="CENTER" wrapText="true" />
-      <TableView layoutX="192.0" layoutY="88.0" pickOnBounds="false" prefHeight="478.0" prefWidth="779.0">
+      <TableView fx:id="historyTable" layoutX="192.0" layoutY="88.0" pickOnBounds="false" prefHeight="478.0" prefWidth="779.0">
         <columns>
-            <TableColumn prefWidth="148.79994201660156" resizable="false" text="Word " />
-          <TableColumn prefWidth="130.4000244140625" resizable="false" text="Pronunciation" />
-            <TableColumn prefWidth="82.4000244140625" resizable="false" text="Type" />
-          <TableColumn minWidth="2.4000244140625" prefWidth="404.0" resizable="false" text="Meaning" />
+            <TableColumn fx:id="wordCol" prefWidth="148.79994201660156" resizable="false" text="Word " />
+          <TableColumn fx:id="proCol" prefWidth="130.4000244140625" resizable="false" text="Pronunciation" />
+            <TableColumn fx:id="typeCol" prefWidth="82.4000244140625" resizable="false" text="Type" />
+          <TableColumn fx:id="meanCol" minWidth="2.4000244140625" prefWidth="404.0" resizable="false" text="Meaning" />
         </columns>
       </TableView>
       <Label layoutX="442.0" layoutY="40.0" prefHeight="42.0" prefWidth="282.0" styleClass="history-title" text="History of words looked up" />
