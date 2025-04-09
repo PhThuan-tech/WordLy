@@ -84,11 +84,6 @@
             <version>9.0.10</version> <!-- Version stable mới nhất -->
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>20</version> <!-- hoặc version bạn đang dùng -->
-        </dependency>
 
     </dependencies>
 

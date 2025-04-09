@@ -32,6 +32,9 @@ public class WordlyApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(WordlyApplication.class.getResource("View/MainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
 
+        // Cách đặt thêm icon- cua so thu nho
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("icons/WordLyIcon.png")));
+
         // Load them CSS trong start
         scene.getStylesheets().add(getClass()
                 .getResource("/com/example/wordly/styles/mainsce.css").toExternalForm());
