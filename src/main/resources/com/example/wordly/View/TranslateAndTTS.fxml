@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.TranslateAndTTSController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.TTS.TranslateAndTTSController">
     <children>
         <ListView prefHeight="600.0" prefWidth="170.0" />
         <Button layoutX="21.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="50.0" prefWidth="128.0" text="Main" />
@@ -18,13 +18,13 @@
         <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="50.0" prefWidth="128.0" text="Game" />
         <Label layoutX="47.0" layoutY="20.0" text="WORDLY" />
         <Button layoutX="21.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="128.0" text="Translate &amp;&amp; Text To Speech" textAlignment="CENTER" wrapText="true" />
-      <TextArea layoutX="190.0" layoutY="88.0" prefHeight="226.0" prefWidth="358.0" promptText="Write a passage in here" />
+      <TextArea fx:id="needToTrans" layoutX="190.0" layoutY="88.0" prefHeight="226.0" prefWidth="358.0" promptText="Write a passage in here" />
       <Label layoutX="313.0" layoutY="55.0" text="Original passage" />
-      <TextArea layoutX="609.0" layoutY="88.0" prefHeight="226.0" prefWidth="367.0" promptText="The passage will be translated" />
+      <TextArea fx:id="translated" layoutX="609.0" layoutY="88.0" prefHeight="226.0" prefWidth="367.0" promptText="The passage will be translated" />
       <Label layoutX="738.0" layoutY="55.0" text="Translated passage" />
-      <Button layoutX="542.0" layoutY="50.0" mnemonicParsing="false" text="Translate" />
-      <Button layoutX="190.0" layoutY="332.0" mnemonicParsing="false" text="Speak" />
-      <Button layoutX="609.0" layoutY="332.0" mnemonicParsing="false" text="Speak" />
+      <Button fx:id="transButton" layoutX="542.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleTranslating" text="Translate" />
+      <Button fx:id="speak1Button" layoutX="190.0" layoutY="332.0" mnemonicParsing="false" text="Speak" />
+      <Button fx:id="speak2Button" layoutX="609.0" layoutY="332.0" mnemonicParsing="false" text="Speak" />
     </children>
 
     <stylesheets>

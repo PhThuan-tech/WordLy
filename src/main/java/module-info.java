@@ -11,6 +11,7 @@ module com.example.wordly {
     requires java.desktop;
     requires org.json;
     requires javafx.media;
+    requires jdk.jartool;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;
@@ -19,4 +20,6 @@ module com.example.wordly {
     opens com.example.wordly.controllerForUI to javafx.fxml;
     exports com.example.wordly.History;
     opens com.example.wordly.History to javafx.fxml;
+    exports com.example.wordly.TTS;
+    opens com.example.wordly.TTS to javafx.fxml;
 }
