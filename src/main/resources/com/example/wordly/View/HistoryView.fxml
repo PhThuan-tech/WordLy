@@ -27,7 +27,8 @@
           <TableColumn fx:id="meanCol" minWidth="2.4000244140625" prefWidth="404.0" resizable="false" text="Meaning" />
         </columns>
       </TableView>
-      <Label layoutX="442.0" layoutY="40.0" prefHeight="42.0" prefWidth="282.0" styleClass="history-title" text="History of words looked up" />
+      <Label layoutX="440.0" layoutY="33.0" prefHeight="42.0" prefWidth="282.0" styleClass="history-title" text="History of words looked up" />
+      <Button fx:id="delHistory" layoutX="212.0" layoutY="40.0" mnemonicParsing="false" onAction="#delHistory" text="Xóa lịch sử" />
     </children>
 
     <stylesheets>
