@@ -8,10 +8,14 @@ module com.example.wordly {
     requires com.almasb.fxgl.all;
 
     requires java.net.http;
-    requires java.desktop;
     requires org.json;
     requires javafx.media;
     requires jdk.jartool;
+    requires annotations;
+    requires com.fasterxml.jackson.databind;
+    requires okhttp3;
+    requires java.desktop;
+    requires java.logging;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;
