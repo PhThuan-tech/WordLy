@@ -1,4 +1,9 @@
-hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
-hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
-school	noun	/skuːl/	(collective) A group of fish or a group of marine mammals such as porpoises, dolphins, or whales.
-hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+history	noun	/ˈhɪst(ə)ɹi/	The aggregate of past events.
+ash	noun	/æʃ/	The solid remains of a fire.
+region	noun	/ˈɹiːd͡ʒn̩/	Any considerable and connected part of a space or surface; specifically, a tract of land or sea of considerable but indefinite extent; a country; a district; in a broad sense, a place without special reference to location or extent but viewed as an entity for geographical, social or cultural reasons.
+particular	noun	/pəˈtɪkjələ/	A small individual part of something larger; a detail, a point.
+erupt	verb	/ɪˈɹʌpt/	To eject something violently (such as lava or water, as from a volcano or geyser).
+sample	noun	/sæːm.pəl/	A part or snippet of something taken or presented for inspection, or shown as evidence of the quality of the whole; a specimen.
+sample	noun	/sæːm.pəl/	A part or snippet of something taken or presented for inspection, or shown as evidence of the quality of the whole; a specimen.
+release	noun	/ɹɪˈliːs/	The event of setting (someone or something) free (e.g. hostages, slaves, prisoners, caged animals, hooked or stuck mechanisms).
+space	noun	/speɪs/	(heading) Of time.
