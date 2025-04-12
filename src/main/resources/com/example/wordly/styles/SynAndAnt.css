@@ -1,0 +1,71 @@
+/* Tông màu chủ đạo: Xanh pastel và nâu */
+.root {
+    -fx-background-color: #f4f9f4;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Tiêu đề chính có animation mượt */
+.label {
+    -fx-text-fill: #2a9d8f; /* xanh pastel */
+    -fx-font-weight: bold;
+    -fx-opacity: 0;
+    -fx-translate-y: -10;
+    -fx-effect: dropshadow(gaussian, rgba(42,157,143,0.5), 4, 0.3, 0, 1);
+    -fx-font-size: 24px;
+    -fx-padding: 10;
+    -fx-transition: all 1s ease;
+}
+
+/* Sau khi khởi động xong sẽ hiện */
+.label.animate {
+    -fx-opacity: 1;
+    -fx-translate-y: 0;
+}
+
+/* TextField style */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b5838d;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6;
+}
+
+/* Button hiệu ứng bấm mượt */
+.button {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(42,157,143,0.2), 4, 0.2, 0, 1);
+    -fx-transition: all 0.3s ease;
+}
+
+.button:hover {
+    -fx-background-color: #1f776c;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.button:pressed {
+    -fx-background-color: #14564f;
+    -fx-translate-y: 1;
+}
+
+/* ListView đẹp hơn tí */
+.list-view {
+    -fx-background-color: #e0e0e0;
+    -fx-border-color: #b5838d;
+}
+
+/* TextArea style */
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b5838d;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}

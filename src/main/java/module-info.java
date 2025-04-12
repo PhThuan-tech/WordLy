@@ -16,6 +16,7 @@ module com.example.wordly {
     requires okhttp3;
     requires java.desktop;
     requires java.logging;
+    requires com.google.gson;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;

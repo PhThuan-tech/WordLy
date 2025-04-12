@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import com.jfoenix.controls.JFXListView?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
@@ -11,7 +10,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.web.WebView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.FavouriteController">
     <children>
@@ -94,7 +92,6 @@
             <SplitPane dividerPositions="0.3457516339869281" layoutY="157.0" prefHeight="426.0" prefWidth="767.0">
                <items>
                   <JFXListView fx:id="listWords" onKeyPressed="#handleKeyEnterPress" onMouseClicked="#handleMouseClicked" prefHeight="424.0" prefWidth="320.0" stylesheets="" />
-                  <WebView fx:id="webView" prefHeight="424.0" prefWidth="436.0" />
                </items>
             </SplitPane>
             <AnchorPane layoutX="546.0" layoutY="132.0" prefHeight="201.0" prefWidth="201.0" style="-fx-background-color: #FEC400; -fx-background-radius: 20; -fx-font-weight: bold;">
