@@ -12,14 +12,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
-        <!-- Khai báo phiên bản JavaFX tập trung -->
         <javafx.version>23.0.1</javafx.version>
-        <!-- Khai báo phiên bản Java tập trung -->
         <java.version>23</java.version>
     </properties>
 
+    <!-- ✅ THÊM PHẦN REPOSITORY -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
-        <!-- JavaFX Dependencies - Sử dụng biến phiên bản -->
+        <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -38,14 +48,14 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>${javafx.version}</version> <!-- Đã đồng bộ hóa phiên bản -->
+            <version>${javafx.version}</version>
         </dependency>
 
-        <!-- Other Dependencies -->
+        <!-- UI Libraries -->
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.2.1</version> <!-- Lưu ý: Kiểm tra tính tương thích với JFX 23 nếu có lỗi -->
+            <version>11.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
@@ -61,7 +71,7 @@
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
-            <version>17.3</version> <!-- Lưu ý: FXGL 17 có thể không tối ưu với JFX 23 -->
+            <version>17.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -77,10 +87,10 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20231013</version> <!-- Đã xóa mục trùng lặp -->
+            <version>20231013</version>
         </dependency>
 
-        <!-- JUnit Test Dependencies -->
+        <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -93,16 +103,35 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- ✅ OkHttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
         </dependency>
+
+        <!-- ✅ Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.17.2</version>
         </dependency>
+
+        <!-- ✅ Kotlin (bắt buộc nếu dùng OkHttp 4.x trở lên) -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk7</artifactId>
+            <version>1.8.21</version>
+        </dependency>
+
+        <!-- API muse tim tu dong nghia va trai nghia -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -112,7 +141,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <!-- Sử dụng biến phiên bản Java -->
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
@@ -123,10 +151,8 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <!-- Chỉ giữ lại mainClass đúng -->
                             <mainClass>${project.groupId}/${project.artifactId}.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
