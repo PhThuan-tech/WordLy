@@ -37,6 +37,7 @@ public class FavouriteController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
     }
 
+
     public void handleKeyEnterPress(KeyEvent keyEvent) {
     }
 

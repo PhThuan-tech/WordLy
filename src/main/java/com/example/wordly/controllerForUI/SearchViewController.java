@@ -69,6 +69,8 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         switchScene(actionEvent, "/com/example/wordly/View/SynAndAntView.fxml");
     }
 
+
+
     @FXML
     public void initialize() {
         // Khoi tao neu SBCH can no
