@@ -38,7 +38,12 @@ Ngày 12/04/2025 :
 
 !!! Cần cải thiện thêm phần chuyển giao diện nên dùng tính kế thừa thay vì copy_code trong từng giao diện khác nhau ( coming soon )
 
-Ngày 15/04/2025
+Ngày 15/04/2025 :
 
 1 Tạo được lớp cơ sở BaseController để sử dụng lại đoạn code chuyển giao diện.
+
+2 Thái resolved được phần làm Edit and add Word và xử lí đc giao diện favourite.
+
+3 Thử nghiệm game đoán từ Wordle, chưa lấy đc từ ngẫu nhiên từ Dictionarydev hoặc APImuse.
+
 
