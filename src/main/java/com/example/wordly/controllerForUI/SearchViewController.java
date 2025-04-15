@@ -89,6 +89,8 @@ public class SearchViewController implements SearchUIUpdate {
         stage.getScene().setRoot(TranslateAndTTSView);
     }
 
+
+
     @FXML
     public void initialize() {
         // Khoi tao neu SBCH can no

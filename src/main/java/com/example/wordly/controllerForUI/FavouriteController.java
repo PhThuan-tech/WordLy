@@ -71,6 +71,7 @@ public class FavouriteController {
         stage.getScene().setRoot(TranslateAndTTSView);
     }
 
+
     public void handleKeyEnterPress(KeyEvent keyEvent) {
     }
 
