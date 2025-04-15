@@ -38,4 +38,7 @@ Ngày 12/04/2025 :
 
 !!! Cần cải thiện thêm phần chuyển giao diện nên dùng tính kế thừa thay vì copy_code trong từng giao diện khác nhau ( coming soon )
 
+Ngày 15/04/2025
+
+1 Tạo được lớp cơ sở BaseController để sử dụng lại đoạn code chuyển giao diện.
 

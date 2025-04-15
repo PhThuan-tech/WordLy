@@ -35,4 +35,8 @@ public class GameViewController extends BaseController {
     public void handleGotoEditWord(ActionEvent actionEvent)  {
         switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
+
+    public void GoToWordle(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/GameView/WordleView.fxml");
+    }
 }

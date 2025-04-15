@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.GameController.WordleController">
+
+    <stylesheets>
+        <URL value="@../styles/WordleStyle.css" />
+    </stylesheets>
+
+    <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+
+        <!-- Grid các ô chữ -->
+        <GridPane fx:id="grid" alignment="CENTER" hgap="5" vgap="5">
+            <!-- Các ô sẽ được thêm bằng code -->
+        </GridPane>
+
+        <!-- Nhập từ -->
+        <HBox alignment="CENTER" spacing="10">
+            <TextField fx:id="inputField" promptText="Nhập từ 5 chữ" />
+            <Button onAction="#handleSubmit" text="Enter" />
+            <Button onAction="#handleRestart" text="Restart" />
+            <Button fx:id="hintButton" onAction="#handleHint" text="Gợi ý 🔍" />
+        </HBox>
+
+        <!-- Thông báo -->
+        <Label fx:id="messageLabel" textFill="red" />
+    </VBox>
+   <Button layoutX="29.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleGotoGame" text="Back" />
+
+
+</AnchorPane>
