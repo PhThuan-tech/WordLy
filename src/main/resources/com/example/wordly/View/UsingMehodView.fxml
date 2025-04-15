@@ -1,29 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.UsingMethodController">
-   <children>
-      <Button layoutX="30.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="42.0" prefWidth="131.0" styleClass="primary-button" text="Back to main" />
-      <Label layoutX="252.0" layoutY="34.0" prefHeight="42.0" prefWidth="522.0" styleClass="title-label" text="📘 Hướng Dẫn Sử Dụng Ứng Dụng Wordly">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <VBox layoutX="225.0" layoutY="87.0" prefHeight="432.0" prefWidth="550.0" styleClass="guide-box">
-         <children>
-            <Label prefHeight="18.0" prefWidth="162.0" styleClass="content-label" text="Nhap o day ne ong" />
-            <Label prefWidth="107.0" styleClass="content-label" text="O day nua" />
-         </children>
-      </VBox>
-   </children>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0" styleClass="root"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            fx:controller="com.example.wordly.controllerForUI.UsingMethodController">
 
     <stylesheets>
-        <URL value="@../styles/usingsce.css" />
+        <URL value="@../styles/usingsce.css"/>
     </stylesheets>
-</AnchorPane>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0"
+              style="-fx-background-color: #e0e0e0; -fx-border-color: lightgrey; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets top="10.0" right="20.0" bottom="10.0" left="20.0"/>
+            </padding>
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" styleClass="primary-button"
+                        text="⬅ Back to Main"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label styleClass="title-label" text="📘 Hướng Dẫn Sử Dụng Wordly" HBox.hgrow="NEVER">
+
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                </Label>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <BorderPane.margin>
+                <Insets top="20.0" right="50.0" bottom="30.0" left="50.0"/> <!-- Add margins around the scroll pane -->
+            </BorderPane.margin>
+            <content>
+                <!-- VBox holds the actual instruction content -->
+                <VBox fx:id="guideContentBox" spacing="15.0" styleClass="guide-box">
+                    <padding>
+                        <Insets top="15.0" right="20.0" bottom="20.0" left="20.0"/>
+                    </padding>
+                    <children>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="1. Tìm Kiếm Từ (Search):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="Tại màn hình chính, nhấn nút 'Search'. Nhập từ bạn muốn tra vào ô tìm kiếm và nhấn nút 'Search'. Kết quả bao gồm phát âm, loại từ, nghĩa và ví dụ (nếu có) sẽ hiển thị bên dưới."/>
+
+                        <Separator/>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;"
+                               text="2. Dịch &amp; Đọc Văn Bản (Translate &amp; TTS):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="Chọn 'Translate &amp; TTS' từ menu. Nhập đoạn văn bản cần dịch vào ô bên trái, nhấn nút 'Translate'. Bản dịch sẽ xuất hiện ở ô bên phải. Bạn có thể nhấn nút 'Speak' dưới mỗi ô để nghe đọc văn bản gốc hoặc bản dịch."/>
+
+                        <Separator/>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="3. Từ Yêu Thích (Favourite):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="Khi tra từ, bạn có thể nhấn nút 'Add to Favourite' để lưu từ đó. Truy cập mục 'Favourite' từ menu để xem lại danh sách các từ đã lưu. Bạn cũng có thể xóa từ khỏi danh sách này."/>
+
+                        <Separator/>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;"
+                               text="4. Lịch Sử Tra Cứu (History):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="Mỗi khi bạn tra từ thành công, từ đó sẽ được tự động thêm vào lịch sử. Vào mục 'History' để xem lại các từ đã tra. Có thể xóa toàn bộ lịch sử bằng nút 'Clear History'."/>
+
+                        <Separator/>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;"
+                               text="5. Thêm/Sửa Từ (Edit New Word):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="(Tính năng nâng cao) Cho phép bạn thêm từ mới vào từ điển cá nhân hoặc sửa đổi các từ hiện có (nếu ứng dụng hỗ trợ)."/>
+
+                        <Separator/>
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="6. Trò Chơi (Game):"/>
+                        <Label styleClass="content-label" wrapText="true"
+                               text="Mục 'Game' cung cấp các trò chơi nhỏ giúp bạn ôn tập và học từ vựng một cách thú vị."/>
+
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

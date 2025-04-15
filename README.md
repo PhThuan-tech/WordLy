@@ -21,3 +21,21 @@ Ngày 08/04/2025
 3 Chỉnh sửa giao diện Favourite, History và How to Use,
 
 Merge vào testing ko bị lỗi =)) làm vc tuần 7 lần commit là ổn r mấy ôg - tôi ngồi code đau lưng quá 
+
+
+Ngày 09/04/2025 :
+1 Thêm chức năng hiển thị lịch ở tab History
+
+Ngày 12/04/2025 :
+
+1 Thêm giao diện GameView và các chức năng chuyển giao diện
+
+2 Cải thiện giao diện màn hình chính và searchView
+
+3 Sử dụng API của Amuse để tìm từ đồng nghĩa và tìm từ trái nghĩa ( nằm trong giao diện SearchView)
+
+4 Thêm / fix dependency jfonix , okhttp, google.com trong dependency và import trong module info ( xử lí bằng cách xóa depedency r copy chạy lại)
+
+!!! Cần cải thiện thêm phần chuyển giao diện nên dùng tính kế thừa thay vì copy_code trong từng giao diện khác nhau ( coming soon )
+
+

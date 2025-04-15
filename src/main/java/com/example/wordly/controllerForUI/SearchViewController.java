@@ -246,4 +246,13 @@ public class SearchViewController implements SearchUIUpdate {
             }
         }
     }
+
+    @FXML
+    public void handleGoToSynAndAnt(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/SynAndAntView.fxml"));
+        Parent synAndAntView = loader.load();
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(synAndAntView);
+    }
 }
