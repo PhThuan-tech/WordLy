@@ -9,3 +9,7 @@ phone
 table
 liver
 super
+plays
+green
+hello
+thuan
