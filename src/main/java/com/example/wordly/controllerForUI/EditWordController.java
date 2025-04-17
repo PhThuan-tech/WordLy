@@ -2,8 +2,12 @@ package com.example.wordly.controllerForUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
-public class EditWordController extends BaseController {
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class EditWordController {
+public class EditWordController extends BaseController {
+
     @FXML
     public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
@@ -53,9 +58,9 @@ public class EditWordController {
 
     public EditWordController() {
         try {
-            if (Files.notExists(dictionaryFilePath)) {
-                Files.createDirectories(dictionaryFilePath.getParent());
-                Files.createFile(dictionaryFilePath);
+            if (Files.notExists((java.nio.file.Path) dictionaryFilePath)) {
+                Files.createDirectories((java.nio.file.Path) dictionaryFilePath.getParent());
+                Files.createFile((java.nio.file.Path) dictionaryFilePath);
             }
         } catch (IOException e) {
             e.printStackTrace();

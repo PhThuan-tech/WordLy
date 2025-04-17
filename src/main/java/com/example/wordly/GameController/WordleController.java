@@ -1,7 +1,10 @@
 package com.example.wordly.GameController;
 
 import com.example.wordly.controllerForUI.BaseController;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,25 +28,44 @@ public class WordleController extends BaseController {
     @FXML private GridPane grid;
     @FXML private TextField inputField;
     @FXML private Label messageLabel;
-    @FXML private Button hintButton;
-    
-    private  final int WORD_LENGTH = 5;         // Chiều dài của từ
-    private final int MAX_ATTEMPTS = 6;         // Số lần thử
-    private final int MAX_HINTS = 2;            // số lần gợi ý tối đa
 
-    // Tạo danh sách từ trong WordleGame, Từ bí mật là lấy ngẫu nhiên, số lượt thử (6 lần)
-    // hiển thị gợi ý là 2 lần.
-    // Vị trí đoán đúng thì sẽ bôi màu.
+    // Nút bấm xử lí hành động gợi ý.
+    @FXML private Button hintButton;
+
+    // label hiển thị gợi ý từ.
+    @FXML private Label hintLabel;
+
+    // Label đếm số giây chạy còn lại
+    @FXML private Label timerLabel;
+
+
+    private  final int WORD_LENGTH = 5;
+    private final int MAX_ATTEMPTS = 6;
+    private final int MAX_HINTS = 2;
     private List<String> wordList;
     private String secretWord;
     private int currentAttempt = 0;
-    private boolean[] revealedPositions = new boolean[WORD_LENGTH];
-    private int hintCount = 0;      //
 
+    // Hiển thị vị trí đoán đúng.
+    private boolean[] revealedPositions = new boolean[WORD_LENGTH];
+    private int hintCount = 0;
+
+    // Biến xử lí đếm ngược thời gian.
+    private int secondsElapsed = 0;
+    private Timeline timeline;
+
+    // Biến xử lí tính điểm
+    private int score = 0;
+
+
+    /**
+     * 2 chức năng chính của game là load từ khi bắt đầu và resetgame.
+     */
     public void initialize() {
-        wordList = loadWordList(); // <-- GÁN lại nha bro
+        wordList = loadWordList();
         resetGame();
     }
+
 
     /**
      * Reset game khi từ mình đoán đúng.
@@ -67,6 +91,8 @@ public class WordleController extends BaseController {
                 grid.add(cell, col, row);
             }
         }
+        fetchHint(secretWord);
+        startTimer();
     }
 
     private Label createCell() {
@@ -80,6 +106,8 @@ public class WordleController extends BaseController {
 
     private List<String> loadWordList() {
         List<String> wordList = new ArrayList<>();
+        fetchHint(secretWord);                      // hiển thị gợi ý lúc đầu game // ở restart game có nữa.
+        startTimer();
         try {
             InputStream inputStream = getClass().getResourceAsStream("/wordlist.txt");
             if (inputStream == null) {
@@ -125,6 +153,7 @@ public class WordleController extends BaseController {
         }
 
         if (guess.equals(secretWord)) {
+            stopTimer();
             messageLabel.setText("Bạn đoán đúng rồi 🎉 Quá đỉnh luôn bro!!");
             inputField.setDisable(true);
             hintButton.setDisable(true);
@@ -132,12 +161,15 @@ public class WordleController extends BaseController {
             currentAttempt++;
             inputField.clear();
             messageLabel.setText("");
+
             if (currentAttempt == MAX_ATTEMPTS) {
+                stopTimer();
                 messageLabel.setText("Thua rồi bro 💀 Từ đúng là: " + secretWord);
                 inputField.setDisable(true);
                 hintButton.setDisable(true);
             }
         }
+        calculateScore();
     }
 
     @FXML
@@ -203,5 +235,84 @@ public class WordleController extends BaseController {
     @FXML
     public void handleGotoGame(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
+    }
+
+    /**
+     * Hiển thị gợi ý dùng DictionaryDev lấy meaning.
+     * @param word nghĩa của từ đó.
+     */
+    private void fetchHint(String word) {
+        new Thread(() -> {
+            try {
+                JSONArray jsonArray = getObjects(word);
+                String definition = jsonArray
+                        .getJSONObject(0)
+                        .getJSONArray("meanings")
+                        .getJSONObject(0)
+                        .getJSONArray("definitions")
+                        .getJSONObject(0)
+                        .getString("definition");
+
+                // Cập nhật hint trên giao diện
+                javafx.application.Platform.runLater(() -> {
+                    hintLabel.setText("👉 Gợi ý: " + definition);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.application.Platform.runLater(() -> {
+                    hintLabel.setText("Không lấy được gợi ý 🥲");
+                });
+            }
+        }).start();
+    }
+
+    @NotNull
+    private static JSONArray getObjects(String word) throws IOException {
+        String apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
+        java.net.HttpURLConnection conn = (java.net.HttpURLConnection) new java.net.URL(apiUrl).openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+
+        // Phân tích JSON trả về
+        JSONArray jsonArray = new JSONArray(response.toString());
+        return jsonArray;
+    }
+
+    // Thêm tính năng đồng hồ đếm ngược cho game.
+    private void startTimer() {
+        if (timeline != null) {
+            timeline.stop(); // dừng cái cũ nếu đang chạy
+        }
+        secondsElapsed = 0;
+        timerLabel.setText("⏱️ 0s");
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            secondsElapsed++;
+            timerLabel.setText("⏱️ " + secondsElapsed + "s");
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    private void stopTimer() {
+        if (timeline != null) {
+            timeline.stop();
+        }
+    }
+
+    // Thêm tính năng tính điểm - đoán càng nhanh cho điểm càng cao
+    // Đoán sai là trừ 10 điểm.
+    private void calculateScore() {
+        // Càng ít lượt và nhanh thì điểm càng cao
+        score = Math.max(0, (MAX_ATTEMPTS - currentAttempt) * 10 -secondsElapsed);
+        messageLabel.setText("Bạn đoán đúng rồi 🎉 Điểm của bạn: " + score);
     }
 }
