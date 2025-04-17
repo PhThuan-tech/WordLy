@@ -1,2 +1,3 @@
 green	adjective	/ɡɹiːn/	Having green as its color.
 history	noun	/ˈhɪst(ə)ɹi/	The aggregate of past events.
+table	noun	/ˈteɪbəl/	Furniture with a top surface to accommodate a variety of uses.

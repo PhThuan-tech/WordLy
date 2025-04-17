@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +38,6 @@ public class WordleController extends BaseController {
     // Label đếm số giây chạy còn lại
     @FXML private Label timerLabel;
 
-    @FXML private Label levelLabel;
 
     private  final int WORD_LENGTH = 5;
     private final int MAX_ATTEMPTS = 6;
@@ -243,20 +244,7 @@ public class WordleController extends BaseController {
     private void fetchHint(String word) {
         new Thread(() -> {
             try {
-                String apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
-                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) new java.net.URL(apiUrl).openConnection();
-                conn.setRequestMethod("GET");
-
-                java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                // Phân tích JSON trả về
-                org.json.JSONArray jsonArray = new org.json.JSONArray(response.toString());
+                JSONArray jsonArray = getObjects(word);
                 String definition = jsonArray
                         .getJSONObject(0)
                         .getJSONArray("meanings")
@@ -277,6 +265,25 @@ public class WordleController extends BaseController {
                 });
             }
         }).start();
+    }
+
+    @NotNull
+    private static JSONArray getObjects(String word) throws IOException {
+        String apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
+        java.net.HttpURLConnection conn = (java.net.HttpURLConnection) new java.net.URL(apiUrl).openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+
+        // Phân tích JSON trả về
+        JSONArray jsonArray = new JSONArray(response.toString());
+        return jsonArray;
     }
 
     // Thêm tính năng đồng hồ đếm ngược cho game.
@@ -308,5 +315,4 @@ public class WordleController extends BaseController {
         score = Math.max(0, (MAX_ATTEMPTS - currentAttempt) * 10 -secondsElapsed);
         messageLabel.setText("Bạn đoán đúng rồi 🎉 Điểm của bạn: " + score);
     }
-
 }
