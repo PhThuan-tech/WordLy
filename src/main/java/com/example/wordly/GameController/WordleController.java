@@ -20,9 +20,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javafx.scene.media.AudioClip;
 
 public class WordleController extends BaseController {
     @FXML private GridPane grid;
@@ -154,6 +156,7 @@ public class WordleController extends BaseController {
 
         if (guess.equals(secretWord)) {
             stopTimer();
+            playWinSound();
             messageLabel.setText("Bạn đoán đúng rồi 🎉 Quá đỉnh luôn bro!!");
             inputField.setDisable(true);
             hintButton.setDisable(true);
@@ -164,6 +167,7 @@ public class WordleController extends BaseController {
 
             if (currentAttempt == MAX_ATTEMPTS) {
                 stopTimer();
+                playLoseSound();
                 messageLabel.setText("Thua rồi bro 💀 Từ đúng là: " + secretWord);
                 inputField.setDisable(true);
                 hintButton.setDisable(true);
@@ -314,5 +318,25 @@ public class WordleController extends BaseController {
         // Càng ít lượt và nhanh thì điểm càng cao
         score = Math.max(0, (MAX_ATTEMPTS - currentAttempt) * 10 -secondsElapsed);
         messageLabel.setText("Bạn đoán đúng rồi 🎉 Điểm của bạn: " + score);
+    }
+
+    private void playWinSound() {
+        URL winSoundURL = getClass().getResource("/com/example/wordly/audio/WinGame.mp3");
+        if (winSoundURL != null) {
+            AudioClip winSound = new AudioClip(winSoundURL.toExternalForm());
+            winSound.play();
+        } else {
+            System.out.println("Không tìm thấy âm thanh WinGame.mp3!");
+        }
+    }
+
+    private void playLoseSound() {
+        URL loseSoundURL = getClass().getResource("/com/example/wordly/audio/LoseGame.mp3");
+        if (loseSoundURL != null) {
+            AudioClip loseSound = new AudioClip(loseSoundURL.toExternalForm());
+            loseSound.play();
+        } else {
+            System.out.println("Không tìm thấy âm thanh LoseGame.mp3!");
+        }
     }
 }
