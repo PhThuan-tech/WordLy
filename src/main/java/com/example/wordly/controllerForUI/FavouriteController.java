@@ -2,8 +2,10 @@ package com.example.wordly.controllerForUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class FavouriteController extends BaseController {
     // Các hàm chuyển đổi các giao diện qua lại.
@@ -43,5 +45,40 @@ public class FavouriteController extends BaseController {
 
     public void handleMouseClicked(MouseEvent mouseEvent) {
 
+    }
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Button yesButton;
+
+    @FXML
+    private Button noButton;
+
+    @FXML
+    private AnchorPane confirmationDialog;
+
+    @FXML
+    private void handleDeleteButton() {
+        confirmationDialog.setVisible(true);
+    }
+
+    @FXML
+    public void initialize() {
+        confirmationDialog.setVisible(false);
+
+        // hiện hộp thoại
+        deleteButton.setOnAction(event -> confirmationDialog.setVisible(true));
+
+        // bấm no -> ẩn hộp thoại
+        noButton.setOnAction(event -> confirmationDialog.setVisible(false));
+
+        // bấm YES, chức năng xóa
+        yesButton.setOnAction(event -> {
+            //Thêm chức năng xóa
+
+            confirmationDialog.setVisible(false);
+        });
     }
 }
