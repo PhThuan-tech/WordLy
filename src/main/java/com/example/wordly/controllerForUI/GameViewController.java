@@ -1,0 +1,68 @@
+package com.example.wordly.controllerForUI;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+
+public class GameViewController extends BaseController {
+    // Các phương thức chuyển giao diện.
+    @FXML
+    public void handleBackMain(ActionEvent actionEvent)  {
+        switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
+    }
+
+    @FXML
+    public void handleGoToSearch(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
+    }
+
+    @FXML
+    public void handleGoToFavourite(ActionEvent actionEvent)  {
+        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
+    }
+
+    @FXML
+    public void handleGoToHistory(ActionEvent actionEvent)  {
+        switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
+    }
+
+
+    @FXML
+    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
+    }
+
+    @FXML
+    public void handleGotoEditWord(ActionEvent actionEvent)  {
+        switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
+    }
+
+    public void GoToWordle(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/GameView/WordleView.fxml");
+    }
+
+
+    public void handleStartWordleGame(ActionEvent event) {
+    }
+
+    public void handleStartScrambleGame(ActionEvent event) {
+    }
+
+    public void handleGotoEdit(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void handleStartDefiGame(ActionEvent event) throws IOException, IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/DefinitionGame-View.fxml"));
+        Parent DefinitionGame = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(DefinitionGame);
+    }
+}

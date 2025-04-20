@@ -14,3 +14,4 @@ office	noun	/ˈɑfɪs/	A ceremonial duty or service, particularly:
 bed	noun	/bed/	A piece of furniture, usually flat and soft, on which to rest or sleep.
 bet	noun	/ˈbɛt/	A wager, an agreement between two parties that a stake (usually money) will be paid by the loser to the winner (the winner being the one who correctly forecast the outcome of an event).
 shirt	noun	/ʃɜːt/	An article of clothing that is worn on the upper part of the body, and often has sleeves, either long or short, that cover the arms.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.

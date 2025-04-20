@@ -7,21 +7,19 @@ import com.example.wordly.getWord.SearchUIUpdate;
 import com.example.wordly.getWord.WordDetails;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
+// kế thừa lớp BaseController và implements interface SearchUIUpdate.
 
-public class SearchViewController implements SearchUIUpdate {
-    //Goi API va xu li su kien
+public class SearchViewController extends BaseController implements SearchUIUpdate {
     public Button searchButton;
     public TextField searchBar;
     public TextArea meaningText;
@@ -35,59 +33,43 @@ public class SearchViewController implements SearchUIUpdate {
     private WordDetails currDetails;
     private MediaPlayer activeMedia;
 
+    // Dùng kế thừa và tái sử dụng trông sang hẳn =))
+    // lỗi cũng ít hơn thôi mấy ôg, đỡ copy nhiều phần ko quan trọng.
     @FXML
-    public void handleBackMain(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/view/MainView.fxml"));
-        Parent mainView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(mainView);
+    public void handleBackMain(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
 
-    // chuyen cac giao dien :v dai vai sua o cac giao dien khac
-    public void handleGoToFavourite(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/FavouriteView.fxml"));
-        Parent favouriteView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(favouriteView);
+    public void handleGoToFavourite(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
 
     @FXML
-    public void handleGoToHistory(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/HistoryView.fxml"));
-        Parent historyView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(historyView);
+    public void handleGoToHistory(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
 
     @FXML
-    public void handleGotoEdit(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/EditWordView.fxml"));
-        Parent EditWordView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(EditWordView);
+    public void handleGotoEdit(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
 
     @FXML
-    public void handleGotoGame(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/GameView.fxml"));
-        Parent GameView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(GameView);
+    public void handleGotoGame(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
 
     @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/TranslateAndTTS.fxml"));
-        Parent TranslateAndTTSView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(TranslateAndTTSView);
+    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
     }
+
+    @FXML
+    public void handleGoToSynAndAnt(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/SynAndAntView.fxml");
+    }
+
+
 
     @FXML
     public void initialize() {
@@ -174,11 +156,10 @@ public class SearchViewController implements SearchUIUpdate {
     }
 
 
-    // ========================================
-    // ===XU LI NUT NGHE=====================
-    // =========XU LI NUT NGHE==============
-    //========================================
-
+    /**
+     * Hàm sử lí hành động khi bấm nút speak.
+     * @param e tạo hành động cần thực hiện.
+     */
     @FXML
     void handleSpeakButtonOnAction(ActionEvent e) {
         System.out.println("Dang o handleSpeakButtonOnAction");
@@ -187,18 +168,17 @@ public class SearchViewController implements SearchUIUpdate {
     }
 
     /**
-     * Phuong thuc nghe.
-     *
-     * @param audioURL link mp3
+     * Lấy ra URL của audio cần tìm.
+     * @param audioURL trả về encoded của URL.
      */
     public void playAudio(String audioURL) {
-        updateStatus("Dang tap noi");
+        updateStatus("Đang tập nói nè cha");
 
         try {
             stopCurrPlayer(); // Dung cai dang nghe
 
             if (audioURL == null || audioURL.isEmpty()) {
-                updateStatus("Khong thay duong dan am thanh");
+                updateStatus("Không thấy đường dẫn");
                 return;
             }
 
@@ -208,50 +188,41 @@ public class SearchViewController implements SearchUIUpdate {
 
             //Neu xay ra loi
             activeMedia.setOnError(() -> {
-                updateStatus("Loi" + activeMedia.getError().getMessage());
+                updateStatus("Lỗi rồi má ơi" + activeMedia.getError().getMessage());
                 System.out.println(activeMedia.getError().getMessage());
             });
 
             //Chuan bi phat am thanh
             activeMedia.setOnReady(() -> {
-                updateStatus("Dang phat");
+                updateStatus("Đang phát ~.~ CHILL GUY");
                 activeMedia.play();
             });
 
             //khi phat xong
             activeMedia.setOnEndOfMedia(() -> {
-                updateStatus("Nghe xong roi nhe");
+                updateStatus("Mời mấy bác thưởng thức");
                 stopCurrPlayer();
             });
         } catch (Exception e) {
-            updateStatus("Loi " + e.getMessage());
+            updateStatus("Lỗi " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Ham de dung nghe
+     * Hàm để nghe từ cần nghe.
      */
     private void stopCurrPlayer() {
         if (activeMedia != null) {
             try {
                 activeMedia.stop();
                 activeMedia.dispose();
-                System.out.println("Nghe thich chua");
+                System.out.println("Nghe thích chưa");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
                 activeMedia = null;
             }
         }
-    }
-
-    @FXML
-    public void handleGoToSynAndAnt(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/SynAndAntView.fxml"));
-        Parent synAndAntView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(synAndAntView);
     }
 }

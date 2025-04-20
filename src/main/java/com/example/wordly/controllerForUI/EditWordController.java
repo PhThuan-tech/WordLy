@@ -2,70 +2,114 @@ package com.example.wordly.controllerForUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class EditWordController {
+public class EditWordController extends BaseController {
+
     @FXML
-    public void handleBackMain(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/view/MainView.fxml"));
-        Parent mainView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(mainView);
+    public void handleBackMain(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
 
     @FXML
     public void handleGoToSearch(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/SearchView.fxml"));
-        Parent searchView = null;
+        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
+    }
+
+    @FXML
+    public void handleGoToFavourite(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
+    }
+
+    @FXML
+    public void handleGotoGame(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
+    }
+
+    @FXML
+    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
+    }
+
+    @FXML
+    public void handleGoToHistory(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
+    }
+
+    @FXML
+    private TextField txtWord, txtPronunciation, txtType;
+    @FXML
+    private TextArea txtDescription;
+    @FXML
+    private Button addButton;
+
+    private final Path dictionaryFilePath = Paths.get("data/dictionary.txt");
+
+    public EditWordController() {
         try {
-            searchView = loader.load();
+            if (Files.notExists((java.nio.file.Path) dictionaryFilePath)) {
+                Files.createDirectories((java.nio.file.Path) dictionaryFilePath.getParent());
+                Files.createFile((java.nio.file.Path) dictionaryFilePath);
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            showPopup("Failed to create dictionary file.");
+            throw new RuntimeException("Cannot prepare dictionary file!", e);
         }
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(searchView);
     }
 
-    @FXML
-    public void handleGoToFavourite(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/FavouriteView.fxml"));
-        Parent favouriteView = loader.load();
+    public void handleAddButton(ActionEvent event) {
+        if (event.getSource() == addButton) {
+            String word = txtWord.getText().trim();
+            String pronunciation = txtPronunciation.getText().trim();
+            String type = txtType.getText().trim();
+            String description = txtDescription.getText().trim();
 
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(favouriteView);
+            if (word.isEmpty() || description.isEmpty()) {
+                showPopup("Please enter at least the word and its description!");
+                return;
+            }
+
+            String newLine = String.format("%s | %s | %s | %s", word, pronunciation, type, description);
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFilePath.toFile(), true))) {
+                writer.write(newLine);
+                writer.newLine();
+                showPopup("Word added successfully!");
+                clearFields();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showPopup("Error writing to dictionary file.");
+            }
+        }
     }
 
-    @FXML
-    public void handleGotoGame(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/GameView.fxml"));
-        Parent GameView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(GameView);
+    private void clearFields() {
+        txtWord.clear();
+        txtPronunciation.clear();
+        txtType.clear();
+        txtDescription.clear();
     }
 
-    @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/TranslateAndTTS.fxml"));
-        Parent TranslateAndTTSView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(TranslateAndTTSView);
-    }
-
-    @FXML
-    public void handleGoToHistory(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/HistoryView.fxml"));
-        Parent historyView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(historyView);
+    // Popup hien thi them tu
+    private void showPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notification");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
+
+

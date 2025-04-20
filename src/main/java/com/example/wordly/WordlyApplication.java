@@ -79,4 +79,5 @@ public class WordlyApplication extends Application {
             }
         });
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.wordly.TTS;
 
+import com.example.wordly.controllerForUI.BaseController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -24,120 +25,62 @@ import java.util.logging.Logger; // For logging
  * displaying the translation, providing text-to-speech functionality (placeholder buttons),
  * and navigating to other application views.
  */
-public class TranslateAndTTSController {
-
+public class TranslateAndTTSController extends BaseController {
     // --- Logger ---
     // Use java.util.logging (JUL) for simplicity, or SLF4J if preferred in the project
     private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+    //Ông ko cần comment ở phần FXML đâu á.
+    // vì cái này khi tạo hàm view.fxml là nó tự tạo thôi. mình tự hiểu được.
 
-    // --- FXML View Paths (Constants for maintainability) ---
-    private static final String MAIN_VIEW_PATH = "/com/example/wordly/view/MainView.fxml";
-    private static final String SEARCH_VIEW_PATH = "/com/example/wordly/view/SearchView.fxml"; // Corrected path casing
-    private static final String FAVOURITE_VIEW_PATH = "/com/example/wordly/view/FavouriteView.fxml"; // Corrected path casing
-    private static final String EDIT_WORD_VIEW_PATH = "/com/example/wordly/view/EditWordView.fxml"; // Corrected path casing
-    private static final String GAME_VIEW_PATH = "/com/example/wordly/view/GameView.fxml"; // Corrected path casing
-    private static final String HISTORY_VIEW_PATH = "/com/example/wordly/view/HistoryView.fxml"; // Corrected path casing
-
-    // --- FXML Injected Fields ---
-
-    /** TextArea for user to input text to be translated. */
     @FXML private TextArea needToTrans;
 
-    /** TextArea to display the translated text. */
     @FXML private TextArea translated;
 
-    /** Button to trigger the translation process. */
     @FXML private Button transButton;
 
-    /** Button to trigger text-to-speech for the original text (implementation pending). */
     @FXML private Button speak1Button; // Placeholder for future TTS
 
-    /** Button to trigger text-to-speech for the translated text (implementation pending). */
     @FXML private Button speak2Button; // Placeholder for future TTS
 
-    // Optional: Add a progress indicator for visual feedback during translation
-    // @FXML private ProgressIndicator translationProgress;
-
     /**
-     * Initializes the controller class. This method is automatically called
-     * after the FXML file has been loaded.
-     * Can be used for setup tasks like binding properties or setting initial states.
+     * Xử lí chuyển đổi giữa các giao diện.
      */
     @FXML
     public void initialize() {
-        // Example: Disable speak buttons initially if no text is present
         LOGGER.info("TranslateAndTTSController initialized.");
     }
 
-    // --- Navigation Event Handlers ---
-
-    /**
-     * Handles the action event when the 'Back to Main' button is clicked.
-     * Navigates the user back to the main application view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
+    // Tôi sửa phần chuyển đổi giao diện thôi nhé.
+    // Phần nào cần sự trợ giúp thì ông hú tôi cái tôi nghĩ cùng.
     @FXML
     public void handleBackMain(ActionEvent actionEvent) {
-        navigateToView(actionEvent, MAIN_VIEW_PATH, "Main View");
+        switchScene(actionEvent, "/com/example/wordly/View/MainView.fxml");
     }
 
-    /**
-     * Handles the action event when the 'Go to Search' button is clicked.
-     * Navigates the user to the search view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
     @FXML
     public void handleGoToSearch(ActionEvent actionEvent) {
-        navigateToView(actionEvent, SEARCH_VIEW_PATH, "Search View");
+        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
 
-    /**
-     * Handles the action event when the 'Go to Favourite' button is clicked.
-     * Navigates the user to the favourite words view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
     @FXML
     public void handleGoToFavourite(ActionEvent actionEvent) {
-        navigateToView(actionEvent, FAVOURITE_VIEW_PATH, "Favourite View");
+        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
 
-    /**
-     * Handles the action event when the 'Go to Edit' button is clicked.
-     * Navigates the user to the word editing view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
     @FXML
     public void handleGotoEdit(ActionEvent actionEvent) {
-        navigateToView(actionEvent, EDIT_WORD_VIEW_PATH, "Edit Word View");
+        switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
 
-    /**
-     * Handles the action event when the 'Go to Game' button is clicked.
-     * Navigates the user to the game view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
     @FXML
     public void handleGotoGame(ActionEvent actionEvent) {
-        navigateToView(actionEvent, GAME_VIEW_PATH, "Game View");
+        switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
 
-    /**
-     * Handles the action event when the 'Go to History' button is clicked.
-     * Navigates the user to the search history view.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
     @FXML
     public void handleGoToHistory(ActionEvent actionEvent) {
-        navigateToView(actionEvent, HISTORY_VIEW_PATH, "History View");
+        switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
-
-
     // --- Core Functionality Event Handlers ---
 
     /**
@@ -222,7 +165,6 @@ public class TranslateAndTTSController {
             }
         };
     }
-
 
     /**
      * Updates the UI state to indicate whether a translation is in progress.
