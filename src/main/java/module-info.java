@@ -27,4 +27,6 @@ module com.example.wordly {
     opens com.example.wordly.History to javafx.fxml;
     exports com.example.wordly.TTS;
     opens com.example.wordly.TTS to javafx.fxml;
+    exports com.example.wordly.GAME;
+    opens com.example.wordly.GAME to javafx.fxml;
 }

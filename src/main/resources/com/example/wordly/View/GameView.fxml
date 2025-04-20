@@ -1,39 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<!-- Use BorderPane for the main structure -->
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <?import java.net.URL?>
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.GameViewController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.wordly.GAME.GameViewController">
 
     <stylesheets>
-        <URL value="@../styles/home.css" />
+        <URL value="@../styles/home.css"/>
+        <!-- Consider a specific gameSelection.css -->
+        <!-- <URL value="@../styles/gameSelection.css" /> -->
     </stylesheets>
 
-    <children>
-        <ListView prefHeight="600.0" prefWidth="170.0" />
-        <Button layoutX="21.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="50.0" prefWidth="128.0" text="Main" />
-        <Button layoutX="21.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleGoToSearch" prefHeight="50.0" prefWidth="128.0" text="Search" />
-        <Button layoutX="21.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="50.0" prefWidth="128.0" text="Favourite" />
-        <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="50.0" prefWidth="128.0" text="History" textAlignment="CENTER" />
-        <Button layoutX="21.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleGotoEditWord" prefHeight="50.0" prefWidth="128.0" text="Edit New Word" textAlignment="CENTER" />
-        <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="128.0" text="Game" />
-        <Label layoutX="47.0" layoutY="20.0" text="WORDLY" />
-        <Button layoutX="21.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" prefWidth="128.0" text="Translate &amp;&amp; Text To Speech" textAlignment="CENTER" wrapText="true" />
-      <VBox layoutX="245.0" layoutY="113.0" prefHeight="306.0" prefWidth="100.0">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button" />
-            <AnchorPane prefHeight="58.0" prefWidth="100.0" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button" />
-            <AnchorPane prefHeight="58.0" prefWidth="100.0" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button" />
-         </children>
-      </VBox>
-      <Label layoutX="383.0" layoutY="129.0" prefHeight="18.0" prefWidth="49.0" text="Quizz" />
-      <Label layoutX="383.0" layoutY="242.0" prefHeight="18.0" prefWidth="100.0" text="Wordle" />
-      <Label layoutX="379.0" layoutY="348.0" prefHeight="18.0" prefWidth="107.0" text="Word Scramble" />
-    </children>
-</AnchorPane>
+    <!-- Left Navigation Sidebar -->
+    <left>
+        <!-- Consistent VBox for navigation -->
+        <VBox alignment="TOP_CENTER" prefWidth="170.0" spacing="10.0" style="-fx-background-color: #f0f0f0;">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="15.0"/>
+            </padding>
+            <children>
+                <!-- WORDLY Brand -->
+                <HBox alignment="CENTER">
+                    <children>
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="WORDLY"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="25.0"/>
+                    </VBox.margin>
+                </HBox>
+
+                <!-- Navigation Buttons -->
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackMain"
+                        prefHeight="45.0" text="Main"/>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToSearch"
+                        prefHeight="45.0" text="Search"/>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToFavourite"
+                        prefHeight="45.0" text="Favourite"/>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToHistory"
+                        prefHeight="45.0" text="History" textAlignment="CENTER"/>
+                <!-- Corrected action handler name potentially -->
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoEdit"
+                        prefHeight="45.0" text="Edit New Word" textAlignment="CENTER" wrapText="true"/>
+                <!-- Disable Game button as this is the Game view -->
+                <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0"
+                        text="Game"/>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS"
+                        prefHeight="50.0" text="Translate &amp; TTS" textAlignment="CENTER" wrapText="true">
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Button>
+
+                <Region VBox.vgrow="ALWAYS"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Center Content Area: Game Selection -->
+    <center>
+        <!-- VBox to center the game choices vertically -->
+        <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="30.0" left="50.0" right="50.0" top="20.0"/>
+            </padding>
+            <children>
+                <!-- Title for the Game Selection Screen -->
+                <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Choose Your Game">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="40.0"/> <!-- Extra space below title -->
+                    </VBox.margin>
+                </Label>
+
+                <!-- Buttons for each game -->
+                <!-- Add appropriate fx:id and onAction handlers -->
+                <Button fx:id="defiGameButton" onAction="#handleStartDefiGame" prefHeight="60.0" prefWidth="300.0"
+                        styleClass="game-button" text="📝 Definition Quiz">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="wordleGameButton" disable="true" onAction="#handleStartWordleGame" prefHeight="60.0"
+                        prefWidth="300.0" styleClass="game-button"
+                        text="🟩 Wordle Challenge"> <!-- Disabled for example -->
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="scrambleGameButton" disable="true" onAction="#handleStartScrambleGame" prefHeight="60.0"
+                        prefWidth="300.0" styleClass="game-button" text="🔄 Word Scramble"> <!-- Disabled for example -->
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Button>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

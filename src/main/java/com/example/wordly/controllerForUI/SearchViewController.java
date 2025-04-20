@@ -140,6 +140,7 @@ public class SearchViewController implements SearchUIUpdate {
             HistoryManage hm = new HistoryManage();
            try {
                hm.saveToHistory(details);
+               hm.saveToGame(details);
            }catch (IOException e) {
                System.err.println(e.getMessage());
            }
