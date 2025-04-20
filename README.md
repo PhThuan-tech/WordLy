@@ -46,4 +46,10 @@ Ngày 15/04/2025 :
 
 3 Thử nghiệm game đoán từ Wordle, chưa lấy đc từ ngẫu nhiên từ Dictionarydev hoặc APImuse.
 
+Ngày 20/04/2025 :
+1 Sửa đổi lại đồng bộ các giao diện.
+
+2 Thêm các icons, audio ngắn trong game và màn hình chính
+
+3 Fix bug lỗi merge của thái 
 
