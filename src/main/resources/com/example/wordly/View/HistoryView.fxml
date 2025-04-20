@@ -6,6 +6,8 @@
 <?import java.net.URL?>
 
 <!-- Root: BorderPane for overall structure -->
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.History.HistoryController">
 
     <stylesheets>
@@ -25,18 +27,66 @@
                     </VBox.margin>
                 </Label>
 
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" text="Main" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToSearch" prefHeight="40.0" text="Search" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="40.0" text="Favourite" />
+                <Button contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" text="Back">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/back.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="28.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToSearch" prefHeight="40.0" text="Search">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/dictionary.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="40.0" text="Favourite">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/bookmark.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
                 <!-- Disable the History button as this *is* the History view -->
-                <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="History" textAlignment="CENTER" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="40.0" text="Edit New Word" textAlignment="CENTER" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="40.0" text="Game" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" text="Translate &amp; TTS" textAlignment="CENTER" wrapText="true">
+                <Button contentDisplay="RIGHT" disable="true" graphicTextGap="20.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="History" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/history.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="18.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="40.0" text="Edit Word" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/editword.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="37.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="40.0" text="Game">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/game.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" text="Text To Speech" textAlignment="CENTER" wrapText="true">
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
-                </Button>
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/TTSicon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
 
                 <Region VBox.vgrow="ALWAYS" />
             </children>
