@@ -9,3 +9,4 @@ near	noun	/nɪə(ɹ)/	The left side of a horse or of a team of horses pulling a 
 bear	noun	/bɛə(ɹ)/	A large omnivorous mammal, related to the dog and raccoon, having shaggy hair, a very small tail, and flat feet; a member of family Ursidae.
 rare	noun	[ɹɜɹ]	A scarce or uncommon item.
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.

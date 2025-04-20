@@ -23,6 +23,13 @@ public class WordDetails {
     public WordDetails() {
     }
 
+    public WordDetails(String word, String wordType, String pronunciation, String definition) {
+        this.word = word;
+        this.type = wordType;
+        this.phonetic = pronunciation;
+        this.definition = definition;
+    }
+
     // --- Getters and Setters ---
     public String getWord() {
         return word;
