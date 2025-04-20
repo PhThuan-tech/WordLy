@@ -1,4 +1,4 @@
-package com.example.wordly.GAME;
+package com.example.wordly.GameController;
 
 import com.example.wordly.getWord.WordDetails;
 import javafx.event.ActionEvent;

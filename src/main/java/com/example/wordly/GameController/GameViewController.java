@@ -1,4 +1,4 @@
-package com.example.wordly.GAME;
+package com.example.wordly.GameController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
