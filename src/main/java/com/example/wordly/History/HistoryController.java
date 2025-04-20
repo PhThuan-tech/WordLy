@@ -1,18 +1,15 @@
 package com.example.wordly.History;
 
+import com.example.wordly.controllerForUI.BaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
@@ -24,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HistoryController implements Initializable {
-    private static final String History_File = "src/history.txt";
-    private static final int Max_Row = 12;
+public class HistoryController extends BaseController implements Initializable {
+    private static final String History_File = "src/history.txt";   // Tạo 1 file history.txt ngang hàng với mục src.
+    private static final int Max_Row = 12;                          // Giới hạn hiển thị của 1 danh sách.
+
+    // phần này FXML can thiệp
     public TableView<WordEntry> historyTable;
     public TableColumn<WordEntry, String> wordCol;
     public TableColumn<WordEntry, String> proCol;
@@ -34,64 +33,39 @@ public class HistoryController implements Initializable {
     public TableColumn<WordEntry, String> meanCol;
     public Button delHistory;
 
-    @FXML
-    public void handleBackMain(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/view/MainView.fxml"));
-        Parent mainView = loader.load();
+    // Tôi sửa thêm rồi nhé ôg.
 
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(mainView);
+    //=================Phần chuyển đổi giao diện.=======================//
+    @FXML
+    public void handleBackMain(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
 
     @FXML
     public void handleGoToSearch(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/SearchView.fxml"));
-        Parent searchView = null;
-        try {
-            searchView = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(searchView);
+        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
 
-    public void handleGoToFavourite(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/FavouriteView.fxml"));
-        Parent favouriteView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(favouriteView);
+    public void handleGoToFavourite(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
 
     @FXML
-    public void handleGotoEdit(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/EditWordView.fxml"));
-        Parent EditWordView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(EditWordView);
+    public void handleGotoEdit(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
 
     @FXML
-    public void handleGotoGame(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/GameView.fxml"));
-        Parent GameView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(GameView);
+    public void handleGotoGame(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
 
     @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/TranslateAndTTS.fxml"));
-        Parent TranslateAndTTSView = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(TranslateAndTTSView);
+    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
     }
 
+    //=================Phần tính Controller của history trong giao diện.===============//
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
@@ -111,7 +85,7 @@ public class HistoryController implements Initializable {
         historyTable.setItems(historyData);
     }
 
-    private ObservableList<WordEntry> loadHistoryFromFile(String filePath) throws IOException {
+    private ObservableList<WordEntry> loadHistoryFromFile(String filePath) {
         ObservableList<WordEntry> data = FXCollections.observableArrayList();
         Path path = Paths.get(filePath);
 
@@ -152,7 +126,7 @@ public class HistoryController implements Initializable {
         return data;
     }
 
-    private void setDelHistory() throws IOException {
+    private void setDelHistory() {
         try (FileWriter fw = new FileWriter("src/history.txt")) {
 
         } catch (IOException e) {
@@ -160,7 +134,7 @@ public class HistoryController implements Initializable {
         }
     }
 
-    public void delHistory(ActionEvent event) throws IOException {
+    public void delHistory(ActionEvent event) {
         setDelHistory();
     }
 }
