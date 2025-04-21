@@ -7,13 +7,13 @@ public class WordEntry {
     private final StringProperty word;
     private final StringProperty type;
     private final StringProperty pronunciation;
-    private final StringProperty meaning;
+    private final StringProperty definition;
 
     public WordEntry(String word, String type, String pronunciation, String meaning) {
         this.word = new SimpleStringProperty(word);
         this.type = new SimpleStringProperty(type);
         this.pronunciation = new SimpleStringProperty(pronunciation);
-        this.meaning = new SimpleStringProperty(meaning);
+        this.definition = new SimpleStringProperty(meaning);
     }
 
     public String getWord() {
@@ -40,11 +40,11 @@ public class WordEntry {
         return pronunciation;
     }
 
-    public String getMeaning() {
-        return meaning.get();
+    public String getDefinition() {
+        return definition.get();
     }
 
-    public StringProperty meaningProperty() {
-        return meaning;
+    public StringProperty definitionProperty() {
+        return definition;
     }
 }

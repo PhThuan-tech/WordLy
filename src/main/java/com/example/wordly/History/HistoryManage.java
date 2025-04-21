@@ -9,10 +9,22 @@ import java.io.*;
  */
 public class HistoryManage {
     private static final String HISTORY_FILE = "src/history.txt";
+    private static final String GAME_FILE = "src/main/resources/game_data.txt";
 
     //Ghi thong tin vao file
     public void saveToHistory(WordDetails details) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(HISTORY_FILE, true))) {
+            String line = formatWord(details);
+            bw.write(line);
+            bw.newLine();
+            System.out.println("Ghi thanh cong " + details.getWord());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void saveToGame(WordDetails details) throws IOException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(GAME_FILE, true))) {
             String line = formatWord(details);
             bw.write(line);
             bw.newLine();

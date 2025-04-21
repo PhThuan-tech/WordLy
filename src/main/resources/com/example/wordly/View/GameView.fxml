@@ -10,11 +10,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<!-- Use BorderPane for the main structure -->
 
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.GameViewController">
 
     <stylesheets>
-        <URL value="@../styles/home.css" />
+        <URL value="@../styles/home.css"/>
+        <!-- Consider a specific gameSelection.css -->
+        <!-- <URL value="@../styles/gameSelection.css" /> -->
     </stylesheets>
 
     <left>
@@ -108,7 +111,7 @@
          <children>
             <HBox layoutX="157.0" layoutY="145.0" prefHeight="50.0" prefWidth="447.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Funny Quizz" />
+                  <Button mnemonicParsing="false" onAction="#handleStartDefiGame" prefHeight="50.0" prefWidth="100.0" text="Funny Quizz" />
                   <Label alignment="CENTER" prefHeight="50.0" prefWidth="346.0" text="Trò chơi giải đố đoán nghĩa của 1 từ" wrapText="true" />
                </children>
             </HBox>

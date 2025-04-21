@@ -71,7 +71,7 @@ public class HistoryController extends BaseController implements Initializable {
         wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
         proCol.setCellValueFactory(new PropertyValueFactory<>("pronunciation")); // Giả sử property là "pronunciation"
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        meanCol.setCellValueFactory(new PropertyValueFactory<>("meaning"));     // Giả sử property là "meaning"
+        meanCol.setCellValueFactory(new PropertyValueFactory<>("definition"));     // Giả sử property là "definition"
 
         try {
             loadAndDisplayHistory();
@@ -114,9 +114,9 @@ public class HistoryController extends BaseController implements Initializable {
                 String word = parts[0].trim();
                 String pronunciation = parts[1].trim();
                 String type = parts[2].trim();
-                String meaning = parts[3].trim();
+                String definition = parts[3].trim();
 
-                recent.add(new WordEntry(word, pronunciation, type, meaning));
+                recent.add(new WordEntry(word, pronunciation, type, definition));
             } else {
                 System.err.println("Loi o " + line);
             }

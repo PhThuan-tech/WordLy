@@ -2,6 +2,12 @@ package com.example.wordly.controllerForUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class GameViewController extends BaseController {
@@ -26,6 +32,7 @@ public class GameViewController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
 
+
     @FXML
     public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
@@ -38,5 +45,24 @@ public class GameViewController extends BaseController {
 
     public void GoToWordle(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/GameView/WordleView.fxml");
+    }
+
+
+    public void handleStartWordleGame(ActionEvent event) {
+    }
+
+    public void handleStartScrambleGame(ActionEvent event) {
+    }
+
+    public void handleGotoEdit(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void handleStartDefiGame(ActionEvent event) throws IOException, IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/View/DefinitionGame-View.fxml"));
+        Parent DefinitionGame = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(DefinitionGame);
     }
 }
