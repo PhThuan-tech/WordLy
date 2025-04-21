@@ -25,76 +25,77 @@
     <left>
         <VBox prefWidth="170.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
 
-            <children>
-                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="WORDLY">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Label>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="WORDLY">
+                <VBox.margin>
+                    <Insets bottom="20.0"/>
+                </VBox.margin>
+            </Label>
 
-                <Button contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" text="Back">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/back.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" disable="true" graphicTextGap="28.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="Search">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/dictionary.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="40.0" text="Favourite">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/bookmark.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" graphicTextGap="20.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="40.0" text="History" textAlignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/history.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" graphicTextGap="18.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="40.0" text="Edit Word" textAlignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/editword.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" graphicTextGap="37.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="40.0" text="Game">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/game.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button contentDisplay="RIGHT" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" text="Text To Speech" textAlignment="CENTER" wrapText="true">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/TTSicon.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            </children>
+            <Button contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" text="Back">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/back.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" disable="true" graphicTextGap="28.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" prefHeight="40.0" text="Search">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/dictionary.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="40.0" text="Favourite">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/bookmark.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="20.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="40.0" text="History"
+                    textAlignment="CENTER">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/history.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="18.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="40.0" text="Edit Word"
+                    textAlignment="CENTER">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/editword.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="37.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="40.0" text="Game">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/game.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="5.0" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0"
+                    text="Text To Speech" textAlignment="CENTER" wrapText="true">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/TTSicon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
         </VBox>
     </left>
 
@@ -102,79 +103,82 @@
     <center>
         <VBox spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="15.0"/>
             </padding>
-            <children>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <Label text="From:" />
-                        <ChoiceBox fx:id="langFromChoice" prefWidth="100.0" />
-                        <Label>
-                     <graphic>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <VBox.margin>
+                    <Insets bottom="5.0"/>
+                </VBox.margin>
+                <Label text="From:"/>
+                <ChoiceBox fx:id="langFromChoice" prefWidth="100.0"/>
+                <Label>
+                    <graphic>
                         <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/translate.png" />
-                           </image>
+                            <Image url="@../icons/translate.png"/>
                         </ImageView>
-                     </graphic></Label>
-                        <ChoiceBox fx:id="langToChoice" prefWidth="100.0" />
-                    </children>
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </HBox>
-
-                <!-- Search Bar Row -->
-                <HBox spacing="10.0">
-                    <children>
-                        <TextField fx:id="searchBar" promptText="Enter word to search..." HBox.hgrow="ALWAYS" />
-                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchButtonOnClick" prefHeight="0.0" prefWidth="66.0">
-                     <graphic>
-                        <ImageView fitHeight="13.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/find.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-                    </children>
-                </HBox>
-
-                <Label fx:id="statusLabel" style="-fx-text-fill: red; -fx-font-weight: bold;">
-                    <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                    </VBox.margin>
+                    </graphic>
                 </Label>
+                <ChoiceBox fx:id="langToChoice" prefWidth="100.0"/>
+            </HBox>
 
-
-                <!-- Word Details Row using GridPane for alignment -->
-                <GridPane hgap="10.0" prefHeight="30.0" prefWidth="701.0" vgap="5.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="150.0" prefWidth="154.39996337890625" />
-                        <ColumnConstraints hgrow="NEVER" maxWidth="103.20003662109377" minWidth="48.80000000000001" prefWidth="63.20001220703125" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="73.59998779296876" minWidth="29.600000000000023" prefWidth="40.00002441406252" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.39999999999998" minWidth="48.800018310546875" prefWidth="76.80007934570312" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="169.19992065429688" minWidth="10.0" prefWidth="169.19992065429688" />
-                        <ColumnConstraints hgrow="ALWAYS" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Pronunciation:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <Label fx:id="proLabel" text="[pronunciation]" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                        <Button fx:id="speakButton" mnemonicParsing="false" onAction="#handleSpeakButtonOnAction" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/Audio.png" />
-                           </image>
+            <!-- Search Bar Row -->
+            <HBox spacing="10.0">
+                <TextField fx:id="searchBar" promptText="Enter word to search..." HBox.hgrow="ALWAYS"/>
+                <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchButtonOnClick"
+                        prefHeight="0.0" prefWidth="66.0">
+                    <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/find.png"/>
+                            </image>
                         </ImageView>
-                     </graphic></Button>
+                    </graphic>
+                </Button>
+            </HBox>
 
-                        <Label text="Type:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                        <Label fx:id="typeLabel" text="[type]" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+            <Label fx:id="statusLabel" style="-fx-text-fill: red; -fx-font-weight: bold;">
+                <VBox.margin>
+                    <Insets bottom="5.0" top="5.0"/>
+                </VBox.margin>
+            </Label>
+
+
+            <!-- Word Details Row using GridPane for alignment -->
+            <GridPane hgap="10.0" prefHeight="30.0" prefWidth="701.0" vgap="5.0">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" hgrow="NEVER"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="150.0"
+                                       prefWidth="154.39996337890625"/>
+                    <ColumnConstraints hgrow="NEVER" maxWidth="103.20003662109377" minWidth="48.80000000000001"
+                                       prefWidth="63.20001220703125"/>
+                    <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="73.59998779296876"
+                                       minWidth="29.600000000000023" prefWidth="40.00002441406252"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.39999999999998" minWidth="48.800018310546875"
+                                       prefWidth="76.80007934570312"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="169.19992065429688" minWidth="10.0"
+                                       prefWidth="169.19992065429688"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+                <Label text="Pronunciation:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label fx:id="proLabel" text="[pronunciation]" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Button fx:id="speakButton" mnemonicParsing="false" onAction="#handleSpeakButtonOnAction"
+                        GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../icons/Audio.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Label text="Type:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                <Label fx:id="typeLabel" text="[type]" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
 
                         <Button fx:id="addToFavouriteButton" mnemonicParsing="false" onAction="#handleAddToFavourite" text="Add to Favourite" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
                   <Button mnemonicParsing="false" onAction="#handleGoToSynAndAnt" prefHeight="30.0" prefWidth="168.0" text="Synonym And Antonym" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
@@ -185,13 +189,14 @@
                 </GridPane>
 
 
-                <Label style="-fx-font-weight: bold;" text="Meaning:" />
-                <TextArea fx:id="meaningText" editable="false" prefHeight="150.0" promptText="Meaning will appear here..." wrapText="true" VBox.vgrow="ALWAYS" />
+            <Label style="-fx-font-weight: bold;" text="Meaning:"/>
+            <TextArea fx:id="meaningText" editable="false" prefHeight="150.0" promptText="Meaning will appear here..."
+                      wrapText="true" VBox.vgrow="ALWAYS"/>
 
-                <Label style="-fx-font-weight: bold;" text="Example:" />
-                <TextArea fx:id="exampleText" editable="false" prefHeight="100.0" promptText="Example usage will appear here..." wrapText="true" VBox.vgrow="SOMETIMES" />
+            <Label style="-fx-font-weight: bold;" text="Example:"/>
+            <TextArea fx:id="exampleText" editable="false" prefHeight="100.0"
+                      promptText="Example usage will appear here..." wrapText="true" VBox.vgrow="SOMETIMES"/>
 
-            </children>
         </VBox>
     </center>
 </BorderPane>
