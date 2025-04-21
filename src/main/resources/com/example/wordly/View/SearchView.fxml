@@ -16,11 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0"
-            prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.wordly.controllerForUI.SearchViewController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
 
     <stylesheets>
         <URL value="@../styles/home.css" />
@@ -184,11 +180,13 @@
                 <Label text="Type:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
                 <Label fx:id="typeLabel" text="[type]" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
 
-                <Button fx:id="addToFavouriteButton" mnemonicParsing="false" text="Add to Favourite"
-                        GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="0"/>
-                <Button mnemonicParsing="false" onAction="#handleGoToSynAndAnt" prefHeight="30.0" prefWidth="168.0"
-                        text="Synonym And Antonym" GridPane.columnIndex="5" GridPane.halignment="CENTER"/>
-            </GridPane>
+                        <Button fx:id="addToFavouriteButton" mnemonicParsing="false" onAction="#handleAddToFavourite" text="Add to Favourite" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                  <Button mnemonicParsing="false" onAction="#handleGoToSynAndAnt" prefHeight="30.0" prefWidth="168.0" text="Synonym And Antonym" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </GridPane>
 
 
             <Label style="-fx-font-weight: bold;" text="Meaning:"/>
