@@ -16,7 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-import java.io.IOException;
+import java.io.*;
 // kế thừa lớp BaseController và implements interface SearchUIUpdate.
 
 public class SearchViewController extends BaseController implements SearchUIUpdate {
@@ -223,6 +223,47 @@ public class SearchViewController extends BaseController implements SearchUIUpda
             } finally {
                 activeMedia = null;
             }
+        }
+    }
+
+    @FXML
+    private void handleAddToFavourite() {
+        String word = searchBar.getText();
+        String type = typeLabel.getText();
+        String pronunciation =proLabel.getText();
+        String meaning = meaningText.getText();
+
+        //format
+        String entry = word + " | " + type + " | " + pronunciation + " | " + meaning;
+
+        try {
+            File file = new File("data/favourites.txt");
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            Boolean isDuplicate = false;
+            while((line = reader.readLine()) != null) {
+                if(line.startsWith(word + " |")) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            reader.close();
+
+            if(isDuplicate) {
+                System.out.println("Từ này đã có trong danh sách yêu thích.");
+            } else {
+                FileWriter newFavour = new FileWriter(file, true);
+                newFavour.write(entry + "\n");
+                newFavour.close();
+                System.out.println("Đã thêm từ vào Favourite.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
