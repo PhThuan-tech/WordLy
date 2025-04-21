@@ -1,52 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
+<!-- Root Layout Pane -->
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SynAndAntController">
 
-    <!-- TOP - Tiêu đề và nút Back -->
+    <!-- TOP REGION: Title and Input Controls -->
     <top>
+        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15.0" right="20.0" bottom="10.0" left="20.0" />
+            </padding>
 
-              <VBox prefHeight="70.0" prefWidth="1000.0" spacing="10.0" BorderPane.alignment="CENTER">
-            <Label prefHeight="50.0" prefWidth="303.0" text="🔎 Tra từ đồng nghĩa và trái nghĩa">
+            <!-- Title Label -->
+            <Label text="🔎 Tra từ đồng nghĩa và trái nghĩa">
                 <font>
-               <Font size="24.0" />
-            </font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="1000.0" spacing="10.0">
-                <TextField fx:id="inputField" prefHeight="30.0" prefWidth="380.0" promptText="Nhập từ bạn cần tra vào đây..." />
-                <Button onAction="#handleSynonymClick" prefHeight="22.0" prefWidth="98.0" text="Đồng nghĩa" />
-                <Button onAction="#handleAntonymClick" text="Trái nghĩa" />
+
+            <!-- Input Field and Action Buttons -->
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <TextField fx:id="inputField" promptText="Nhập từ bạn cần tra vào đây..." prefHeight="30.0" HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleSynonymClick" text="Đồng nghĩa" prefHeight="30.0" prefWidth="100.0" styleClass="action-button" />
+                <Button onAction="#handleAntonymClick" text="Trái nghĩa" prefHeight="30.0" prefWidth="100.0" styleClass="action-button" />
             </HBox>
         </VBox>
     </top>
 
-    <!-- CENTER: Danh sách từ & nghĩa -->
+    <!-- CENTER REGION: Results List and Definition Area -->
     <center>
-        <VBox alignment="CENTER" spacing="10.0">
-            <ListView fx:id="resultList" onMouseClicked="#handleWordSelection" prefHeight="200" prefWidth="500" />
-            <TextArea fx:id="definitionArea" editable="false" prefHeight="169.0" prefWidth="1000.0" wrapText="true" />
+        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="10.0" right="20.0" bottom="10.0" left="20.0" />
+            </padding>
+
+            <!-- Results List -->
+            <ListView fx:id="resultList" onMouseClicked="#handleWordSelection" prefHeight="200.0" VBox.vgrow="SOMETIMES" />
+            <!-- Definition/Meaning Area -->
+            <TextArea fx:id="definitionArea" editable="false" wrapText="true" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+            <!-- Note: VBox.vgrow="ALWAYS" on TextArea makes it take up available vertical space preferentially.
+                 VBox.vgrow="SOMETIMES" on ListView allows it to grow if needed but doesn't demand space like ALWAYS.
+                 Adjust prefHeights and vgrow properties as needed for desired balance. -->
         </VBox>
     </center>
-   <bottom>
-      <AnchorPane prefHeight="84.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="22.0" layoutY="24.0" mnemonicParsing="false" onAction="#handlebackSearch" prefHeight="36.0" prefWidth="115.0" text="Quay trở lại" />
-         </children>
-      </AnchorPane>
-   </bottom>
 
+    <!-- BOTTOM REGION: Navigation -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="10.0" right="20.0" bottom="15.0" left="20.0" />
+            </padding>
+            <children>
+                <Button onAction="#handlebackSearch" text="Quay trở lại" prefHeight="36.0" prefWidth="115.0" styleClass="back-button" />
+            </children>
+        </HBox>
+    </bottom>
+
+    <!-- Stylesheet Link -->
     <stylesheets>
         <URL value="@../styles/SynAndAnt.css" />
+        <!-- Consider adding a general theme stylesheet if you have one -->
+        <!-- <URL value="@../styles/theme.css" /> -->
     </stylesheets>
+
 </BorderPane>

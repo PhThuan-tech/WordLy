@@ -20,7 +20,11 @@ public class WordDetails {
         this.audioLink = audioLink;
     }
 
+    public WordDetails(String trim, String trimmed, String s, String string) {
+    }
+
     public WordDetails() {
+
     }
 
     // --- Getters and Setters ---
