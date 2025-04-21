@@ -1,0 +1,117 @@
+/* --- Header --- */
+.header-box {
+    -fx-background-color: #2c3e50; /* Màu nền header */
+    /* padding đã đặt trong FXML, hoặc đặt ở đây: -fx-padding: 12px 20px; */
+}
+
+.nav-button { /* Nút Back */
+    -fx-background-color: transparent;
+    -fx-text-fill: #ecf0f1; /* Màu chữ sáng */
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+.nav-button:hover {
+    -fx-background-color: #34495e; /* Màu nền khi hover */
+    -fx-cursor: hand;
+}
+
+.title-label { /* Tiêu đề DEFINITION CHALLENGE */
+    -fx-text-fill: #ffffff; /* Chữ trắng */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-alignment: center; /* Căn giữa trong không gian còn lại */
+    -fx-padding: 0 10px; /* Padding ngang */
+}
+
+/* --- Center Content --- */
+.center-content-box {
+    -fx-background-color: #ecf0f1; /* Màu nền nội dung */
+    /* padding đã đặt trong FXML, hoặc đặt ở đây: -fx-padding: 20px 30px; */
+}
+
+.question-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495e; /* Màu chữ đậm hơn */
+}
+
+.word-label {
+    -fx-font-size: 48px; /* Có thể giảm nhẹ nếu cần */
+    -fx-font-weight: bold;
+    -fx-text-fill: #2980b9; /* Màu xanh dương */
+    -fx-padding: 5px 0; /* Giảm padding dọc */
+}
+
+.score-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e67e22; /* Màu cam cho điểm */
+    -fx-padding-bottom: 10px; /* Khoảng cách dưới điểm */
+}
+
+.options-vbox {
+    -fx-padding: 10px 40px; /* Giảm padding dọc, giữ ngang */
+    /* spacing và alignment đã đặt trong FXML */
+}
+
+.option-button {
+    /* maxWidth đặt trong FXML */
+    -fx-pref-height: 50px; /* Chiều cao nút, có thể giảm nếu cần */
+    -fx-min-height: 40px;
+    -fx-font-size: 14px; /* Cỡ chữ trong nút */
+    -fx-text-fill: #333; /* Màu chữ nút */
+    -fx-background-color: #ffffff; /* Nền trắng */
+    -fx-border-color: #bdc3c7; /* Viền xám nhạt */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 15px; /* Padding trong nút */
+    -fx-alignment: center-left; /* Căn chữ trong nút sang trái */
+}
+
+.option-button:hover {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #7f8c8d;
+    -fx-cursor: hand;
+}
+
+/* Thêm style cho trạng thái nút khi được chọn hoặc đúng/sai nếu cần */
+.option-button-correct {
+    -fx-background-color: #2ecc71; /* Xanh lá */
+    -fx-text-fill: white;
+    -fx-border-color: #27ae60;
+}
+.option-button-incorrect {
+    -fx-background-color: #e74c3c; /* Đỏ */
+    -fx-text-fill: white;
+    -fx-border-color: #c0392b;
+}
+.option-button:disabled { /* Khi đã chọn xong */
+    -fx-opacity: 0.7;
+}
+
+
+.feedback-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    /* Màu chữ sẽ được đặt trong code (ví dụ: xanh cho đúng, đỏ cho sai) */
+    /* -fx-text-fill: green; or -fx-text-fill: red;
+    -fx-padding: 10px 0; /* Khoảng đệm */
+    -fx-min-height: 25px; /* Đảm bảo có không gian */
+}
+
+.action-button { /* Nút NEXT WORD */
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db; /* Màu xanh dương */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 20px;
+}
+.action-button:hover {
+    -fx-background-color: #2980b9;
+    -fx-cursor: hand;
+}
