@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -19,16 +19,14 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-/**
- * TODO: THUC HIEN CHO LOGIC GAME.
- */
 public class DefinitionGameController {
 
-    //Phục vụ cho vieejc đọc từ file.
+    //Phục vụ cho việc đọc từ file.
     private static final String GAME_FILE_RESOURCE_PATH = "/game_data.txt";
     private static final String DELIMITER = "\t"; // Dấu phân cách là TAB
     private static final int REQUIRED_WORDS = 4; // Số lượng từ tối thiểu cần có trong file
     private final Random random = new Random(); // Random từ
+    private final int totalQuestions = 10; // Tổng số câu hỏi
     // Thành phần FXML
     @FXML
     public Button backButton;
@@ -39,8 +37,9 @@ public class DefinitionGameController {
     @FXML
     public Label scoreLabel;     // Điểm
     @FXML
-    public VBox optionsContainer;
-    //4 options cho 4 choices
+    public Label questionCounterLabel; // Nhãn mới để hiển thị bộ đếm câu hỏi
+    @FXML
+    public GridPane optionsContainer; // Thay đổi từ VBox sang GridPane
     @FXML
     public Button optionButton1;
     @FXML
@@ -49,7 +48,6 @@ public class DefinitionGameController {
     public Button optionButton3;
     @FXML
     public Button optionButton4;
-    //GO TO NEXT QUESTION
     @FXML
     public Button nextButton;
     // --- Biến logic của trò chơi ---
@@ -57,6 +55,7 @@ public class DefinitionGameController {
     private List<Button> optionButtons;  // Danh sách choice
     private String correctDefinition; // Định nghĩa đúng
     private int score = 0;           // Điểm
+    private int currentQuestion = 0; // Theo dõi câu hỏi hiện tại
 
     // --- Khởi tạo Controller ---
     @FXML
@@ -70,6 +69,7 @@ public class DefinitionGameController {
         if (wordList != null && wordList.size() >= REQUIRED_WORDS) {
             displayNewQuestion();     // Hiển thị câu hỏi đầu tiên
             updateScoreLabel();       // Cập nhật điểm
+            updateQuestionCounter();  // Cập nhật bộ đếm câu hỏi
             nextButton.setVisible(false);
             feedbackLabel.setText("");
         } else {
@@ -109,7 +109,6 @@ public class DefinitionGameController {
                 // Tách dòng thành các phần tử bằng dấu TAB, tối đa 4 phần
                 String[] parts = line.split(DELIMITER, 4);
                 if (parts.length == 4) {
-
                     try {
                         wordList.add(new WordDetails(parts[0].trim(),
                                 parts[1].trim(),
@@ -141,34 +140,36 @@ public class DefinitionGameController {
             return;
         }
 
+        if (currentQuestion >= totalQuestions) {
+            showEndGameMessage();
+            return;
+        }
+
         resetUIState(); //RESET STATUS KHI CHUYEN TRANG THAI
+        currentQuestion++;
+        updateQuestionCounter();
 
         //STEP 1 : CHON TU NGAU NHIEN TRONG DANH SACH
         int targetIndex = random.nextInt(wordList.size());
-
         WordDetails currentTargetWord = wordList.get(targetIndex);
         correctDefinition = currentTargetWord.getDefinition();
 
-        // STEP2 2 : CHON CAC NGHIA CUA CAC TU KHAC TU DC RANDOM
+        // STEP2 : CHON CAC NGHIA CUA CAC TU KHAC TU DC RANDOM
         List<WordDetails> otherWords = new ArrayList<>(wordList);
         otherWords.remove(targetIndex); // XOA TU DC RANDOM DE TRANH LAP TU / DINH NGHIA
 
         // SETEP 3 : TAO DANH SACH LUA CHON DINH NGHIA
         List<String> currentOptions = new ArrayList<>();
-        currentOptions.add(correctDefinition); // THEM DIH NGHIA DUNG TRUOC
-        int neededIncorrect = 3; // 3 DINH NGHIA SAI
+        currentOptions.add(correctDefinition); // THEM DINH NGHIA DUNG TRUOC
 
         // LAY DINH NGHIA SAI
         for (WordDetails otherWord : otherWords) {
-            if (currentOptions.size() > neededIncorrect) break; // DU 4 LUA CHON THI DUNG
-
+            if (currentOptions.size() >= REQUIRED_WORDS) break; // DU 4 LUA CHON THI DUNG
             String incorrectDef = otherWord.getDefinition();
-
             if (incorrectDef != null && !incorrectDef.trim().isEmpty() && !incorrectDef.equals(correctDefinition) && !currentOptions.contains(incorrectDef)) {
                 currentOptions.add(incorrectDef);
             }
         }
-
 
         //STEP 4 : TRAO CAC DAP AN VA CHO HIEN THI
         Collections.shuffle(currentOptions);
@@ -185,7 +186,7 @@ public class DefinitionGameController {
     }
 
     /**
-     * TODO : kHI USER CHON 1 DAP AN.
+     * TODO : KHI USER CHON 1 DAP AN.
      *
      * @param event KHI CHON DAP AN
      */
@@ -199,19 +200,12 @@ public class DefinitionGameController {
 
         boolean isCorrect = selectedDefinition.equals(correctDefinition); //KIEM TRA DAP AN
 
-
         if (isCorrect) { // CHON DUNG DAP AN
             feedbackLabel.setText("Chính xác!");
             score++; // CONG 1 DIEM
             updateScoreLabel(); // CAP NHAT DIEM
         } else { // CHON SAI DAP AN
             feedbackLabel.setText("Không đúng.\nĐịnh nghĩa đúng là:\n" + correctDefinition);
-
-            for (Button btn : optionButtons) {
-                if (btn.getText().equals(correctDefinition)) {
-                    break;
-                }
-            }
         }
     }
 
@@ -224,7 +218,6 @@ public class DefinitionGameController {
     public void handleNextQuestion(ActionEvent event) {
         displayNewQuestion();
     }
-
 
     /**
      * TODO : QUAY VE MAN HINH CHINH.
@@ -239,13 +232,10 @@ public class DefinitionGameController {
             Parent gameViewParent = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(gameViewParent);
-
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
-
-    //-- CAC PHUONG THUC TREN MAN HINH.
 
     // BAT-TAT LUA CHON
     private void enableOptionButtons(boolean enable) {
@@ -261,10 +251,14 @@ public class DefinitionGameController {
         nextButton.setVisible(false);
     }
 
-
     // CAP NHAT DIEM
     private void updateScoreLabel() {
         scoreLabel.setText("Điểm: " + score);
+    }
+
+    // CAP NHAT BO DEM CAU HOI
+    private void updateQuestionCounter() {
+        questionCounterLabel.setText("Câu hỏi " + currentQuestion + " / " + totalQuestions);
     }
 
     // HIEN THI LOI
@@ -287,6 +281,15 @@ public class DefinitionGameController {
         alert.setTitle("Lỗi Khởi Tạo Trò Chơi");
         alert.setHeaderText(null);
         alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    // HIEN THI THONG BAO KET THUC TRO CHOI
+    private void showEndGameMessage() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Kết thúc trò chơi");
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn đã hoàn thành tất cả các câu hỏi!\nĐiểm của bạn: " + score + " / " + totalQuestions);
         alert.showAndWait();
     }
 }
