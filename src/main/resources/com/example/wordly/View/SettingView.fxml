@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.Setting">
 
-    <Label style="-fx-font-size: 18px;" text="🎵 Âm thanh nền" />
+    <stylesheets>
+        <URL value="@../styles/setting.css" />
+    </stylesheets>
 
-    <CheckBox fx:id="musicToggle" text="Bật nhạc nền" />
+    <Label styleClass="title-label" text="🎵 Âm thanh nền" />
+
+    <CheckBox fx:id="musicToggle" prefHeight="30.0" prefWidth="152.0" text="Bật nhạc nền" textFill="#cc0b0b">
+      <styleClass>
+         <String fx:value="toggle-button" />
+         <String fx:value="back-button" />
+      </styleClass></CheckBox>
 
     <HBox alignment="CENTER" spacing="10">
-        <Label text="Âm lượng:" />
-        <Slider fx:id="volumeSlider" blockIncrement="0.1" max="1" min="0" value="0.5" />
-      <Button mnemonicParsing="false" onAction="#pauseAudio" text="Stop" />
+        <Label prefHeight="38.0" prefWidth="134.0" text="Âm lượng:">
+         <styleClass>
+            <String fx:value="volume-label" />
+            <String fx:value="back-button" />
+         </styleClass></Label>
+        <Slider fx:id="volumeSlider" blockIncrement="0.1" max="1" min="0" prefHeight="36.0" prefWidth="222.0" styleClass="volume-slider" value="0.5" />
     </HBox>
-   <AnchorPane prefHeight="53.0" prefWidth="307.0">
-      <children>
-         <Button layoutY="87.0" mnemonicParsing="false" onAction="#handleBackMain" text="Back" />
-      </children>
-   </AnchorPane>
 
-    
+    <!-- Nút chuyển bài -->
+    <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="prevBtn" styleClass="nav-button" text="⏮ Trước" />
+        <Button fx:id="nextBtn" styleClass="nav-button" text="Tiếp ⏭" />
+    </HBox>
+
+    <!-- Nút quay lại main -->
+    <Button mnemonicParsing="false" onAction="#handleBackMain" styleClass="back-button" text="⬅ Về Menu" />
 </VBox>
