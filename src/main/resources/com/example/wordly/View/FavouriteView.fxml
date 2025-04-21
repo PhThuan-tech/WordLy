@@ -113,7 +113,7 @@
             <!-- Search Box -->
             <HBox layoutX="148.0" layoutY="27.0" prefHeight="42.0" prefWidth="449.0">
                 <children>
-                    <TextField prefHeight="35.0" prefWidth="346.0" promptText="Search here" style="-fx-background-radius: 15 0 0 15; -fx-border-radius: 15 0 0 15; -fx-border-right-width: 0;" />
+                    <TextField fx:id="searchField" onKeyReleased="#onSearchKeyReleased" prefHeight="35.0" prefWidth="346.0" promptText="Search here" style="-fx-background-radius: 15 0 0 15; -fx-border-radius: 15 0 0 15; -fx-border-right-width: 0;" />
                     <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="40.0" style="-fx-background-radius: 0 15 15 0; -fx-border-radius: 0 15 15 0;">
                         <graphic>
                             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">

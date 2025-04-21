@@ -1,13 +1,16 @@
 package com.example.wordly.controllerForUI;
 
+import com.example.wordly.Levenshtein.LevenshteinUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -68,31 +71,20 @@ public class FavouriteController extends BaseController {
     @FXML
     private AnchorPane confirmationDialog;
 
+    @FXML public TableView<WordEntry> tableView;
+    @FXML public TableColumn<WordEntry, String> wordCol;
+    @FXML public TableColumn<WordEntry, String> typeCol;
+    @FXML public TableColumn<WordEntry, String> pronCol;
+    @FXML public TableColumn<WordEntry, String> meaningCol;
+    @FXML private TextField searchField;
+
     @FXML
     private void handleDeleteButton() {
         confirmationDialog.setVisible(true);
     }
 
-    @FXML
-    public void initialize() {
-        confirmationDialog.setVisible(false);
+    private FilteredList<WordEntry> filteredData;
 
-        // hiện hộp thoại
-        deleteButton.setOnAction(event -> confirmationDialog.setVisible(true));
-
-        // bấm no -> ẩn hộp thoại
-        noButton.setOnAction(event -> confirmationDialog.setVisible(false));
-
-        // bấm YES, chức năng xóa
-        yesButton.setOnAction(event -> {
-            //Thêm chức năng xóa
-            deleteSelectedWord();
-
-            confirmationDialog.setVisible(false);
-        });
-        mappingTable();
-        loadTableData("data/favourites.txt");
-    }
 
     public class WordEntry {
         private final SimpleStringProperty word;
@@ -123,14 +115,8 @@ public class FavouriteController extends BaseController {
         public String getMeaning() {
             return meaning.get();
         }
-
     }
 
-    @FXML public TableView<WordEntry> tableView;
-    @FXML public TableColumn<WordEntry, String> wordCol;
-    @FXML public TableColumn<WordEntry, String> typeCol;
-    @FXML public TableColumn<WordEntry, String> pronCol;
-    @FXML public TableColumn<WordEntry, String> meaningCol;
 
     private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
 
@@ -185,6 +171,43 @@ public class FavouriteController extends BaseController {
             wordList.remove(selectedWord);
             saveListToFile("data/favourites.txt");
         }
+    }
+
+    @FXML
+    private void onSearchKeyReleased(KeyEvent event) {
+        String keyword = searchField.getText().trim();
+        int threshold = 3;
+
+        filteredData.setPredicate(entry -> {
+            if (keyword.isEmpty()) return true;
+            return LevenshteinUtils.inThreshold(entry.getWord(), keyword, threshold);
+        });
+    }
+
+    @FXML
+    public void initialize() {
+        confirmationDialog.setVisible(false);
+
+        // hiện hộp thoại
+        deleteButton.setOnAction(event -> confirmationDialog.setVisible(true));
+
+        // bấm no -> ẩn hộp thoại
+        noButton.setOnAction(event -> confirmationDialog.setVisible(false));
+
+        // bấm YES, chức năng xóa
+        yesButton.setOnAction(event -> {
+            //Thêm chức năng xóa
+            deleteSelectedWord();
+
+            confirmationDialog.setVisible(false);
+        });
+        mappingTable();
+        loadTableData("data/favourites.txt");
+
+        filteredData = new FilteredList<>(wordList, e -> true);
+        tableView.setItems(filteredData);
+
+        searchField.setOnKeyReleased(this::onSearchKeyReleased);
     }
 
 }
