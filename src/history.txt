@@ -21,3 +21,14 @@ hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
 wait	noun	/weɪt/	A delay.
 nice	noun	/naɪs/	Niceness.
 nice	noun	/naɪs/	Niceness.
+end	noun	/ɛnd/	The terminal point of something in space or time.
+happy	noun	/ˈhæpiː/	A happy event, thing, person, etc.
+good	adjective	/ɡʊ(d)/	(of people)
+welcome	noun	/ˈwɛlkəm/	The act of greeting someone’s arrival, especially by saying "Welcome!"; reception.
+stage	noun	/steɪd͡ʒ/	A phase.
+history	noun	/ˈhɪst(ə)ɹi/	The aggregate of past events.
+favour	noun	/ˈfeɪ.və/	A kind or helpful deed; an instance of voluntarily assisting (someone).
+show	noun	/ʃəʊ/	A play, dance, or other entertainment.
+style	noun	/staɪl/	Senses relating to a thin, pointed object.
+load	noun	/ləʊd/	A burden; a weight to be carried.
+get	noun	/ɡɛt/	Offspring.
