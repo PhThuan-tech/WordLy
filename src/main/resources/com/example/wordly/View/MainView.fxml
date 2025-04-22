@@ -30,7 +30,7 @@
                   <Insets bottom="30.0" /> <!-- Space below sidebar title -->
                </VBox.margin>
             </Label>
-            
+
             <Button fx:id="menuScence" contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="45.0" styleClass="custom-button" text="Home" VBox.vgrow="NEVER">
                <graphic>
                   <ImageView fitHeight="46.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
