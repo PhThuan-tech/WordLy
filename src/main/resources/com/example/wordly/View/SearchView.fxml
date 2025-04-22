@@ -3,7 +3,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -16,11 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0"
-            prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.wordly.controllerForUI.SearchViewController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
 
     <stylesheets>
         <URL value="@../styles/home.css" />
@@ -111,17 +106,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
-                        <Label text="From:" />
-                        <ChoiceBox fx:id="langFromChoice" prefWidth="100.0" />
-                        <Label>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/translate.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Label>
-                        <ChoiceBox fx:id="langToChoice" prefWidth="100.0" />
+                        <Label />
                     </children>
                     <VBox.margin>
                         <Insets bottom="5.0" />
