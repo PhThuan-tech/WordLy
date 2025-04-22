@@ -51,4 +51,8 @@ public class MainController extends BaseController {
             System.out.println("Âm thanh chưa được load!");
         }
     }
+
+    public void handleGoToSetting(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/SettingView.fxml");
+    }
 }

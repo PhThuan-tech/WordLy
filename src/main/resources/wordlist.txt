@@ -8,6 +8,17 @@ plant
 phone
 table
 liver
+human
+graph
+magic
+brown
+close
+opens
+quizz
+finds
+class
+scold
+scoop
 super
 plays
 green

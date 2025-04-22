@@ -20,14 +20,11 @@ public class WordDetails {
         this.audioLink = audioLink;
     }
 
-    public WordDetails() {
+    public WordDetails(String trim, String trimmed, String s, String string) {
     }
 
-    public WordDetails(String word, String wordType, String pronunciation, String definition) {
-        this.word = word;
-        this.type = wordType;
-        this.phonetic = pronunciation;
-        this.definition = definition;
+    public WordDetails() {
+
     }
 
     // --- Getters and Setters ---

@@ -54,9 +54,6 @@ public class GameViewController extends BaseController {
     public void handleStartScrambleGame(ActionEvent event) {
     }
 
-    public void handleGotoEdit(ActionEvent event) {
-
-    }
 
     @FXML
     public void handleStartDefiGame(ActionEvent event) throws IOException, IOException {
