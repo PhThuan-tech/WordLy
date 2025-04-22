@@ -4,8 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21"
             fx:controller="com.example.wordly.GameController.DefinitionGameController">
+
+    <stylesheets>
+        <URL value="@../styles/home.css"/>
+        <URL value="@../styles/game.css" />
+    </stylesheets>
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
             <padding>
