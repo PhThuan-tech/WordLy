@@ -1,0 +1,68 @@
+/* Màu nền tổng thể */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e6ecf0);
+}
+
+/* Tiêu đề */
+.label {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Từ scrambled */
+#scrambledWordLabel {
+    -fx-font-size: 26px;
+    -fx-text-fill: #34495e;
+    -fx-font-weight: bold;
+}
+
+/* Label timer và score */
+#timerLabel, #scoreLabel {
+    -fx-font-size: 18px;
+}
+
+/* TextField nhập từ */
+#inputField {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 8 12;
+    -fx-border-color: #bdc3c7;
+    -fx-font-size: 16px;
+}
+
+/* Nút chung */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+/* Hover nút */
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Kết quả */
+#resultLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2ecc71;
+}
+
+/* TextArea lịch sử */
+#historyArea {
+    -fx-border-color: #dcdde1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-control-inner-background: #f9f9f9;
+}
+
+/* ChoiceBox độ khó */
+#difficultyBox {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 8;
+    -fx-padding: 5;
+}
