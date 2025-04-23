@@ -30,34 +30,29 @@ public class WordleController extends BaseController {
     @FXML private GridPane grid;
     @FXML private TextField inputField;
     @FXML private Label messageLabel;
-
-    // Nút bấm xử lí hành động gợi ý.
     @FXML private Button hintButton;
-
-    // label hiển thị gợi ý từ.
     @FXML private Label hintLabel;
-
-    // Label đếm số giây chạy còn lại
     @FXML private Label timerLabel;
+    @FXML private Label scoreLabel;
+    @FXML private Label levelLabel;
 
-
-    private  final int WORD_LENGTH = 5;
-    private final int MAX_ATTEMPTS = 6;
+    private int wordLength = 5;
+    private int maxAttempts = 6;
     private final int MAX_HINTS = 2;
+    private final int COUNTDOWN_SECONDS = 90; // 3 minutes countdown
     private List<String> wordList;
+    private List<String> wordListAll;
     private String secretWord;
     private int currentAttempt = 0;
-
-    // Hiển thị vị trí đoán đúng.
-    private boolean[] revealedPositions = new boolean[WORD_LENGTH];
+    private boolean[] revealedPositions = new boolean[wordLength];
     private int hintCount = 0;
 
-    // Biến xử lí đếm ngược thời gian.
-    private int secondsElapsed = 0;
-    private Timeline timeline;
-
-    // Biến xử lí tính điểm
-    private int score = 0;
+    // Game state variables
+    private int currentLevel = 1;
+    private int totalScore = 0;
+    private int levelScore = 0;
+    private int timeRemaining = COUNTDOWN_SECONDS;
+    private Timeline countdownTimer;
 
 
     /**
@@ -65,7 +60,9 @@ public class WordleController extends BaseController {
      */
     public void initialize() {
         wordList = loadWordList();
+        wordListAll = loadWordList();
         resetGame();
+        startCountdownTimer();
     }
 
 
@@ -75,10 +72,20 @@ public class WordleController extends BaseController {
     private void resetGame() {
         currentAttempt = 0;
         hintCount = 0;
-        revealedPositions = new boolean[WORD_LENGTH];
+        revealedPositions = new boolean[wordLength];
+        levelScore = 0;
+        timeRemaining = COUNTDOWN_SECONDS;
+        updateTimerDisplay();
 
-        secretWord = wordList.get(new Random().nextInt(wordList.size()));   // chọn ngẫu nhiên kiểu String
-        System.out.println("🤫 Từ bí mật: " + secretWord);                  // =)) ko hiểu sao lỗi chỗ này nữa thiếu là ko tìm được kết quả.
+        // Chỉ chọn từ có độ dài phù hợp
+        if (!wordList.isEmpty()) {
+            secretWord = wordList.get(new Random().nextInt(wordList.size()));
+        } else {
+            // Fallback nếu không có từ nào
+            secretWord = "default".substring(0, Math.min(10, wordLength));
+        }
+
+        System.out.println("🤫 Từ bí mật: " + secretWord);
 
         grid.getChildren().clear();
         messageLabel.setText("");
@@ -86,63 +93,113 @@ public class WordleController extends BaseController {
         inputField.clear();
         hintButton.setDisable(false);
 
-        // Đặt các chữ cái vào từng ô ( Mảng 2 chiều kích thước 5 x 6 )
-        for (int row = 0; row < MAX_ATTEMPTS; row++) {
-            for (int col = 0; col < WORD_LENGTH; col++) {
+        for (int row = 0; row < maxAttempts; row++) {
+            for (int col = 0; col < wordLength; col++) {
                 Label cell = createCell();
                 grid.add(cell, col, row);
             }
         }
+
         fetchHint(secretWord);
-        startTimer();
+        updateUI();
+        startCountdownTimer(); // Khởi động lại đồng hồ
+    }
+
+    private void createFlexibleGrid() {
+        // Xóa các constraints cũ (nếu có)
+        grid.getColumnConstraints().clear();
+        grid.getRowConstraints().clear();
+
+        // Tạo các ô với kích thước linh hoạt
+        for (int row = 0; row < maxAttempts; row++) {
+            for (int col = 0; col < wordLength; col++) {
+                Label cell = createCell();
+
+                // Thiết lập kích thước động dựa trên độ dài từ
+                cell.setPrefSize(calculateCellSize(), calculateCellSize());
+                grid.add(cell, col, row);
+            }
+        }
+    }
+
+    private double calculateCellSize() {
+        // Tính toán kích thước ô dựa trên độ dài từ
+        // Ô càng nhiều thì kích thước càng nhỏ để vừa màn hình
+        double baseSize = 50.0; // Kích thước cơ bản
+        double size = baseSize * (5.0 / wordLength); // Giảm kích thước theo tỷ lệ
+
+        // Đảm bảo kích thước tối thiểu và tối đa
+        return Math.max(30.0, Math.min(60.0, size));
+    }
+
+    private void updateUI() {
+        levelLabel.setText("Level: " + currentLevel);
+        scoreLabel.setText("Score: " + totalScore);
     }
 
     private Label createCell() {
         Label cell = new Label("");
-        cell.setPrefSize(50, 50);
-        cell.setFont(Font.font(20));
+        cell.setFont(Font.font(calculateFontSize()));
         cell.getStyleClass().add("cell");
         cell.setAlignment(javafx.geometry.Pos.CENTER);
+        cell.setStyle("-fx-border-color: #cccccc; -fx-border-width: 2px;");
         return cell;
     }
 
+    private double calculateFontSize() {
+        // Điều chỉnh font size dựa trên độ dài từ
+        double baseFontSize = 20.0;
+        return baseFontSize * (5.0 / wordLength);
+    }
+
     private List<String> loadWordList() {
-        List<String> wordList = new ArrayList<>();
-        fetchHint(secretWord);                      // hiển thị gợi ý lúc đầu game // ở restart game có nữa.
-        startTimer();
+        List<String> words = new ArrayList<>();
         try {
             InputStream inputStream = getClass().getResourceAsStream("/wordlist.txt");
             if (inputStream == null) {
                 System.err.println("File wordlist.txt not found!");
-                return wordList; // trả về list rỗng để tránh crash
+                return words;
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = reader.readLine()) != null) {
-                wordList.add(line.trim());
+                words.add(line.trim().toLowerCase());
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return wordList;
+        return words;
+    }
+
+    private void filterWordListByLength(int length) {
+        wordList = new ArrayList<>();
+        for (String word : wordListAll) {
+            if (word.length() == length) {
+                wordList.add(word);
+            }
+        }
+
+        if (wordList.isEmpty()) {
+            System.err.println("Không có từ nào có độ dài " + length + " trong wordlist!");
+            // Fallback: thêm một số từ mặc định
+            wordList.add("default"); // Ví dụ cho 7 chữ
+        }
     }
 
     public void handleSubmit() {
         String guess = inputField.getText().trim().toLowerCase();
-        if (guess.length() != WORD_LENGTH) {
-            messageLabel.setText("Phải nhập đúng 5 chữ nha bro 😤");
+        if (guess.length() != wordLength) {
+            messageLabel.setText("Phải nhập đúng " + wordLength + " chữ nha bro 😤");
             return;
         }
 
-        if (currentAttempt >= MAX_ATTEMPTS) return;
+        if (currentAttempt >= maxAttempts) return;
 
-        for (int i = 0; i < WORD_LENGTH; i++) {
+        for (int i = 0; i < wordLength; i++) {
             Label cell = getCell(currentAttempt, i);
             char c = guess.charAt(i);
             cell.setText(String.valueOf(c).toUpperCase());
-
-            // Animation lật chữ
             animateCell(cell);
 
             if (c == secretWord.charAt(i)) {
@@ -155,25 +212,110 @@ public class WordleController extends BaseController {
         }
 
         if (guess.equals(secretWord)) {
-            stopTimer();
+            levelScore = calculateScore();
+            totalScore += levelScore;
             playWinSound();
-            messageLabel.setText("Bạn đoán đúng rồi 🎉 Quá đỉnh luôn bro!!");
+            messageLabel.setText(String.format("Level %d hoàn thành! 🎉 Điểm: +%d (Tổng: %d)",
+                    currentLevel, levelScore, totalScore));
             inputField.setDisable(true);
             hintButton.setDisable(true);
+
+            // Dừng đồng hồ hiện tại trước khi chuyển level
+            if (countdownTimer != null) {
+                countdownTimer.stop();
+            }
+
+            // Proceed to next level after delay
+            Timeline levelTransition = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+                currentLevel++;
+                resetGame(); // resetGame() sẽ tự động gọi startCountdownTimer()
+            }));
+            levelTransition.play();
         } else {
             currentAttempt++;
             inputField.clear();
             messageLabel.setText("");
 
-            if (currentAttempt == MAX_ATTEMPTS) {
-                stopTimer();
+            if (currentAttempt == maxAttempts) {
                 playLoseSound();
-                messageLabel.setText("Thua rồi bro 💀 Từ đúng là: " + secretWord);
+                messageLabel.setText(String.format("Game Over! 💀 Từ đúng là: %s (Level %d)",
+                        secretWord, currentLevel));
                 inputField.setDisable(true);
                 hintButton.setDisable(true);
+                endGame();
             }
         }
-        calculateScore();
+    }
+
+    public void setGameDifficulty(int length, int attempts) {
+        this.wordLength = length;
+        this.maxAttempts = attempts;
+        filterWordListByLength(length); // Lọc từ điển theo độ dài
+        resetGame();
+    }
+
+    @FXML
+    public void handleEasyMode() {
+        setGameDifficulty(5, 6); // 5 chữ, 6 lần thử
+    }
+
+    @FXML
+    public void handleMediumMode() {
+        setGameDifficulty(7, 6); // 7 chữ, 6 lần thử
+    }
+
+    @FXML
+    public void handleHardMode() {
+        setGameDifficulty(10, 6); // 10 chữ, 6 lần thử
+    }
+
+    private void startCountdownTimer() {
+        if (countdownTimer != null) {
+            countdownTimer.stop();
+        }
+
+        timeRemaining = COUNTDOWN_SECONDS;
+        updateTimerDisplay();
+
+        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            timeRemaining--;
+            updateTimerDisplay();
+
+            if (timeRemaining <= 0) {
+                endGame();
+            }
+        }));
+        countdownTimer.setCycleCount(Animation.INDEFINITE);
+        countdownTimer.play();
+    }
+
+    private void updateTimerDisplay() {
+        int minutes = timeRemaining / 60;
+        int seconds = timeRemaining % 60;
+        timerLabel.setText(String.format("⏱️ %02d:%02d", minutes, seconds));
+
+        // Đổi màu đỏ nếu còn dưới 10 giây
+        if (timeRemaining <= 10) {
+            timerLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+        } else {
+            timerLabel.setStyle(""); // Reset về style mặc định
+        }
+    }
+
+    private void endGame() {
+        if (countdownTimer != null) {
+            countdownTimer.stop();
+        }
+        inputField.setDisable(true);
+        hintButton.setDisable(true);
+        messageLabel.setText(String.format("Thời gian kết thúc! Tổng điểm: %d", totalScore));
+    }
+
+    private int calculateScore() {
+        // Score based on attempts left and time remaining
+        int attemptsBonus = (maxAttempts - currentAttempt) * 10;
+        int timeBonus = timeRemaining / 10; // Bonus for remaining time
+        return Math.max(0, attemptsBonus + timeBonus);
     }
 
     @FXML
@@ -182,7 +324,8 @@ public class WordleController extends BaseController {
             System.err.println("Word list is empty!");
             return;
         }
-        resetGame(); // <-- Quan trọng
+        resetGame();
+        startCountdownTimer(); // Thêm dòng này để đảm bảo đồng hồ chạy lại
     }
 
     private void animateCell(Label cell) {
@@ -213,7 +356,7 @@ public class WordleController extends BaseController {
         }
 
         List<Integer> unrevealed = new ArrayList<>();
-        for (int i = 0; i < WORD_LENGTH; i++) {
+        for (int i = 0; i < wordLength; i++) {
             if (!revealedPositions[i]) {
                 unrevealed.add(i);
             }
@@ -288,36 +431,6 @@ public class WordleController extends BaseController {
         // Phân tích JSON trả về
         JSONArray jsonArray = new JSONArray(response.toString());
         return jsonArray;
-    }
-
-    // Thêm tính năng đồng hồ đếm ngược cho game.
-    private void startTimer() {
-        if (timeline != null) {
-            timeline.stop(); // dừng cái cũ nếu đang chạy
-        }
-        secondsElapsed = 0;
-        timerLabel.setText("⏱️ 0s");
-
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            secondsElapsed++;
-            timerLabel.setText("⏱️ " + secondsElapsed + "s");
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
-
-    private void stopTimer() {
-        if (timeline != null) {
-            timeline.stop();
-        }
-    }
-
-    // Thêm tính năng tính điểm - đoán càng nhanh cho điểm càng cao
-    // Đoán sai là trừ 10 điểm.
-    private void calculateScore() {
-        // Càng ít lượt và nhanh thì điểm càng cao
-        score = Math.max(0, (MAX_ATTEMPTS - currentAttempt) * 10 -secondsElapsed);
-        messageLabel.setText("Bạn đoán đúng rồi 🎉 Điểm của bạn: " + score);
     }
 
     private void playWinSound() {
