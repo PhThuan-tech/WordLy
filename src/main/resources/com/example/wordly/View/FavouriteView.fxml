@@ -111,7 +111,7 @@
             </columnResizePolicy>
          </TableView>
             <!-- Search Box -->
-            <HBox layoutX="148.0" layoutY="27.0" prefHeight="42.0" prefWidth="449.0">
+            <HBox layoutX="19.0" layoutY="64.0" prefHeight="42.0" prefWidth="449.0">
                 <children>
                     <TextField fx:id="searchField" onKeyReleased="#onSearchKeyReleased" prefHeight="35.0" prefWidth="346.0" promptText="Search here" style="-fx-background-radius: 15 0 0 15; -fx-border-radius: 15 0 0 15; -fx-border-right-width: 0;" />
                     <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="40.0" style="-fx-background-radius: 0 15 15 0; -fx-border-radius: 0 15 15 0;">
@@ -135,17 +135,6 @@
                     </ImageView>
                 </graphic>
             </Button>
-   
-                                    <!-- Audio Button -->
-            <Button layoutX="459.0" layoutY="69.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="50.0">
-                <graphic>
-                    <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../icons/Audio.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
 
                                  <!-- Confirmation Dialog -->
             <AnchorPane fx:id="confirmationDialog" layoutX="566.0" layoutY="100.0" prefHeight="188.0" prefWidth="201.0" style="-fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: #4CAF50;">
@@ -157,6 +146,7 @@
                                          <Button fx:id="noButton" layoutX="120.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="57.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="NO" />
                 </children>
             </AnchorPane>
+         <Button layoutX="437.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleGoToWordEdit" prefHeight="35.0" prefWidth="94.0" text="Word List" />
         </AnchorPane>
     </center>
 </BorderPane>

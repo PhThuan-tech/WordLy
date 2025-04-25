@@ -53,12 +53,9 @@ public class FavouriteController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
     }
 
-
-    public void handleKeyEnterPress(KeyEvent keyEvent) {
-    }
-
-    public void handleMouseClicked(MouseEvent mouseEvent) {
-
+    @FXML
+    public void handleGoToWordEdit(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/WordListView.fxml");
     }
 
     @FXML

@@ -1,59 +1,134 @@
-.table-view {
+/* Styles for the main ListView container */
+.list-view {
     -fx-background-color: #d1f2c4; /* Xanh lá hơi đậm hơn */
-    -fx-border-color: #519c5f;
+    -fx-border-color: #519c5f; /* Màu xanh lá đậm cho viền */
     -fx-border-width: 1;
     -fx-border-radius: 5;
     -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5); /* Thêm đổ bóng nhẹ */
 }
 
-/* Header cột */
-.table-view .column-header-background {
-    -fx-background-color: #519c5f; /* Xanh lá đậm */
+/* Style for individual list cells (the container for your custom FXML) */
+.list-cell {
+    -fx-background-color: transparent; /* Mặc định trong suốt */
+    -fx-padding: 0; /* Quan trọng: Đặt padding về 0 để custom FXML kiểm soát padding */
+    -fx-cell-size: -1; /* Cho phép cell tự điều chỉnh chiều cao dựa trên nội dung */
 }
 
-.table-view .column-header {
-    -fx-size: 40px;
+/* Style for filled list cells (cells with data) */
+.list-cell:filled {
+    /* Background sẽ được set bởi alternating row colors */
 }
 
-.table-view .column-header .label {
-    -fx-text-fill: #5D4037;
+/* *** MÀU NỀN XEN KẼ CHO CÁC DÒNG (CELL) *** */
+.list-cell:odd:filled {
+    -fx-background-color: #f1f8e9; /* Màu xanh rất nhạt cho dòng lẻ */
+}
+
+.list-cell:even:filled {
+    -fx-background-color: #e9ffe5; /* Màu xanh nhạt hơn một chút cho dòng chẵn */
+}
+/* *** KẾT THÚC MÀU NỀN XEN KẼ *** */
+
+
+/* Style for selected list cells */
+.list-cell:filled:selected,
+.list-cell:focused:selected {
+    -fx-background-color: #98d88b; /* Xanh đậm hơn khi được chọn */
+    -fx-text-fill: #5D4037; /* Nâu đậm (mặc dù text-fill thường được áp dụng cho các label bên trong) */
+    -fx-border-color: #519c5f; /* Thêm viền màu xanh đậm khi chọn */
+    -fx-border-width: 0 0 0 3px; /* Viền dày 3px ở bên trái */
+    -fx-border-insets: 0;
+}
+
+/* Style for hover state */
+.list-cell:filled:hover {
+    -fx-background-color: #c7f0ba; /* Màu xanh nhạt hơn khi hover */
+}
+
+
+/* *** STYLES CHO CÁC THÀNH PHẦN BÊN TRONG CUSTOM CELL (HistoryCell.fxml) *** */
+
+/* Container VBox trong HistoryCell.fxml */
+.history-cell-container {
+    /* Padding đã được định nghĩa trong FXML, có thể thêm border dưới để phân cách */
+    -fx-border-color: #a5d6a7; /* Màu xanh trung bình cho viền phân cách */
+    -fx-border-width: 0 0 1px 0; /* Chỉ viền dưới */
+    -fx-border-insets: 0 15px 0 15px; /* Viền thụt vào 15px ở hai bên */
+}
+
+/* Label cho Word */
+.history-word-label {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-text-fill: #3e2723; /* Nâu rất đậm */
 }
 
-/* Các dòng dữ liệu */
-.table-row-cell {
-    -fx-background-color: transparent;
+/* Label cho Pronunciation */
+.history-pronunciation-label {
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+    -fx-text-fill: #795548; /* Nâu nhạt hơn */
 }
 
-.table-row-cell:filled {
-    -fx-background-color: #e9ffe5; /* xanh rất nhạt */
+/* Label cho Type */
+.history-type-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #795548; /* Nâu nhạt hơn */
 }
 
-.table-row-cell:filled:selected,
-.table-row-cell:focused:selected {
-    -fx-background-color: #98d88b; /* xanh đậm hơn khi được chọn */
-    -fx-text-fill: #5D4037; /* nâu đậm */
-}
-
-/* Cell text */
-.table-cell {
-    -fx-text-fill: #5D4037; /* Màu nâu đẹp */
+/* Label cho Meaning */
+.history-meaning-label {
     -fx-font-size: 13px;
-    -fx-padding: 6px;
+    -fx-text-fill: #5D4037; /* Nâu đậm */
+    /* wrapText="true" được set trong FXML */
 }
 
+/* *** KẾT THÚC STYLES CHO CUSTOM CELL *** */
+
+
+/* Style for the history title label */
 .history-title {
     -fx-text-fill: #5D4037; /* Nâu đậm */
-    -fx-font-size: 20px;
+    -fx-font-size: 24px; /* Tăng kích thước font tiêu đề */
     -fx-font-weight: bold;
+    -fx-padding: 10px 0; /* Thêm padding trên/dưới tiêu đề */
 }
 
-/* Bo góc */
-.table-view, .table-row-cell, .table-cell {
+/* Style for the placeholder text when the list is empty */
+.list-view .placeholder-text {
+    -fx-fill: #795548; /* Màu nâu nhạt hơn */
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+    -fx-alignment: CENTER;
+}
+
+/* *** STYLE CHO SCROLLBAR (Tương tự TableView) *** */
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent; /* Nền scrollbar trong suốt */
+}
+
+.list-view .scroll-bar .track {
+    -fx-background-color: #e9ffe5; /* Màu nền track scrollbar */
+    -fx-background-radius: 0;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #a5d6a7; /* Màu xanh trung bình cho thumb */
+    -fx-background-insets: 0;
     -fx-background-radius: 5;
 }
 
-.table-row-cell:hover {
-    -fx-background-color: #c7f0ba;
+/* Hide scrollbar buttons */
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+     -fx-background-color: transparent;
+     -fx-padding: 0;
 }
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+     -fx-background-color: transparent;
+}
+/* *** KẾT THÚC STYLE SCROLLBAR *** */

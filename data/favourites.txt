@@ -7,3 +7,4 @@ good | adjective | /ɡʊ(d)/ | (of people)
 welcome | noun | /ˈwɛlkəm/ | The act of greeting someone’s arrival, especially by saying "Welcome!"; reception.
 stage | noun | /steɪd͡ʒ/ | A phase.
 history | noun | /ˈhɪst(ə)ɹi/ | The aggregate of past events.
+museum | noun | /mjuːˈziːəm/ | A building or institution dedicated to the acquisition, conservation, study, exhibition, and educational interpretation of objects having scientific, historical, cultural or artistic value.
