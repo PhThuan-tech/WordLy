@@ -15,8 +15,8 @@ module com.example.wordly {
     requires com.fasterxml.jackson.databind;
     requires okhttp3;
     requires java.desktop;
-    requires java.logging;
     requires com.google.gson;
+    requires java.sql;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;
@@ -27,6 +27,8 @@ module com.example.wordly {
     opens com.example.wordly.History to javafx.fxml;
     exports com.example.wordly.TTS;
     opens com.example.wordly.TTS to javafx.fxml;
+
+    opens com.example.wordly.getWord to javafx.base;
 
     exports com.example.wordly.GameController;
     opens com.example.wordly.GameController to javafx.fxml;
