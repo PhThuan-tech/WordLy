@@ -21,3 +21,5 @@ memory	noun	/ˈmɛm(ə)ɹi/	The ability of the brain to record information or im
 translate	noun	/ˈtɹɛnzlæet/	In Euclidean spaces: a set of points obtained by adding a given fixed vector to each point of a given set.
 translate	noun	/ˈtɹɛnzlæet/	In Euclidean spaces: a set of points obtained by adding a given fixed vector to each point of a given set.
 protect	verb	/pɹəˈtɛkt/	To keep safe; to defend; to guard; to prevent harm coming to.
+museum	noun	/mjuːˈziːəm/	A building or institution dedicated to the acquisition, conservation, study, exhibition, and educational interpretation of objects having scientific, historical, cultural or artistic value.
+museum	noun	/mjuːˈziːəm/	A building or institution dedicated to the acquisition, conservation, study, exhibition, and educational interpretation of objects having scientific, historical, cultural or artistic value.

@@ -43,7 +43,7 @@
                     </graphic>
                 </Button>
 
-                <Button contentDisplay="RIGHT" graphicTextGap="28.0" maxWidth="Infinity" mnemonicParsing="false" prefHeight="40.0" text="Search">
+                <Button contentDisplay="RIGHT" graphicTextGap="28.0" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleGoToSearch" prefHeight="40.0" text="Search">
                     <graphic>
                         <ImageView fitHeight="45.0" fitWidth="45.0" preserveRatio="true">
                             <image>

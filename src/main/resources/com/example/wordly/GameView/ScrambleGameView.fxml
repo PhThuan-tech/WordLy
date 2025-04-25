@@ -23,7 +23,10 @@
         <!-- Thông tin trò chơi -->
         <HBox alignment="CENTER" spacing="40">
             <Label fx:id="scrambledWordLabel" styleClass="scrambled-word" text="scrambled-word" />
-            <Label fx:id="scoreLabel" styleClass="info-label" text="Điểm: 0" />
+            <!-- *** THÊM LABEL CHO ĐIỂM VÁN TRƯỚC Ở ĐÂY *** -->
+            <Label fx:id="previousScoreLabel" styleClass="info-label" text="Điểm ván trước: 0" />
+            <!-- *** KẾT THÚC THÊM LABEL *** -->
+            <Label fx:id="scoreLabel" styleClass="info-label" text="Điểm hiện tại: 0" /> <!-- Đã sửa text mặc định cho rõ ràng hơn -->
             <Label fx:id="timerLabel" styleClass="timer-label" text="⏳ 30s" />
         </HBox>
 
