@@ -1,6 +1,8 @@
 package com.example.wordly.controllerForUI;
 
 import com.example.wordly.Levenshtein.LevenshteinUtils;
+import com.example.wordly.SQLite.FavouriteWordDAO;
+import com.example.wordly.getWord.WordEntry;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,42 +85,12 @@ public class FavouriteController extends BaseController {
         confirmationDialog.setVisible(true);
     }
 
-    private FilteredList<WordEntry> filteredData;
 
 
-    public class WordEntry {
-        private final SimpleStringProperty word;
-        private final SimpleStringProperty pronunciation;
-        private final SimpleStringProperty type;
-        private final SimpleStringProperty meaning;
-
-        public WordEntry(String word, String pronunciation, String type, String meaning) {
-            this.word = new SimpleStringProperty(word);
-            this.pronunciation = new SimpleStringProperty(pronunciation);
-            this.type = new SimpleStringProperty(type);
-            this.meaning = new SimpleStringProperty(meaning);
-        }
-
-        public String getWord() {
-            return word.get();
-        }
-
-
-        public String getPronunciation() {
-            return pronunciation.get();
-        }
-
-        public String getType() {
-            return type.get();
-        }
-
-        public String getMeaning() {
-            return meaning.get();
-        }
-    }
 
 
     private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
+    private FilteredList<WordEntry> filteredData;
 
     @FXML
     public void mappingTable() {
@@ -130,46 +102,20 @@ public class FavouriteController extends BaseController {
         tableView.setItems(wordList);
     }
 
-    private void loadTableData(String fileName) {
+    private void loadTableData() {
         wordList.clear();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                if (parts.length == 4) {
-                    String word = parts[0].trim();
-                    String type = parts[1].trim();
-                    String pron = parts[2].trim();
-                    String meaning = parts[3].trim();
-                    wordList.add(new WordEntry(word, pron, type, meaning));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+        wordList.addAll(favouriteWordDAO.getAllFavourites());
     }
 
-    private void saveListToFile(String fileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            for (WordEntry entry : wordList) {
-                writer.write(entry.getWord() + " | "
-                        + entry.getPronunciation() + " | "
-                        + entry.getType() + " | "
-                        + entry.getMeaning());
-                writer.newLine();
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
 
     private void deleteSelectedWord() {
         WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
         if (selectedWord != null) {
-            wordList.remove(selectedWord);
-            saveListToFile("data/favourites.txt");
+           FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+           favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
+           wordList.remove(selectedWord);
         }
     }
 
@@ -202,8 +148,9 @@ public class FavouriteController extends BaseController {
             confirmationDialog.setVisible(false);
         });
         mappingTable();
-        loadTableData("data/favourites.txt");
+        loadTableData();
 
+        // filter voi levenshtein
         filteredData = new FilteredList<>(wordList, e -> true);
         tableView.setItems(filteredData);
 

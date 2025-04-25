@@ -21,3 +21,6 @@ memory	noun	/ˈmɛm(ə)ɹi/	The ability of the brain to record information or im
 translate	noun	/ˈtɹɛnzlæet/	In Euclidean spaces: a set of points obtained by adding a given fixed vector to each point of a given set.
 translate	noun	/ˈtɹɛnzlæet/	In Euclidean spaces: a set of points obtained by adding a given fixed vector to each point of a given set.
 protect	verb	/pɹəˈtɛkt/	To keep safe; to defend; to guard; to prevent harm coming to.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+wait	noun	/weɪt/	A delay.
+great	noun	/ɡɹeɪt/	A person of major significance, accomplishment or acclaim.
