@@ -32,3 +32,7 @@ show	noun	/ʃəʊ/	A play, dance, or other entertainment.
 style	noun	/staɪl/	Senses relating to a thin, pointed object.
 load	noun	/ləʊd/	A burden; a weight to be carried.
 get	noun	/ɡɛt/	Offspring.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+wait	noun	/weɪt/	A delay.
+great	noun	/ɡɹeɪt/	A person of major significance, accomplishment or acclaim.
+
