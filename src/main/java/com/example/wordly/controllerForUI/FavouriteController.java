@@ -57,6 +57,11 @@ public class FavouriteController extends BaseController {
     }
 
     @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+
+    @FXML
     private Button deleteButton;
 
     @FXML

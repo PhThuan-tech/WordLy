@@ -66,6 +66,11 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     }
 
     @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+
+    @FXML
     public void handleGoToSynAndAnt(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SynAndAntView.fxml");
     }
