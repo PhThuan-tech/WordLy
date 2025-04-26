@@ -1,5 +1,7 @@
 package com.example.wordly.controllerForUI;
 
+import com.example.wordly.SQLite.NewAddedWordDAO;
+import com.example.wordly.getWord.WordEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -54,45 +56,34 @@ public class EditWordController extends BaseController {
     @FXML
     private Button addButton;
 
-    private final Path dictionaryFilePath = Paths.get("data/dictionary.txt");
-
-    public EditWordController() {
-        try {
-            if (Files.notExists((java.nio.file.Path) dictionaryFilePath)) {
-                Files.createDirectories((java.nio.file.Path) dictionaryFilePath.getParent());
-                Files.createFile((java.nio.file.Path) dictionaryFilePath);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            showPopup("Failed to create dictionary file.");
-            throw new RuntimeException("Cannot prepare dictionary file!", e);
-        }
-    }
-
     public void handleAddButton(ActionEvent event) {
-        if (event.getSource() == addButton) {
-            String word = txtWord.getText().trim();
-            String pronunciation = txtPronunciation.getText().trim();
-            String type = txtType.getText().trim();
-            String description = txtDescription.getText().trim();
-
-            if (word.isEmpty() || description.isEmpty()) {
-                showPopup("Please enter at least the word and its description!");
-                return;
-            }
-
-            String newLine = String.format("%s | %s | %s | %s", word, pronunciation, type, description);
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFilePath.toFile(), true))) {
-                writer.write(newLine);
-                writer.newLine();
-                showPopup("Word added successfully!");
-                clearFields();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showPopup("Error writing to dictionary file.");
-            }
+        if (event.getSource() != addButton) {
+            return;
         }
+
+        String word = txtWord.getText();
+        String pron = "/" + txtPronunciation.getText() + "/";
+        String type = txtType.getText();
+        String desc = txtDescription.getText();
+
+        if (word.isEmpty()) {
+            showPopup("Vui lòng điền từ bạn muốn thêm !");
+            return;
+        }
+        if (desc.isEmpty()) {
+            showPopup("Vui long điền nghĩa của từ bạn thêm !");
+            return;
+        }
+
+        NewAddedWordDAO newAddedWordDAO = new NewAddedWordDAO();
+        boolean isAdded = newAddedWordDAO.addNewWord(word, pron, type, desc);
+
+        if (isAdded) {
+            showPopup("Thêm từ thành công !!!");
+        } else {
+            showPopup("Lỗi khi thêm từ vào database !!!");
+        }
+
     }
 
     private void clearFields() {
@@ -105,7 +96,7 @@ public class EditWordController extends BaseController {
     // Popup hien thi them tu
     private void showPopup(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Notification");
+        alert.setTitle("ALO ALO");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

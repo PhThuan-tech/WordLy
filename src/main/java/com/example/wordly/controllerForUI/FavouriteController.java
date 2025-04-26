@@ -2,7 +2,9 @@ package com.example.wordly.controllerForUI;
 
 import com.example.wordly.Levenshtein.LevenshteinUtils;
 import com.example.wordly.SQLite.FavouriteWordDAO;
+import com.example.wordly.SQLite.NewAddedWordDAO;
 import com.example.wordly.getWord.WordEntry;
+import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import javax.imageio.IIOException;
 import java.io.*;
@@ -54,11 +57,6 @@ public class FavouriteController extends BaseController {
     }
 
     @FXML
-    public void handleGoToWordEdit(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/WordListView.fxml");
-    }
-
-    @FXML
     private Button deleteButton;
 
     @FXML
@@ -76,43 +74,72 @@ public class FavouriteController extends BaseController {
     @FXML public TableColumn<WordEntry, String> pronCol;
     @FXML public TableColumn<WordEntry, String> meaningCol;
     @FXML private TextField searchField;
-
+    @FXML private Button btnSwitchView;
     @FXML
     private void handleDeleteButton() {
         confirmationDialog.setVisible(true);
     }
 
 
-
-
-
     private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
     private FilteredList<WordEntry> filteredData;
+    private boolean showFavouriteWords = true;
 
     @FXML
     public void mappingTable() {
         wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         pronCol.setCellValueFactory(new PropertyValueFactory<>("pronunciation"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         meaningCol.setCellValueFactory(new PropertyValueFactory<>("meaning"));
 
         tableView.setItems(wordList);
     }
 
-    private void loadTableData() {
+    private void updateSwitchbutton() {
+        if (showFavouriteWords) {
+            btnSwitchView.setText("Word List");
+        } else {
+            btnSwitchView.setText("Favourite List");
+        }
+    }
+
+    private void toggleView() {
+        if (showFavouriteWords) {
+            loadWordsAdded();
+        } else {
+            loadFavourites();
+        }
+        showFavouriteWords = !showFavouriteWords;
+        updateSwitchbutton();
+    }
+
+    private void playButtonAnimation() {
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), btnSwitchView);
+        st.setFromX(1.0); st.setFromY(1.0);
+        st.setToX(1.1);   st.setToY(1.1);
+        st.setCycleCount(2);
+        st.setAutoReverse(true);
+        st.play();
+    }
+
+    private void loadFavourites() {
         wordList.clear();
         FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
         wordList.addAll(favouriteWordDAO.getAllFavourites());
     }
 
-
+    private void loadWordsAdded() {
+        wordList.clear();
+        NewAddedWordDAO newAddedWordDAO = new NewAddedWordDAO();
+        wordList.addAll(newAddedWordDAO.getAddedWords());
+    }
 
     private void deleteSelectedWord() {
         WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
         if (selectedWord != null) {
-           FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
-           favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
-           wordList.remove(selectedWord);
+            FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+            favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
+            wordList.remove(selectedWord);
         }
     }
 
@@ -145,13 +172,21 @@ public class FavouriteController extends BaseController {
             confirmationDialog.setVisible(false);
         });
         mappingTable();
-        loadTableData();
 
-        // filter voi levenshtein
+        // filter tìm kiếm với levenshtein
         filteredData = new FilteredList<>(wordList, e -> true);
         tableView.setItems(filteredData);
-
         searchField.setOnKeyReleased(this::onSearchKeyReleased);
+
+        // animation switch view
+        btnSwitchView.setOnAction(e -> {
+            playButtonAnimation();
+            toggleView();
+        });
+
+        // load dữ liệu đầu vào
+        loadFavourites();
+        updateSwitchbutton();
     }
 
 }
