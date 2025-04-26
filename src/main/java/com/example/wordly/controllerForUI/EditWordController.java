@@ -49,6 +49,12 @@ public class EditWordController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
 
+
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+
     @FXML
     private TextField txtWord, txtPronunciation, txtType;
     @FXML

@@ -116,6 +116,11 @@ public class HistoryController extends BaseController {
     private void handleGoToTranslateAndTTS(ActionEvent event) { // Nhận ActionEvent
         switchScene(event, "/com/example/wordly/View/TranslateAndTTSView.fxml"); // Truyền ActionEvent
     }
+
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
     // *** KẾT THÚC SỬA CÁC PHƯƠNG THỨC ***
 
 

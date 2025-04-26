@@ -81,6 +81,11 @@ public class TranslateAndTTSController extends BaseController {
     public void handleGoToHistory(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
+
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
     // --- Core Functionality Event Handlers ---
 
     /**

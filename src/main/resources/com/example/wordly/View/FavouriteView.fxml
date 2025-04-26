@@ -82,13 +82,19 @@
                         </ImageView>
                     </graphic></Button>
                 <Button contentDisplay="RIGHT" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" text="Text To Speech" textAlignment="CENTER" wrapText="true">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
+
                     <graphic>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/TTSicon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#handleGoToChat" prefHeight="53.0" prefWidth="154.0" text="ChatBot" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/chatbot.png" />
                             </image>
                         </ImageView>
                     </graphic></Button>
