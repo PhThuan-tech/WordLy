@@ -1,0 +1,2 @@
+src/main/resources/history.txt merge=union
+resources/*.txt merge=union
