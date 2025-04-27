@@ -1,6 +1,5 @@
 package com.example.wordly.GameController.ScrambleWord;
 
-import com.example.wordly.API.DictionaryAPI;
 import com.example.wordly.controllerForUI.BaseController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,7 +16,6 @@ public class ScrambleGameController extends BaseController {
     @FXML private Button checkButton, nextButton, restartButton;
     @FXML private ChoiceBox<String> difficultyBox;
     @FXML private Label scoreLabel, resultLabel, timerLabel;
-    @FXML private TextArea definitionArea;
     @FXML private Label previousScoreLabel;
 
     private int score = 0;
@@ -76,7 +74,6 @@ public class ScrambleGameController extends BaseController {
         timerLabel.setText("⏳ " + timeLeft + "s");
         inputField.clear();
         resultLabel.setText("");
-        definitionArea.clear();
         checkButton.setDisable(false);
         nextButton.setDisable(true);
 
@@ -100,11 +97,6 @@ public class ScrambleGameController extends BaseController {
         if (gameManager.checkAnswer(userInput)) {
             score++;
             resultMessage = "✅ Đỉnh nha Bro, đoán được cũng căng phết!!";
-
-            String definition = DictionaryAPI.getDefinition(currentWord);
-            definitionArea
-                    .setText("📖 Nghĩa của từ : " + (!definition.isEmpty() ? definition : "Không tìm thấy nghĩa."));
-
             checkButton.setDisable(true);
             if (timeline != null) {
                 timeline.stop();
@@ -116,7 +108,6 @@ public class ScrambleGameController extends BaseController {
             attemptsLeft--;
             if (attemptsLeft > 0) {
                 resultMessage = "❌ Nghĩ kĩ nha mom, bà còn " + attemptsLeft + " lượt thử nữa thôi.";
-                audioManager.playLoseSound();
             } else {
                 resultMessage = "❌ Bà sai rồi nè, để tui đoán hộ cho, từ cần đoán là: " + currentWord;
                 checkButton.setDisable(true);
@@ -150,7 +141,6 @@ public class ScrambleGameController extends BaseController {
 
         inputField.clear();
         resultLabel.setText("");
-        definitionArea.clear();
         checkButton.setDisable(false);
         nextButton.setDisable(true);
 
