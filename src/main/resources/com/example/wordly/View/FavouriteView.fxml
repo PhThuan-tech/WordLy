@@ -82,13 +82,19 @@
                         </ImageView>
                     </graphic></Button>
                 <Button contentDisplay="RIGHT" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToTranslateAndTTS" prefHeight="50.0" text="Text To Speech" textAlignment="CENTER" wrapText="true">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
+
                     <graphic>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/TTSicon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button contentDisplay="RIGHT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#handleGoToChat" prefHeight="53.0" prefWidth="154.0" text="ChatBot" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/chatbot.png" />
                             </image>
                         </ImageView>
                     </graphic></Button>
@@ -99,17 +105,17 @@
     <!-- Center Content Area -->
     <center>
         <AnchorPane prefHeight="600.0" prefWidth="830.0">
-         <TableView fx:id="tableView" layoutX="19.0" layoutY="108.0" pickOnBounds="false" prefHeight="471.0" prefWidth="796.0">
-            <columns>
-               <TableColumn fx:id="wordCol" prefWidth="150.0" text="Favourite List" />
-               <TableColumn fx:id="pronCol" prefWidth="130.0" text="Pronunciation" />
-               <TableColumn fx:id="typeCol" prefWidth="85.0" text="Type" />
-               <TableColumn fx:id="meaningCol" prefWidth="400.0" text="Meaning" />
-            </columns>
-            <columnResizePolicy>
-               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
-         </TableView>
+            <TableView fx:id="tableView" layoutX="19.0" layoutY="108.0" pickOnBounds="false" prefHeight="471.0" prefWidth="796.0">
+                <columns>
+                    <TableColumn fx:id="wordCol" prefWidth="150.0" text="Favourite List" />
+                    <TableColumn fx:id="pronCol" prefWidth="130.0" text="Pronunciation" />
+                    <TableColumn fx:id="typeCol" prefWidth="85.0" text="Type" />
+                    <TableColumn fx:id="meaningCol" prefWidth="400.0" text="Meaning" />
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+            </TableView>
             <!-- Search Box -->
             <HBox layoutX="19.0" layoutY="64.0" prefHeight="42.0" prefWidth="449.0">
                 <children>
@@ -126,7 +132,7 @@
                 </children>
             </HBox>
 
-                                             <Button fx:id="deleteButton" layoutX="623.0" layoutY="69.0" mnemonicParsing="false" onAction="#handleDeleteButton" style="-fx-text-fill: #2D2D2D; -fx-font-weight: bold;" text="Delete">
+            <Button fx:id="deleteButton" layoutX="623.0" layoutY="69.0" mnemonicParsing="false" style="-fx-text-fill: #2D2D2D; -fx-font-weight: bold;" text="Delete">
                 <graphic>
                     <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -136,17 +142,17 @@
                 </graphic>
             </Button>
 
-                                 <!-- Confirmation Dialog -->
+            <!-- Confirmation Dialog -->
             <AnchorPane fx:id="confirmationDialog" layoutX="566.0" layoutY="100.0" prefHeight="188.0" prefWidth="201.0" style="-fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: #4CAF50;">
                 <children>
                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="31.0" prefHeight="75.0" prefWidth="164.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 20;" text="Do you want to delete this word out of your Favourite Word list" textAlignment="CENTER" wrapText="true" />
 
-                                         <Button fx:id="yesButton" layoutX="25.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="64.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="YES" />
+                    <Button fx:id="yesButton" layoutX="25.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="64.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="YES" />
 
-                                         <Button fx:id="noButton" layoutX="120.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="57.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="NO" />
+                    <Button fx:id="noButton" layoutX="120.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="57.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="NO" />
                 </children>
             </AnchorPane>
-         <Button layoutX="437.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleGoToWordEdit" prefHeight="35.0" prefWidth="94.0" text="Word List" />
+            <Button fx:id="btnSwitchView" layoutX="451.0" layoutY="70.0" mnemonicParsing="false" text="Show New Added" />
         </AnchorPane>
     </center>
 </BorderPane>

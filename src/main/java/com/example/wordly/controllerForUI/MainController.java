@@ -61,7 +61,7 @@ public class MainController extends BaseController {
         // Phát âm thanh
         if (clickSound != null) {
             clickSound.stop();
-            clickSound.play();
+            clickSound.play();   
         } else {
             System.err.println("Âm thanh chưa được load hoặc không tìm thấy tài nguyên âm thanh!");
         }

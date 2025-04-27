@@ -39,6 +39,11 @@ public class GameViewController extends BaseController {
     }
 
     @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+
+    @FXML
     public void handleGotoEditWord(ActionEvent actionEvent)  {
         switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
