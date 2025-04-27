@@ -11,7 +11,7 @@ target/
 *.iws
 *.iml
 *.ipr
-src/history.txt
+*.txt
 
 ### Eclipse ###
 .apt_generated
