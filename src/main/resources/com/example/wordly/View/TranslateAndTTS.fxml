@@ -18,7 +18,7 @@
             prefWidth="1000.0"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.wordly.TTS.TranslateAndTTSController">
+            fx:controller="com.example.wordly.controllerForUI.TranslateAndTTSController">
 
     <stylesheets>
         <URL value="@../styles/home.css" />
