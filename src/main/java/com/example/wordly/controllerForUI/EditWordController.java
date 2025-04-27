@@ -86,8 +86,10 @@ public class EditWordController extends BaseController {
 
         if (isAdded) {
             showPopup("Thêm từ thành công !!!");
+            clearFields();
         } else {
-            showPopup("Lỗi khi thêm từ vào database !!!");
+            showPopup("\"Từ này đã thêm mất rồi \uD83D\uDE22!!!\"");
+            clearFields();
         }
 
     }
