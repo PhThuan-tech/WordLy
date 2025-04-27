@@ -1,11 +1,9 @@
 package com.example.wordly.getWord;
 
-import javafx.scene.media.MediaPlayer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.print.attribute.standard.Media;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

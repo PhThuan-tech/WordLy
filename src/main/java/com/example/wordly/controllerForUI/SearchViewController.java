@@ -1,6 +1,7 @@
 package com.example.wordly.controllerForUI;
 
 import com.example.wordly.History.HistoryManage;
+import com.example.wordly.SQLite.FavouriteWordDAO;
 import com.example.wordly.getWord.GetAPI;
 import com.example.wordly.getWord.SearchButtonClickHandle;
 import com.example.wordly.getWord.SearchUIUpdate;
@@ -62,6 +63,11 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     @FXML
     public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
+    }
+
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
     }
 
     @FXML
@@ -233,37 +239,22 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         String pronunciation =proLabel.getText();
         String meaning = meaningText.getText();
 
-        //format
-        String entry = word + " | " + type + " | " + pronunciation + " | " + meaning;
+        if (word.isEmpty()) {
+            System.out.println("Không thể thêm từ");
+            return;
+        }
 
-        try {
-            File file = new File("data/favourites.txt");
-
-            if (!file.exists()) {
-                file.createNewFile();
+        FavouriteWordDAO newWord = new FavouriteWordDAO();
+        if (newWord.isFavouriteWord(word)) {
+            System.out.println("Từ này đã có trong danh sách yêu thích");
+        } else {
+            try {
+                newWord.addFavouriteWord(word, type, pronunciation, meaning);
+                System.out.println("Đã thêm từ" + word + "vào danh sách yêu thích");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Không thể thêm vào danh sách yêu thích");
             }
-
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            Boolean isDuplicate = false;
-            while((line = reader.readLine()) != null) {
-                if(line.startsWith(word + " |")) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            reader.close();
-
-            if(isDuplicate) {
-                System.out.println("Từ này đã có trong danh sách yêu thích.");
-            } else {
-                FileWriter newFavour = new FileWriter(file, true);
-                newFavour.write(entry + "\n");
-                newFavour.close();
-                System.out.println("Đã thêm từ vào Favourite.");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
 }

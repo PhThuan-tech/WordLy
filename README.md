@@ -47,9 +47,21 @@ Ngày 15/04/2025 :
 3 Thử nghiệm game đoán từ Wordle, chưa lấy đc từ ngẫu nhiên từ Dictionarydev hoặc APImuse.
 
 Ngày 20/04/2025 :
-1 Sửa đổi lại đồng bộ các giao diện.
+
+1 Sửa đổi lại đồng bộ các giao diện. 
 
 2 Thêm các icons, audio ngắn trong game và màn hình chính
 
 3 Fix bug lỗi merge của thái 
 
+Ngày 28/04/2024
+
+1 Fix lại lỗi âm thanh nhạc troll bị đè vào nhau - nhạc troll nào thế, phần nhạc trol ở main tôi fix r mà.
+
+2 Tạo giao diện setting nhạc nền và fix đc lỗi chuyển giao diện nhạc ko bật
+
+3 Tạo game scramble word(đoán từ được tráo sẵn) và thêm nhiều tính năng khác
+
+4 sửa lại giao diện historyView và giao diện EditWord để xem các từ đã chỉnh sửa - phần word added tôi nhét ở favourite nhé.
+
+5 Tạo chat bot

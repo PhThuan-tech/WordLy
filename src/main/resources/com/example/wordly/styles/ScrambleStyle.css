@@ -1,0 +1,104 @@
+.title-label {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00796b;
+}
+
+.scrambled-word {
+    -fx-font-size: 22px;
+    -fx-text-fill: #37474f;
+    -fx-font-weight: bold;
+}
+
+.info-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #555;
+}
+
+.timer-label {
+    -fx-text-fill: #ff7043;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.input-field {
+    -fx-pref-width: 300px;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b2dfdb;
+}
+
+.action-button {
+    -fx-background-color: #4db6ac;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 5, 0, 0, 2);
+}
+
+.action-button:hover {
+    -fx-background-color: #26a69a;
+}
+
+.result-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #1e88e5;
+    -fx-font-weight: bold;
+}
+
+.back-button {
+    -fx-background-color: #ffccbc;
+    -fx-text-fill: #d84315;
+    -fx-background-radius: 20;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20;
+}
+
+.back-button:hover {
+    -fx-background-color: #ffab91;
+}
+
+
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #80cbc4;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #00796b;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 1);
+}
+
+.choice-box:hover {
+    -fx-background-color: #e0f2f1;
+}
+
+.choice-box .label {
+    -fx-text-fill: #00796b;
+    -fx-font-weight: bold;
+}
+
+.choice-box .arrow {
+    -fx-background-color: #00796b;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #80cbc4;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.choice-box .menu-item {
+    -fx-text-fill: #00796b;
+    -fx-font-size: 14px;
+}
+
+.choice-box .menu-item:hover {
+    -fx-background-color: #b2dfdb;
+}

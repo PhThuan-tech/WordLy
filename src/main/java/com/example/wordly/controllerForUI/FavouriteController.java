@@ -1,17 +1,25 @@
 package com.example.wordly.controllerForUI;
 
+import com.example.wordly.Levenshtein.LevenshteinUtils;
+import com.example.wordly.SQLite.FavouriteWordDAO;
+import com.example.wordly.SQLite.NewAddedWordDAO;
+import com.example.wordly.getWord.WordEntry;
+import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import javax.imageio.IIOException;
 import java.io.*;
@@ -48,12 +56,9 @@ public class FavouriteController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
     }
 
-
-    public void handleKeyEnterPress(KeyEvent keyEvent) {
-    }
-
-    public void handleMouseClicked(MouseEvent mouseEvent) {
-
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
     }
 
     @FXML
@@ -68,9 +73,90 @@ public class FavouriteController extends BaseController {
     @FXML
     private AnchorPane confirmationDialog;
 
+    @FXML public TableView<WordEntry> tableView;
+    @FXML public TableColumn<WordEntry, String> wordCol;
+    @FXML public TableColumn<WordEntry, String> typeCol;
+    @FXML public TableColumn<WordEntry, String> pronCol;
+    @FXML public TableColumn<WordEntry, String> meaningCol;
+    @FXML private TextField searchField;
+    @FXML private Button btnSwitchView;
     @FXML
     private void handleDeleteButton() {
         confirmationDialog.setVisible(true);
+    }
+
+
+    private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
+    private FilteredList<WordEntry> filteredData;
+    private boolean showFavouriteWords = true;
+
+    @FXML
+    public void mappingTable() {
+        wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
+        pronCol.setCellValueFactory(new PropertyValueFactory<>("pronunciation"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        meaningCol.setCellValueFactory(new PropertyValueFactory<>("meaning"));
+
+        tableView.setItems(wordList);
+    }
+
+    private void updateSwitchbutton() {
+        if (showFavouriteWords) {
+            btnSwitchView.setText("Word List");
+        } else {
+            btnSwitchView.setText("Favourite List");
+        }
+    }
+
+    private void toggleView() {
+        if (showFavouriteWords) {
+            loadWordsAdded();
+        } else {
+            loadFavourites();
+        }
+        showFavouriteWords = !showFavouriteWords;
+        updateSwitchbutton();
+    }
+
+    private void playButtonAnimation() {
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), btnSwitchView);
+        st.setFromX(1.0); st.setFromY(1.0);
+        st.setToX(1.1);   st.setToY(1.1);
+        st.setCycleCount(2);
+        st.setAutoReverse(true);
+        st.play();
+    }
+
+    private void loadFavourites() {
+        wordList.clear();
+        FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+        wordList.addAll(favouriteWordDAO.getAllFavourites());
+    }
+
+    private void loadWordsAdded() {
+        wordList.clear();
+        NewAddedWordDAO newAddedWordDAO = new NewAddedWordDAO();
+        wordList.addAll(newAddedWordDAO.getAddedWords());
+    }
+
+    private void deleteSelectedWord() {
+        WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
+        if (selectedWord != null) {
+            FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+            favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
+            wordList.remove(selectedWord);
+        }
+    }
+
+    @FXML
+    private void onSearchKeyReleased(KeyEvent event) {
+        String keyword = searchField.getText().trim();
+        int threshold = 3;
+
+        filteredData.setPredicate(entry -> {
+            if (keyword.isEmpty()) return true;
+            return LevenshteinUtils.inThreshold(entry.getWord(), keyword, threshold);
+        });
     }
 
     @FXML
@@ -91,100 +177,21 @@ public class FavouriteController extends BaseController {
             confirmationDialog.setVisible(false);
         });
         mappingTable();
-        loadTableData("data/favourites.txt");
-    }
 
-    public class WordEntry {
-        private final SimpleStringProperty word;
-        private final SimpleStringProperty pronunciation;
-        private final SimpleStringProperty type;
-        private final SimpleStringProperty meaning;
+        // filter tìm kiếm với levenshtein
+        filteredData = new FilteredList<>(wordList, e -> true);
+        tableView.setItems(filteredData);
+        searchField.setOnKeyReleased(this::onSearchKeyReleased);
 
-        public WordEntry(String word, String pronunciation, String type, String meaning) {
-            this.word = new SimpleStringProperty(word);
-            this.pronunciation = new SimpleStringProperty(pronunciation);
-            this.type = new SimpleStringProperty(type);
-            this.meaning = new SimpleStringProperty(meaning);
-        }
+        // animation switch view
+        btnSwitchView.setOnAction(e -> {
+            playButtonAnimation();
+            toggleView();
+        });
 
-        public String getWord() {
-            return word.get();
-        }
-
-
-        public String getPronunciation() {
-            return pronunciation.get();
-        }
-
-        public String getType() {
-            return type.get();
-        }
-
-        public String getMeaning() {
-            return meaning.get();
-        }
-
-    }
-
-    @FXML public TableView<WordEntry> tableView;
-    @FXML public TableColumn<WordEntry, String> wordCol;
-    @FXML public TableColumn<WordEntry, String> typeCol;
-    @FXML public TableColumn<WordEntry, String> pronCol;
-    @FXML public TableColumn<WordEntry, String> meaningCol;
-
-    private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
-
-    @FXML
-    public void mappingTable() {
-        wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        pronCol.setCellValueFactory(new PropertyValueFactory<>("pronunciation"));
-        meaningCol.setCellValueFactory(new PropertyValueFactory<>("meaning"));
-
-        tableView.setItems(wordList);
-    }
-
-    private void loadTableData(String fileName) {
-        wordList.clear();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                if (parts.length == 4) {
-                    String word = parts[0].trim();
-                    String type = parts[1].trim();
-                    String pron = parts[2].trim();
-                    String meaning = parts[3].trim();
-                    wordList.add(new WordEntry(word, pron, type, meaning));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void saveListToFile(String fileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            for (WordEntry entry : wordList) {
-                writer.write(entry.getWord() + " | "
-                        + entry.getPronunciation() + " | "
-                        + entry.getType() + " | "
-                        + entry.getMeaning());
-                writer.newLine();
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void deleteSelectedWord() {
-        WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
-        if (selectedWord != null) {
-            wordList.remove(selectedWord);
-            saveListToFile("data/favourites.txt");
-        }
+        // load dữ liệu đầu vào
+        loadFavourites();
+        updateSwitchbutton();
     }
 
 }

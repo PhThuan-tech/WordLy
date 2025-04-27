@@ -39,6 +39,11 @@ public class GameViewController extends BaseController {
     }
 
     @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+
+    @FXML
     public void handleGotoEditWord(ActionEvent actionEvent)  {
         switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
@@ -48,21 +53,15 @@ public class GameViewController extends BaseController {
     }
 
 
-    public void handleStartWordleGame(ActionEvent event) {
-    }
-
-    public void handleStartScrambleGame(ActionEvent event) {
-    }
-
-    public void handleGotoEdit(ActionEvent event) {
-
-    }
-
     @FXML
     public void handleStartDefiGame(ActionEvent event) throws IOException, IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/GameView/DefinitionGame-View.fxml"));
         Parent DefinitionGame = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(DefinitionGame);
+    }
+
+    public void handleGoToScrambleWord(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/GameView/ScrambleGameView.fxml");
     }
 }

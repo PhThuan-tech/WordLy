@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.media.AudioClip;
+import java.net.URL; // Import URL
 
 public class MainController extends BaseController {
     @FXML
@@ -20,6 +21,7 @@ public class MainController extends BaseController {
 
     /**
      * Hàm khởi tạo CSS vào trong MainController.
+     * Và tải âm thanh.
      */
     public void initialize() {
         if (menuScence != null) {
@@ -27,12 +29,21 @@ public class MainController extends BaseController {
             if (scene != null) {
                 scene.getStylesheets().add(getClass()
                         .getResource("/com/example/wordly/styles/mainsce.css").toExternalForm());
+            } else {
+                System.out.println("Scene chưa sẵn sàng khi initialize MainController.");
             }
+        } else {
+            System.out.println("FXML elements chưa được load đầy đủ khi initialize MainController.");
         }
-        clickSound = new AudioClip(getClass().getResource("/com/example/wordly/audio/TrollButton.mp3").toString());
+
+        URL audioResource = getClass().getResource("/com/example/wordly/audio/TrollButton.mp3");
+        if (audioResource != null) {
+            clickSound = new AudioClip(audioResource.toString());
+        } else {
+            System.err.println("Không tìm thấy tài nguyên âm thanh: /com/example/wordly/audio/TrollButton.mp3");
+        }
     }
 
-    // Các Hàm chuyển đổi giữa các giao diện.
     public void switchToHomeScence(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
@@ -41,14 +52,18 @@ public class MainController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/UsingMehodView.fxml");
     }
 
+    public void handleGoToSetting(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/SettingView.fxml");
+    }
 
     @FXML
     public void HandlePlaysound(ActionEvent actionEvent) {
         // Phát âm thanh
         if (clickSound != null) {
-            clickSound.play();
+            clickSound.stop();
+            clickSound.play();   
         } else {
-            System.out.println("Âm thanh chưa được load!");
+            System.err.println("Âm thanh chưa được load hoặc không tìm thấy tài nguyên âm thanh!");
         }
     }
 }
