@@ -37,3 +37,4 @@ wait	noun	/weɪt/	A delay.
 great	noun	/ɡɹeɪt/	A person of major significance, accomplishment or acclaim.
 
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+earth	proper noun	/ɜːθ/	The third planet of the Solar System; the world upon which humans live.

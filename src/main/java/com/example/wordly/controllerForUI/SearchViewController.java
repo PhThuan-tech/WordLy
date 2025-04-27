@@ -250,7 +250,7 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         } else {
             try {
                 newWord.addFavouriteWord(word, type, pronunciation, meaning);
-                System.out.println("Đã thêm từ" + word + "vào danh sách yêu thích");
+                System.out.println("Đã thêm từ " + word + " vào danh sách yêu thích");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Không thể thêm vào danh sách yêu thích");
