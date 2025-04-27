@@ -54,7 +54,7 @@ public class GameViewController extends BaseController {
 
 
     @FXML
-    public void handleStartDefiGame(ActionEvent event) throws IOException, IOException {
+    public void handleStartDefiGame(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/wordly/GameView/DefinitionGame-View.fxml"));
         Parent DefinitionGame = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
