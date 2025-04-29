@@ -52,3 +52,9 @@ counter	noun	/ˈkaʊntə/	One who counts
 super	adjective	/ˈs(j)uːpə(ɹ)/	Of excellent quality, superfine.
 men	noun	/mɛn/	An adult male human.
 earning	verb	N/A	To gain (success, reward, recognition) through applied effort or work.
+hair	noun	/heː/	A pigmented filament of keratin which grows from a follicle on the skin of humans and other mammals.
+dynamic	noun	/daɪˈnæ.mɪk/	A characteristic or manner of an interaction; a behavior.
+active	noun	/ˈæk.tɪv/	A person or thing that is acting or capable of acting.
+die	verb	/daɪ/	To stop living; to become dead; to undergo death.
+sick	noun	/sɪk/	Sick people in general as a group.
+sick	noun	/sɪk/	Sick people in general as a group.
