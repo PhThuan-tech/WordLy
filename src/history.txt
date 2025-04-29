@@ -41,3 +41,14 @@ high	noun	/haɪ/	A high point or position, literally or figuratively; an elevate
 conservation	noun	/ˌkɑnsə(ɹ)ˈveɪʃən/	The act of preserving, guarding, or protecting; the keeping (of a thing) in a safe or entire state; preservation.
 aquatic	noun	/ɘˈkwɔ.tɘk/	Any aquatic plant.
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+ant	noun	/ɛnt/	Any of various insects in the family Formicidae in the order Hymenoptera, typically living in large colonies composed almost entirely of flightless females.
+purple	noun	/ˈpɜː(ɹ).pəl/	A colour/color that is a dark blend of red and blue; dark magenta.
+a	noun	/æɪ/	The name of the Latin script letter A/a.
+complete	noun	/kəmˈpliːt/	A completed survey.
+oven	noun	/ˈʌ.vn̩/	A chamber used for baking or heating.
+counter	noun	/ˈkaʊntə/	One who counts
+counter	noun	/ˈkaʊntə/	One who counts
+super	adjective	/ˈs(j)uːpə(ɹ)/	Of excellent quality, superfine.
+men	noun	/mɛn/	An adult male human.
+earning	verb	N/A	To gain (success, reward, recognition) through applied effort or work.

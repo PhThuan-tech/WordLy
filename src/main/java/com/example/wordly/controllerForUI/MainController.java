@@ -29,8 +29,6 @@ public class MainController extends BaseController {
             if (scene != null) {
                 scene.getStylesheets().add(getClass()
                         .getResource("/com/example/wordly/styles/mainsce.css").toExternalForm());
-            } else {
-                System.out.println("Scene chưa sẵn sàng khi initialize MainController.");
             }
         } else {
             System.out.println("FXML elements chưa được load đầy đủ khi initialize MainController.");
