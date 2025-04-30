@@ -69,6 +69,9 @@ Ngày 28/04/2025
 Ngày 30/04/2025
 
 1 Thái thêm phần translate, tts và đọc images dùng api Azure.
+
 2 Tôi đã training lại con bot để nó thông minh hơn, giờ nó là quái vật Tiếng Anh nhé =))).
+
 3 Phần tts đang có vấn đề khi đọc quá nhiều văn bản -> application sẽ unresponse (đơ) cho đến khi đọc hết văn bản thì sẽ hết, cái này hình như do resquest lớn đâm ra app không load đc tôi sẽ tìm cách fix, nma ae fix đc thì alo nhé.
+
 4 Có vài giao diện đang hơi sơ sài + chuyển giao diện đang chưa mượt.
