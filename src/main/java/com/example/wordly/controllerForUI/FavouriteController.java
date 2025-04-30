@@ -5,7 +5,6 @@ import com.example.wordly.SQLite.FavouriteWordDAO;
 import com.example.wordly.SQLite.NewAddedWordDAO;
 import com.example.wordly.getWord.WordEntry;
 import javafx.animation.ScaleTransition;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,12 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-import javax.imageio.IIOException;
-import java.io.*;
 
 public class FavouriteController extends BaseController {
     // Các hàm chuyển đổi các giao diện qua lại.
