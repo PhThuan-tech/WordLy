@@ -68,7 +68,7 @@ Ngày 28/04/2025
 
 Ngày 30/04/2025
 
-1 Thái thêm phần translate, tts và đọc images dùng api Azure.
+1 Thái thêm phần translate, tts và đọc images dùng api Azure, xóa vài cái không quan trọng đi(không liên quan đến file của mng nhé).
 
 2 Tôi đã training lại con bot để nó thông minh hơn, giờ nó là quái vật Tiếng Anh nhé =))).
 
