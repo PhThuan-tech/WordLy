@@ -1,6 +1,49 @@
+/* Nút đẹp hơn */
+.custom-button {
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0.2, 1, 1);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Hover xịn sò */
+.custom-button:hover {
+    -fx-background-color: #7CB342;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0.4, 1, 1);
+}
+
+/* Nhấn xuống cảm giác mượt mà */
+.custom-button:pressed {
+    -fx-background-color: #689F38;
+    -fx-translate-y: 0.5px;
+}
+
+.setting-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.setting-button:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
+
+.setting-button:pressed {
+    -fx-translate-y: 0.5px;
+    -fx-opacity: 0.6;
+     -fx-background-color: transparent;
+}
+
 /* Background tổng thể */
 .anchor-pane {
-    -fx-background-color: linear-gradient(to bottom right, #edf5e1, #f0ebe1); /* xanh lá pastel */
+    -fx-background-color: linear-gradient(to bottom right, #edf5e1, #f0ebe1);
     -fx-font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
@@ -8,39 +51,10 @@
 .title-text {
     -fx-font-size: 36px;
     -fx-font-weight: 600;
-    -fx-text-fill: #A1887F; /* nau pastel */
+    -fx-text-fill: #558B2F;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.5, 0, 2);
     -fx-padding: 10px;
     -fx-alignment: center;
     -fx-text-alignment: center;
-}
-
-/* Nút đẹp hơn */
-.custom-button {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 1, 1);
-    -fx-transition: all 0.3s ease-in-out;
-}
-
-/* Hover xịn sò */
-.custom-button:hover {
-    -fx-background-color: #388E3C;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
-
-/* Nhấn xuống cảm giác mượt mà */
-.custom-button:pressed {
-    -fx-background-color: #2E7D32;
-    -fx-translate-y: 1px;
-}
-
-.custom-button:active {
-    -fx-background-color: #6C63FF;
-    -fx-effect: dropshadow(gaussian, rgba(108, 99, 255, 0.4), 0, 6, 0, 3);
+    -fx-opacity: 0;
 }

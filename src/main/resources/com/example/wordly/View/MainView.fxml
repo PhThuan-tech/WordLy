@@ -23,54 +23,52 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
          </padding>
          <children>
-            <Label alignment="CENTER" prefHeight="35.0" prefWidth="148.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="WORDLY">
+            <Label fx:id="wordlyTitleLabel" alignment="CENTER" prefHeight="35.0" prefWidth="225.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" styleClass="title-text" text="WORDLY">
                <VBox.margin>
-                  <Insets bottom="30.0" /> <!-- Space below sidebar title -->
+                  <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
 
-            <Button fx:id="menuScence" contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="45.0" styleClass="custom-button" text="Home" VBox.vgrow="NEVER">
+            <Button fx:id="menuScence" graphicTextGap="55.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToHomeScence" prefHeight="54.0" prefWidth="210.0" styleClass="custom-button" text="Home" VBox.vgrow="NEVER">
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/home.png" />
+                        <Image url="@../icons/HomeIcon.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="features" contentDisplay="RIGHT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" styleClass="custom-button" text="Attribution" VBox.vgrow="NEVER">
+            <Button fx:id="HowToUse" graphicTextGap="19.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToUsing" prefHeight="55.0" prefWidth="206.0" styleClass="custom-button" text="Instruction" VBox.vgrow="NEVER">
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/feature.png" />
+                        <Image url="@../icons/UsingInfo.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="HowToUse" contentDisplay="RIGHT" graphicTextGap="19.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToUsing" prefHeight="45.0" styleClass="custom-button" text="Instruction" VBox.vgrow="NEVER">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/UsingManner.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button mnemonicParsing="false" onAction="#HandlePlaysound" prefHeight="40.0" prefWidth="210.0" styleClass="custom-button" text="Đừng bấm" textFill="#073aed" wrapText="true">
+            <Button fx:id="BuyPrenium" mnemonicParsing="false" onAction="#HandlePlaysound" prefHeight="51.0" prefWidth="206.0" styleClass="custom-button" text="Buy prenium" textFill="#073aed" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/Premium.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <AnchorPane prefHeight="233.0" prefWidth="210.0">
+            <AnchorPane prefHeight="184.0" prefWidth="210.0">
                <children>
-                  <Button layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleGoToSetting">
+                  <Button layoutX="8.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleGoToSetting" prefHeight="32.0" prefWidth="32.0" styleClass="setting-button">
                      <graphic>
-                        <ImageView fitHeight="39.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="62.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" styleClass="setting-button">
                            <image>
                               <Image url="@../icons/setting.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                  </Button>
+                     </graphic></Button>
                </children>
-            </AnchorPane> <!-- Pushes elements upwards if space allows -->
+            </AnchorPane>
 
          </children>
       </VBox>
@@ -79,13 +77,16 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="557.0" fitWidth="729.0" layoutX="10.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/mainBackground.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
+            <Label layoutX="143.0" layoutY="28.0" prefHeight="74.0" prefWidth="462.0" style="-fx-font-size: 36; -fx-text-fill: #558B2F; -fx-font-weight: bold;" text="Welcome back to Wordly" textFill="#3a473e">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="503.0" prefHeight="46.0" prefWidth="139.0" style="-fx-font-size: 25; -fx-text-fill: #B16E4B;" text="Quote daily" />
+            <Label fx:id="quoteLabel" layoutX="9.0" layoutY="537.0" prefHeight="63.0" prefWidth="684.0" style="-fx-font-size: 20; -fx-text-fill: #A65A53;" text="random" wrapText="true" />
+            <Label layoutX="360.0" layoutY="191.0" style="-fx-font-size: 24; -fx-text-fill: #A65A53;" text="Tips For Learning" />
+            <VBox fx:id="tipBox" layoutX="360.0" layoutY="244.0" prefHeight="200.0" prefWidth="335.0" />
+         </children></AnchorPane>
    </center>
 
 </BorderPane>

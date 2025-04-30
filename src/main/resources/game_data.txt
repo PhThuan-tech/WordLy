@@ -41,3 +41,13 @@ active	noun	/ˈæk.tɪv/	A person or thing that is acting or capable of acting.
 die	verb	/daɪ/	To stop living; to become dead; to undergo death.
 sick	noun	/sɪk/	Sick people in general as a group.
 sick	noun	/sɪk/	Sick people in general as a group.
+heal	noun	/hiːl/	A spell or ability that restores hit points or removes a status ailment.
+anti	noun	/ˈæn.ti/	A person opposed to a concept or principle.
+ant	noun	/ɛnt/	Any of various insects in the family Formicidae in the order Hymenoptera, typically living in large colonies composed almost entirely of flightless females.
+attitude	noun	/ˈætɪˌtjuːd/	The position of the body or way of carrying oneself.
+compare	noun	/kəmˈpɛə/	Comparison.
+chicken	noun	/ˈt͡ʃɪkɪn/	A domestic fowl, Gallus gallus, especially when young.
+dog	noun	/dɑɡ/	A mammal, Canis familiaris or Canis lupus familiaris, that has been domesticated for thousands of years, of highly variable appearance due to human breeding.
+courage	noun	/ˈkʌɹɪdʒ/	The quality of being confident, not afraid or easily intimidated, but without being incautious or inconsiderate.
+hear	verb	/hɪə(ɹ)/	(stative) To perceive sounds through the ear.
+come	noun	/kʌm/	Coming, arrival; approach.
