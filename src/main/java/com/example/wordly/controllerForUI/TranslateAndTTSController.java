@@ -1,20 +1,25 @@
 package com.example.wordly.controllerForUI;
 
-import com.example.wordly.TTS.LibreTranslator;
+import com.example.wordly.API.TextToSpeech;
+import com.example.wordly.API.Translator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.File;
 import java.lang.invoke.MethodHandles; // For logger name
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.file.Files;
 import java.util.logging.Logger; // For logging
 
 /**
@@ -39,7 +44,7 @@ public class TranslateAndTTSController extends BaseController {
     @FXML private Button speak1Button; // Placeholder for future TTS
 
     @FXML private Button speak2Button; // Placeholder for future TTS
-
+    @FXML private Button laodImageButton;
     /**
      * Xử lí chuyển đổi giữa các giao diện.
      */
@@ -88,7 +93,6 @@ public class TranslateAndTTSController extends BaseController {
     /**
      * Handles the action event when the 'Translate' button is clicked.
      * Retrieves text from the input TextArea, validates it, and initiates
-     * an asynchronous translation task using {@link LibreTranslator}.
      * Updates the UI with the result or displays an error message.
      * Disables the translation button during the operation.
      *
@@ -97,31 +101,86 @@ public class TranslateAndTTSController extends BaseController {
     @FXML
     public void handleTranslating(ActionEvent actionEvent) {
         try {
-            String needToTrans = this.needToTrans.getText();
+            String textToTranslate = needToTrans.getText();
+            String sourceLang = "auto"; // Azure vẫn tự nhận dạng nếu set auto
             String targetLang = "vi";
-            String sourceLang = "auto";
 
-            String scriptUrl = "https://script.google.com/macros/s/AKfycbyonS6sLu4FvvR9ve4ZC1QSKZIH9zMtoZ9RgA7uzt4KpJdDf-EE7QQ-WCqILh6XEy0nVw/exec"; // link của bạn
-            String urlStr = scriptUrl
-                    + "?text=" + URLEncoder.encode(needToTrans, StandardCharsets.UTF_8)
-                    + "&source=" + sourceLang
-                    + "&target=" + targetLang;
-
-            URL url = new URL(urlStr);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String translatedText = br.readLine();
-            conn.disconnect();
-
+            String translatedText = Translator.translate(textToTranslate, sourceLang, targetLang);
             translated.setText(translatedText);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
+    @FXML
+    private void handleImageToText(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file == null) {
+            showInfoAlert("No File Selected", "Please select an image file to extract text.");
+            return;
+        }
+
+        try {
+            String endpoint = "https://phamthaic3.cognitiveservices.azure.com/";
+            String subscriptionKey = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
+            String uri = endpoint + "/vision/v3.2/ocr?language=unk&detectOrientation=true";
+
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))
+                    .header("Ocp-Apim-Subscription-Key", subscriptionKey)
+                    .header("Content-Type", "application/octet-stream")
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(imageBytes))
+                    .build();
+
+            HttpClient client = HttpClient.newHttpClient();
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenApply(HttpResponse::body)
+                    .thenAccept(this::extractTextFromOCR)
+                    .exceptionally(e -> {
+                        e.printStackTrace();
+                        showInfoAlert("Error", "Failed to extract text: " + e.getMessage());
+                        return null;
+                    });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showInfoAlert("Error", "An error occurred: " + e.getMessage());
+        }
+    }
+
+    private void extractTextFromOCR(String jsonResponse) {
+        Platform.runLater(() -> {
+            try {
+                JSONObject json = new JSONObject(jsonResponse);
+                JSONArray regions = json.getJSONArray("regions");
+                StringBuilder resultText = new StringBuilder();
+
+                for (int i = 0; i < regions.length(); i++) {
+                    JSONArray lines = regions.getJSONObject(i).getJSONArray("lines");
+                    for (int j = 0; j < lines.length(); j++) {
+                        JSONArray words = lines.getJSONObject(j).getJSONArray("words");
+                        for (int k = 0; k < words.length(); k++) {
+                            resultText.append(words.getJSONObject(k).getString("text")).append(" ");
+                        }
+                        resultText.append("\n");
+                    }
+                }
+
+                needToTrans.setText(resultText.toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                showInfoAlert("Parse Error", "Could not parse OCR result.");
+            }
+        });
+    }
 
     /**
      * Displays an informational alert dialog to the user.
@@ -167,8 +226,7 @@ public class TranslateAndTTSController extends BaseController {
     private void handleSpeakOriginal(ActionEvent event) {
         String text = needToTrans.getText();
         if (text != null && !text.isBlank()) {
-            // Add TTS implementation here
-            showInfoAlert("TTS Placeholder", "Speaking original text: \"" + text.substring(0, Math.min(text.length(), 30)) + "...\"");
+            TextToSpeech.speak(text, "en-US-GuyNeural");
         } else {
             showInfoAlert("TTS Unavailable", "No original text available to speak.");
         }
@@ -178,8 +236,7 @@ public class TranslateAndTTSController extends BaseController {
     private void handleSpeakTranslated(ActionEvent event) {
         String text = translated.getText();
         if (text != null && !text.isBlank()) {
-            // Add TTS implementation here
-            showInfoAlert("TTS Placeholder", "Speaking translated text: \"" + text.substring(0, Math.min(text.length(), 30)) + "...\"");
+            TextToSpeech.speak(text, "vi-VN-NamMinhNeural");
         } else {
             showInfoAlert("TTS Unavailable", "No translated text available to speak.");
         }

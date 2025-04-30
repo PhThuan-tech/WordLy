@@ -144,6 +144,24 @@
             <version>1.7.36</version>
         </dependency>
 
+        <!-- azure tts -->
+        <dependency>
+            <groupId>com.microsoft.cognitiveservices.speech</groupId>
+            <artifactId>client-sdk</artifactId>
+            <version>1.36.0</version>
+        </dependency>
+
+        <!-- azure computer vision -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-vision-imageanalysis</artifactId>
+            <version>1.0.1</version> </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>1.25.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
