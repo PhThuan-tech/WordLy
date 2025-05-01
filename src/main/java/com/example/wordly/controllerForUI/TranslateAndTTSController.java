@@ -1,26 +1,31 @@
 package com.example.wordly.controllerForUI;
 
+import com.azure.ai.vision.imageanalysis.ImageAnalysisClient;
+import com.azure.ai.vision.imageanalysis.ImageAnalysisClientBuilder;
+import com.azure.ai.vision.imageanalysis.models.ImageAnalysisOptions;
+import com.azure.ai.vision.imageanalysis.models.ImageAnalysisResult;
+import com.azure.ai.vision.imageanalysis.models.ReadResult;
+import com.azure.ai.vision.imageanalysis.models.VisualFeatures;
+import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.util.BinaryData;
 import com.example.wordly.API.TextToSpeech;
 import com.example.wordly.API.Translator;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javafx.stage.Stage;
 
 import java.io.File;
-import java.lang.invoke.MethodHandles; // For logger name
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.file.Files;
-import java.util.logging.Logger; // For logging
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Controller for the Translate and Text-To-Speech view (TranslateTTSView.fxml).
@@ -31,26 +36,8 @@ import java.util.logging.Logger; // For logging
 public class TranslateAndTTSController extends BaseController {
     // --- Logger ---
     // Use java.util.logging (JUL) for simplicity, or SLF4J if preferred in the project
-    private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
     //Ông ko cần comment ở phần FXML đâu á.
     // vì cái này khi tạo hàm view.fxml là nó tự tạo thôi. mình tự hiểu được.
-
-    @FXML private TextArea needToTrans;
-
-    @FXML private TextArea translated;
-
-    @FXML private Button transButton;
-
-    @FXML private Button speak1Button; // Placeholder for future TTS
-
-    @FXML private Button speak2Button; // Placeholder for future TTS
-    @FXML private Button laodImageButton;
-    /**
-     * Xử lí chuyển đổi giữa các giao diện.
-     */
-    @FXML
-    public void initialize() {
-    }
 
     // Tôi sửa phần chuyển đổi giao diện thôi nhé.
     // Phần nào cần sự trợ giúp thì ông hú tôi cái tôi nghĩ cùng.
@@ -88,107 +75,155 @@ public class TranslateAndTTSController extends BaseController {
     public void handleGoToChat(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
     }
-    // --- Core Functionality Event Handlers ---
 
-    /**
-     * Handles the action event when the 'Translate' button is clicked.
-     * Retrieves text from the input TextArea, validates it, and initiates
-     * Updates the UI with the result or displays an error message.
-     * Disables the translation button during the operation.
-     *
-     * @param actionEvent The event triggered by clicking the button.
-     */
+    @FXML private TextArea needToTrans;
+    @FXML private TextArea translated;
+    @FXML private Button transButton;
+    @FXML private Button speak1Button;
+    @FXML private Button speak2Button;
+    @FXML private Button loadImageButton;
+
+    private ImageAnalysisClient imageAnalysisClient;
+    private ExecutorService executorService;
+
+    private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
+    private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
+
     @FXML
-    public void handleTranslating(ActionEvent actionEvent) {
-        try {
-            String textToTranslate = needToTrans.getText();
-            String sourceLang = "auto"; // Azure vẫn tự nhận dạng nếu set auto
-            String targetLang = "vi";
+    public void initialize() {
+        executorService = Executors.newCachedThreadPool();
 
-            String translatedText = Translator.translate(textToTranslate, sourceLang, targetLang);
-            translated.setText(translatedText);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (AZURE_VISION_SUBSCRIPTION_KEY.contains("YOUR_API_KEY") || AZURE_VISION_ENDPOINT.contains("YOUR_ENDPOINT")) {
+            loadImageButton.setDisable(true);
+            showInfoAlert("Cấu hình thiếu", "Vui lòng thiết lập Azure Vision API Key và Endpoint.");
+        } else {
+            imageAnalysisClient = new ImageAnalysisClientBuilder()
+                    .credential(new AzureKeyCredential(AZURE_VISION_SUBSCRIPTION_KEY))
+                    .endpoint(AZURE_VISION_ENDPOINT)
+                    .buildClient();
+            loadImageButton.setDisable(false);
         }
     }
 
     @FXML
-    private void handleImageToText(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an image");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file == null) {
-            showInfoAlert("No File Selected", "Please select an image file to extract text.");
+    public void handleTranslating(ActionEvent actionEvent) {
+        String textToTranslate = needToTrans.getText();
+        if (textToTranslate == null || textToTranslate.trim().isEmpty()) {
+            showInfoAlert("Thiếu văn bản", "Vui lòng nhập văn bản cần dịch.");
             return;
         }
 
-        try {
-            String endpoint = "https://phamthaic3.cognitiveservices.azure.com/";
-            String subscriptionKey = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
-            String uri = endpoint + "/vision/v3.2/ocr?language=unk&detectOrientation=true";
+        Task<String> translateTask = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                return Translator.translate(textToTranslate, "auto", "vi");
+            }
 
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            @Override
+            protected void succeeded() {
+                translated.setText(getValue());
+            }
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(uri))
-                    .header("Ocp-Apim-Subscription-Key", subscriptionKey)
-                    .header("Content-Type", "application/octet-stream")
-                    .POST(HttpRequest.BodyPublishers.ofByteArray(imageBytes))
-                    .build();
+            @Override
+            protected void failed() {
+                showInfoAlert("Lỗi dịch", getException().getMessage());
+                translated.setText("Không thể dịch văn bản.");
+            }
+        };
 
-            HttpClient client = HttpClient.newHttpClient();
-            client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                    .thenApply(HttpResponse::body)
-                    .thenAccept(this::extractTextFromOCR)
-                    .exceptionally(e -> {
-                        e.printStackTrace();
-                        showInfoAlert("Error", "Failed to extract text: " + e.getMessage());
-                        return null;
-                    });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            showInfoAlert("Error", "An error occurred: " + e.getMessage());
-        }
+        executorService.submit(translateTask);
     }
 
-    private void extractTextFromOCR(String jsonResponse) {
-        Platform.runLater(() -> {
-            try {
-                JSONObject json = new JSONObject(jsonResponse);
-                JSONArray regions = json.getJSONArray("regions");
-                StringBuilder resultText = new StringBuilder();
+    @FXML
+    private void handleLoadImage(ActionEvent event) {
+        if (imageAnalysisClient == null) {
+            showInfoAlert("Lỗi", "Dịch vụ phân tích ảnh chưa sẵn sàng.");
+            return;
+        }
 
-                for (int i = 0; i < regions.length(); i++) {
-                    JSONArray lines = regions.getJSONObject(i).getJSONArray("lines");
-                    for (int j = 0; j < lines.length(); j++) {
-                        JSONArray words = lines.getJSONObject(j).getJSONArray("words");
-                        for (int k = 0; k < words.length(); k++) {
-                            resultText.append(words.getJSONObject(k).getString("text")).append(" ");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chọn hình ảnh");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif")
+        );
+
+        Stage stage = (Stage) loadImageButton.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            needToTrans.setText("Đang xử lý hình ảnh, vui lòng chờ...");
+
+            Task<String> ocrTask = new Task<>() {
+                @Override
+                protected String call() throws Exception {
+                    try {
+                        BinaryData imageData = BinaryData.fromFile(selectedFile.toPath());
+                        List<VisualFeatures> features = List.of(VisualFeatures.READ);
+                        ImageAnalysisResult result = imageAnalysisClient.analyze(imageData, features, null);
+                        ReadResult readResult = result.getRead();
+
+                        StringBuilder extractedText = new StringBuilder();
+                        if (readResult != null && readResult.getBlocks() != null) {
+                            readResult.getBlocks().forEach(block -> {
+                                if (block.getLines() != null) {
+                                    block.getLines().forEach(line -> {
+                                        if (line.getText() != null) {
+                                            extractedText.append(line.getText()).append("\n");
+                                        }
+                                    });
+                                }
+                            });
                         }
-                        resultText.append("\n");
+                        return extractedText.toString().trim();
+                    } catch (Exception e) {
+                        String message = "Lỗi phân tích ảnh.";
+                        if (e instanceof IOException || e.getCause() instanceof IOException) {
+                            message = "Không thể đọc file ảnh.";
+                        } else if (e instanceof HttpResponseException httpEx) {
+                            message = "Lỗi từ Azure API: " + httpEx.getMessage();
+                        }
+                        throw new Exception(message, e);
                     }
                 }
 
-                needToTrans.setText(resultText.toString());
+                @Override
+                protected void succeeded() {
+                    String result = getValue();
+                    needToTrans.setText(result.isEmpty() ? "Không phát hiện văn bản trong ảnh." : result);
+                }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-                showInfoAlert("Parse Error", "Could not parse OCR result.");
-            }
-        });
+                @Override
+                protected void failed() {
+                    showInfoAlert("Lỗi xử lý ảnh", getException().getMessage());
+                    needToTrans.setText("Không thể xử lý ảnh.");
+                }
+            };
+
+            executorService.submit(ocrTask);
+        }
     }
 
-    /**
-     * Displays an informational alert dialog to the user.
-     * Ensures the alert is shown on the JavaFX Application Thread.
-     *
-     * @param title   The title of the alert window.
-     * @param content The main message content of the alert.
-     */
+
+    @FXML
+    private void handleSpeakOriginal(ActionEvent event) {
+        String text = needToTrans.getText();
+        if (text != null && !text.isBlank()) {
+            executorService.submit(() -> TextToSpeech.speak(text, "en-US-GuyNeural"));
+        } else {
+            showInfoAlert("Không có văn bản", "Không có văn bản gốc để đọc.");
+        }
+    }
+
+    @FXML
+    private void handleSpeakTranslated(ActionEvent event) {
+        String text = translated.getText();
+        if (text != null && !text.isBlank()) {
+            executorService.submit(() -> TextToSpeech.speak(text, "vi-VN-NamMinhNeural"));
+        } else {
+            showInfoAlert("Không có bản dịch", "Không có văn bản dịch để đọc.");
+        }
+    }
+
     private void showInfoAlert(String title, String content) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -199,46 +234,10 @@ public class TranslateAndTTSController extends BaseController {
         });
     }
 
-    /**
-     * Extracts a concise, user-friendly message from a Throwable.
-     * Prefers the Throwable's message, falls back to the class name if the message is null/blank.
-     *
-     * @param t The throwable exception.
-     * @return A non-null, non-blank error message string.
-     */
-    private String getConciseErrorMessage(Throwable t) {
-        if (t == null) {
-            return "An unknown error occurred.";
-        }
-        String message = t.getMessage();
-        if (message != null && !message.isBlank()) {
-            return message;
-        } else {
-            // If no message, return the exception type as a basic indicator
-            return "Error type: " + t.getClass().getSimpleName();
+    public void shutdown() {
+        if (executorService != null && !executorService.isShutdown()) {
+            executorService.shutdownNow();
         }
     }
 
-    // --- Placeholder Methods for TTS ---
-    // TODO: Implement actual Text-To-Speech logic for speak1Button and speak2Button
-
-    @FXML
-    private void handleSpeakOriginal(ActionEvent event) {
-        String text = needToTrans.getText();
-        if (text != null && !text.isBlank()) {
-            TextToSpeech.speak(text, "en-US-GuyNeural");
-        } else {
-            showInfoAlert("TTS Unavailable", "No original text available to speak.");
-        }
-    }
-
-    @FXML
-    private void handleSpeakTranslated(ActionEvent event) {
-        String text = translated.getText();
-        if (text != null && !text.isBlank()) {
-            TextToSpeech.speak(text, "vi-VN-NamMinhNeural");
-        } else {
-            showInfoAlert("TTS Unavailable", "No translated text available to speak.");
-        }
-    }
 }
