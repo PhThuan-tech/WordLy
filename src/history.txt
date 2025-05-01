@@ -39,3 +39,4 @@ high	noun	/haɪ/	A high point or position, literally or figuratively; an elevate
 conservation	noun	/ˌkɑnsə(ɹ)ˈveɪʃən/	The act of preserving, guarding, or protecting; the keeping (of a thing) in a safe or entire state; preservation.
 aquatic	noun	/ɘˈkwɔ.tɘk/	Any aquatic plant.
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+apple	noun	/ˈæp.əl/	A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.

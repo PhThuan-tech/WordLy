@@ -73,11 +73,7 @@ public class HistoryController extends BaseController {
     private void loadHistoryData() {
         List<WordEntry> loadedData = historyService.getAllHistoryEntries();
 
-        if (loadedData != null) {
-            historyEntries.setAll(loadedData);
-        } else {
-            historyEntries.clear();
-        }
+        historyEntries.setAll(loadedData);
     }
 
     @FXML
