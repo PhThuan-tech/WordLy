@@ -6,15 +6,16 @@ import com.example.wordly.getWord.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 // kế thừa lớp BaseController và implements interface SearchUIUpdate.
 
 public class SearchViewController extends BaseController implements SearchUIUpdate {
@@ -26,13 +27,14 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     public Label typeLabel;
     public Label statusLabel;
     public Button speakButton;
-    @FXML private ListView<String> suggestionList;  // them cai autocomplete dung trie
+    @FXML
+    private ListView<String> suggestionList;  // them cai autocomplete dung trie
 
     private SearchButtonClickHandle searchHandle;
     private WordDetails currDetails;
     private MediaPlayer activeMedia;
-    private Trie trie = new Trie();
-    private HistoryManage historyManager = new HistoryManage();
+    private final Trie trie = new Trie();
+    private final HistoryManage historyManager = new HistoryManage();
 
     @FXML
     public void handleBackMain(ActionEvent actionEvent) {
@@ -77,10 +79,35 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     @FXML
     public void initialize() {
         // Khoi tao neu SBCH can no
-        URL resource = getClass().getResource("/com/example/wordly/ListOfWord");
+        getClass().getResource("/com/example/wordly/ListOfWord");
         GetAPI apiInstance = new GetAPI();
         this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
         this.updateStatus("Sẵn sàng tra từ,Bro chọn từ khó vô để tôi tìm");
+
+        changeUI();
+
+        loadWordFromTextFile();
+
+        if (speakButton != null) {
+            speakButton.setDisable(true);
+        }
+    }
+
+    private void loadWordFromTextFile() {
+        // load tu trong file txt =))
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/com/example/wordly/ListOfWord"))))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                trie.insert(line.trim().toLowerCase());
+            }
+        } catch (IOException | NullPointerException e) {
+            System.err.println("Không load được ListOfWord: " + e.getMessage());
+            updateStatus("Lỗi: Không load được dữ liệu từ điển.");
+        }
+    }
+
+    private void changeUI() {
 
         // phan mo rong cho SearchBar - cang qua fix bug tum lum.(ko dung sql lite va database)
         searchBar.setOnAction(this::handleSearchButtonOnClick);
@@ -124,26 +151,11 @@ public class SearchViewController extends BaseController implements SearchUIUpda
                     break;
             }
         });
-
-        // load tu trong file txt =))
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                getClass().getResourceAsStream("/com/example/wordly/ListOfWord")))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                trie.insert(line.trim().toLowerCase());
-            }
-        } catch (IOException | NullPointerException e) {
-            System.err.println("Không load được ListOfWord: " + e.getMessage());
-            updateStatus("Lỗi: Không load được dữ liệu từ điển.");
-        }
-
-        if (speakButton != null) {
-            speakButton.setDisable(true);
-        }
     }
 
     /**
      * Thuc hien khi searchButton duoc an.
+     *
      * @param e ac
      */
     @FXML
@@ -226,6 +238,7 @@ public class SearchViewController extends BaseController implements SearchUIUpda
 
     /**
      * Lấy ra URL của audio cần tìm.
+     *
      * @param audioURL trả về encoded của URL.
      */
     public void playAudio(String audioURL) {
@@ -280,7 +293,7 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     private void handleAddToFavourite() {
         String word = searchBar.getText();
         String type = typeLabel.getText();
-        String pronunciation =proLabel.getText();
+        String pronunciation = proLabel.getText();
         String meaning = meaningText.getText();
 
         if (word.isEmpty()) {

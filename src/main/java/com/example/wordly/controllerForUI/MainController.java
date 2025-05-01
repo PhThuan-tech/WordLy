@@ -2,28 +2,34 @@ package com.example.wordly.controllerForUI;
 
 import com.example.wordly.getWord.QuoteProvider;
 import com.example.wordly.getWord.TipsProvider;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
+
 import java.net.URL;
 import java.util.List;
-
-import javafx.animation.TranslateTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.FadeTransition;
-import javafx.util.Duration;
-import javafx.scene.control.Label;
+import java.util.Objects;
 
 public class MainController extends BaseController {
-    @FXML public Button menuScence;
-    @FXML public Button HowToUse;
-    @FXML public Button BuyPrenium;
-    @FXML public Label quoteLabel;
-    @FXML public VBox tipBox;
-    @FXML private Label wordlyTitleLabel;
+    @FXML
+    public Button menuScence;
+    @FXML
+    public Button HowToUse;
+    @FXML
+    public Button BuyPrenium;
+    @FXML
+    public Label quoteLabel;
+    @FXML
+    public VBox tipBox;
+    @FXML
+    private Label wordlyTitleLabel;
     private AudioClip clickSound;
 
     /**
@@ -31,23 +37,43 @@ public class MainController extends BaseController {
      * Và tải âm thanh.
      */
     public void initialize() {
+        loadStyles();
+
+        loadAudio();
+
+        randomTips();
+
+
+        animations();
+
+
+        if (menuScence != null) menuScence.setDisable(false);
+        if (HowToUse != null) HowToUse.setDisable(false);
+        if (BuyPrenium != null) BuyPrenium.setDisable(false);
+    }
+
+    private void loadStyles() {
         if (menuScence != null) {
             Scene scene = menuScence.getScene();
             if (scene != null) {
-                scene.getStylesheets().add(getClass()
-                        .getResource("/com/example/wordly/styles/mainsce.css").toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(getClass()
+                        .getResource("/com/example/wordly/styles/mainsce.css")).toExternalForm());
             }
         } else {
             System.out.println("FXML elements chưa được load đầy đủ khi initialize MainController.");
         }
+    }
 
+    private void loadAudio() {
         URL audioResource = getClass().getResource("/com/example/wordly/audio/TrollButton.mp3");
         if (audioResource != null) {
             clickSound = new AudioClip(audioResource.toString());
         } else {
             System.err.println("Không tìm thấy tài nguyên âm thanh: /com/example/wordly/audio/TrollButton.mp3");
         }
+    }
 
+    private void randomTips() {
         // quote daily them vao
         String randomQuote = QuoteProvider.getRandomQuote();
         quoteLabel.setText("\"" + randomQuote + "\"");
@@ -63,7 +89,9 @@ public class MainController extends BaseController {
             tipLabel.setWrapText(true);
             tipBox.getChildren().add(tipLabel);
         }
+    }
 
+    private void animations() {
         // Áp dụng animation cho tiêu đề
         if (wordlyTitleLabel != null) {
             TranslateTransition titleTranslateTransition = new TranslateTransition(Duration.seconds(0.5), wordlyTitleLabel);
@@ -77,6 +105,7 @@ public class MainController extends BaseController {
         } else {
             System.err.println("FXML element wordlyTitleLabel chưa được gán trong MainController.");
         }
+        
         Duration buttonAnimationDuration = Duration.seconds(0.8);
         Duration delayBetweenButtons = Duration.seconds(0.2);
 
@@ -130,21 +159,21 @@ public class MainController extends BaseController {
         } else {
             System.err.println("FXML element buyPremiumButton chưa được gán trong MainController.");
         }
-
-        if (menuScence != null) menuScence.setDisable(false);
-        if (HowToUse != null) HowToUse.setDisable(false);
-        if (BuyPrenium != null) BuyPrenium.setDisable(false);
     }
 
+    // ===== XỬ LÍ KHI ẤN CÁC NUT =====
     public void switchToHomeScence(ActionEvent actionEvent) {
+        stopSound();
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
 
     public void handleGoToUsing(ActionEvent actionEvent) {
+        stopSound();
         switchScene(actionEvent, "/com/example/wordly/View/UsingMehodView.fxml");
     }
 
     public void handleGoToSetting(ActionEvent actionEvent) {
+        stopSound();
         switchScene(actionEvent, "/com/example/wordly/View/SettingView.fxml");
     }
 
@@ -153,9 +182,16 @@ public class MainController extends BaseController {
         // Phát âm thanh
         if (clickSound != null) {
             clickSound.stop();
-            clickSound.play();   
+            clickSound.play();
         } else {
             System.err.println("Âm thanh chưa được load hoặc không tìm thấy tài nguyên âm thanh!");
+        }
+    }
+
+    //PHUONG THUC DE DUNG NHAC
+    private void stopSound() {
+        if (clickSound != null && clickSound.isPlaying()) {
+            clickSound.stop();
         }
     }
 }
