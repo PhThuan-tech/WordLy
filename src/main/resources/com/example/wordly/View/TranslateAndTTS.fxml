@@ -146,7 +146,7 @@
                             </image>
                         </ImageView>
                     </graphic></Button>
-            <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#handleLoadImage" text="choose image" />
+                <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#handleLoadImage" text="choose image" />
             </children>
         </GridPane>
     </center>
