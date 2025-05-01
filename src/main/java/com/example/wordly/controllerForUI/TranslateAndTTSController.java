@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Controller for the Translate and Text-To-Speech view (TranslateTTSView.fxml).
@@ -81,10 +82,12 @@ public class TranslateAndTTSController extends BaseController {
     @FXML private Button transButton;
     @FXML private Button speak1Button;
     @FXML private Button speak2Button;
+    @FXML private Button stopButton;
     @FXML private Button loadImageButton;
 
     private ImageAnalysisClient imageAnalysisClient;
     private ExecutorService executorService;
+    private Future<?> currentSpeechTask;
 
     private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
     private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
@@ -93,6 +96,7 @@ public class TranslateAndTTSController extends BaseController {
     public void initialize() {
         executorService = Executors.newCachedThreadPool();
 
+        // Setup Azure Vision client
         if (AZURE_VISION_SUBSCRIPTION_KEY.contains("YOUR_API_KEY") || AZURE_VISION_ENDPOINT.contains("YOUR_ENDPOINT")) {
             loadImageButton.setDisable(true);
             showInfoAlert("Cấu hình thiếu", "Vui lòng thiết lập Azure Vision API Key và Endpoint.");
@@ -103,6 +107,9 @@ public class TranslateAndTTSController extends BaseController {
                     .buildClient();
             loadImageButton.setDisable(false);
         }
+
+        // Handle stop button
+        stopButton.setOnAction(e -> handleStopSpeaking());
     }
 
     @FXML
@@ -118,19 +125,16 @@ public class TranslateAndTTSController extends BaseController {
             protected String call() throws Exception {
                 return Translator.translate(textToTranslate, "auto", "vi");
             }
-
             @Override
             protected void succeeded() {
                 translated.setText(getValue());
             }
-
             @Override
             protected void failed() {
                 showInfoAlert("Lỗi dịch", getException().getMessage());
                 translated.setText("Không thể dịch văn bản.");
             }
         };
-
         executorService.submit(translateTask);
     }
 
@@ -140,19 +144,15 @@ public class TranslateAndTTSController extends BaseController {
             showInfoAlert("Lỗi", "Dịch vụ phân tích ảnh chưa sẵn sàng.");
             return;
         }
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Chọn hình ảnh");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif")
         );
-
         Stage stage = (Stage) loadImageButton.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(stage);
-
         if (selectedFile != null) {
             needToTrans.setText("Đang xử lý hình ảnh, vui lòng chờ...");
-
             Task<String> ocrTask = new Task<>() {
                 @Override
                 protected String call() throws Exception {
@@ -161,7 +161,6 @@ public class TranslateAndTTSController extends BaseController {
                         List<VisualFeatures> features = List.of(VisualFeatures.READ);
                         ImageAnalysisResult result = imageAnalysisClient.analyze(imageData, features, null);
                         ReadResult readResult = result.getRead();
-
                         StringBuilder extractedText = new StringBuilder();
                         if (readResult != null && readResult.getBlocks() != null) {
                             readResult.getBlocks().forEach(block -> {
@@ -185,30 +184,31 @@ public class TranslateAndTTSController extends BaseController {
                         throw new Exception(message, e);
                     }
                 }
-
                 @Override
                 protected void succeeded() {
                     String result = getValue();
                     needToTrans.setText(result.isEmpty() ? "Không phát hiện văn bản trong ảnh." : result);
                 }
-
                 @Override
                 protected void failed() {
                     showInfoAlert("Lỗi xử lý ảnh", getException().getMessage());
                     needToTrans.setText("Không thể xử lý ảnh.");
                 }
             };
-
             executorService.submit(ocrTask);
         }
     }
-
 
     @FXML
     private void handleSpeakOriginal(ActionEvent event) {
         String text = needToTrans.getText();
         if (text != null && !text.isBlank()) {
-            executorService.submit(() -> TextToSpeech.speak(text, "en-US-GuyNeural"));
+            // cancel previous and stop audio
+            if (currentSpeechTask != null && !currentSpeechTask.isDone()) {
+                currentSpeechTask.cancel(true);
+                TextToSpeech.stop();
+            }
+            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, "en-US-GuyNeural"));
         } else {
             showInfoAlert("Không có văn bản", "Không có văn bản gốc để đọc.");
         }
@@ -218,10 +218,22 @@ public class TranslateAndTTSController extends BaseController {
     private void handleSpeakTranslated(ActionEvent event) {
         String text = translated.getText();
         if (text != null && !text.isBlank()) {
-            executorService.submit(() -> TextToSpeech.speak(text, "vi-VN-NamMinhNeural"));
+            if (currentSpeechTask != null && !currentSpeechTask.isDone()) {
+                currentSpeechTask.cancel(true);
+                TextToSpeech.stop();
+            }
+            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, "vi-VN-NamMinhNeural"));
         } else {
             showInfoAlert("Không có bản dịch", "Không có văn bản dịch để đọc.");
         }
+    }
+
+    @FXML
+    private void handleStopSpeaking() {
+        if (currentSpeechTask != null && !currentSpeechTask.isDone()) {
+            currentSpeechTask.cancel(true);
+        }
+        TextToSpeech.stop();
     }
 
     private void showInfoAlert(String title, String content) {
@@ -239,5 +251,4 @@ public class TranslateAndTTSController extends BaseController {
             executorService.shutdownNow();
         }
     }
-
 }

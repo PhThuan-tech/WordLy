@@ -147,6 +147,7 @@
                         </ImageView>
                     </graphic></Button>
                 <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#handleLoadImage" text="choose image" />
+                <Button fx:id="stopButton" mnemonicParsing="false" onAction="#handleStopSpeaking" text="stop" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
     </center>
