@@ -88,3 +88,4 @@ Ngày 02/05/2025
 2. Training lại promt cho bot, promt của user.
 3. Sửa phần bình minh bảo.
 4. Giao diện đang sơ sài + chuyển vẫn không mượt :v
+5. Phần tts nếu cho nhiều từ, hết bị đơ, nhưng lại không dừng lại bằng nút được (ít từ thì nút dừng được). Tôi sẽ tìm cách fix.
