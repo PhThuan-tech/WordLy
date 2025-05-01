@@ -10,27 +10,23 @@ public class HistoryManage {
     private static final String GAME_FILE = "src/main/resources/game_data.txt";
     private static final String WORD_TRIE = "src/main/resources/com/example/wordly/ListOfWord";
 
-    //Ghi thong tin vao file
-    public void saveToHistory(WordDetails details) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(HISTORY_FILE, true))) {
+    private void saveToFile(String filePath, WordDetails details) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
             String line = formatWord(details);
             bw.write(line);
             bw.newLine();
-            System.out.println("Ghi thanh cong " + details.getWord());
+            System.out.println("Ghi thanh cong " + details.getWord() + " vao file " + filePath);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public void saveToGame(WordDetails details) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(GAME_FILE, true))) {
-            String line = formatWord(details);
-            bw.write(line);
-            bw.newLine();
-            System.out.println("Ghi thanh cong " + details.getWord());
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+    public void saveToHistory(WordDetails details) {
+        saveToFile(HISTORY_FILE, details);
+    }
+
+    public void saveToGame(WordDetails details) {
+        saveToFile(GAME_FILE, details);
     }
 
     public void saveWordToTrieFile(String word) {

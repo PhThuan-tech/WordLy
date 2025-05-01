@@ -1,0 +1,279 @@
+[33mcommit 10da51dd174d6e245c245f58f34796f3329eac6d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mtbmdemi[m[33m, [m[1;31morigin/tbmdemi[m[33m)[m
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Thu May 1 16:32:39 2025 +0700
+
+    feat: add audio stop functionality and improve tab switching performance
+
+[33mcommit d065aa75c91666249fe1b295f199ea6e1654cea1[m
+Merge: 62fdb20 745d6ba
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Thu May 1 13:35:19 2025 +0700
+
+    chore : pull and ?
+
+[33mcommit 62fdb2057eda93132b38b4e6ab6de441c2b40bb0[m
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Thu May 1 13:30:40 2025 +0700
+
+    test : fine but run slowly, need to perf
+
+[33mcommit 745d6bad3a2c4c05b5d8b2284612facffb975f34[m[33m ([m[1;31morigin/testingApp[m[33m, [m[1;32mtestingApp[m[33m)[m
+Merge: ff796b3 6a2b617
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Thu May 1 07:47:50 2025 +0700
+
+    Merge pull request #42 from PhThuan-tech/PhThuan
+    
+    Ph thuan
+
+[33mcommit 6a2b6173b9c1666bdfbe5711cb3a04d9e0cca047[m[33m ([m[1;31morigin/PhThuan[m[33m)[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Thu May 1 07:48:22 2025 +0700
+
+    edit view Setting
+
+[33mcommit ff796b3af378e3d97d789033bfeb73db949e22a0[m
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Thu May 1 00:11:39 2025 +0700
+
+    Update README.md
+
+[33mcommit 70077decd3628fd57e04ccc8411df57c9b26fd99[m
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Thu May 1 00:09:13 2025 +0700
+
+    Update README.md
+
+[33mcommit 4906cd8eaf80f11e901af726bdc069f9091bd354[m
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Thu May 1 00:08:22 2025 +0700
+
+    Update README.md
+
+[33mcommit 0c7683d5b72963a561be4b780aa2b99b7743e343[m
+Merge: d4c1d60 5fc371f
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Thu May 1 00:01:34 2025 +0700
+
+    Merge pull request #41 from PhThuan-tech/thai
+    
+    update AI + add translate + add tts + add đọc image
+
+[33mcommit 5fc371f96820bc2a00f0bdfaf315f12b9ef69644[m[33m ([m[1;31morigin/thai[m[33m)[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Thu May 1 00:00:44 2025 +0700
+
+    update AI + add translate + add tts + add đọc image
+
+[33mcommit 1dab97c380d7dbccb5c7d142a65685c10d27ff31[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Wed Apr 30 13:56:23 2025 +0700
+
+    Change History and Main view
+
+[33mcommit 1106d3e450fbe7d1bf1f060f7074a115eedf3632[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Tue Apr 29 22:54:51 2025 +0700
+
+    Fixed SaveToFile
+
+[33mcommit 4935c09e4e15eaa1a48f5c16c236f8ac52b2ee28[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Tue Apr 29 22:02:23 2025 +0700
+
+    Using Trie to SaveWord
+
+[33mcommit 44d0afc1012cd2b1934f2c4ed51c010c1e406c94[m
+Merge: df93b0b 03d6130
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 17:24:15 2025 +0700
+
+    Resolve merge conflict
+
+[33mcommit df93b0bc40414ddfde87aa19a2cf09eef3e05cc4[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 17:17:55 2025 +0700
+
+    fixed bug gitignore
+
+[33mcommit f812a6bfae5b35fe3ddf5040df59ef3c1781b901[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 17:02:59 2025 +0700
+
+    Fix loi history
+
+[33mcommit 03d61300d7be4e73efa8468db5473619abe2c23b[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 17:02:59 2025 +0700
+
+    Fix loi history
+
+[33mcommit d4c1d602b4ed1ac2230fd1599ea2d1e6a7fafa45[m
+Merge: 29d6695 87958ab
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 14:07:31 2025 +0700
+
+    Merge pull request #39 from PhThuan-tech/thai
+    
+    fix conflict
+
+[33mcommit 87958ab78ca5804ff8f853885a31338567367f2a[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 14:05:27 2025 +0700
+
+    fix conflict
+
+[33mcommit 29d669566ab3edb457781a69ce454413cab4c0d7[m
+Merge: 0b1b0f0 ef2b31f
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 14:01:48 2025 +0700
+
+    Merge pull request #38 from PhThuan-tech/thai
+    
+    fix translate
+
+[33mcommit ef2b31f44637e285960d4696ae807ec645f15b7e[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 14:01:03 2025 +0700
+
+    fix translate
+
+[33mcommit 0b1b0f01669e65dda0973ddc5582fafba55e7a32[m
+Merge: 7d9f3b4 c8d432b
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Sun Apr 27 12:47:05 2025 +0700
+
+    Merge pull request #37 from PhThuan-tech/tbmdemi
+    
+    debu game
+
+[33mcommit c8d432b0cfb358c11b1a3b311316c2162b635760[m
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Sun Apr 27 12:45:54 2025 +0700
+
+    Debug DefinitionGame
+
+[33mcommit a7d93c41b2665b721b84c1dceb92cdd9bdda7dfa[m
+Merge: 6e0a8e0 7d9f3b4
+Author: tbmdemi <24022413@vnu.edu.vn>
+Date:   Sun Apr 27 09:38:03 2025 +0700
+
+    Merge pull request #36 from PhThuan-tech/testingApp
+    
+    Testing app
+
+[33mcommit 7d9f3b4388c9d67efc2638994864702b4b06c048[m
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 09:28:26 2025 +0700
+
+    Update README.md
+
+[33mcommit b2f98c13c8f90216009ae43b05e40503b13ae024[m
+Merge: cc3b37e aa141c1
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 07:11:38 2025 +0700
+
+    Merge pull request #35 from PhThuan-tech/PhThuan
+    
+    Fix lỗi conflict
+
+[33mcommit aa141c1f49bcf599601dc102275b0dd923c65a5d[m
+Merge: fd6586c cc3b37e
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 07:11:17 2025 +0700
+
+    Merge branch 'testingApp' into PhThuan
+
+[33mcommit cc3b37e61dc810fd66fe7300610d20f051c9dc71[m
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 07:08:52 2025 +0700
+
+    Update README.md
+
+[33mcommit fd6586c32527a892db981c9c3f94d44faf76419c[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Sun Apr 27 07:05:53 2025 +0700
+
+    load game
+
+[33mcommit e50082f9e23e3cba370ab1c42096c10a63e29b82[m
+Merge: 91c298a 4f7333a
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 01:09:54 2025 +0700
+
+    Merge pull request #34 from PhThuan-tech/thai
+    
+    thêm tính năng chatbot
+
+[33mcommit 4f7333a24f93a97ea2b00306ccc108031864aff7[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Sun Apr 27 01:09:08 2025 +0700
+
+    thêm tính năng chatbot
+
+[33mcommit 91c298a939ac7d5605f47f1854e98b5d426b567b[m
+Merge: ae7a191 09e91e4
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Sat Apr 26 19:09:52 2025 +0700
+
+    Merge pull request #33 from PhThuan-tech/thai
+    
+    create addword view
+
+[33mcommit 09e91e48a9b173fdfa08a706235151a08ad9d1fd[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Sat Apr 26 19:07:39 2025 +0700
+
+    create addword view
+
+[33mcommit ae7a191e182da0ac41aeed352899c7d8b4687c05[m
+Merge: 8d782b2 1bb1acd
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Fri Apr 25 18:32:26 2025 +0700
+
+    Merge pull request #32 from PhThuan-tech/PhThuan
+    
+    fixed resolved history.txt and game_data.txt
+
+[33mcommit 1bb1acd23cd69251251edb4e0635aaec66affa03[m
+Merge: a605dcd 8d782b2
+Author: Phạm Văn Vương Thuận <24022461@vnu.edu.vn>
+Date:   Fri Apr 25 18:30:19 2025 +0700
+
+    Merge branch 'testingApp' into PhThuan
+
+[33mcommit a605dcdd36fd5f045ac78ebe54b26ff1cf00894e[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Fri Apr 25 18:25:08 2025 +0700
+
+    add scene WordList for EditAndAddWord
+
+[33mcommit 8d782b22c35615742f0416cd677d34fc78fddc03[m
+Merge: 0c5df51 f957357
+Author: Thái dz nhất vũ trụ <24022449@vnu.edu.vn>
+Date:   Fri Apr 25 18:17:00 2025 +0700
+
+    Merge pull request #31 from PhThuan-tech/thai
+    
+    them sql + fix cac loi
+
+[33mcommit f957357da3ab68aa7e268deb86aae7614b9aa518[m
+Author: Pham Thai <24022449@vnu.edu.vn>
+Date:   Fri Apr 25 18:16:15 2025 +0700
+
+    them sql + fix cac loi
+
+[33mcommit b872554acc0afd4e346b406e4060ace3cf9aa856[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Fri Apr 25 09:03:06 2025 +0700
+
+    Edit lai History view va Fix bug scramble
+
+[33mcommit 1eb6231434cb81c8e6f59e456098bff9e2e38da3[m
+Author: PhThuan-Tech <24022461@vnu.edu.vn>
+Date:   Thu Apr 24 07:51:51 2025 +0700
+
+    update game Scramble
+
+[33mcommit ff11d81eb287e12b2c8e7494f6bd67893d49767d[m
+Auth
