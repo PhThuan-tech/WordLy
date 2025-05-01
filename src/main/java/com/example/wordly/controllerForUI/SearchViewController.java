@@ -2,22 +2,19 @@ package com.example.wordly.controllerForUI;
 
 import com.example.wordly.History.HistoryManage;
 import com.example.wordly.SQLite.FavouriteWordDAO;
-import com.example.wordly.getWord.GetAPI;
-import com.example.wordly.getWord.SearchButtonClickHandle;
-import com.example.wordly.getWord.SearchUIUpdate;
-import com.example.wordly.getWord.WordDetails;
+import com.example.wordly.getWord.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
 import java.io.*;
+import java.net.URL;
+import java.util.List;
 // kế thừa lớp BaseController và implements interface SearchUIUpdate.
 
 public class SearchViewController extends BaseController implements SearchUIUpdate {
@@ -29,18 +26,20 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     public Label typeLabel;
     public Label statusLabel;
     public Button speakButton;
-    private SearchButtonClickHandle searchHandle;
+    @FXML private ListView<String> suggestionList;  // them cai autocomplete dung trie
 
+    private SearchButtonClickHandle searchHandle;
     private WordDetails currDetails;
     private MediaPlayer activeMedia;
+    private Trie trie = new Trie();
+    private HistoryManage historyManager = new HistoryManage();
 
-    // Dùng kế thừa và tái sử dụng trông sang hẳn =))
-    // lỗi cũng ít hơn thôi mấy ôg, đỡ copy nhiều phần ko quan trọng.
     @FXML
     public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
 
+    @FXML
     public void handleGoToFavourite(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
@@ -75,16 +74,68 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         switchScene(actionEvent, "/com/example/wordly/View/SynAndAntView.fxml");
     }
 
-
-
     @FXML
     public void initialize() {
         // Khoi tao neu SBCH can no
+        URL resource = getClass().getResource("/com/example/wordly/ListOfWord");
         GetAPI apiInstance = new GetAPI();
         this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
-        this.updateStatus("San sang tra tu");
+        this.updateStatus("Sẵn sàng tra từ,Bro chọn từ khó vô để tôi tìm");
 
+        // phan mo rong cho SearchBar - cang qua fix bug tum lum.(ko dung sql lite va database)
         searchBar.setOnAction(this::handleSearchButtonOnClick);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isBlank()) {
+                suggestionList.setVisible(false);
+                suggestionList.getItems().clear();
+            } else {
+                List<String> suggestions = trie.getSuggestions(newValue.toLowerCase());
+                if (!suggestions.isEmpty()) {
+                    suggestionList.setItems(FXCollections.observableArrayList(
+                            suggestions.subList(0, Math.min(suggestions.size(), 10))
+                    ));
+                    suggestionList.setVisible(true);
+                } else {
+                    suggestionList.setVisible(false);
+                }
+            }
+        });
+
+        suggestionList.setOnMouseClicked(event -> {
+            String selected = suggestionList.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                searchBar.setText(selected);
+                suggestionList.setVisible(false);
+                getSearchTerm(); // gọi hàm tìm kiếm
+            }
+        });
+
+        searchBar.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case DOWN:
+                    suggestionList.requestFocus();
+                    suggestionList.getSelectionModel().selectFirst();
+                    break;
+                case ENTER:
+                    getSearchTerm();
+                    suggestionList.setVisible(false);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        // load tu trong file txt =))
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                getClass().getResourceAsStream("/com/example/wordly/ListOfWord")))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                trie.insert(line.trim().toLowerCase());
+            }
+        } catch (IOException | NullPointerException e) {
+            System.err.println("Không load được ListOfWord: " + e.getMessage());
+            updateStatus("Lỗi: Không load được dữ liệu từ điển.");
+        }
 
         if (speakButton != null) {
             speakButton.setDisable(true);
@@ -93,7 +144,6 @@ public class SearchViewController extends BaseController implements SearchUIUpda
 
     /**
      * Thuc hien khi searchButton duoc an.
-     *
      * @param e ac
      */
     @FXML
@@ -116,23 +166,29 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     }
 
     @Override
-    public void displayResult(WordDetails details) {
+    public void displayResult(WordDetails details) throws IOException {
         this.currDetails = details;
-
         if (details != null) {
+            // Hiển thị kết quả của Lịch sử lưu vào game và history
             proLabel.setText(details.getPhonetic());
             typeLabel.setText(details.getType());
             exampleText.setText(details.getExample());
             meaningText.setText(details.getDefinition());
             System.out.println(details.getAudioLink());
-            HistoryManage hm = new HistoryManage();
-           try {
-               hm.saveToHistory(details);
-               hm.saveToGame(details);
-           }catch (IOException e) {
-               System.err.println(e.getMessage());
-           }
 
+            historyManager.saveToHistory(details);
+            historyManager.saveToGame(details);
+
+            String searchedWord = details.getWord();
+            historyManager.saveWordToTrieFile(details.getWord());
+
+            String wordForTrie = searchedWord.trim().toLowerCase();
+            if (wordForTrie.matches("^[a-z]+$")) {
+                this.trie.insert(wordForTrie);
+                System.out.println("Đã thêm từ '" + wordForTrie + "' vào Trie trong bộ nhớ.");
+            } else {
+                System.err.println("Không thêm từ '" + searchedWord + "' vào Trie trong bộ nhớ do chứa ký tự không hợp lệ.");
+            }
 
             boolean audio = details.getAudioLink() != null && !details.getAudioLink().trim().isEmpty();
             if (speakButton != null) {
@@ -161,11 +217,6 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         }
     }
 
-
-    /**
-     * Hàm sử lí hành động khi bấm nút speak.
-     * @param e tạo hành động cần thực hiện.
-     */
     @FXML
     void handleSpeakButtonOnAction(ActionEvent e) {
         System.out.println("Dang o handleSpeakButtonOnAction");
@@ -182,16 +233,12 @@ public class SearchViewController extends BaseController implements SearchUIUpda
 
         try {
             stopCurrPlayer(); // Dung cai dang nghe
-
             if (audioURL == null || audioURL.isEmpty()) {
                 updateStatus("Không thấy đường dẫn");
                 return;
             }
-
             Media media = new Media(audioURL);
             activeMedia = new MediaPlayer(media);
-
-
             //Neu xay ra loi
             activeMedia.setOnError(() -> {
                 updateStatus("Lỗi rồi má ơi" + activeMedia.getError().getMessage());
@@ -215,9 +262,6 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         }
     }
 
-    /**
-     * Hàm để nghe từ cần nghe.
-     */
     private void stopCurrPlayer() {
         if (activeMedia != null) {
             try {
@@ -250,7 +294,7 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         } else {
             try {
                 newWord.addFavouriteWord(word, type, pronunciation, meaning);
-                System.out.println("Đã thêm từ" + word + "vào danh sách yêu thích");
+                System.out.println("Đã thêm từ " + word + " vào danh sách yêu thích");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Không thể thêm vào danh sách yêu thích");

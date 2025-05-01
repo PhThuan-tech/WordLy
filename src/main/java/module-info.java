@@ -17,6 +17,7 @@ module com.example.wordly {
     requires java.desktop;
     requires com.google.gson;
     requires java.sql;
+    requires client.sdk;
 
     opens com.example.wordly to javafx.fxml;
     exports com.example.wordly;

@@ -1,21 +1,12 @@
 package com.example.wordly.controllerForUI;
 
 import com.example.wordly.SQLite.NewAddedWordDAO;
-import com.example.wordly.getWord.WordEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class EditWordController extends BaseController {
 
@@ -86,8 +77,10 @@ public class EditWordController extends BaseController {
 
         if (isAdded) {
             showPopup("Thêm từ thành công !!!");
+            clearFields();
         } else {
-            showPopup("Lỗi khi thêm từ vào database !!!");
+            showPopup("\"Từ này đã thêm mất rồi \uD83D\uDE22!!!\"");
+            clearFields();
         }
 
     }

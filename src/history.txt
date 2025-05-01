@@ -35,8 +35,36 @@ get	noun	/ɡɛt/	Offspring.
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
 wait	noun	/weɪt/	A delay.
 great	noun	/ɡɹeɪt/	A person of major significance, accomplishment or acclaim.
+
+
 high	noun	/haɪ/	A high point or position, literally or figuratively; an elevated place; a superior region; a height; the sky; heaven.
 conservation	noun	/ˌkɑnsə(ɹ)ˈveɪʃən/	The act of preserving, guarding, or protecting; the keeping (of a thing) in a safe or entire state; preservation.
 aquatic	noun	/ɘˈkwɔ.tɘk/	Any aquatic plant.
 hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
-apple	noun	/ˈæp.əl/	A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+ant	noun	/ɛnt/	Any of various insects in the family Formicidae in the order Hymenoptera, typically living in large colonies composed almost entirely of flightless females.
+purple	noun	/ˈpɜː(ɹ).pəl/	A colour/color that is a dark blend of red and blue; dark magenta.
+a	noun	/æɪ/	The name of the Latin script letter A/a.
+complete	noun	/kəmˈpliːt/	A completed survey.
+oven	noun	/ˈʌ.vn̩/	A chamber used for baking or heating.
+counter	noun	/ˈkaʊntə/	One who counts
+counter	noun	/ˈkaʊntə/	One who counts
+super	adjective	/ˈs(j)uːpə(ɹ)/	Of excellent quality, superfine.
+men	noun	/mɛn/	An adult male human.
+earning	verb	N/A	To gain (success, reward, recognition) through applied effort or work.
+hair	noun	/heː/	A pigmented filament of keratin which grows from a follicle on the skin of humans and other mammals.
+dynamic	noun	/daɪˈnæ.mɪk/	A characteristic or manner of an interaction; a behavior.
+active	noun	/ˈæk.tɪv/	A person or thing that is acting or capable of acting.
+die	verb	/daɪ/	To stop living; to become dead; to undergo death.
+sick	noun	/sɪk/	Sick people in general as a group.
+sick	noun	/sɪk/	Sick people in general as a group.
+heal	noun	/hiːl/	A spell or ability that restores hit points or removes a status ailment.
+anti	noun	/ˈæn.ti/	A person opposed to a concept or principle.
+ant	noun	/ɛnt/	Any of various insects in the family Formicidae in the order Hymenoptera, typically living in large colonies composed almost entirely of flightless females.
+attitude	noun	/ˈætɪˌtjuːd/	The position of the body or way of carrying oneself.
+compare	noun	/kəmˈpɛə/	Comparison.
+chicken	noun	/ˈt͡ʃɪkɪn/	A domestic fowl, Gallus gallus, especially when young.
+dog	noun	/dɑɡ/	A mammal, Canis familiaris or Canis lupus familiaris, that has been domesticated for thousands of years, of highly variable appearance due to human breeding.
+courage	noun	/ˈkʌɹɪdʒ/	The quality of being confident, not afraid or easily intimidated, but without being incautious or inconsiderate.
+hear	verb	/hɪə(ɹ)/	(stative) To perceive sounds through the ear.
+come	noun	/kʌm/	Coming, arrival; approach.
