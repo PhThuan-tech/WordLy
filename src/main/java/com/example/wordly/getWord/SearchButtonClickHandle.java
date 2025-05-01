@@ -3,6 +3,8 @@ package com.example.wordly.getWord;
 
 import javafx.concurrent.Task;
 
+import java.io.IOException;
+
 /**
  * TODO : Handles the action triggered when the search button is clicked.
  */
@@ -15,16 +17,16 @@ public class SearchButtonClickHandle {
 
     public void handleSearch() {
         String word = uiUpdate.getSearchTerm();
-        System.out.println("Tu nhan dc la " + word);
+        System.out.println("Từ của bro là: " + word);
 
         if (word.isEmpty()) {
-            uiUpdate.updateStatus("Deo thay");
+            uiUpdate.updateStatus("Bro nhập sai rồi, nhập lại nhanh");
             uiUpdate.clearResult();
             return;
         }
 
         uiUpdate.resetSearchButton(true);
-        uiUpdate.updateStatus("Searching.......");
+        uiUpdate.updateStatus("Đang load nè má");
         uiUpdate.clearResult();
 
         Task<WordDetails> lookingupTask = new Task<>() {
@@ -37,8 +39,12 @@ public class SearchButtonClickHandle {
 
         lookingupTask.setOnSucceeded(e-> {
             WordDetails details = lookingupTask.getValue();
-            uiUpdate.displayResult(details);
-            uiUpdate.updateStatus("Tim thay roi can bo oi");
+            try {
+                uiUpdate.displayResult(details);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            uiUpdate.updateStatus("Tìm thấy rồi cán bộ ơi!!");
             uiUpdate.resetSearchButton(false);
         });
 

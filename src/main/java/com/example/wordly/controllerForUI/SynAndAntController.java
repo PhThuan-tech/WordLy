@@ -1,39 +1,33 @@
 package com.example.wordly.controllerForUI;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.example.wordly.API.DatamuseService;
 import com.example.wordly.API.DictionaryAPI;
+import com.example.wordly.History.HistoryManage;
 import java.util.List;
 
 public class SynAndAntController extends BaseController {
     @FXML private TextField inputField;
     @FXML private ListView<String> resultList;
     @FXML private TextArea definitionArea;
+    private List<String> currentWordList;
 
-    /**
-     * Quay lại màn hình chính.
-     * @param actionEvent Nhấn nút để quay lại.
-     */
+    private HistoryManage historyManager = new HistoryManage();
+
+    @FXML
     public void handlebackSearch(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
 
-    // Tạo 1 danh sách các từ vựng cùng trường nghĩa với nhau lưu vào List kiểu String.
-    private List<String> currentWordList;
-
-    /*
-      Xử lí hành động nhấn nút bấm để tạo danh sách từ cùng trường nghĩa.
-      Có thể lưu danh sách đó vào "history.txt" .
-     */
     @FXML
     public void handleSynonymClick() {
         String word = inputField.getText().trim();
         if (!word.isEmpty()) {
-            currentWordList = DatamuseService.getSynonyms(word);    // tạo danh sách lấy từ đồng nghĩa
-            resultList.getItems().setAll(currentWordList);          // lấy hết từ đồng nghĩa đó cho vào list
-            definitionArea.clear();                     // Khi lấy xong từ này mà cần chuyển sang từ khác thì xóa từ cũ
+            currentWordList = DatamuseService.getSynonyms(word);
+            saveResultsToTrieFile(currentWordList);
+            resultList.getItems().setAll(currentWordList);
+            definitionArea.clear();
         }
     }
 
@@ -42,14 +36,12 @@ public class SynAndAntController extends BaseController {
         String word = inputField.getText().trim();
         if (!word.isEmpty()) {
             currentWordList = DatamuseService.getAntonyms(word);
+            saveResultsToTrieFile(currentWordList);
             resultList.getItems().setAll(currentWordList);
             definitionArea.clear();
         }
     }
 
-    /**
-     * Xử lí tra nghĩa của từ khi bấm vào danh sách các trường nghĩa.
-     */
     @FXML
     public void handleWordSelection() {
         String selectedWord = resultList.getSelectionModel().getSelectedItem();
@@ -57,5 +49,17 @@ public class SynAndAntController extends BaseController {
             String definition = DictionaryAPI.getDefinition(selectedWord);
             definitionArea.setText(definition);
         }
+    }
+
+    private void saveResultsToTrieFile(List<String> wordList) {
+        if (wordList == null || wordList.isEmpty()) {
+            System.out.println("Danh sách kết quả rỗng, không lưu vào file Trie.");
+            return;
+        }
+        System.out.println("Đang lưu " + wordList.size() + " từ vào file Trie...");
+        for (String word : wordList) {
+            historyManager.saveWordToTrieFile(word); // Sử dụng lại phương thức đã có trong HistoryManage
+        }
+        System.out.println("Hoàn tất lưu kết quả Syn/Ant vào file Trie.");
     }
 }

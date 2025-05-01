@@ -16,16 +16,9 @@ public class Setting extends BaseController {
     @FXML
     public void initialize() {
         MusicManager musicManager = MusicManager.getInstance();
-
-        // Load volume đã lưu
         volumeSlider.setValue(musicManager.getSavedVolume());
-
-        // ✅ Đồng bộ trạng thái CheckBox với tình trạng nhạc
         musicToggle.setSelected(musicManager.isPlaying());
-
-        // ✅ Đồng bộ volume slider với giá trị đã lưu
         volumeSlider.setValue(musicManager.getSavedVolume());
-
         volumeSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             musicManager.setVolume(newVal.doubleValue());
         });
