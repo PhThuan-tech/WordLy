@@ -81,3 +81,10 @@ Ngày  01.05.2025
 1. Bình Minh thêm chức năng dừng nhạc ở MAINVIEW khi ấn các nút khác.
 2. Cải thiện tốc độ xử lí khi thực hiện chuyển tab (Sử dụng THREAD - Xử lí đồng thời). Tạm thời mới áp dụng cho HISTORY TAB.
 3. BOT đang có vấn đề khi đang chat nếu user có ấn enter thì đang bị kéo theo câu trả lời (Tự test đi, không thể miêu tả kĩ được).
+
+Ngày 02/05/2025
+
+1. Thêm đọc image ocr, hủy voice.
+2. Training lại promt cho bot, promt của user.
+3. Sửa phần bình minh bảo.
+4. Giao diện đang sơ sài + chuyển vẫn không mượt :v
