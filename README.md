@@ -75,3 +75,9 @@ Ngày 30/04/2025
 3 Phần tts đang có vấn đề khi đọc quá nhiều văn bản -> application sẽ unresponse (đơ) cho đến khi đọc hết văn bản thì sẽ hết, cái này hình như do resquest lớn đâm ra app không load đc tôi sẽ tìm cách fix, nma ae fix đc thì alo nhé.
 
 4 Có vài giao diện đang hơi sơ sài + chuyển giao diện đang chưa mượt.
+
+Ngày  01.05.2025
+
+1. Bình Minh thêm chức năng dừng nhạc ở MAINVIEW khi ấn các nút khác.
+2. Cải thiện tốc độ xử lí khi thực hiện chuyển tab (Sử dụng THREAD - Xử lí đồng thời). Tạm thời mới áp dụng cho HISTORY TAB.
+3. BOT đang có vấn đề khi đang chat nếu user có ấn enter thì đang bị kéo theo câu trả lời (Tự test đi, không thể miêu tả kĩ được).
