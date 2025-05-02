@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.TranslateAndTTSController">
+<BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.TranslateAndTTSController">
 
     <stylesheets>
         <URL value="@../styles/home.css" />
+        <URL value="@../styles/translate.css" />
     </stylesheets>
 
     <left>
@@ -95,60 +103,61 @@
             </children>
         </VBox>
     </left>
-
     <center>
-        <GridPane hgap="15.0" vgap="10.0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" percentWidth="45.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" percentWidth="45.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                <RowConstraints minHeight="200.0" prefHeight="400.0" vgrow="ALWAYS" />
-                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
-            </rowConstraints>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Label text="Original Passage" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-                <Label text="Translated Passage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-                <TextArea fx:id="needToTrans" prefHeight="226.0" prefWidth="358.0" promptText="Write or paste text here..." wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextArea fx:id="translated" editable="false" prefHeight="226.0" prefWidth="367.0" promptText="Translation will appear here..." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-
-                <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <children>
-                        <Button fx:id="transButton" mnemonicParsing="false" onAction="#handleTranslating">
-                            <graphic>
-                                <ImageView fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/translate.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic></Button>
-                    </children>
-                </VBox>
-
-                <Button fx:id="speak1Button" mnemonicParsing="false" onAction="#handleSpeakOriginal" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                <TextArea fx:id="translated" editable="false" layoutX="433.0" layoutY="110.0" prefHeight="339.0" prefWidth="367.0" promptText="Translation will appear here..." wrapText="true" />
+                <Label layoutX="558.0" layoutY="76.0" text="Translated Passage" />
+                <Button fx:id="speak2Button" layoutX="478.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleSpeakTranslated" styleClass="icon-button">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/Audio.png" />
+                                <Image url="@../icons/sound-icon.png" />
                             </image>
                         </ImageView>
                     </graphic></Button>
-                <Button fx:id="speak2Button" mnemonicParsing="false" onAction="#handleSpeakTranslated" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                <TextArea fx:id="needToTrans" layoutX="37.0" layoutY="109.0" prefHeight="340.0" prefWidth="342.0" promptText="Write or paste text here..." wrapText="true" />
+
+                <Button fx:id="speak1Button" layoutX="80.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleSpeakOriginal" styleClass="icon-button">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/Audio.png" />
+                                <Image url="@../icons/sound-icon.png" />
                             </image>
                         </ImageView>
                     </graphic></Button>
-                <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#handleLoadImage" text="choose image" />
-                <Button fx:id="stopButton" mnemonicParsing="false" onAction="#handleStopSpeaking" text="stop" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button fx:id="stopButton" layoutX="382.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleStopSpeaking" prefHeight="34.0" prefWidth="41.0" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/stop-button.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <Button fx:id="loadImageButton" layoutX="133.0" layoutY="407.0" onAction="#showDropZone" prefHeight="38.0" prefWidth="49.0" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/lens-camera-icon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+
+                <StackPane fx:id="dropPane" layoutX="19.0" layoutY="262.0" prefHeight="150" prefWidth="300" styleClass="drop-zone" visible="false">
+                    <Label text="Click hoặc kéo-thả ảnh vào đây" />
+                </StackPane>
+
+                <Label layoutX="157.0" layoutY="76.0" text="Original Passage" />
+                <Button fx:id="transButton" layoutX="379.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleTranslating" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/translation-icon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </children>
-        </GridPane>
+        </AnchorPane>
     </center>
 </BorderPane>

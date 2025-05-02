@@ -2,7 +2,6 @@ package com.example.wordly.controllerForUI;
 
 import com.azure.ai.vision.imageanalysis.ImageAnalysisClient;
 import com.azure.ai.vision.imageanalysis.ImageAnalysisClientBuilder;
-import com.azure.ai.vision.imageanalysis.models.ImageAnalysisOptions;
 import com.azure.ai.vision.imageanalysis.models.ImageAnalysisResult;
 import com.azure.ai.vision.imageanalysis.models.ReadResult;
 import com.azure.ai.vision.imageanalysis.models.VisualFeatures;
@@ -18,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -27,6 +28,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import javafx.util.Duration;
+import javafx.animation.PauseTransition;
 
 /**
  * Controller for the Translate and Text-To-Speech view (TranslateTTSView.fxml).
@@ -83,7 +87,11 @@ public class TranslateAndTTSController extends BaseController {
     @FXML private Button speak1Button;
     @FXML private Button speak2Button;
     @FXML private Button stopButton;
+    @FXML private StackPane dropPane;
     @FXML private Button loadImageButton;
+    @FXML
+    private BorderPane rootPane;
+
 
     private ImageAnalysisClient imageAnalysisClient;
     private ExecutorService executorService;
@@ -93,24 +101,144 @@ public class TranslateAndTTSController extends BaseController {
     private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
 
     @FXML
+    private void showDropZone(ActionEvent event) {
+        boolean isVisible = dropPane.isVisible();
+        dropPane.setVisible(!isVisible);
+        dropPane.setManaged(!isVisible);
+    }
+
+    private final PauseTransition debounceTranslate = new PauseTransition(Duration.millis(500));
+
+    @FXML
     public void initialize() {
+        applyHoverEffectToAllButtons(rootPane);
         executorService = Executors.newCachedThreadPool();
 
-        // Setup Azure Vision client
+        needToTrans.textProperty().addListener((obs, oldText, newText) -> {
+            debounceTranslate.setOnFinished(e -> autoTranslate(newText));
+            debounceTranslate.playFromStart();
+        });
+
         if (AZURE_VISION_SUBSCRIPTION_KEY.contains("YOUR_API_KEY") || AZURE_VISION_ENDPOINT.contains("YOUR_ENDPOINT")) {
-            loadImageButton.setDisable(true);
+            if (dropPane != null) dropPane.setDisable(true);
             showInfoAlert("Cấu hình thiếu", "Vui lòng thiết lập Azure Vision API Key và Endpoint.");
         } else {
             imageAnalysisClient = new ImageAnalysisClientBuilder()
                     .credential(new AzureKeyCredential(AZURE_VISION_SUBSCRIPTION_KEY))
                     .endpoint(AZURE_VISION_ENDPOINT)
                     .buildClient();
-            loadImageButton.setDisable(false);
+            if (dropPane != null) dropPane.setDisable(false);
         }
 
-        // Handle stop button
         stopButton.setOnAction(e -> handleStopSpeaking());
+
+        if (dropPane != null) {
+            dropPane.setOnMouseClicked(event -> openImageChooser());
+            dropPane.setOnDragOver(event -> {
+                if (event.getGestureSource() != dropPane && event.getDragboard().hasFiles()) {
+                    event.acceptTransferModes(javafx.scene.input.TransferMode.COPY);
+                }
+                event.consume();
+            });
+
+            dropPane.setOnDragDropped(event -> {
+                var db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    processImageFile(db.getFiles().get(0));
+                    success = true;
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            });
+        }
     }
+
+    private void autoTranslate(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            translated.clear();
+            return;
+        }
+
+        Task<String> translateTask = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                return Translator.translate(text, "auto", "vi");
+            }
+
+            @Override
+            protected void succeeded() {
+                translated.setText(getValue());
+            }
+
+            @Override
+            protected void failed() {
+                translated.setText("Không thể dịch văn bản.");
+            }
+        };
+        executorService.submit(translateTask);
+    }
+
+
+    private void openImageChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chọn hình ảnh");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif")
+        );
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            processImageFile(selectedFile);
+        }
+    }
+
+    private void processImageFile(File file) {
+        if (imageAnalysisClient == null) {
+            showInfoAlert("Lỗi", "Dịch vụ phân tích ảnh chưa sẵn sàng.");
+            return;
+        }
+        needToTrans.setText("Đang xử lý hình ảnh, vui lòng chờ...");
+        Task<String> ocrTask = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                BinaryData imageData = BinaryData.fromFile(file.toPath());
+                List<VisualFeatures> features = List.of(VisualFeatures.READ);
+                ImageAnalysisResult result = imageAnalysisClient.analyze(imageData, features, null);
+                ReadResult readResult = result.getRead();
+                StringBuilder extractedText = new StringBuilder();
+                if (readResult != null && readResult.getBlocks() != null) {
+                    readResult.getBlocks().forEach(block -> {
+                        if (block.getLines() != null) {
+                            block.getLines().forEach(line -> {
+                                if (line.getText() != null) {
+                                    extractedText.append(line.getText()).append("\n");
+                                }
+                            });
+                        }
+                    });
+                }
+                return extractedText.toString().trim();
+            }
+
+            @Override
+            protected void succeeded() {
+                String result = getValue();
+                needToTrans.setText(result.isEmpty() ? "Không phát hiện văn bản trong ảnh." : result);
+            }
+
+            @Override
+            protected void failed() {
+                showInfoAlert("Lỗi xử lý ảnh", getException().getMessage());
+                needToTrans.setText("Không thể xử lý ảnh.");
+            }
+        };
+        executorService.submit(ocrTask);
+    }
+
+
+
+
 
     @FXML
     public void handleTranslating(ActionEvent actionEvent) {
@@ -136,67 +264,6 @@ public class TranslateAndTTSController extends BaseController {
             }
         };
         executorService.submit(translateTask);
-    }
-
-    @FXML
-    private void handleLoadImage(ActionEvent event) {
-        if (imageAnalysisClient == null) {
-            showInfoAlert("Lỗi", "Dịch vụ phân tích ảnh chưa sẵn sàng.");
-            return;
-        }
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Chọn hình ảnh");
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif")
-        );
-        Stage stage = (Stage) loadImageButton.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile != null) {
-            needToTrans.setText("Đang xử lý hình ảnh, vui lòng chờ...");
-            Task<String> ocrTask = new Task<>() {
-                @Override
-                protected String call() throws Exception {
-                    try {
-                        BinaryData imageData = BinaryData.fromFile(selectedFile.toPath());
-                        List<VisualFeatures> features = List.of(VisualFeatures.READ);
-                        ImageAnalysisResult result = imageAnalysisClient.analyze(imageData, features, null);
-                        ReadResult readResult = result.getRead();
-                        StringBuilder extractedText = new StringBuilder();
-                        if (readResult != null && readResult.getBlocks() != null) {
-                            readResult.getBlocks().forEach(block -> {
-                                if (block.getLines() != null) {
-                                    block.getLines().forEach(line -> {
-                                        if (line.getText() != null) {
-                                            extractedText.append(line.getText()).append("\n");
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                        return extractedText.toString().trim();
-                    } catch (Exception e) {
-                        String message = "Lỗi phân tích ảnh.";
-                        if (e instanceof IOException || e.getCause() instanceof IOException) {
-                            message = "Không thể đọc file ảnh.";
-                        } else if (e instanceof HttpResponseException httpEx) {
-                            message = "Lỗi từ Azure API: " + httpEx.getMessage();
-                        }
-                        throw new Exception(message, e);
-                    }
-                }
-                @Override
-                protected void succeeded() {
-                    String result = getValue();
-                    needToTrans.setText(result.isEmpty() ? "Không phát hiện văn bản trong ảnh." : result);
-                }
-                @Override
-                protected void failed() {
-                    showInfoAlert("Lỗi xử lý ảnh", getException().getMessage());
-                    needToTrans.setText("Không thể xử lý ảnh.");
-                }
-            };
-            executorService.submit(ocrTask);
-        }
     }
 
     @FXML
