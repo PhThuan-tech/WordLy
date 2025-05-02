@@ -260,6 +260,10 @@ public class HistoryController extends BaseController implements Initializable {
     @FXML public void handleGotoEdit(ActionEvent actionEvent) { shutdownExecutor(); switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml"); }
     @FXML public void handleGotoGame(ActionEvent actionEvent) { shutdownExecutor(); switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml"); }
     @FXML public void handleGoToTranslateAndTTS(ActionEvent actionEvent) { shutdownExecutor(); switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml"); }
+    @FXML
+    public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
 
     /**
      * TAT EXECUTOR

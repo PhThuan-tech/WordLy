@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class ChatBotController extends BaseController {
     @FXML
@@ -49,11 +50,15 @@ public class ChatBotController extends BaseController {
     @FXML private ListView<Message> chatListView;
     @FXML private TextField messageInput;
     @FXML private Button sendButton;
+    @FXML
+    private BorderPane rootPane;
+
 
     private final ObservableList<Message> messages = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
+        applyHoverEffectToAllButtons(rootPane);
         chatListView.setItems(messages);
         chatListView.setCellFactory(lv -> new MessageCell());
 
