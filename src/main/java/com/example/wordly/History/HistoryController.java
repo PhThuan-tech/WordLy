@@ -262,6 +262,9 @@ public class HistoryController extends BaseController implements Initializable {
     @FXML public void GoToAdvanceFeature(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
+    @FXML public void handleGoToChat(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/ChatView.fxml");
+    }
 
     /**
      * TAT EXECUTOR
@@ -274,4 +277,6 @@ public class HistoryController extends BaseController implements Initializable {
             backgroundExecutor.shutdownNow();
         }
     }
+
+
 }
