@@ -12,9 +12,8 @@ import javafx.scene.layout.BorderPane;
 
 public class EditWordController extends BaseController {
 
-    public BorderPane rootPane;
-
-    @FXML public void handleBackMain(ActionEvent actionEvent) {
+    @FXML
+    public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
     @FXML public void handleGoToSearch(ActionEvent actionEvent) {
@@ -36,6 +35,9 @@ public class EditWordController extends BaseController {
     @FXML private TextField txtWord, txtPronunciation, txtType;
     @FXML private TextArea txtDescription;
     @FXML private Button addButton;
+
+    @FXML
+    private BorderPane rootPane;
 
     public void initialize() {
         applyHoverEffectToAllButtons(rootPane);

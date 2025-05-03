@@ -277,6 +277,4 @@ public class HistoryController extends BaseController implements Initializable {
             backgroundExecutor.shutdownNow();
         }
     }
-
-
 }
