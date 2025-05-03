@@ -40,53 +40,31 @@ import java.util.concurrent.Future;
 
 import javafx.util.Duration;
 
-/**
- * Controller for the Translate and Text-To-Speech view (TranslateTTSView.fxml).
- * Handles user interactions for translating text using LibreTranslator,
- * displaying the translation, providing text-to-speech functionality (placeholder buttons),
- * and navigating to other application views.
- */
-public class TranslateAndTTSController extends BaseController {
-    // --- Logger ---
-    // Use java.util.logging (JUL) for simplicity, or SLF4J if preferred in the project
-    //Ông ko cần comment ở phần FXML đâu á.
-    // vì cái này khi tạo hàm view.fxml là nó tự tạo thôi. mình tự hiểu được.
 
-    // Tôi sửa phần chuyển đổi giao diện thôi nhé.
-    // Phần nào cần sự trợ giúp thì ông hú tôi cái tôi nghĩ cùng.
-    @FXML
-    public void handleBackMain(ActionEvent actionEvent) {
+public class TranslateAndTTSController extends BaseController {
+    @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/MainView.fxml");
     }
-
-    @FXML
-    public void handleGoToSearch(ActionEvent actionEvent) {
+    @FXML public void handleGoToSearch(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
-
-    @FXML
-    public void handleGoToFavourite(ActionEvent actionEvent) {
+    @FXML public void handleGoToFavourite(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
-
-    @FXML
-    public void handleGotoEdit(ActionEvent actionEvent) {
+    @FXML public void handleGotoEdit(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
     }
-
-    @FXML
-    public void handleGotoGame(ActionEvent actionEvent) {
+    @FXML public void handleGotoGame(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
-
-    @FXML
-    public void handleGoToHistory(ActionEvent actionEvent) {
+    @FXML public void handleGoToHistory(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
-
-    @FXML
-    public void handleGoToChat(ActionEvent actionEvent) {
+    @FXML public void handleGoToChat(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    }
+    @FXML public void backToAdvance(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
     @FXML private TextArea needToTrans;
