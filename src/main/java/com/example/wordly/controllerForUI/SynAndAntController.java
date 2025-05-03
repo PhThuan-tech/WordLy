@@ -15,9 +15,8 @@ public class SynAndAntController extends BaseController {
 
     private HistoryManage historyManager = new HistoryManage();
 
-    @FXML
-    public void handlebackSearch(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
+    @FXML public void handlebackSearch(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
     @FXML
@@ -58,7 +57,7 @@ public class SynAndAntController extends BaseController {
         }
         System.out.println("Đang lưu " + wordList.size() + " từ vào file Trie...");
         for (String word : wordList) {
-            historyManager.saveWordToTrieFile(word); // Sử dụng lại phương thức đã có trong HistoryManage
+            historyManager.saveWordToTrieFile(word);
         }
         System.out.println("Hoàn tất lưu kết quả Syn/Ant vào file Trie.");
     }

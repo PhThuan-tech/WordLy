@@ -13,7 +13,6 @@ import javafx.scene.media.MediaPlayer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 // kế thừa lớp BaseController và implements interface SearchUIUpdate.
@@ -67,13 +66,8 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     }
 
     @FXML
-    public void handleGoToChat(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
-    }
-
-    @FXML
-    public void handleGoToSynAndAnt(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/SynAndAntView.fxml");
+    public void GoToAdvanceFeature(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
     @FXML

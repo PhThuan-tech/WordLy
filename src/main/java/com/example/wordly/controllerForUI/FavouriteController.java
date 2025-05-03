@@ -48,13 +48,8 @@ public class FavouriteController extends BaseController {
     }
 
     @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
-    }
-
-    @FXML
-    public void handleGoToChat(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    public void GoToAdvanceFeature(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
     @FXML
