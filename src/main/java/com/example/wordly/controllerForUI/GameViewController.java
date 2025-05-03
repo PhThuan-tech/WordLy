@@ -43,12 +43,7 @@ public class GameViewController extends BaseController {
         applyHoverEffectToAllButtons(rootPane);
     }
 
-    @FXML
-    private BorderPane rootPane;
 
-    public void initialize() {
-        applyHoverEffectToAllButtons(rootPane);
-    }
     @FXML
     public void handleGoToScrambleWord(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/GameView/ScrambleGameView.fxml");
