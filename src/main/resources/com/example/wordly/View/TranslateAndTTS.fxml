@@ -130,6 +130,6 @@
                     </children>
                 </HBox>
             </children>
-        </AnchorPane>
+        </GridPane>
     </center>
 </BorderPane>

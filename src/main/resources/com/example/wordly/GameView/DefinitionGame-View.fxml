@@ -1,94 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21"
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!-- Sử dụng BorderPane làm gốc cho bố cục chính -->
+<?import javafx.scene.layout.Region?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+            styleClass="game-root-pane" xmlns="http://javafx.com/javafx/21"
             fx:controller="com.example.wordly.GameController.DefinitionGameController">
 
     <stylesheets>
-        <URL value="@../styles/home.css"/>
-        <URL value="@../styles/game.css" />
+        <!-- Đảm bảo đường dẫn CSS chính xác -->
+        <URL value="@../styles/home.css"/> <!-- Có thể không cần home.css ở đây -->
+        <URL value="@../styles/game.css"/>
     </stylesheets>
+
+    <!-- Khu vực TOP: Thanh thông tin Game -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="game-top-bar" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <!-- Padding cho thanh trên cùng -->
+                <Insets top="10.0" right="20.0" bottom="10.0" left="20.0"/>
             </padding>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" text="Back to Games"/>
-            <Label text="Definition Guessing Game" HBox.hgrow="ALWAYS">
-                <font>
-                    <Font name="System Bold" size="18.0"/>
-                </font>
-            </Label>
-            <Label fx:id="questionCounterLabel" text="Question 1 of 10"/>
-            <Label fx:id="scoreLabel" text="Score: 0">
-                <font>
-                    <Font name="System Bold" size="14.0"/>
-                </font>
-            </Label>
+            <children>
+                <!-- Nút quay lại -->
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" text="Back to Games"
+                        styleClass="back-button-game"/> <!-- Style riêng cho nút back trong game -->
+
+                <!-- Spacer để đẩy các label điểm số sang phải -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Tiêu đề Game (không bắt buộc, có thể loại bỏ nếu thấy thừa) -->
+                <!-- <Label text="Definition Guessing Game" styleClass="game-title-small"/> -->
+
+                <!-- Hiển thị câu hỏi hiện tại/tổng số câu -->
+                <Label fx:id="questionCounterLabel" text="Question 1 of 10" styleClass="game-info-label"/>
+
+                <!-- Hiển thị điểm số -->
+                <Label fx:id="scoreLabel" text="Score: 0" styleClass="game-score-label"/>
+            </children>
         </HBox>
     </top>
+
+    <!-- Khu vực CENTER: Nội dung chính của Game -->
     <center>
-        <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+        <!-- VBox để căn chỉnh các thành phần chính theo chiều dọc và ở giữa -->
+        <VBox alignment="CENTER" spacing="25.0" styleClass="game-content-area" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                <!-- Padding lớn hơn cho khu vực nội dung -->
+                <Insets top="30.0" right="50.0" bottom="30.0" left="50.0"/>
             </padding>
-            <Label text="Which definition matches this word?">
-                <font>
-                    <Font size="16.0"/>
-                </font>
-            </Label>
-            <Label fx:id="wordLabel" text="WordTarget">
-                <font>
-                    <Font name="System Bold" size="36.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets bottom="15.0"/>
-                </VBox.margin>
-            </Label>
-            <GridPane fx:id="optionsContainer" hgap="10.0" vgap="10.0" alignment="CENTER">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints vgrow="ALWAYS"/>
-                    <RowConstraints vgrow="ALWAYS"/>
-                </rowConstraints>
-                <Button fx:id="optionButton1" maxWidth="Infinity" mnemonicParsing="false"
-                        onAction="#handleOptionSelected" text="Option 1" wrapText="true"
-                        GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button fx:id="optionButton2" maxWidth="Infinity" mnemonicParsing="false"
-                        onAction="#handleOptionSelected" text="Option 2" wrapText="true"
-                        GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button fx:id="optionButton3" maxWidth="Infinity" mnemonicParsing="false"
-                        onAction="#handleOptionSelected" text="Option 3" wrapText="true"
-                        GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button fx:id="optionButton4" maxWidth="Infinity" mnemonicParsing="false"
-                        onAction="#handleOptionSelected" text="Option 4" wrapText="true"
-                        GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS"
-                        GridPane.vgrow="ALWAYS"/>
-            </GridPane>
-            <Label fx:id="feedbackLabel" textAlignment="CENTER" wrapText="true">
-                <font>
-                    <Font name="System Bold" size="14.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="10.0"/>
-                </VBox.margin>
-            </Label>
-            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNextQuestion" text="Next Word"
-                    visible="false">
-                <VBox.margin>
-                    <Insets top="10.0"/>
-                </VBox.margin>
-            </Button>
+            <children>
+                <!-- Hướng dẫn -->
+                <Label text="Which definition matches this word?" styleClass="game-instruction-label"/>
+
+                <!-- Từ mục tiêu -->
+                <Label fx:id="wordLabel" text="[Word Target]" styleClass="game-target-word-label">
+                    <!-- Có thể dùng Font trong CSS thay vì inline -->
+                    <!-- <font><Font name="System Bold" size="48.0"/></font> -->
+                    <VBox.margin>
+                        <Insets bottom="20.0"/> <!-- Thêm khoảng cách dưới từ -->
+                    </VBox.margin>
+                </Label>
+
+                <!-- Lưới các lựa chọn -->
+                <GridPane fx:id="optionsContainer" hgap="20.0" vgap="20.0" alignment="CENTER" maxWidth="800" styleClass="game-options-grid">
+                    <columnConstraints>
+                        <!-- 2 cột bằng nhau -->
+                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <!-- 2 hàng, chiều cao tự động hoặc ưu tiên như nhau -->
+                        <RowConstraints minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES"/> <!-- Tăng chiều cao nút -->
+                        <RowConstraints minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <!-- Các nút lựa chọn -->
+                        <!-- Sử dụng styleClass thay vì đặt nhiều thuộc tính inline -->
+                        <Button fx:id="optionButton1" onAction="#handleOptionSelected" text="Option 1" wrapText="true"
+                                maxWidth="Infinity" maxHeight="Infinity" styleClass="game-option-button"
+                                GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Button fx:id="optionButton2" onAction="#handleOptionSelected" text="Option 2" wrapText="true"
+                                maxWidth="Infinity" maxHeight="Infinity" styleClass="game-option-button"
+                                GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Button fx:id="optionButton3" onAction="#handleOptionSelected" text="Option 3" wrapText="true"
+                                maxWidth="Infinity" maxHeight="Infinity" styleClass="game-option-button"
+                                GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Button fx:id="optionButton4" onAction="#handleOptionSelected" text="Option 4" wrapText="true"
+                                maxWidth="Infinity" maxHeight="Infinity" styleClass="game-option-button"
+                                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="20.0" /> <!-- Khoảng cách dưới lưới nút -->
+                    </VBox.margin>
+                </GridPane>
+
+                <!-- Label phản hồi (Đúng/Sai) -->
+                <!-- MinHeight để giữ không gian ngay cả khi không có text -->
+                <Label fx:id="feedbackLabel" textAlignment="CENTER" wrapText="true" minHeight="30"
+                       styleClass="game-feedback-label">
+                    <!-- Font nên định nghĩa trong CSS -->
+                    <!-- <font><Font name="System Bold" size="16.0"/></font> -->
+                </Label>
+
+                <!-- Nút Next Word -->
+                <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNextQuestion" text="Next Word"
+                        visible="false" styleClass="game-next-button">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Button>
+
+            </children>
         </VBox>
     </center>
+
 </BorderPane>

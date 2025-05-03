@@ -101,7 +101,7 @@ public class HistoryController extends BaseController implements Initializable {
     private void startLoadingHistoryTask() {
         Task<ObservableList<WordEntry>> loadHistoryTask = createLoadHistoryTask();
 
-        loadHistoryTask.setOnSucceeded(event -> {
+        loadHistoryTask.setOnSucceeded(_ -> {
             ObservableList<WordEntry> historyData = loadHistoryTask.getValue();
             if (historyTable != null) {
                 historyTable.setItems(historyData);
@@ -112,7 +112,7 @@ public class HistoryController extends BaseController implements Initializable {
             setLoadingState(false, loadHistoryTask.getMessage()); // Cập nhật UI khi thành công
         });
 
-        loadHistoryTask.setOnFailed(event -> {
+        loadHistoryTask.setOnFailed(_ -> {
             Throwable error = loadHistoryTask.getException();
             System.err.println("Task tải lịch sử thất bại.");
             if (error != null) {
