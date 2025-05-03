@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
+<BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
 
     <stylesheets>
         <URL value="@../styles/home.css" />
@@ -111,8 +111,6 @@
                   <Label fx:id="statusLabel" layoutX="152.0" layoutY="-10.0" prefHeight="20.0" prefWidth="490.0" style="-fx-text-fill: red; -fx-font-weight: bold;" />
             </children>
          </AnchorPane>
-
-
             <!-- Word Details Row using GridPane for alignment -->
             <!-- Word Details Row using GridPane for alignment -->
             <GridPane alignment="TOP_RIGHT" hgap="10.0" prefHeight="30.0" prefWidth="757.0" vgap="5.0">

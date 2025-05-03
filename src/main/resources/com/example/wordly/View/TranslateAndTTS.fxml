@@ -129,8 +129,7 @@
                         <!-- You might add copy/save translated text buttons here -->
                     </children>
                 </HBox>
-
             </children>
-        </GridPane>
+        </AnchorPane>
     </center>
 </BorderPane>
