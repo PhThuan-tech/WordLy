@@ -31,8 +31,8 @@ module com.example.wordly {
 
     opens com.example.wordly.getWord to javafx.base;
 
-    exports com.example.wordly.GameController;
-    opens com.example.wordly.GameController to javafx.fxml;
+    exports com.example.wordly.GameController.Wordle;
+    opens com.example.wordly.GameController.Wordle to javafx.fxml;
 
     exports com.example.wordly.GameController.ScrambleWord;
     opens com.example.wordly.GameController.ScrambleWord to javafx.fxml;

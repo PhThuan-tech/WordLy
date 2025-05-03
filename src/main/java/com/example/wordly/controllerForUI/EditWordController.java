@@ -3,6 +3,7 @@ package com.example.wordly.controllerForUI;
 import com.example.wordly.SQLite.NewAddedWordDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -15,44 +16,26 @@ public class EditWordController extends BaseController {
     public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
-
-    @FXML
-    public void handleGoToSearch(ActionEvent actionEvent) {
+    @FXML public void handleGoToSearch(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
-
-    @FXML
-    public void handleGoToFavourite(ActionEvent actionEvent) {
+    @FXML public void handleGoToFavourite(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
-
-    @FXML
-    public void handleGotoGame(ActionEvent actionEvent) {
+    @FXML public void handleGotoGame(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
-
-    @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
-    }
-
-    @FXML
-    public void handleGoToHistory(ActionEvent actionEvent) {
+    @FXML public void handleGoToHistory(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
-
-
-    @FXML
-    public void handleGoToChat(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    @FXML public void GoToAdvanceFeature(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    @FXML
-    private TextField txtWord, txtPronunciation, txtType;
-    @FXML
-    private TextArea txtDescription;
-    @FXML
-    private Button addButton;
+    @FXML private TextField txtWord, txtPronunciation, txtType;
+    @FXML private TextArea txtDescription;
+    @FXML private Button addButton;
+
     @FXML
     private BorderPane rootPane;
 

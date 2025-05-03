@@ -1,11 +1,14 @@
 package com.example.wordly.controllerForUI;
 
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -60,6 +63,7 @@ public abstract class BaseController {
         });
     }
 }
+
 
 // Để sử dụng đc cái lớp này
 // ở mỗi controller thì extends (hoặc implents thêm các tính năng)
