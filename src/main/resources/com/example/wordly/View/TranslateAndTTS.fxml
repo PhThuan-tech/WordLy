@@ -88,7 +88,7 @@
                                 <Tooltip text="Speak Original Text" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#handleLoadImage" text="Load Image">
+                        <Button fx:id="loadImageButton" mnemonicParsing="false" onAction="#showDropZone" text="Load Image">
                             <tooltip>
                                 <Tooltip text="Load text from an image (OCR)" />
                             </tooltip>

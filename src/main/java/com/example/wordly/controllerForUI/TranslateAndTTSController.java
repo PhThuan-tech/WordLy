@@ -37,23 +37,8 @@ public class TranslateAndTTSController extends BaseController {
     @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/MainView.fxml");
     }
-    @FXML public void handleGoToSearch(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
-    }
-    @FXML public void handleGoToFavourite(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
-    }
-    @FXML public void handleGotoEdit(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/EditWordView.fxml");
-    }
     @FXML public void handleGotoGame(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
-    }
-    @FXML public void handleGoToHistory(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
-    }
-    @FXML public void handleGoToChat(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
     }
     @FXML public void backToAdvance(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
@@ -61,15 +46,11 @@ public class TranslateAndTTSController extends BaseController {
 
     @FXML private TextArea needToTrans;
     @FXML private TextArea translated;
-    @FXML private Button transButton;
-    @FXML private Button speak1Button;
-    @FXML private Button speak2Button;
     @FXML private Button stopButton;
     @FXML private StackPane dropPane;
     @FXML private Button loadImageButton;
     @FXML
     private BorderPane rootPane;
-
 
     private ImageAnalysisClient imageAnalysisClient;
     private ExecutorService executorService;
