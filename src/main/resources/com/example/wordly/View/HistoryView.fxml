@@ -84,18 +84,14 @@
             <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#GoToAdvanceFeature" prefHeight="61.0" prefWidth="150.0" text="Advance Features" wrapText="true">
                 <graphic>
                     <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../icons/features.png" />
-                        </image>
+                        <Image url="@../icons/features.png"/>
                     </ImageView>
                 </graphic>
             </Button>
             <Button contentDisplay="RIGHT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#handleGoToChat" prefHeight="53.0" prefWidth="154.0" text="ChatBot" textAlignment="CENTER">
                 <graphic>
                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../icons/chatbot.png" />
-                        </image>
+                        <Image url="@../icons/chatbot.png"/>
                     </ImageView>
                 </graphic></Button>
 
@@ -121,11 +117,9 @@
                 </VBox.margin>
                 <Button fx:id="delHistory" mnemonicParsing="false" onAction="#delHistory" text="Clear All History">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/deleteWord.png" />
-                     </image>
-                  </ImageView>
+                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                       <Image url="@../icons/deleteWord.png"/>
+                   </ImageView>
                </graphic></Button>
 
                 <Label fx:id="statusLabel" HBox.hgrow="ALWAYS">
