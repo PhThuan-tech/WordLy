@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class EditWordController extends BaseController {
 
@@ -52,6 +53,12 @@ public class EditWordController extends BaseController {
     private TextArea txtDescription;
     @FXML
     private Button addButton;
+    @FXML
+    private BorderPane rootPane;
+
+    public void initialize() {
+        applyHoverEffectToAllButtons(rootPane);
+    }
 
     public void handleAddButton(ActionEvent event) {
         if (event.getSource() != addButton) {

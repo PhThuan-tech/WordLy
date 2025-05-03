@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -50,6 +51,12 @@ public class GameViewController extends BaseController {
 
     public void GoToWordle(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/GameView/WordleView.fxml");
+    }
+    @FXML
+    private BorderPane rootPane;
+
+    public void initialize() {
+        applyHoverEffectToAllButtons(rootPane);
     }
 
 

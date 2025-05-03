@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -27,6 +29,10 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     public Label typeLabel;
     public Label statusLabel;
     public Button speakButton;
+
+    @FXML
+    private BorderPane rootPane;
+
     @FXML
     private ListView<String> suggestionList;  // them cai autocomplete dung trie
 
@@ -91,6 +97,8 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         if (speakButton != null) {
             speakButton.setDisable(true);
         }
+
+        applyHoverEffectToAllButtons(rootPane);
     }
 
     private void loadWordFromTextFile() {

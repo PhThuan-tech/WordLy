@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class ChatBotController extends BaseController {
     @FXML
@@ -49,12 +50,15 @@ public class ChatBotController extends BaseController {
     @FXML private ListView<Message> chatListView;
     @FXML private TextField messageInput;
     @FXML private Button sendButton;
+    @FXML
+    private BorderPane rootPane;
+
 
     private final ObservableList<Message> messages = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // Bind ListView và cell factory
+        applyHoverEffectToAllButtons(rootPane);
         chatListView.setItems(messages);
         chatListView.setCellFactory(lv -> new MessageCell());
 
@@ -65,69 +69,78 @@ public class ChatBotController extends BaseController {
         // Thread riêng để gọi API lấy lời chào
         new Thread(() -> {
             try {
-                String greeting = ChatService.sendMessage(""); // Lời chào từ AI
-                showTypingEffect(greeting, false); // Hiển thị lời chào dần dần
+                String greeting = ChatService.sendMessage("");
+                Message botMsg = new Message("", false);
+                Platform.runLater(() -> messages.add(botMsg));
+                showTypingEffect(greeting, botMsg);
             } catch (Exception e) {
-                Platform.runLater(() ->
-                        messages.add(new Message("Lỗi khi lấy lời chào.", false))
-                );
+                Platform.runLater(() -> messages.add(new Message("Lỗi khi lấy lời chào.", false)));
                 e.printStackTrace();
             }
         }).start();
+
     }
 
     // Hàm hiển thị "typing effect" cho tin nhắn
-    private void showTypingEffect(String messageContent, boolean isUser) {
+    private void showTypingEffect(String messageContent, Message targetMessage) {
         new Thread(() -> {
-            Platform.runLater(() -> {
-                messages.add(new Message("", isUser)); // Gửi tin nhắn rỗng để AI phản hồi trước
-            });
-
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             for (int i = 0; i < messageContent.length(); i++) {
                 final String currentText = messageContent.substring(0, i + 1);
                 Platform.runLater(() -> {
-                    if (!messages.isEmpty()) {
-                        messages.get(messages.size() - 1).setContent(currentText);
-                        chatListView.refresh();
-                    }
+                    targetMessage.setContent(currentText);
+                    chatListView.refresh();
                 });
                 try {
-                    // Tốc độ gõ chữ
-                    Thread.sleep(40);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            Platform.runLater(this::scrollToEnd);
 
+            Platform.runLater(() -> {
+                scrollToEnd();
+                isBotTyping = false;
+                sendButton.setDisable(false);
+                sendButton.setText("Gửi");
+            });
         }).start();
     }
+
+    private volatile boolean isBotTyping = false;
     @FXML
     private void handleSendMessage() {
+        if (isBotTyping) {
+            System.out.println("Bot đang trả lời, không thể gửi tin nhắn lúc này.");
+            return;
+        }
+
         String text = messageInput.getText().trim();
         if (text.isEmpty()) return;
 
-        // Thêm tin nhắn người dùng vào danh sách
-        Message userMsg = new Message(text, true);
-        messages.add(userMsg);
+        messages.add(new Message(text, true));
         messageInput.clear();
 
-        // Gọi API và hiển thị phản hồi từ trợ lý dần dần
         new Thread(() -> {
             try {
-                String reply = ChatService.sendMessage(text); // Gửi tin nhắn tới API
-                showTypingEffect(reply, false); // Hiển thị phản hồi từ AI dần dần
+                // Chặn gửi mới
+                isBotTyping = true;
+                Platform.runLater(() -> {
+                    sendButton.setDisable(true);
+                    sendButton.setText("...");
+                });
+
+                String reply = ChatService.sendMessage(text);
+                Message botMsg = new Message("", false);
+                Platform.runLater(() -> messages.add(botMsg));
+                showTypingEffect(reply, botMsg);
             } catch (Exception e) {
-                Platform.runLater(() ->
-                        messages.add(new Message("Lỗi khi lấy phản hồi từ trợ lý.", false))
-                );
+                Platform.runLater(() -> messages.add(new Message("Lỗi khi lấy phản hồi từ trợ lý.", false)));
                 e.printStackTrace();
+                isBotTyping = false;
+                Platform.runLater(() -> {
+                    sendButton.setDisable(false);
+                    sendButton.setText("Gửi");
+                });
             }
         }).start();
     }

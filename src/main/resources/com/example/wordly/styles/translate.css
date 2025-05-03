@@ -1,0 +1,19 @@
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 6px;
+}
+.drop-zone {
+    -fx-border-color: #999;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-background-color: #f7f7f7;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.drop-zone:hover {
+    -fx-background-color: #eeeeee;
+}
+.icon-button:hover {
+    -fx-background-color: transparent;
+}

@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
 
@@ -68,6 +69,9 @@ public class FavouriteController extends BaseController {
 
     @FXML
     private AnchorPane confirmationDialog;
+    @FXML
+    private BorderPane rootPane;
+
 
     @FXML public TableView<WordEntry> tableView;
     @FXML public TableColumn<WordEntry, String> wordCol;
@@ -157,6 +161,7 @@ public class FavouriteController extends BaseController {
 
     @FXML
     public void initialize() {
+        applyHoverEffectToAllButtons(rootPane);
         confirmationDialog.setVisible(false);
 
         // hiện hộp thoại
