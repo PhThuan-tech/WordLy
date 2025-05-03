@@ -89,3 +89,14 @@ Ngày 02/05/2025
 3. Sửa phần bình minh bảo, sẽ không kéo theo câu trả lời nữa.
 4. Giao diện đang sơ sài + chuyển vẫn không mượt :v
 5. Phần tts nếu cho nhiều từ, hết bị đơ, nhưng lại không dừng lại bằng nút được (ít từ thì nút dừng được). Tôi sẽ tìm cách fix.
+
+Ngày 03/05/2025
+1. Thay đổi giao diện toàn bộ các scence cho gọn.
+   
+2. Gộp các chức năng đặc biệt vào Advance Features cho đỡ nhiều nút
+
+3. Fix lỗi Game Wordle (loại bỏ DictionaryDev) và thêm gợi ý bằng tiếng việt
+  
+4. Mở rộng tính năng lưu các từ Syn and An vào trie
+Mấy file game_data của Bminh đag bị mất, t ko bt ai xóa nx chạy ko đc các game ấy.
+Animation chuyển giao diện thì t tìm hiểu bị chậm là do phần initialize ( kiểu theo cơ chế stack) nên là phần code trong intialize dài thì code sẽ chạy tuần tự rất lâu, nên là chia nhỏ ra snhé
