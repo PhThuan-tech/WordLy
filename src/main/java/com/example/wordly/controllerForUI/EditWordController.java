@@ -11,50 +11,28 @@ import javafx.scene.layout.BorderPane;
 
 public class EditWordController extends BaseController {
 
-    @FXML
-    public void handleBackMain(ActionEvent actionEvent) {
+    @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
-
-    @FXML
-    public void handleGoToSearch(ActionEvent actionEvent) {
+    @FXML public void handleGoToSearch(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/SearchView.fxml");
     }
-
-    @FXML
-    public void handleGoToFavourite(ActionEvent actionEvent) {
+    @FXML public void handleGoToFavourite(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/FavouriteView.fxml");
     }
-
-    @FXML
-    public void handleGotoGame(ActionEvent actionEvent) {
+    @FXML public void handleGotoGame(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/GameView.fxml");
     }
-
-    @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
-    }
-
-    @FXML
-    public void handleGoToHistory(ActionEvent actionEvent) {
+    @FXML public void handleGoToHistory(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/HistoryView.fxml");
     }
-
-
-    @FXML
-    public void handleGoToChat(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
+    @FXML public void GoToAdvanceFeature(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    @FXML
-    private TextField txtWord, txtPronunciation, txtType;
-    @FXML
-    private TextArea txtDescription;
-    @FXML
-    private Button addButton;
-    @FXML
-    private BorderPane rootPane;
+    @FXML private TextField txtWord, txtPronunciation, txtType;
+    @FXML private TextArea txtDescription;
+    @FXML private Button addButton;
 
     public void initialize() {
         applyHoverEffectToAllButtons(rootPane);

@@ -1,0 +1,85 @@
+.root-pane {
+    -fx-background-color: #f0f0f0; /* Màu nền nhẹ cho toàn bộ ứng dụng */
+}
+
+.grid-pane {
+    -fx-background-color: #ffffff; /* Màu nền trắng cho khu vực chính giữa */
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 10; /* Thêm padding bên trong GridPane */
+}
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+.text-area {
+    -fx-font-size: 13px;
+    -fx-control-inner-background: #fafafa;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 3;
+}
+
+.button {
+    /* Kiểu nút chung */
+    -fx-padding: 5 10 5 10; /* Padding bên trong nút */
+    -fx-background-color: none; /* Màu nền xanh dương */
+    -fx-text-fill: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #0056b3; /* Màu nền khi rê chuột */
+}
+
+.button:pressed {
+     -fx-background-color: #004085; /* Màu nền khi nhấn */
+}
+
+/* Nếu muốn các nút biểu tượng khác kiểu nút text */
+.button .graphic-container {
+    -fx-padding: 0; /* Loại bỏ padding mặc định cho graphic */
+}
+
+/* Kiểu riêng cho nút Stop nếu cần nổi bật */
+.button#stopButton {
+    -fx-background-color: none; /* Màu nền đỏ */
+}
+.button#stopButton:hover {
+    -fx-background-color: #c82333;
+}
+.button#stopButton:pressed {
+     -fx-background-color: #bd2130;
+}
+
+/* Kiểu riêng cho nút Load Image nếu cần khác */
+.button#loadImageButton {
+     -fx-background-color: #ffc107; /* Màu vàng */
+     -fx-text-fill: #212529;
+}
+.button#loadImageButton:hover {
+     -fx-background-color: #e0a800;
+}
+.button#loadImageButton:pressed {
+     -fx-background-color: #d39e00;
+}
+
+.text-area {
+    -fx-border-radius: 20;
+    -fx-background-radius: 10;
+}
+
+.text-area .scroll-pane {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.text-area .scroll-pane .content {
+     -fx-background-radius: 10;
+     -fx-background-color: -fx-control-inner-background;
+}

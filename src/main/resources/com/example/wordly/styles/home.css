@@ -1,82 +1,104 @@
-/* === Toàn bộ AnchorPane === */
 .anchor-pane {
-    -fx-background-color: #f4f9ff;
-    -fx-font-family: "Arial";
+    -fx-background-color: linear-gradient(to bottom right, #edf5e1, #f0ebe1);
+    -fx-font-family: 'Poppins', 'Segoe UI', sans-serif; /* Sử dụng font từ CSS thứ hai. Bạn cần đảm bảo font này có sẵn trong hệ thống hoặc thêm vào dự án. */
 }
 
-/* === Tiêu đề chính === */
 .label {
     -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
 .label[text="WORDLY"] {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2C3E50;
+    -fx-font-size: 36px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #558B2F;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.5, 0, 2);
+    -fx-padding: 10px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }
 
-/* === Các nút chức năng bên trái === */
 .button {
-    -fx-font-size: 14px;
+    -fx-background-color: #8BC34A;
     -fx-text-fill: white;
-    -fx-background-radius: 6px;
-    -fx-border-radius: 6px;
-    -fx-background-color: #4CAF50;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
     -fx-cursor: hand;
-}
-/* === thêm các nút bấm có hiệu ứng trong giao diện === */
-.button:pressed {
-    -fx-background-color: #2E7D32;
-    -fx-translate-y: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0.2, 1, 1);
+    -fx-transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
-    -fx-background-color: #388E3C;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
+    -fx-background-color: #7CB342;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0.4, 1, 1);
 }
 
-/* Nút đặc biệt (Search ở header) */
+.button:pressed {
+    -fx-background-color: #689F38;
+    -fx-translate-y: 0.5px;
+}
+
 .button[text="Search"] {
     -fx-background-color: #FF5722;
 }
-
 .button[text="Search"]:hover {
     -fx-background-color: #E64A19;
 }
 
-/* Nút "Speak" */
-.button[text="Speak"] {
-    -fx-background-color: #2196F3;
+#speakButton {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+}
+#speakButton:hover {
+    -fx-background-color: transparent;
+}
+#speakButton:pressed {
+     -fx-background-color: transparent;
 }
 
-.button[text="Speak"]:hover {
-    -fx-background-color: #1E88E5;
+#addToFavouriteButton {
+    -fx-background-color: transparent;
+     -fx-effect: none;
+}
+#addToFavouriteButton:hover {
+    -fx-background-color: transparent;
+}
+#addToFavouriteButton:pressed {
+    -fx-background-color: transparent;
 }
 
-/* Nút "Adding to favourite" */
-.button[text="Adding to favourite"] {
-    -fx-background-color: #9C27B0;
-}
 
-.button[text="Adding to favourite"]:hover {
-    -fx-background-color: #7B1FA2;
-}
-
-/* Nút dài ở dưới cùng */
-.button[text="Translate Paragraph Text To Speech"] {
+.button[text="Text To Speech"] {
     -fx-background-color: #607D8B;
     -fx-font-size: 13px;
     -fx-padding: 8px;
     -fx-wrap-text: true;
 }
-
-.button[text="Translate Paragraph Text To Speech"]:hover {
+.button[text="Text To Speech"]:hover {
     -fx-background-color: #546E7A;
 }
 
-/* === TextField === */
+.setting-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.setting-button:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
+
+.setting-button:pressed {
+    -fx-translate-y: 0.5px;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent; /* Đảm bảo vẫn trong suốt khi nhấn */
+}
+
+
 .text-field {
     -fx-background-color: white;
     -fx-border-color: #ccc;
@@ -84,7 +106,6 @@
     -fx-padding: 4px;
 }
 
-/* === TextArea === */
 .text-area {
     -fx-background-color: white;
     -fx-border-color: #ccc;
@@ -93,7 +114,6 @@
     -fx-font-size: 13px;
 }
 
-/* === ChoiceBox === */
 .choice-box {
     -fx-background-color: white;
     -fx-border-color: #ccc;
@@ -101,7 +121,6 @@
     -fx-padding: 4px;
 }
 
-/* === ListView (menu bên trái) === */
 .list-view {
     -fx-background-color: #e8f5e9;
     -fx-border-color: #c8e6c9;
