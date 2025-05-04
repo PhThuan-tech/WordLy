@@ -10,17 +10,26 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.util.BinaryData;
 import com.example.wordly.API.TextToSpeech;
 import com.example.wordly.API.Translator;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import com.microsoft.cognitiveservices.speech.*;
+import com.microsoft.cognitiveservices.speech.audio.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,8 +58,21 @@ public class TranslateAndTTSController extends BaseController {
     @FXML private Button stopButton;
     @FXML private StackPane dropPane;
     @FXML private Button loadImageButton;
+    @FXML private Button recordButton;
     @FXML
     private BorderPane rootPane;
+    @FXML private Button stopRecordingBtn;
+    @FXML
+    private Button clearInputButton;
+    @FXML
+    private Button copyButton;
+    @FXML
+    private AnchorPane recordingPane;
+    @FXML private Label realTimeLabel;
+    @FXML private Circle wave1;
+    @FXML private Circle wave2;
+    @FXML private Circle wave3;
+
 
     private ImageAnalysisClient imageAnalysisClient;
     private ExecutorService executorService;
@@ -58,6 +80,10 @@ public class TranslateAndTTSController extends BaseController {
 
     private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
     private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
+    private static final String AZURE_SPEECH_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";
+    private static final String AZURE_SPEECH_REGION = "southeastasia";
+
+    private Future<?> currentRecognitionTask;
 
     @FXML
     private void showDropZone(ActionEvent event) {
@@ -71,7 +97,18 @@ public class TranslateAndTTSController extends BaseController {
     @FXML
     public void initialize() {
         applyHoverEffectToAllButtons(rootPane);
+        stopRecordingBtn.setVisible(false);
         executorService = Executors.newCachedThreadPool();
+        clearInputButton.setVisible(false);
+        needToTrans.textProperty().addListener((obs, oldText, newText) -> {
+            clearInputButton.setVisible(!newText.isEmpty());
+        });
+
+        copyButton.setVisible(false);
+
+        translated.textProperty().addListener((obs, oldText, newText) -> {
+            copyButton.setVisible(newText != null && !newText.isEmpty());
+        });
 
         needToTrans.textProperty().addListener((obs, oldText, newText) -> {
             debounceTranslate.setOnFinished(e -> autoTranslate(newText));
@@ -111,6 +148,9 @@ public class TranslateAndTTSController extends BaseController {
                 event.consume();
             });
         }
+        createWaveAnimation(wave1, Duration.seconds(1), 0);
+        createWaveAnimation(wave2, Duration.seconds(1), 300);
+        createWaveAnimation(wave3, Duration.seconds(1), 600);
     }
 
     private void autoTranslate(String text) {
@@ -275,6 +315,125 @@ public class TranslateAndTTSController extends BaseController {
     public void shutdown() {
         if (executorService != null && !executorService.isShutdown()) {
             executorService.shutdownNow();
+        }
+    }
+
+    private final StringBuilder recognitionBuffer = new StringBuilder();
+    private SpeechRecognizer recognizer;
+
+    @FXML
+    private void handleStartRecording(ActionEvent event) {
+        recordButton.setVisible(false);
+        stopRecordingBtn.setVisible(true);
+
+        recognitionBuffer.setLength(0); // reset buffer khi bắt đầu mới
+
+        Platform.runLater(() -> {
+            recordingPane.setVisible(true);
+            recordingPane.setManaged(true);
+            realTimeLabel.setText("Đang nghe...");
+            needToTrans.clear();
+        });
+
+        if (currentRecognitionTask != null && !currentRecognitionTask.isDone()) {
+            currentRecognitionTask.cancel(true);
+        }
+
+        currentRecognitionTask = executorService.submit(() -> {
+            try {
+                SpeechConfig config = SpeechConfig.fromSubscription(AZURE_SPEECH_KEY, AZURE_SPEECH_REGION);
+                config.setSpeechRecognitionLanguage("en-US"); // hoặc "vi-VN"
+
+                AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
+                recognizer = new SpeechRecognizer(config, audioConfig);
+
+                recognizer.recognizing.addEventListener((s, e) -> {
+                    String partial = e.getResult().getText();
+                    Platform.runLater(() -> realTimeLabel.setText(partial));
+                });
+
+                recognizer.recognized.addEventListener((s, e) -> {
+                    String finalText = e.getResult().getText();
+                    if (finalText != null && !finalText.isBlank()) {
+                        recognitionBuffer.append(finalText).append(" ");
+                        Platform.runLater(() -> {
+                            realTimeLabel.setText(finalText);
+                            needToTrans.setText(recognitionBuffer.toString().trim());
+                        });
+                    }
+                });
+
+                recognizer.canceled.addEventListener((s, e) -> {
+                    Platform.runLater(() -> {
+                        realTimeLabel.setText("Đã huỷ hoặc có lỗi.");
+                        stopListeningView();
+                    });
+                });
+
+                recognizer.sessionStopped.addEventListener((s, e) -> {
+                    Platform.runLater(this::stopListeningView);
+                });
+
+                recognizer.startContinuousRecognitionAsync().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> showInfoAlert("Lỗi STT", e.getMessage()));
+                stopListeningView();
+            }
+        });
+    }
+    @FXML
+    private void handleStopRecording() {
+        stopRecordingBtn.setVisible(false);
+        recordButton.setVisible(true);
+        if (recognizer != null) {
+            try {
+                recognizer.stopContinuousRecognitionAsync().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                recognizer.close();
+                recognizer = null;
+            }
+        }
+        stopListeningView();
+    }
+
+    private void stopListeningView() {
+        recordingPane.setVisible(false);
+        recordingPane.setManaged(false);
+    }
+
+    private void createWaveAnimation(Circle circle, Duration duration, int delayMillis) {
+        ScaleTransition st = new ScaleTransition(duration, circle);
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(2.5);
+        st.setToY(2.5);
+        st.setAutoReverse(false);
+
+        FadeTransition ft = new FadeTransition(duration, circle);
+        ft.setFromValue(0.3);
+        ft.setToValue(0.0);
+
+        ParallelTransition pt = new ParallelTransition(st, ft);
+        pt.setCycleCount(Animation.INDEFINITE);
+        pt.setDelay(Duration.millis(delayMillis));
+        pt.play();
+    }
+
+    @FXML
+    private void handleClearInput() {
+        needToTrans.clear();
+    }
+
+    @FXML
+    private void handleCopy() {
+        String text = translated.getText();
+        if (text != null && !text.isEmpty()) {
+            ClipboardContent content = new ClipboardContent();
+            content.putString(text);
+            Clipboard.getSystemClipboard().setContent(content);
         }
     }
 }
