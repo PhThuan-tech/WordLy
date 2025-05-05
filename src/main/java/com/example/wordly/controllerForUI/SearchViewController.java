@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -76,7 +77,7 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     @FXML
     public void initialize() {
         // Khoi tao neu SBCH can no
-        getClass().getResource("/com/example/wordly/ListOfWord");
+        getClass().getResource("/com/example/wordly/ListOfWord4Trie");
         GetAPI apiInstance = new GetAPI();
         this.searchHandle = new SearchButtonClickHandle(this, apiInstance);
         this.updateStatus("Sẵn sàng tra từ,Bro chọn từ khó vô để tôi tìm");
@@ -94,13 +95,13 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     private void loadWordFromTextFile() {
         // load tu trong file txt =))
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                Objects.requireNonNull(getClass().getResourceAsStream("/com/example/wordly/ListOfWord"))))) {
+                Objects.requireNonNull(getClass().getResourceAsStream("/com/example/wordly/ListOfWord4Trie"))))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 trie.insert(line.trim().toLowerCase());
             }
         } catch (IOException | NullPointerException e) {
-            System.err.println("Không load được ListOfWord: " + e.getMessage());
+            System.err.println("Không load được ListOfWord4Trie: " + e.getMessage());
             updateStatus("Lỗi: Không load được dữ liệu từ điển.");
         }
     }

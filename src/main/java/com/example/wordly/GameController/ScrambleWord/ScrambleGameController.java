@@ -25,7 +25,7 @@ public class ScrambleGameController extends BaseController {
     private int attemptsLeft = 3;
     private AudioManager audioManager;
     private final int INITIAL_ATTEMPTS = 3;
-    private final int INITIAL_TIME = 30;
+    private final int INITIAL_TIME = 90;
     private int previousScore = 0;
 
     @FXML

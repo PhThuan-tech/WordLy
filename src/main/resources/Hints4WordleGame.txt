@@ -1,0 +1,111 @@
+apple : Quả tròn, thường đỏ hoặc xanh, ăn giòn ngọt.
+grape : Loại quả mọc thành chùm, thường dùng làm rượu
+house : Nơi để ở, có cửa ra vào và mái che
+earth : Hành tinh chúng ta đang sống, có nước và không khí
+tiger : Loài mèo lớn có sọc, sống trong rừng
+tuyen : Người đẹp dạy OOP lớp K69A-AI1
+khanh : Người này dạy lý thuyết OOP =)) bạn biết ai rồi chứ
+thuan : người bị OOP dí nhiều nhất.
+table : Đồ nội thất có mặt phẳng, dùng để đặt đồ vật hoặc ăn uống.
+happy : Cảm giác vui vẻ, hài lòng.
+smile : Biểu hiện khuôn mặt khi vui, kéo khóe miệng lên.
+beach : Vùng đất cạnh biển, có cát hoặc sỏi.
+cloud : Khối hơi nước bồng bềnh trên bầu trời.
+chair : Đồ nội thất để ngồi.
+green : Màu của cỏ hoặc lá cây.
+bread : Thực phẩm làm từ bột mì nướng.
+fruit : Phần ngọt, nhiều hạt của cây, có thể ăn được.
+juice : Nước ép từ quả hoặc rau.
+money : Vật dùng để mua hàng hóa và dịch vụ.
+power : Khả năng kiểm soát hoặc ảnh hưởng.
+story : Một câu chuyện, bài tường thuật về sự kiện có thật hoặc tưởng tượng.
+think : Sử dụng trí óc để suy nghĩ, cân nhắc.
+great : Rất tốt, tuyệt vời hoặc có kích thước/tầm quan trọng lớn.
+small : Có kích thước nhỏ.
+large : Có kích thước lớn.
+short : Có chiều dài hoặc chiều cao ngắn.
+dream : Những hình ảnh, suy nghĩ xuất hiện khi ngủ.
+share : Chia sẻ thứ gì đó với người khác.
+peace : Tình trạng không có chiến tranh hoặc xung đột.
+world : Toàn bộ Trái Đất và mọi thứ trên đó.
+
+chicken : Gia cầm nuôi lấy thịt và trứng.
+dolphin : Động vật biển thông minh, thường sống thành đàn.
+picture : Hình vẽ hoặc ảnh chụp.
+windows : Các ô kính trên tường hoặc cửa.
+library : Nơi chứa sách để đọc hoặc mượn.
+kitchen : Phòng dùng để nấu ăn.
+bedroom : Phòng dùng để ngủ.
+package : Hộp hoặc bọc chứa đồ, thường gửi qua bưu điện.
+journey : Một chuyến đi dài, thường khó khăn hoặc phiêu lưu.
+rainbow : Vòng cung nhiều màu sắc trên bầu trời sau mưa.
+holiday : Ngày nghỉ lễ hoặc kỳ nghỉ.
+student : Người học ở trường hoặc đại học.
+teacher : Người dạy mình trên trường.
+company : Một doanh nghiệp hoặc công ty.
+country : Một lãnh thổ của 1 đất nước.
+village : Khu dân cư nhỏ hơn thị trấn.
+airport : Nơi máy bay cất cánh và hạ cánh.
+grocery : Cửa hàng bán thực phẩm và đồ dùng hàng ngày.
+factory : Nhà máy sản xuất hàng hóa.
+uniform : Trang phục giống nhau cho một nhóm người.
+weather : Tình trạng khí quyển (nắng, mưa, gió...).
+morning : Buổi sáng, từ khi mặt trời mọc đến trưa.
+evening : Buổi tối, từ chiều muộn đến đêm.
+weekend : Hai ngày cuối tuần (Thứ Bảy và Chủ Nhật).
+january : Tháng đầu tiên trong năm.
+believe : Tin tưởng vào điều gì đó.
+receive : Nhận lấy một cái gì đó.
+achieve : Đạt được mục tiêu.
+improve : Trở nên tốt hơn.
+prepare : Chuẩn bị cho việc gì đó.
+success : Học hành nghiêm túc thì ắt thành công.
+protect : Bảo vệ khỏi nguy hiểm.
+explore : Khám phá một nơi hoặc ý tưởng mới.
+amazing : Rất tuyệt vời, đáng kinh ngạc.
+healthy : Có sức khỏe tốt.
+careful : Cẩn thận để tránh sai lầm hoặc nguy hiểm.
+serious : Nghiêm túc, không đùa giỡn.
+patient : Miêu tả ai đó bình tĩnh, lạc quan.
+helpful : Sẵn sàng giúp đỡ.
+curious : Tò mò muốn biết.
+nervous : Lo lắng, bồn chồn.
+worried : Cảm thấy lo ngại.
+thirsty : Cảm giác khát nước.
+finally : Từ này có nghĩa là cuối cùng.
+usually : Chỉ mức độ thường xuyên.
+
+atmosphere : Lớp khí bao quanh Trái Đất.
+government : Hệ thống cai trị một quốc gia.
+understand : Hiểu rõ điều gì đó.
+experience : Kinh nghiệm có được từ thực tế.
+healthcare : Chăm sóc sức khỏe.
+technology : Công nghệ, ứng dụng khoa học vào thực tế
+management : Sự quản lý.
+completely : Hoàn toàn.
+impossible : Không thể xảy ra.
+permission : Sự cho phép.
+vocabulary : Từ vựng.
+dictionary : Từ điển.
+experiment : Thí nghiệm.
+generously : Một cách rộng lượng.
+hemisphere : Bán cầu (Trái Đất).
+importance : Tầm quan trọng.
+overweight : Thừa cân.
+passionate : Đam mê, nhiệt huyết.
+pedestrian : Người đi bộ.
+philosophy : Triết học.
+photograph : Nhiếp ảnh.
+successful : Thành công (tính từ).
+tournament : Giải đấu thể thao.
+university : Trường đại học.
+waterproof : Chống nước.
+worthwhile : Đáng giá, có ích.
+accessible : Có thể tiếp cận được.
+activities : Các hoạt động.
+appearance : Ngoại hình, sự xuất hiện.
+revolution : Sự quay quanh (như hành tinh quanh sao).
+continents : Các lục địa chính của Trái Đất.
+population : Tổng số người sống ở một khu vực hoặc trên toàn cầu.
+vegetation : Toàn bộ cây cối và thực vật trong một khu vực.
+terraceing : Việc làm ruộng theo bậc trên sườn đồi.

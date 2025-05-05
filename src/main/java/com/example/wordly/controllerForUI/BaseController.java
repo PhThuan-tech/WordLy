@@ -10,6 +10,13 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.animation.ScaleTransition;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 // Tạo 1 base cơ bản để chuyển cảnh

@@ -167,7 +167,7 @@ public class DefinitionGameController {
             score++;
             updateScoreLabel();
         } else {
-            feedbackLabel.setText("Không đúng. Đúng là:\n" + correctDefinition);
+            feedbackLabel.setText("Không đúng. Đúng là: " + correctDefinition);
         }
     }
 

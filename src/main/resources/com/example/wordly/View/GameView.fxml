@@ -6,9 +6,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <!-- Use BorderPane for the main structure -->
@@ -16,12 +17,14 @@
 <BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.GameViewController">
 
     <stylesheets>
+        <!-- Link tới file CSS -->
         <URL value="@../styles/home.css" />
-        <!-- Consider a specific gameSelection.css -->
-        <!-- <URL value="@../styles/gameSelection.css" /> -->
+        <!-- Có thể thêm file CSS riêng cho game nếu muốn -->
+        <!-- <URL value="@../styles/game.css" /> -->
     </stylesheets>
 
     <left>
+        <!-- Phần menu bên trái giữ nguyên -->
         <VBox prefWidth="170.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -83,6 +86,7 @@
                     </graphic>
                 </Button>
 
+                <!-- Nút Game hiện tại được disable -->
                 <Button contentDisplay="RIGHT" disable="true" graphicTextGap="37.0" maxWidth="Infinity" mnemonicParsing="false" prefHeight="40.0" text="Game">
                     <graphic>
                         <ImageView fitHeight="45.0" fitWidth="45.0" preserveRatio="true">
@@ -107,33 +111,68 @@
         </VBox>
     </left>
     <center>
-        <AnchorPane prefHeight="554.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+        <!-- Sử dụng GridPane để sắp xếp các game -->
+        <GridPane alignment="CENTER" hgap="40.0" prefHeight="554.0" prefWidth="830.0" vgap="40.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
             <children>
-                <HBox layoutX="157.0" layoutY="145.0" prefHeight="50.0" prefWidth="447.0">
+                <!-- Game 1: Definition Game -->
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="game-item" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleStartDefiGame" prefHeight="50.0" prefWidth="154.0" text="Funny Quizz" />
-                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="346.0" text="Trò chơi giải đố đoán nghĩa của 1 từ" wrapText="true" />
+                        <ImageView fitHeight="219.0" fitWidth="317.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/GameQuiz.jpg" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Button mnemonicParsing="false" onAction="#handleStartDefiGame" prefHeight="50.0" prefWidth="222.0" styleClass="game-button" text="Play Definition Game" />
                     </children>
-                </HBox>
-                <HBox layoutX="157.0" layoutY="229.0" prefHeight="50.0" prefWidth="447.0">
+                </VBox>
+
+                <!-- Game 2: Wordle -->
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="game-item" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#GoToWordle" prefHeight="50.0" prefWidth="155.0" text="Wordle " />
-                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="348.0" text="Trò chơi đoán từ đã được gợi ý" wrapText="true" />
+                        <ImageView fitHeight="210.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/wordleImage.jpg" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Button mnemonicParsing="false" onAction="#GoToWordle" prefHeight="52.0" prefWidth="214.0" styleClass="game-button" text="Play Wordle" />
                     </children>
-                </HBox>
-                <HBox layoutX="157.0" layoutY="310.0" prefHeight="50.0" prefWidth="447.0">
+                </VBox>
+
+                <!-- Game 3: Scramble Word -->
+                <VBox alignment="CENTER" prefHeight="264.0" prefWidth="350.0" styleClass="game-item" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" text="Quái vật bánh mì" />
-                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="318.0" text="Label" wrapText="true" />
+                        <ImageView fitHeight="183.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/scramble-words.jpg" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Button mnemonicParsing="false" onAction="#handleGoToScrambleWord" prefHeight="46.0" prefWidth="241.0" styleClass="game-button" text="Play Scramble Word" />
                     </children>
-                </HBox>
-                <HBox layoutX="157.0" layoutY="393.0" prefHeight="54.0" prefWidth="474.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#handleGoToScrambleWord" prefHeight="52.0" prefWidth="132.0" text="Scramble Word" />
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="343.0" text="Sắp xếp từ tiếng anh bị xáo trộn" />
-                    </children>
-                </HBox>
+                </VBox>
+
+                <!-- Cell (1,1) hiện tại trống, có thể thêm game thứ 4 vào đây -->
+
             </children>
-        </AnchorPane>
+        </GridPane>
     </center>
 </BorderPane>

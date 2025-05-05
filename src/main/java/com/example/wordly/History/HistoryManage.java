@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 public class HistoryManage {
     private static final String HISTORY_FILE = "src/history.txt";
     private static final String GAME_FILE = "src/main/resources/game_data.txt";
-    private static final String WORD_TRIE = "src/main/resources/com/example/wordly/ListOfWord";
+    private static final String WORD_TRIE = "src/main/resources/com/example/wordly/ListOfWord4Trie";
 
     private void saveToFile(String filePath, WordDetails details) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
