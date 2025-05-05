@@ -14,13 +14,71 @@
         <URL value="@../styles/translate.css" />
     </stylesheets>
 
-   <center>
+    <fx:define>
+        <ToggleGroup fx:id="sourceLangGroup" />
+        <ToggleGroup fx:id="targetLangGroup" />
+    </fx:define>
+
+
+    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+             <!-- Thanh chọn ngôn ngữ nguồn -->
+             <StackPane layoutX="37.0" layoutY="70.0" prefHeight="40.0">
+                 <VBox spacing="0">
+                     <HBox alignment="CENTER_LEFT" spacing="10">
+                         <HBox fx:id="sourceLangBox" spacing="10">
+                             <ToggleButton onAction="#handleSourceLangSelection" styleClass="lang-toggle" text="Phát hiện ngôn ngữ" toggleGroup="$sourceLangGroup" />
+                             <ToggleButton onAction="#handleSourceLangSelection" styleClass="lang-toggle" text="Anh" toggleGroup="$sourceLangGroup" />
+                             <ToggleButton onAction="#handleSourceLangSelection" styleClass="lang-toggle" text="Việt" toggleGroup="$sourceLangGroup" />
+                             <ToggleButton onAction="#handleSourceLangSelection" styleClass="lang-toggle" text="Pháp" toggleGroup="$sourceLangGroup" />
+                         </HBox>
+
+                         <MenuButton fx:id="languageMenuButton" styleClass="selected-menu-item">
+                             <items>
+                                 <MenuItem fx:id="itemTrung" onAction="#handleOtherLangSelection" text="Trung" />
+                                 <MenuItem fx:id="itemHan" onAction="#handleOtherLangSelection" text="Hàn" />
+                                 <MenuItem fx:id="itemNhat" onAction="#handleOtherLangSelection" text="Nhật" />
+                             </items>
+                         </MenuButton>
+
+                     </HBox>
+
+                     <Pane prefHeight="2">
+                         <Rectangle fx:id="highlightBar" fill="#1a73e8" height="2" visible="true" />
+                         <Rectangle fx:id="menuSourceHighlightBar" fill="#1a73e8" height="2" visible="false" />
+                     </Pane>
+                 </VBox>
+             </StackPane>
+
+
+             <!-- Thanh chọn ngôn ngữ đích -->
+             <StackPane layoutX="550.0" layoutY="70.0" prefHeight="40.0">
+                 <VBox spacing="0">
+                     <HBox fx:id="targetLangBox" alignment="CENTER_LEFT" spacing="10" styleClass="selected-menu-item">
+                         <ToggleButton onAction="#handleTargetLangSelection" styleClass="lang-toggle" text="Việt" toggleGroup="$targetLangGroup" />
+                         <ToggleButton onAction="#handleTargetLangSelection" styleClass="lang-toggle" text="Anh" toggleGroup="$targetLangGroup" />
+                         <ToggleButton onAction="#handleTargetLangSelection" styleClass="lang-toggle" text="Trung" toggleGroup="$targetLangGroup" />
+
+                         <MenuButton fx:id="targetLangMenuButton" styleClass="selected-menu-item">
+                             <items>
+                                 <MenuItem onAction="#handleOtherTargetLangSelection" text="Pháp" />
+                                 <MenuItem onAction="#handleOtherTargetLangSelection" text="Hàn" />
+                                 <MenuItem onAction="#handleOtherTargetLangSelection" text="Nhật" />
+                             </items>
+                         </MenuButton>
+
+                     </HBox>
+                     <Pane prefHeight="2">
+                         <Rectangle fx:id="targetHighlightBar" fill="#1a73e8" height="2" visible="true" />
+                         <Rectangle fx:id="menuTargetHighlightBar" fill="#1a73e8" height="2" visible="false" />
+                     </Pane>
+                 </VBox>
+             </StackPane>
 
              <TextArea fx:id="needToTrans" layoutX="37.0" layoutY="109.0" prefHeight="340.0" prefWidth="400.0" promptText="Write or paste text here..." wrapText="true" />
                 <TextArea fx:id="translated" editable="false" layoutX="550.0" layoutY="110.0" prefHeight="339.0" prefWidth="400.0" promptText="Translation will appear here..." wrapText="true" />
-                <Label layoutX="558.0" layoutY="76.0" text="Translated Passage" />
+                <Label layoutX="691.0" layoutY="40.0" text="Translated Passage" />
                 <Button fx:id="speak2Button" layoutX="828.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleSpeakTranslated" styleClass="icon-button">
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -70,7 +128,7 @@
                  <Label text="Click hoặc kéo-thả ảnh vào đây" />
              </StackPane>
 
-             <Label layoutX="157.0" layoutY="76.0" text="Original Passage" />
+             <Label layoutX="157.0" layoutY="40.0" text="Original Passage" />
                   <Button fx:id="transButton" layoutX="474.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleTranslating" styleClass="icon-button">
                       <graphic>
                           <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
@@ -93,14 +151,12 @@
                      <Label fx:id="realTimeLabel" style="-fx-text-fill: white; -fx-font-size: 24px;" text="Đang nghe..." />
                      <Region visible="false" HBox.hgrow="ALWAYS" />
 
-                     <!-- StackPane chứa vòng tròn + icon micro -->
                      <StackPane fx:id="micContainer" prefHeight="60" prefWidth="60">
-                         <!-- Các vòng tròn bập bùng -->
                          <Circle fx:id="wave1" fill="white" opacity="0.2" radius="20" />
                          <Circle fx:id="wave2" fill="white" opacity="0.2" radius="20" />
                          <Circle fx:id="wave3" fill="white" opacity="0.2" radius="20" />
 
-                         <!-- Ảnh micro nằm trên cùng -->
+
                          <ImageView fitHeight="40.0" fitWidth="40.0">
                              <Image url="@../icons/micro-for-speaking.png" />
                          </ImageView>
@@ -129,6 +185,12 @@
                   </ImageView>
                </graphic>
             </Button>
+             <StackPane fx:id="copyNotificationLabel" layoutX="422.0" layoutY="183.0" opacity="0" prefHeight="67.0" prefWidth="146.0" visible="false" styleClass="copy-pane">
+                 <Label text="Đã copy ✅" />
+             </StackPane>
+
+
+
              <Button layoutX="40.0" layoutY="541.0" mnemonicParsing="false" onAction="#backToAdvance" prefHeight="50.0" prefWidth="76.0" style="-fx-background-color: transparent;">
                  <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">

@@ -8,6 +8,7 @@ import com.azure.ai.vision.imageanalysis.models.VisualFeatures;
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.util.BinaryData;
+
 import com.example.wordly.API.TextToSpeech;
 import com.example.wordly.API.Translator;
 import javafx.animation.*;
@@ -15,16 +16,16 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -43,6 +44,7 @@ import javafx.animation.PauseTransition;
 
 
 public class TranslateAndTTSController extends BaseController {
+    /* ============================ PHƯƠNG THỨC SWITCH VIEW ========================================================= */
     @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/MainView.fxml");
     }
@@ -68,53 +70,59 @@ public class TranslateAndTTSController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    @FXML private TextArea needToTrans;
-    @FXML private TextArea translated;
-    @FXML private Button transButton;
-    @FXML private Button speak1Button;
-    @FXML private Button speak2Button;
-    @FXML private Button stopButton;
-    @FXML private StackPane dropPane;
-    @FXML private Button loadImageButton;
-    @FXML private Button recordButton;
-    @FXML
-    private BorderPane rootPane;
-    @FXML private Button stopRecordingBtn;
-    @FXML
-    private Button clearInputButton;
-    @FXML
-    private Button copyButton;
-    @FXML
-    private AnchorPane recordingPane;
-    @FXML private Label realTimeLabel;
-    @FXML private Circle wave1;
-    @FXML private Circle wave2;
-    @FXML private Circle wave3;
+    /* ============================================================================================================== */
 
 
 
-    private ImageAnalysisClient imageAnalysisClient;
-    private ExecutorService executorService;
-    private Future<?> currentSpeechTask;
 
+    /* ======================== API, ENDPOINT CỦA VISION VÀ SPEECH ================================================== */
     private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
     private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
     private static final String AZURE_SPEECH_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";
     private static final String AZURE_SPEECH_REGION = "southeastasia";
 
-    private Future<?> currentRecognitionTask;
+    /* ============================================================================================================== */
 
-    @FXML
-    private void showDropZone(ActionEvent event) {
-        boolean isVisible = dropPane.isVisible();
-        dropPane.setVisible(!isVisible);
-        dropPane.setManaged(!isVisible);
-    }
+
+
+
+    /* ========================== PHƯƠNG THỨC KHỞI TẠO VIEW BAN ĐẦU ================================================= */
+    @FXML private Button stopButton;
+    @FXML private BorderPane rootPane;
+    @FXML private Circle wave1;
+    @FXML private Circle wave2;
+    @FXML private Circle wave3;
+    @FXML private Rectangle highlightBar;
 
     private final PauseTransition debounceTranslate = new PauseTransition(Duration.millis(500));
 
+
+
     @FXML
     public void initialize() {
+        // Chọn mặc định “Phát hiện ngôn ngữ”
+        ToggleButton firstBtn = (ToggleButton) sourceLangBox.getChildren().get(0);
+        sourceLangGroup.selectToggle(firstBtn);
+
+        // Đặt highlight ngay dưới nút đầu tiên sau khi layout xong
+        Platform.runLater(() -> {
+            highlightBar.setWidth(firstBtn.getWidth());
+            highlightBar.setTranslateX(firstBtn.localToParent(0, 0).getX());
+        });
+        // Chọn mặc định ToggleButton đầu tiên (Ví dụ: "Việt")
+        ToggleButton firstBt = (ToggleButton) targetLangBox.getChildren().get(0);
+        targetLangGroup.selectToggle(firstBt); // Chọn ToggleButton đầu tiên
+
+        // Đặt thanh highlight dưới nút đầu tiên sau khi layout xong
+        Platform.runLater(() -> {
+            // Đảm bảo rằng thanh highlight có chiều rộng bằng nút đầu tiên
+            targetHighlightBar.setWidth(firstBt.getWidth());
+            // Đặt thanh highlight đúng vị trí dưới nút đầu tiên
+            targetHighlightBar.setTranslateX(firstBt.localToParent(0, 0).getX());
+        });
+        targetLangCode = "vi"; // Cập nhật mã ngôn ngữ đích tương ứng
+
+
         applyHoverEffectToAllButtons(rootPane);
         stopRecordingBtn.setVisible(false);
         executorService = Executors.newCachedThreadPool();
@@ -172,32 +180,21 @@ public class TranslateAndTTSController extends BaseController {
         createWaveAnimation(wave3, Duration.seconds(1), 600);
     }
 
-    private void autoTranslate(String text) {
-        if (text == null || text.trim().isEmpty()) {
-            translated.clear();
-            return;
-        }
-
-        Task<String> translateTask = new Task<>() {
-            @Override
-            protected String call() throws Exception {
-                return Translator.translate(text, "auto", "vi");
-            }
-
-            @Override
-            protected void succeeded() {
-                translated.setText(getValue());
-            }
-
-            @Override
-            protected void failed() {
-                translated.setText("Không thể dịch văn bản.");
-            }
-        };
-        executorService.submit(translateTask);
-    }
+    /* ============================================================================================================== */
 
 
+
+
+
+    /* =====================  PHƯƠNG THỨC XỬ LÝ HÌNH ẢNH  =========================================================== */
+    @FXML private Button loadImageButton;
+    @FXML private StackPane dropPane;
+    private ImageAnalysisClient imageAnalysisClient;
+    private ExecutorService executorService;
+
+
+
+    // PHƯƠNG THỨC MỞ HÌNH ẢNH
     private void openImageChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Chọn hình ảnh");
@@ -211,6 +208,7 @@ public class TranslateAndTTSController extends BaseController {
         }
     }
 
+    // XỬ LÝ ẢNH
     private void processImageFile(File file) {
         if (imageAnalysisClient == null) {
             showInfoAlert("Lỗi", "Dịch vụ phân tích ảnh chưa sẵn sàng.");
@@ -239,12 +237,14 @@ public class TranslateAndTTSController extends BaseController {
                 return extractedText.toString().trim();
             }
 
+            // XỬ LÝ ẢNH THÀNH CÔNG
             @Override
             protected void succeeded() {
                 String result = getValue();
                 needToTrans.setText(result.isEmpty() ? "Không phát hiện văn bản trong ảnh." : result);
             }
 
+            // XỬ LÝ ẢNH THẤT BẠI
             @Override
             protected void failed() {
                 showInfoAlert("Lỗi xử lý ảnh", getException().getMessage());
@@ -254,8 +254,24 @@ public class TranslateAndTTSController extends BaseController {
         executorService.submit(ocrTask);
     }
 
+    // PHƯƠNG THỨC XỬ LÝ LOGIC CỦA PANE DROP/ CHOOSE IMAGE
+    @FXML
+    private void showDropZone(ActionEvent event) {
+        boolean isVisible = dropPane.isVisible();
+        dropPane.setVisible(!isVisible);
+        dropPane.setManaged(!isVisible);
+    }
+
+    /* ============================================================================================================== */
 
 
+
+
+
+    /* ======================= PHƯƠNG THỨC XỬ LÝ LOGIC TRANSLATE ==================================================== */
+    @FXML private TextArea needToTrans;
+    @FXML private TextArea translated;
+    @FXML private Button transButton;
 
 
     @FXML
@@ -283,6 +299,43 @@ public class TranslateAndTTSController extends BaseController {
         };
         executorService.submit(translateTask);
     }
+
+    private void autoTranslate(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            translated.clear();
+            return;
+        }
+
+        Task<String> translateTask = new Task<>() {
+            @Override
+            protected String call() throws Exception {
+                return Translator.translate(text, sourceLangCode, targetLangCode);
+            }
+
+            @Override
+            protected void succeeded() {
+                translated.setText(getValue());
+            }
+
+            @Override
+            protected void failed() {
+                translated.setText("Không thể dịch văn bản.");
+            }
+        };
+        executorService.submit(translateTask);
+    }
+
+    /* ============================================================================================================== */
+
+
+
+
+
+    /* ======================== PHƯƠNG THỨC XỬ LÝ TEXT TO SPEECH ==================================================== */
+    @FXML private Button speak1Button;
+    @FXML private Button speak2Button;
+    private Future<?> currentSpeechTask;
+
 
     @FXML
     private void handleSpeakOriginal(ActionEvent event) {
@@ -313,6 +366,7 @@ public class TranslateAndTTSController extends BaseController {
         }
     }
 
+    // PHƯƠNG THỨC NGẮT GIỌNG/ HỦY NÓI
     @FXML
     private void handleStopSpeaking() {
         if (currentSpeechTask != null && !currentSpeechTask.isDone()) {
@@ -321,25 +375,24 @@ public class TranslateAndTTSController extends BaseController {
         TextToSpeech.stop();
     }
 
-    private void showInfoAlert(String title, String content) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(content);
-            alert.showAndWait();
-        });
-    }
+    /* ============================================================================================================== */
 
-    public void shutdown() {
-        if (executorService != null && !executorService.isShutdown()) {
-            executorService.shutdownNow();
-        }
-    }
 
+
+
+
+    /* =================== PHƯƠNG THỨC XỬ LÝ GHI ÂM/ SPEECH TO TEXT ================================================= */
     private final StringBuilder recognitionBuffer = new StringBuilder();
     private SpeechRecognizer recognizer;
+    @FXML private Button recordButton;
+    @FXML private Button stopRecordingBtn;
+    @FXML private AnchorPane recordingPane;
+    @FXML private Label realTimeLabel;
+    private Future<?> currentRecognitionTask;
 
+
+
+    // PHƯƠNG THỨC LOGIC RECORD
     @FXML
     private void handleStartRecording(ActionEvent event) {
         recordButton.setVisible(false);
@@ -401,6 +454,8 @@ public class TranslateAndTTSController extends BaseController {
             }
         });
     }
+
+    // PHƯƠNG THỨC LOGIC DỪNG RECORD
     @FXML
     private void handleStopRecording() {
         stopRecordingBtn.setVisible(false);
@@ -418,11 +473,13 @@ public class TranslateAndTTSController extends BaseController {
         stopListeningView();
     }
 
+    // PHƯƠNG THỨC ĐÓNG RECORD VIEW
     private void stopListeningView() {
         recordingPane.setVisible(false);
         recordingPane.setManaged(false);
     }
 
+    // PHƯƠNG THỨC TẠO ANIMATION CỦA MICRO
     private void createWaveAnimation(Circle circle, Duration duration, int delayMillis) {
         ScaleTransition st = new ScaleTransition(duration, circle);
         st.setFromX(1);
@@ -441,6 +498,178 @@ public class TranslateAndTTSController extends BaseController {
         pt.play();
     }
 
+    /* ============================================================================================================== */
+
+
+
+
+
+    /* ====================== PHƯƠNG THỨC XỬ LÝ PHẦN CHỌN NGÔN NGỮ DỊCH ============================================= */
+    @FXML private HBox sourceLangBox;
+    @FXML private ToggleGroup sourceLangGroup;
+    @FXML private MenuItem itemTrung;
+    @FXML private MenuItem itemHan;
+    private MenuItem selectedMenuItem = null;
+    // Mã ngôn ngữ nguồn hiện tại, mặc định là detect
+    private String sourceLangCode = "auto";
+
+
+    @FXML private HBox targetLangBox; // Tham chiếu đến HBox của ngôn ngữ đích
+    @FXML private Rectangle targetHighlightBar; // Tham chiếu đến thanh highlight
+    @FXML private ToggleGroup targetLangGroup; // ToggleGroup của ngôn ngữ đích
+    private String targetLangCode = "vi"; // Mã ngôn ngữ đích mặc định
+
+    @FXML private MenuButton languageMenuButton;
+    @FXML private MenuButton targetLangMenuButton;
+
+    @FXML private Rectangle menuSourceHighlightBar;
+    @FXML private Rectangle menuTargetHighlightBar;
+
+
+    @FXML
+    private void handleSourceLangSelection(ActionEvent event) {
+        ToggleButton selected = (ToggleButton) event.getSource();
+
+        // Tính khoảng cách X trong chính HBox của ToggleButton
+        double newX = 0;
+        for (Node node : sourceLangBox.getChildren()) {
+            if (node == selected) break;
+            newX += node.getBoundsInParent().getWidth() + sourceLangBox.getSpacing();
+        }
+
+        // Animate thanh highlight
+        TranslateTransition tt = new TranslateTransition(Duration.millis(200), highlightBar);
+        tt.setToX(newX);
+        tt.setInterpolator(Interpolator.EASE_BOTH);
+        tt.play();
+
+        highlightBar.setWidth(selected.getWidth());
+
+        // Cập nhật mã ngôn ngữ nguồn
+        switch (selected.getText()) {
+            case "Anh" -> sourceLangCode = "en";
+            case "Việt" -> sourceLangCode = "vi";
+            case "Pháp" -> sourceLangCode = "fr";
+            default -> sourceLangCode = "auto";
+        }
+
+        // Gọi dịch lại nếu có văn bản
+        autoTranslate(needToTrans.getText());
+
+        highlightBar.setVisible(true);
+    }
+
+    /** Xử lý khi chọn 1 MenuItem ở “Chọn ngôn ngữ khác” **/
+    @FXML
+    private void handleOtherLangSelection(ActionEvent event) {
+        MenuItem clickedItem = (MenuItem) event.getSource();
+
+        // Bỏ chọn toggle
+        sourceLangGroup.selectToggle(null);
+        highlightBar.setVisible(false);
+
+        // Cập nhật label MenuButton
+        languageMenuButton.setText(clickedItem.getText());
+
+        // Cập nhật style chọn
+        if (selectedMenuItem != null) {
+            selectedMenuItem.getStyleClass().remove("selected-menu-item");
+        }
+        clickedItem.getStyleClass().add("selected-menu-item");
+        selectedMenuItem = clickedItem;
+
+        // Gán mã ngôn ngữ
+        switch (clickedItem.getText()) {
+            case "Trung" -> sourceLangCode = "zh";
+            case "Hàn" -> sourceLangCode = "ko";
+            case "Nhật" -> sourceLangCode = "ja";
+            default -> sourceLangCode = "auto";
+        }
+
+        autoTranslate(needToTrans.getText());
+    }
+
+    @FXML
+    private MenuItem itemXemThem; // nếu bạn muốn xử lý riêng cho từng item
+    private MenuItem selectedTargetMenuItem = null;
+
+
+
+    @FXML
+    private void handleTargetLangSelection(ActionEvent event) {
+        ToggleButton selected = (ToggleButton) event.getSource();
+
+        // Tính khoảng cách X trong chính HBox của ToggleButton
+        double newX = 0;
+        for (Node node : targetLangBox.getChildren()) {
+            if (node == selected) break;
+            newX += node.getBoundsInParent().getWidth() + targetLangBox.getSpacing();
+        }
+
+        // Animate thanh highlight
+        TranslateTransition tt = new TranslateTransition(Duration.millis(200), targetHighlightBar);
+        tt.setToX(newX);
+        tt.setInterpolator(Interpolator.EASE_BOTH);
+        tt.play();
+
+        targetHighlightBar.setWidth(selected.getWidth());
+
+        // Gán mã ngôn ngữ đích
+        switch (selected.getText()) {
+            case "Việt" -> targetLangCode = "vi";
+            case "Anh" -> targetLangCode = "en";
+            case "Trung" -> targetLangCode = "zh";
+            default -> targetLangCode = "auto";
+        }
+
+        // Gọi dịch lại nếu có văn bản
+        autoTranslate(needToTrans.getText());
+        targetHighlightBar.setVisible(true);
+    }
+
+    @FXML
+    private void handleOtherTargetLangSelection(ActionEvent event) {
+        MenuItem clickedItem = (MenuItem) event.getSource();
+
+        // Bỏ chọn toggle
+        targetLangGroup.selectToggle(null);
+        targetHighlightBar.setVisible(false);
+
+        // Cập nhật label MenuButton
+        targetLangMenuButton.setText(clickedItem.getText());
+
+        // Cập nhật style chọn
+        if (selectedTargetMenuItem != null) {
+            selectedTargetMenuItem.getStyleClass().remove("selected-menu-item");
+        }
+        clickedItem.getStyleClass().add("selected-menu-item");
+        selectedTargetMenuItem = clickedItem;
+
+        // Gán mã ngôn ngữ
+        switch (clickedItem.getText()) {
+            case "Pháp" -> targetLangCode = "fr";
+            case "Hàn" -> targetLangCode = "ko";
+            case "Nhật" -> targetLangCode = "ja";
+            default -> targetLangCode = "auto";
+        }
+
+        autoTranslate(needToTrans.getText());
+    }
+
+
+    /* ============================================================================================================== */
+
+
+
+
+
+    /* ==================== PHƯƠNG THỨC XỬ LÝ NÚT BẤM CỦA TEXT AREA ================================================= */
+    @FXML private Button clearInputButton;
+    @FXML private Button copyButton;
+    @FXML private StackPane copyNotificationLabel;
+
+
+
     @FXML
     private void handleClearInput() {
         needToTrans.clear();
@@ -453,6 +682,44 @@ public class TranslateAndTTSController extends BaseController {
             ClipboardContent content = new ClipboardContent();
             content.putString(text);
             Clipboard.getSystemClipboard().setContent(content);
+
+            // Hiện label "Đã copy"
+            copyNotificationLabel.setVisible(true);
+
+            // Hiệu ứng mờ dần (fade in rồi fade out)
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), copyNotificationLabel);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+
+            PauseTransition stay = new PauseTransition(Duration.seconds(1.5));
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), copyNotificationLabel);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+
+            fadeOut.setOnFinished(e -> copyNotificationLabel.setVisible(false));
+
+            SequentialTransition sequence = new SequentialTransition(fadeIn, stay, fadeOut);
+            sequence.play();
         }
+    }
+
+
+    /* ============================================================================================================== */
+
+
+
+
+
+
+    // HIỆN CÁC THÔNG BÁO ALERT CẢNH BÁO
+    private void showInfoAlert(String title, String content) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        });
     }
 }
