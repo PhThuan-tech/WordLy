@@ -3,6 +3,7 @@ package com.example.wordly.controllerForUI;
 import com.example.wordly.SQLite.NewAddedWordDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -10,9 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class EditWordController extends BaseController {
-
-    @FXML
-    public void handleBackMain(ActionEvent actionEvent) {
+    /* =================== PHƯƠNG THỨC CHUYỂN VIEW ================================================================= */
+    @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
     }
     @FXML public void handleGoToSearch(ActionEvent actionEvent) {
@@ -31,17 +31,30 @@ public class EditWordController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    @FXML private TextField txtWord, txtPronunciation, txtType;
-    @FXML private TextArea txtDescription;
-    @FXML private Button addButton;
+    /* ============================================================================================================== */
 
-    @FXML
-    private BorderPane rootPane;
+
+
+    /* ============================= PHƯƠNG THỨC KHỞI TẠO VIEW BAN ĐẦU ============================================ */
+    public BorderPane rootPane;
 
     public void initialize() {
         applyHoverEffectToAllButtons(rootPane);
     }
 
+    /* ============================================================================================================== */
+
+
+
+
+    /* =============================== PHƯƠNG THỨC XỬ LÝ PHÍM ADD WORD ============================================== */
+    @FXML private TextField txtWord, txtPronunciation, txtType;
+    @FXML private TextArea txtDescription;
+    @FXML private Button addButton;
+
+
+
+    // Xử lý thêm từ vào database
     public void handleAddButton(ActionEvent event) {
         if (event.getSource() != addButton) {
             return;
@@ -74,6 +87,7 @@ public class EditWordController extends BaseController {
 
     }
 
+    // Xóa field để thêm từ khác
     private void clearFields() {
         txtWord.clear();
         txtPronunciation.clear();
@@ -81,7 +95,10 @@ public class EditWordController extends BaseController {
         txtDescription.clear();
     }
 
-    // Popup hien thi them tu
+    /* ============================================================================================================== */
+
+
+    // Popup hiển thị thêm từ
     private void showPopup(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("ALO ALO");
