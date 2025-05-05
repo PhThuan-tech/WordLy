@@ -13,8 +13,8 @@ import java.util.Map;
 public class WordDataLoader {
     // 2 duong dan luu file txt de lay word va hint
     // bo dictionarydev vi nghia no hoi kho
-    private static final String WORDLIST_PATH = "/wordlist.txt";
-    private static final String HINTS_PATH = "/hints.txt";
+    private static final String WORDLIST_PATH = "/Word4WordleGame.txt";
+    private static final String HINTS_PATH = "/Hints4WordleGame.txt";
 
     // gio can load cac tu truoc trong wordlist.
     public List<String> loadWordList() {
@@ -85,7 +85,7 @@ public class WordDataLoader {
         }
         // neu ko co tu co kich thuoc da cho thi dung nhu nay
         if (filteredList.isEmpty()) {
-            System.out.println("Từ bạn tìm ko khớp  với kích thước " + length + " trong danh sách.");
+            System.out.println("Từ bạn tìm ko khớp với kích thước " + length + " trong danh sách.");
         }
         return filteredList;
     }

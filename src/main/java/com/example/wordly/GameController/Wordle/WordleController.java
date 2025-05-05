@@ -228,7 +228,7 @@ public class WordleController extends BaseController {
         currentDifficulty = difficulty;
         List<String> filteredList = dataLoader.filterWordByLength(wordListAll, difficulty.getWordLength());
         if (filteredList.isEmpty()) {
-            messageLabel.setText("Lỗi: Không có từ cho độ dài " + difficulty.getWordLength() + ". Vui lòng kiểm tra file wordlist.txt.");
+            messageLabel.setText("Lỗi: Không có từ cho độ dài " + difficulty.getWordLength() + ". Vui lòng kiểm tra file Word4WordleGame.txt.");
             inputField.setDisable(true);
             hintButton.setDisable(true);
             timerLabel.setText("⏱ --:--");

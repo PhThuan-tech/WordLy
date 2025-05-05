@@ -20,11 +20,10 @@
             </ImageView>
         </graphic>
     </Button>
-    <VBox layoutX="37.0" layoutY="69.0" prefHeight="208.0" prefWidth="280.0" spacing="10" styleClass="content-box">
+    <VBox layoutX="39.0" layoutY="142.0" prefHeight="231.0" prefWidth="284.0" spacing="10" styleClass="content-box">
         <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/TextToSpeech.png" />
-        </ImageView> <!-- Adjust image size slightly to fit padding -->
-        <HBox prefHeight="50.0" prefWidth="382.0" styleClass="button-container"> <!-- Add styleClass="button-container" -->
+        </ImageView> <!--  Add styleClass="button-container" -->
             <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToTTS" prefHeight="40.0" prefWidth="278.0" text="Text To Speech">
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -32,15 +31,14 @@
                     </ImageView>
                 </graphic>
             </Button>
-        </HBox>
+
     </VBox>
 
     <!-- Add styleClass="content-box" and spacing to the VBox -->
-    <VBox layoutX="370.0" layoutY="82.0" prefHeight="249.0" prefWidth="216.0" spacing="10" styleClass="content-box">
+    <VBox layoutX="371.0" layoutY="142.0" prefHeight="250.0" prefWidth="258.0" spacing="10" styleClass="content-box">
         <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/SynAndAn.png" />
-        </ImageView> <!-- Adjust image size -->
-        <HBox prefHeight="50.0" prefWidth="333.0" styleClass="button-container"> <!-- Add styleClass="button-container" -->
+        </ImageView> <!--  Add styleClass="button-container" -->
             <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToAnsAndSyn" prefHeight="40.0" prefWidth="266.0" text="WordFinding">
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -48,15 +46,14 @@
                     </ImageView>
                 </graphic>
             </Button>
-        </HBox>
+
     </VBox>
 
     <!-- Add styleClass="content-box" and spacing to the VBox -->
-    <VBox layoutX="363.0" layoutY="357.0" prefHeight="218.0" prefWidth="258.0" spacing="10" styleClass="content-box">
-        <ImageView fitHeight="120.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+    <VBox layoutX="680.0" layoutY="151.0" prefHeight="231.0" prefWidth="282.0" spacing="10" styleClass="content-box">
+        <ImageView fitHeight="198.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/chatbot2.png" />
-        </ImageView> <!-- Adjust image size -->
-        <HBox prefHeight="50.0" prefWidth="382.0" styleClass="button-container"> <!-- Add styleClass="button-container" -->
+        </ImageView> <!--  Add styleClass="button-container" -->
             <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToChatBot" prefHeight="40.0" prefWidth="280.0" text="Chat Bot">
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -64,7 +61,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-        </HBox>
+
     </VBox>
 
     <!-- This label seems unused, but let's keep it -->
@@ -72,9 +69,5 @@
 
     <!-- Add fx:id="titleLabel" to the title Label -->
     <Label fx:id="titleLabel" layoutX="264.0" layoutY="14.0" prefHeight="30.0" prefWidth="540.0" text="Các chức năng nổi bật của ứng dụng" />
-    <VBox layoutX="671.0" layoutY="82.0" prefHeight="262.0" prefWidth="282.0" spacing="10" styleClass="content-box">
-        <ImageView fitHeight="180.0" fitWidth="274.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/grammarcheck.png" />
-        </ImageView>
-    </VBox> <!-- Adjusted layoutY and prefHeight slightly -->
+     <!-- Adjusted layoutY and prefHeight slightly -->
 </AnchorPane>

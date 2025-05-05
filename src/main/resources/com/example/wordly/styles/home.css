@@ -125,3 +125,46 @@
     -fx-background-color: #e8f5e9;
     -fx-border-color: #c8e6c9;
 }
+
+.game-item {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0, 0);
+    -fx-cursor: pointer;
+    -fx-transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.game-item:hover {
+    -fx-border-color: #007bff; /* Đổi màu viền khi hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.2), 15, 0.2, 0, 0); /* Đổ bóng màu khi hover */
+}
+
+/* Styling cho nút Play */
+.game-button {
+    -fx-background-color: #007bff; /* Màu nền xanh dương */
+    -fx-text-fill: white;       /* Màu chữ trắng */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;     /* Bo góc nút */
+    -fx-padding: 10px 20px;     /* Padding cho nút */
+    -fx-cursor: hand;           /* Con trỏ tay */
+     -fx-background-radius: 5px; /* Đảm bảo bo góc cho background */
+     -fx-border-color: transparent;
+     -fx-pref-width: Infinity;
+}
+
+.game-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.game-button:pressed {
+    -fx-background-color: #004085;
+}
+
+.game-item ImageView {
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+     -fx-border-radius: 5px;
+}
