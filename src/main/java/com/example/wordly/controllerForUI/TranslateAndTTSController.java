@@ -361,21 +361,35 @@ public class TranslateAndTTSController extends BaseController {
     private Future<?> currentSpeechTask;
 
 
+    private String getVoiceNameForLang(String langCode) {
+        return switch (langCode) {
+            case "en" -> "en-US-GuyNeural";
+            case "vi" -> "vi-VN-NamMinhNeural";
+            case "fr" -> "fr-FR-DeniseNeural";
+            case "zh" -> "zh-CN-XiaoxiaoNeural";
+            case "ko" -> "ko-KR-SunHiNeural";
+            case "ja" -> "ja-JP-NanamiNeural";
+            default -> "en-US-GuyNeural"; // fallback
+        };
+    }
+
+
     // Hàm tts ở văn bản cần dịch
     @FXML
     private void handleSpeakOriginal(ActionEvent event) {
         String text = needToTrans.getText();
         if (text != null && !text.isBlank()) {
-            // cancel previous and stop audio
             if (currentSpeechTask != null && !currentSpeechTask.isDone()) {
                 currentSpeechTask.cancel(true);
                 TextToSpeech.stop();
             }
-            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, "en-US-GuyNeural"));
+            String voiceName = getVoiceNameForLang(sourceLangCode);
+            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, voiceName));
         } else {
             showInfoAlert("Không có văn bản", "Không có văn bản gốc để đọc.");
         }
     }
+
 
     // Hàm tts ở văn bản được dịch
     @FXML
@@ -386,11 +400,13 @@ public class TranslateAndTTSController extends BaseController {
                 currentSpeechTask.cancel(true);
                 TextToSpeech.stop();
             }
-            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, "vi-VN-NamMinhNeural"));
+            String voiceName = getVoiceNameForLang(targetLangCode);
+            currentSpeechTask = executorService.submit(() -> TextToSpeech.speak(text, voiceName));
         } else {
             showInfoAlert("Không có bản dịch", "Không có văn bản dịch để đọc.");
         }
     }
+
 
     // PHƯƠNG THỨC NGẮT GIỌNG/ HỦY NÓI
     @FXML
@@ -418,16 +434,28 @@ public class TranslateAndTTSController extends BaseController {
     // task xử lý luồng ghi âm hiện tại
     private Future<?> currentRecognitionTask;
 
-
+    // check ngôn ngữ nguồn hiện tại
+    private boolean isSpeechLangSupported() {
+        return sourceLangCode.equals("en") || sourceLangCode.equals("vi");
+    }
 
     // PHƯƠNG THỨC LOGIC RECORD
     @FXML
     private void handleStartRecording(ActionEvent event) {
+        // kiểm tra chỉ cho phép tiếng Anh hoặc tiếng Việt
+        if (!isSpeechLangSupported()) {
+            showInfoAlert("Unsupported Language / Ngôn ngữ không hỗ trợ",
+                    "Hiện ứng dụng chỉ hỗ trợ ghi giọng nói bằng tiếng Anh hoặc tiếng Việt.\n" +
+                            "Currently, only English and Vietnamese are supported for speech recognition.");
+            return;
+        }
+
         /** ẩn hiện các nút **/
         recordButton.setVisible(false);
         stopRecordingBtn.setVisible(true);
         recognitionBuffer.setLength(0); // reset buffer khi bắt đầu mới
         /** ------------------------------------------------------------------------------- **/
+
 
         /** cập nhật ui theo luồng **/
         Platform.runLater(() -> {
@@ -440,6 +468,18 @@ public class TranslateAndTTSController extends BaseController {
 
 
         /** task ghi âm **/
+        // Bắt đầu ghi âm khi đã kiểm tra xong
+        recordButton.setVisible(false);
+        stopRecordingBtn.setVisible(true);
+        recognitionBuffer.setLength(0);
+
+        Platform.runLater(() -> {
+            recordingPane.setVisible(true);
+            recordingPane.setManaged(true);
+            realTimeLabel.setText("Đang nghe...");
+            needToTrans.clear();
+        });
+
         // hủy task cũ nếu đang chạy
         if (currentRecognitionTask != null && !currentRecognitionTask.isDone()) {
             currentRecognitionTask.cancel(true);
@@ -449,7 +489,7 @@ public class TranslateAndTTSController extends BaseController {
         currentRecognitionTask = executorService.submit(() -> {
             try {
                 SpeechConfig config = SpeechConfig.fromSubscription(AZURE_SPEECH_KEY, AZURE_SPEECH_REGION);
-                config.setSpeechRecognitionLanguage("en-US");
+                config.setSpeechRecognitionLanguage(sourceLangCode.equals("vi") ? "vi-VN" : "en-US");
 
                 AudioConfig audioConfig = AudioConfig.fromDefaultMicrophoneInput();
                 recognizer = new SpeechRecognizer(config, audioConfig);
