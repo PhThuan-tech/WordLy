@@ -17,7 +17,11 @@ public class MusicManager {
             "/com/example/wordly/audio/Lofi1.mp3",
             "/com/example/wordly/audio/Lofi2.mp3",
             "/com/example/wordly/audio/Lofi3.mp3",
-            "/com/example/wordly/audio/Lofi4.mp3"
+            "/com/example/wordly/audio/Lofi4.mp3",
+            "/com/example/wordly/audio/Loifi5.mp3",
+            "/com/example/wordly/audio/Lofi6.mp3",
+            "/com/example/wordly/audio/Lofi7.mp3",
+            "/com/example/wordly/audio/BanhMi.mpeg"
     );
     private int currentTrackIndex = 0;
     private double savedVolume = 0.5;
@@ -56,28 +60,34 @@ public class MusicManager {
     }
 
     private void createMediaPlayer(int index) {
-        if (mediaPlayer != null) {
-            fadeOut(mediaPlayer, () -> mediaPlayer.stop());
-        }
+        MediaPlayer oldPlayer = this.mediaPlayer;
 
         String path = musicFiles.get(index);
         URL mediaURL = getClass().getResource(path);
         if (mediaURL == null) {
             System.err.println("Không tìm thấy file: " + path);
+            // Đảm bảo biến mediaPlayer được set null nếu không load được bài hát
+            this.mediaPlayer = null;
+            // Có thể xử lý lỗi ở đây, ví dụ: thử bài tiếp theo hoặc dừng phát
             return;
         }
 
         Media media = new Media(mediaURL.toExternalForm());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(0); // bắt đầu từ âm lượng 0 để fade in
+        this.mediaPlayer = new MediaPlayer(media);
+        this.mediaPlayer.setVolume(0);
 
-        mediaPlayer.setOnEndOfMedia(() -> {
-            nextTrack(); // tự động chuyển bài khi hết
+        this.mediaPlayer.setOnEndOfMedia(() -> {
+            nextTrack();
         });
 
-        mediaPlayer.setCycleCount(1);
-        mediaPlayer.play();
-        fadeIn(mediaPlayer); // fade in khi bắt đầu bài
+        this.mediaPlayer.setCycleCount(1);
+        this.mediaPlayer.play();
+        fadeIn(this.mediaPlayer);
+        if (oldPlayer != null) {
+            fadeOut(oldPlayer, () -> {
+                oldPlayer.stop();
+            });
+        }
     }
 
     public void nextTrack() {

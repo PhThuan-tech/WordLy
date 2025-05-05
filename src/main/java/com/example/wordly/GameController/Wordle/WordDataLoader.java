@@ -85,7 +85,7 @@ public class WordDataLoader {
         }
         // neu ko co tu co kich thuoc da cho thi dung nhu nay
         if (filteredList.isEmpty()) {
-            System.out.println("Từ bạn tìm ko khớp  với kích thước " + length + " trong danh sách.");
+            System.out.println("Từ bạn tìm ko khớp với kích thước " + length + " trong danh sách.");
         }
         return filteredList;
     }
