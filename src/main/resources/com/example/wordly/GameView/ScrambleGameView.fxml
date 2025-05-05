@@ -33,7 +33,7 @@
      </HBox>
 
      <!-- Kết quả đoán -->
-     <Label fx:id="resultLabel" layoutX="500.0" layoutY="296.0" styleClass="result-label" text="" />
+     <Label fx:id="resultLabel" layoutX="500.0" layoutY="296.0" styleClass="result-label"/>
      <!-- Độ khó -->
      <HBox alignment="CENTER" layoutX="579.0" layoutY="225.0" spacing="10">
          <Label styleClass="info-label" text="🎯 Độ khó:" />
@@ -42,12 +42,10 @@
 
      <!-- Nút quay lại -->
      <Button layoutX="26.0" layoutY="542.0" onAction="#HandleBackToGame" styleClass="back-button" text="⬅ Quay lại" />
-   <HBox layoutX="272.0" layoutY="87.0" prefHeight="55.0" prefWidth="430.0">
-      <children>
-         <Label prefHeight="35.0" prefWidth="213.0" style="-fx-font-size: 24;" text="Từ cần sắp xếp lại :" />
-            <Label fx:id="scrambledWordLabel" styleClass="scrambled-word" text="scrambled-word" />
-      </children>
-   </HBox>
+    <HBox layoutX="272.0" layoutY="87.0" prefHeight="55.0" prefWidth="430.0">
+        <Label prefHeight="35.0" prefWidth="213.0" style="-fx-font-size: 24;" text="Từ cần sắp xếp lại :"/>
+        <Label fx:id="scrambledWordLabel" styleClass="scrambled-word" text="scrambled-word"/>
+    </HBox>
    <Label layoutX="695.0" layoutY="145.0" text="Thời gian còn lại:">
       <font>
          <Font size="16.0" />
