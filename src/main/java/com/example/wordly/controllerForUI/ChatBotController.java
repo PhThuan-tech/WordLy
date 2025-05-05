@@ -14,18 +14,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class ChatBotController extends BaseController {
+    /* =================== PHƯƠNG THỨC CHUYỂN VIEW ================================================================= */
     @FXML public void backToAdvance(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
+    /* ============================================================================================================== */
+
+
+
+
+
+    /* =================== PHƯƠNG THỨC VIEW KHỞI TẠO ================================================================= */
     @FXML private ListView<Message> chatListView;
     @FXML private TextField messageInput;
     @FXML private Button sendButton;
-    @FXML
-    private BorderPane rootPane;
-
-
+    @FXML private BorderPane rootPane;
     private final ObservableList<Message> messages = FXCollections.observableArrayList();
+
 
     @FXML
     public void initialize() {
@@ -52,32 +58,16 @@ public class ChatBotController extends BaseController {
 
     }
 
-    // Hàm hiển thị "typing effect" cho tin nhắn
-    private void showTypingEffect(String messageContent, Message targetMessage) {
-        new Thread(() -> {
-            for (int i = 0; i < messageContent.length(); i++) {
-                final String currentText = messageContent.substring(0, i + 1);
-                Platform.runLater(() -> {
-                    targetMessage.setContent(currentText);
-                    chatListView.refresh();
-                });
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+    /* ============================================================================================================== */
 
-            Platform.runLater(() -> {
-                scrollToEnd();
-                isBotTyping = false;
-                sendButton.setDisable(false);
-                sendButton.setText("Gửi");
-            });
-        }).start();
-    }
 
+
+
+
+    /* ============================= PHƯƠNG THỨC TRẢ VỀ MESSAGE TỪ BOT ============================================== */
     private volatile boolean isBotTyping = false;
+
+    // Chặn send promt khi bot đang trả lời
     @FXML
     private void handleSendMessage() {
         if (isBotTyping) {
@@ -116,7 +106,43 @@ public class ChatBotController extends BaseController {
         }).start();
     }
 
+    /* ============================================================================================================== */
+
+
+
+
+
+    /* ============================= CÁC PHƯƠNG THỨC PHỤC VỤ VIEW =================================================== */
+    // Hàm hiển thị "typing effect" cho tin nhắn
+    private void showTypingEffect(String messageContent, Message targetMessage) {
+        new Thread(() -> {
+            for (int i = 0; i < messageContent.length(); i++) {
+                final String currentText = messageContent.substring(0, i + 1);
+                Platform.runLater(() -> {
+                    targetMessage.setContent(currentText);
+                    chatListView.refresh();
+                });
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Platform.runLater(() -> {
+                scrollToEnd();
+                isBotTyping = false;
+                sendButton.setDisable(false);
+                sendButton.setText("Gửi");
+            });
+        }).start();
+    }
+
+    // Thanh cuộn tin nhắn
     private void scrollToEnd() {
         Platform.runLater(() -> chatListView.scrollTo(messages.size() - 1));
     }
+
+    /* ============================================================================================================== */
+
 }
