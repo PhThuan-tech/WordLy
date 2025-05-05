@@ -6,9 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.AdvanceController">
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.AdvanceController">
     <stylesheets>
         <URL value="@../styles/advance_styles.css" />
     </stylesheets>
@@ -22,47 +23,51 @@
     <VBox layoutX="39.0" layoutY="142.0" prefHeight="231.0" prefWidth="284.0" spacing="10" styleClass="content-box">
         <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/TextToSpeech.png" />
-        </ImageView> <!-- Add styleClass="button-container" -->
-         <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToTTS" prefHeight="40.0" prefWidth="278.0" text="Text To Speech">
-             <graphic>
-                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../icons/TTSicon.png" />
-                 </ImageView>
-             </graphic>
-         </Button>
+        </ImageView> <!--  Add styleClass="button-container" -->
+            <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToTTS" prefHeight="40.0" prefWidth="278.0" text="Text To Speech">
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/TTSicon.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
     </VBox>
 
     <!-- Add styleClass="content-box" and spacing to the VBox -->
     <VBox layoutX="371.0" layoutY="142.0" prefHeight="250.0" prefWidth="258.0" spacing="10" styleClass="content-box">
         <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/SynAndAn.png" />
-        </ImageView> <!-- Add styleClass="button-container" -->
-         <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToAnsAndSyn" prefHeight="40.0" prefWidth="266.0" text="WordFinding">
-             <graphic>
-                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../icons/feature.png" />
-                 </ImageView>
-             </graphic>
-         </Button>
+        </ImageView> <!--  Add styleClass="button-container" -->
+            <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToAnsAndSyn" prefHeight="40.0" prefWidth="266.0" text="WordFinding">
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/feature.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
     </VBox>
 
     <!-- Add styleClass="content-box" and spacing to the VBox -->
     <VBox layoutX="680.0" layoutY="151.0" prefHeight="231.0" prefWidth="282.0" spacing="10" styleClass="content-box">
         <ImageView fitHeight="198.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/chatbot2.png" />
-        </ImageView> <!-- Add styleClass="button-container" -->
-         <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToChatBot" prefHeight="40.0" prefWidth="280.0" text="Chat Bot">
-             <graphic>
-                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../icons/chatbot.png" />
-                 </ImageView>
-             </graphic>
-         </Button>
+        </ImageView> <!--  Add styleClass="button-container" -->
+            <Button alignment="CENTER" graphicTextGap="20.0" mnemonicParsing="false" onAction="#GoToChatBot" prefHeight="40.0" prefWidth="280.0" text="Chat Bot">
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/chatbot.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+
     </VBox>
 
     <!-- This label seems unused, but let's keep it -->
     <Label layoutX="614.0" layoutY="406.0" />
 
     <!-- Add fx:id="titleLabel" to the title Label -->
-    <Label fx:id="titleLabel" layoutX="264.0" layoutY="14.0" prefHeight="30.0" prefWidth="540.0" text="Các chức năng nổi bật của ứng dụng" /> <!-- Adjusted layoutY and prefHeight slightly -->
+    <Label fx:id="titleLabel" layoutX="264.0" layoutY="14.0" prefHeight="30.0" prefWidth="540.0" text="Các chức năng nổi bật của ứng dụng" />
+     <!-- Adjusted layoutY and prefHeight slightly -->
 </AnchorPane>

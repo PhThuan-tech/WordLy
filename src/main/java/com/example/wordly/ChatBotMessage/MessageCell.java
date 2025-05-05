@@ -1,4 +1,4 @@
-package com.example.wordly.ChatBotModel;
+package com.example.wordly.ChatBotMessage;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

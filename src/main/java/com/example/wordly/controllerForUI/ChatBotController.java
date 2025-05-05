@@ -1,8 +1,8 @@
 package com.example.wordly.controllerForUI;
 
 import com.example.wordly.API.ChatService;
-import com.example.wordly.ChatBotModel.Message;
-import com.example.wordly.ChatBotModel.MessageCell;
+import com.example.wordly.ChatBotMessage.Message;
+import com.example.wordly.ChatBotMessage.MessageCell;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

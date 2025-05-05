@@ -1,4 +1,4 @@
-package com.example.wordly.ChatBotModel;
+package com.example.wordly.ChatBotMessage;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

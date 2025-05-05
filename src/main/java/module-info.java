@@ -34,7 +34,7 @@ module com.example.wordly {
 
     exports com.example.wordly.GameController.ScrambleWord;
     opens com.example.wordly.GameController.ScrambleWord to javafx.fxml;
-    exports com.example.wordly.ChatBotModel;
+    exports com.example.wordly.ChatBotMessage;
 
     opens com.example.wordly.GameController to javafx.fxml;
 }
