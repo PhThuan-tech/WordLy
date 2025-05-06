@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trie {
-    private TrieNode root;
+    private final TrieNode root;
 
     public Trie() {
         root = new TrieNode();
     }
 
+    // CRUD : chen vao dong moi nhat trong
     public void insert(String word) {
         TrieNode curr = root;
+        // chuyen doi het ve ki tu in thuong
+        // cac ki tu dac biet thi se bao loi
         for(char ch : word.toLowerCase().toCharArray()) {
             int i = ch - 'a';
             if (curr.children[i] == null) {
@@ -22,6 +25,7 @@ public class Trie {
         curr.isEndofWord = true;
     }
 
+    // su dung cai insert o tren khi go xong la se co tu do luon trong suggestion
     public List<String> getSuggestions(String prefix) {
         List<String> results = new ArrayList<>();
         TrieNode curr = root;

@@ -15,7 +15,7 @@ public class WordProvider {
         List<String> words = new ArrayList<>();
         try (InputStream inputStream = getClass().getResourceAsStream("/word4scramble.txt")) {
             if (inputStream == null) {
-                System.out.println("Không tìm thấy file words.txt trong resources.");
+                System.out.println("Không tìm thấy file word4scramble.txt trong resources.");
                 return words;
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
