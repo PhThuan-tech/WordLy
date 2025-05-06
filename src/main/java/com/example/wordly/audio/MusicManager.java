@@ -13,6 +13,7 @@ public class MusicManager {
 
     private static MusicManager instance;
     private MediaPlayer mediaPlayer;
+    // Hmm ghi vao file txt ko duoc nen la dung kieu List final cho on dinh
     private final List<String> musicFiles = List.of(
             "/com/example/wordly/audio/Lofi1.mp3",
             "/com/example/wordly/audio/Lofi2.mp3",
@@ -21,10 +22,10 @@ public class MusicManager {
             "/com/example/wordly/audio/Loifi5.mp3",
             "/com/example/wordly/audio/Lofi6.mp3",
             "/com/example/wordly/audio/Lofi7.mp3",
-            "/com/example/wordly/audio/BanhMi.mpeg"
+            "/com/example/wordly/audio/BanhMi.mpeg"         // easter egg=)) nghe 2-3 lan la trung
     );
-    private int currentTrackIndex = 0;
-    private double savedVolume = 0.5;
+    private int currentTrackIndex = 0;      // index la bai hat dang chay, dung cho nut next va previous
+    private double savedVolume = 0.5;       // Volume khi chuyen bai se mac dinh la 0.5
 
     private MusicManager() {}
 
@@ -48,6 +49,12 @@ public class MusicManager {
         }
     }
 
+    // fix loi khi chuyen giao dien thi ko co nhac
+    public boolean isPlaying() {
+        return mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING;
+    }
+
+    // chinh am luong cua am thanh
     public void setVolume(double volume) {
         this.savedVolume = volume;
         if (mediaPlayer != null) {
@@ -103,7 +110,7 @@ public class MusicManager {
         createMediaPlayer(currentTrackIndex);
     }
 
-    // Fade In - mượt mà khi bắt đầu bài
+    // Khi chuyen bai am thanh no bi de nen la dung cai nay de dung doan cuoi r sang bai khac
     private void fadeIn(MediaPlayer player) {
         Timeline timeline = new Timeline();
         for (int i = 0; i <= 10; i++) {
@@ -115,7 +122,7 @@ public class MusicManager {
         timeline.play();
     }
 
-    // Fade Out - mượt mà khi chuyển bài
+    // Tuong tu fadeIn
     private void fadeOut(MediaPlayer player, Runnable onFinished) {
         Timeline timeline = new Timeline();
         for (int i = 10; i >= 0; i--) {
@@ -126,9 +133,5 @@ public class MusicManager {
         }
         timeline.setOnFinished(e -> onFinished.run());
         timeline.play();
-    }
-
-    public boolean isPlaying() {
-        return mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING;
     }
 }
