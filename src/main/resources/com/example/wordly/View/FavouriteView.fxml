@@ -139,7 +139,7 @@
             <!-- Confirmation Dialog -->
             <AnchorPane fx:id="confirmationDialog" layoutX="566.0" layoutY="100.0" prefHeight="188.0" prefWidth="201.0" style="-fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: #4CAF50;">
                 <children>
-                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="31.0" prefHeight="75.0" prefWidth="164.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 20;" text="Do you want to delete this word out of your Favourite Word list" textAlignment="CENTER" wrapText="true" />
+                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="31.0" prefHeight="75.0" prefWidth="164.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 20;" text="Do you want to delete this word out of your Word list" textAlignment="CENTER" wrapText="true" />
 
                     <Button fx:id="yesButton" layoutX="25.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="64.0" style="-fx-background-color: #eeeeee; -fx-text-fill: #2D2D2D;" text="YES" />
 

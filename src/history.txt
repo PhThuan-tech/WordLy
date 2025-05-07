@@ -67,3 +67,28 @@ training	verb	/ˈtɹeɪnɪŋ/	To practice an ability.
 teleport	noun	/ˈtɛləpɔː(ɹ)t/	A teleporter.
 telephone	noun	/ˈtɛləfəʊn/	A telecommunication device (originally mechanical, and now electronic) used for two-way talking with another person (now often shortened to phone).
 mobile	noun	/ˈməʊbaɪl/	A kinetic sculpture or decorative arrangement made of items hanging so that they can move independently from each other.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+sad	verb	/sæd/	To make melancholy; to sadden or grieve (someone).
+sad	verb	/sæd/	To make melancholy; to sadden or grieve (someone).
+sad	verb	/sæd/	To make melancholy; to sadden or grieve (someone).
+wow	noun	/waʊ̯/	Anything exceptionally surprising, unbelievable, outstanding, etc.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+safe	noun	/seɪf/	A box, usually made of metal, in which valuables can be locked for safekeeping.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+sad	verb	/sæd/	To make melancholy; to sadden or grieve (someone).
+sad	verb	/sæd/	To make melancholy; to sadden or grieve (someone).
+wait	noun	/weɪt/	A delay.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+happy	noun	/ˈhæpiː/	A happy event, thing, person, etc.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+saw	noun	/sɔː/	A tool with a toothed blade used for cutting hard substances, in particular wood or metal
+hello	noun	/həˈləʊ/	"Hello!" or an equivalent greeting.
+sail	noun	/seɪl/	A piece of fabric attached to a boat and arranged such that it causes the wind to drive the boat along. The sail may be attached to the boat via a combination of mast, spars and ropes.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+hi	noun	/haɪ/	The word "hi" used as a greeting.
+hi	noun	/haɪ/	The word "hi" used as a greeting.

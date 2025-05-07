@@ -3,14 +3,20 @@ package com.example.wordly.controllerForUI;
 import com.example.wordly.History.HistoryManage;
 import com.example.wordly.SQLite.FavouriteWordDAO;
 import com.example.wordly.getWord.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -65,13 +71,13 @@ public class SearchViewController extends BaseController implements SearchUIUpda
     }
 
     @FXML
-    public void handleGoToTranslateAndTTS(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/TranslateAndTTS.fxml");
+    public void GoToAdvanceFeature(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
     @FXML
-    public void GoToAdvanceFeature(ActionEvent actionEvent) {
-        switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
+    public void handleGoToSearchOnDatabase(ActionEvent actionEvent) {
+        switchScene(actionEvent, "/com/example/wordly/View/SearchOnDatabase.fxml");
     }
 
     @FXML
@@ -288,6 +294,9 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         }
     }
 
+    @FXML private StackPane saveSuccessfullyNotification;
+    @FXML private StackPane saveFailNotification;
+
     @FXML
     private void handleAddToFavourite() {
         String word = searchBar.getText();
@@ -303,10 +312,47 @@ public class SearchViewController extends BaseController implements SearchUIUpda
         FavouriteWordDAO newWord = new FavouriteWordDAO();
         if (newWord.isFavouriteWord(word)) {
             System.out.println("Từ này đã có trong danh sách yêu thích");
+            // hiện label
+            saveFailNotification.setVisible(true);
+            // Hiệu ứng mờ dần
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), saveFailNotification);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+
+            PauseTransition stay = new PauseTransition(Duration.seconds(1.5));
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), saveFailNotification);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+
+            fadeOut.setOnFinished(e -> saveFailNotification.setVisible(false));
+
+            SequentialTransition sequence = new SequentialTransition(fadeIn, stay, fadeOut);
+            sequence.play();
+
         } else {
             try {
                 newWord.addFavouriteWord(word, type, pronunciation, meaning);
                 System.out.println("Đã thêm từ " + word + " vào danh sách yêu thích");
+                // Hiện label "Đã copy"
+                saveSuccessfullyNotification.setVisible(true);
+
+                // Hiệu ứng mờ dần
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), saveSuccessfullyNotification);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+
+                PauseTransition stay = new PauseTransition(Duration.seconds(1.5));
+
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(300), saveSuccessfullyNotification);
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+
+                fadeOut.setOnFinished(e -> saveSuccessfullyNotification.setVisible(false));
+
+                SequentialTransition sequence = new SequentialTransition(fadeIn, stay, fadeOut);
+                sequence.play();
+
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Không thể thêm vào danh sách yêu thích");

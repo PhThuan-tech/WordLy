@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
@@ -90,6 +91,8 @@
 
     <!-- Center Content Area -->
     <center>
+        <StackPane prefHeight="600.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+        <children>
         <VBox spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
@@ -121,6 +124,7 @@
                     <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="184.00001831054686" minWidth="29.600000000000023" prefWidth="73.60001220703123" />
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.39995727539065" minWidth="47.39998779296877" prefWidth="81.99996948242188" />
                     <ColumnConstraints hgrow="ALWAYS" maxWidth="315.9999938964844" minWidth="43.999926757812545" prefWidth="284.0000305175782" />
+                     <ColumnConstraints />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -144,12 +148,19 @@
 
                 <Button fx:id="addToFavouriteButton" mnemonicParsing="false" onAction="#handleAddToFavourite" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/bookmark.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
+                <Button fx:id="searchDatabaseButton" mnemonicParsing="false" onAction="#handleGoToSearchOnDatabase" prefHeight="64.0" prefWidth="64.0" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="6" GridPane.rowIndex="0">
+                    <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../icons/offline.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </GridPane>
 
 
@@ -160,5 +171,29 @@
             <TextArea fx:id="exampleText" editable="false" prefHeight="100.0" promptText="Example usage will appear here..." wrapText="true" VBox.vgrow="SOMETIMES" />
 
         </VBox>
+            <StackPane fx:id="notificationContainer" alignment="TOP_CENTER" mouseTransparent="true">
+                <children>
+                    <StackPane fx:id="saveSuccessfullyNotification" maxHeight="50" maxWidth="300.0" opacity="0" prefHeight="50" prefWidth="300" style="-fx-background-color: #B0F2B4; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
+                        <children>
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Đã thêm từ vào danh sách yêu thích ✅" />
+                        </children>
+                        <StackPane.margin>
+                            <Insets top="30" />
+                        </StackPane.margin>
+                    </StackPane>
+
+                    <StackPane fx:id="saveFailNotification" maxHeight="50" maxWidth="300.0" opacity="0" prefHeight="50" prefWidth="300" style="-fx-background-color: #F2B4B4; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
+                        <children>
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Từ này đã có trong danh sách yêu thích ❌" />
+                        </children>
+                        <StackPane.margin>
+                            <Insets top="30" />
+                        </StackPane.margin>
+                    </StackPane>
+                </children>
+            </StackPane>
+
+        </children>
+        </StackPane>
     </center>
 </BorderPane>

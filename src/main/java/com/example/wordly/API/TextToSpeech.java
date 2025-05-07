@@ -8,7 +8,6 @@ public class TextToSpeech {
     private static final String API_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";      // your key
     private static final String REGION  = "southeastasia";
 
-    // synthSynth là instance hiện tại đang phát; lock bảo vệ truy xuất đa luồng
     private static SpeechSynthesizer synthSynth;
     private static final Object lock = new Object();
 
@@ -42,7 +41,6 @@ public class TextToSpeech {
         }
 
     }
-
 
     public static void stop() {
         synchronized (lock) {

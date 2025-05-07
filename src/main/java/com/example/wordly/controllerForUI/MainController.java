@@ -181,8 +181,11 @@ public class MainController extends BaseController {
     public void HandlePlaysound(ActionEvent actionEvent) {
         // Phát âm thanh
         if (clickSound != null) {
-            clickSound.stop();
-            clickSound.play();
+            if (clickSound.isPlaying()) {
+                clickSound.stop();
+            } else {
+                clickSound.play();
+            }
         } else {
             System.err.println("Âm thanh chưa được load hoặc không tìm thấy tài nguyên âm thanh!");
         }

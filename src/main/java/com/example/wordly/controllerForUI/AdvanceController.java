@@ -17,6 +17,7 @@ public class AdvanceController extends BaseController {
     @FXML public void GoToChatBot(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/ChatBot.fxml");
     }
+
     @FXML private AnchorPane rootPane;
     public void initialize() {
         applyHoverEffectToAllButtons(rootPane);
