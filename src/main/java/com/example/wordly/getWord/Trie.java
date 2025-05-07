@@ -16,6 +16,10 @@ public class Trie {
         // chuyen doi het ve ki tu in thuong
         // cac ki tu dac biet thi se bao loi
         for(char ch : word.toLowerCase().toCharArray()) {
+            // Kiểm tra xem ký tự có phải là chữ cái hay không
+            if (ch < 'a' || ch > 'z') {
+                continue;  // Nếu không phải chữ cái, bỏ qua ký tự này
+            }
             int i = ch - 'a';
             if (curr.children[i] == null) {
                 curr.children[i] = new TrieNode();
@@ -28,8 +32,18 @@ public class Trie {
     // su dung cai insert o tren khi go xong la se co tu do luon trong suggestion
     public List<String> getSuggestions(String prefix) {
         List<String> results = new ArrayList<>();
-        TrieNode curr = root;
+
+        // Lọc từ chỉ giữ lại các chữ cái không dấu
+        StringBuilder filteredPrefix = new StringBuilder();
         for (char ch : prefix.toLowerCase().toCharArray()) {
+            if (ch >= 'a' && ch <= 'z') {
+                filteredPrefix.append(ch);
+            }
+        }
+        if (filteredPrefix.length() == 0) return results;
+
+        TrieNode curr = root;
+        for (char ch : filteredPrefix.toString().toLowerCase().toCharArray()) {
             int i = ch - 'a';
             // Nếu không tìm thấy ký tự trong trie, trả về danh sách rỗng
             if (curr.children[i] == null) {
@@ -38,7 +52,7 @@ public class Trie {
             curr = curr.children[i];
         }
         // Tiếp tục tìm các từ từ nút hiện tại
-        findWords(curr, prefix, results);
+        findWords(curr, filteredPrefix.toString(), results);
         return results;
     }
 

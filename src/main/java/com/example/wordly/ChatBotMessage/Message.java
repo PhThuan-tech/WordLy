@@ -21,7 +21,7 @@ public class Message {
     }
 
     public void setContent(String newContent) {
-        this.content.set(newContent); // Update the content
+        this.content.set(newContent);
     }
 
     public boolean isUser() {

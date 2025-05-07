@@ -44,7 +44,7 @@ import javafx.animation.PauseTransition;
 
 
 public class TranslateAndTTSController extends BaseController {
-    /* ============================ PHƯƠNG THỨC SWITCH VIEW ========================================================= */
+/* ============================ PHƯƠNG THỨC SWITCH VIEW ============================================================= */
     @FXML public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/View/MainView.fxml");
     }
@@ -55,23 +55,23 @@ public class TranslateAndTTSController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
-    /* ======================== API, ENDPOINT CỦA VISION VÀ SPEECH ================================================== */
+/* ======================== API, ENDPOINT CỦA VISION VÀ SPEECH ====================================================== */
     private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
     private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
     private static final String AZURE_SPEECH_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";
     private static final String AZURE_SPEECH_REGION = "southeastasia";
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
-    /* ========================== PHƯƠNG THỨC KHỞI TẠO VIEW BAN ĐẦU ================================================= */
+/* ========================== PHƯƠNG THỨC KHỞI TẠO VIEW BAN ĐẦU ===================================================== */
     @FXML private Button stopButton;
     @FXML private BorderPane rootPane;
     @FXML private Circle wave1;
@@ -198,13 +198,13 @@ public class TranslateAndTTSController extends BaseController {
 
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* =====================  PHƯƠNG THỨC XỬ LÝ HÌNH ẢNH  =========================================================== */
+/* =====================  PHƯƠNG THỨC XỬ LÝ HÌNH ẢNH  =============================================================== */
     @FXML private Button loadImageButton;
     @FXML private StackPane dropPane;
     private ImageAnalysisClient imageAnalysisClient;
@@ -280,13 +280,13 @@ public class TranslateAndTTSController extends BaseController {
         dropPane.setManaged(!isVisible);
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* ======================= PHƯƠNG THỨC XỬ LÝ LOGIC TRANSLATE ==================================================== */
+/* ======================= PHƯƠNG THỨC XỬ LÝ LOGIC TRANSLATE ======================================================== */
     @FXML private TextArea needToTrans;
     @FXML private TextArea translated;
     @FXML private Button transButton;
@@ -348,13 +348,13 @@ public class TranslateAndTTSController extends BaseController {
         executorService.submit(translateTask);
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* ======================== PHƯƠNG THỨC XỬ LÝ TEXT TO SPEECH ==================================================== */
+/* ======================== PHƯƠNG THỨC XỬ LÝ TEXT TO SPEECH ======================================================== */
     @FXML private Button speak1Button;
     @FXML private Button speak2Button;
     // task xử lý đọc văn bản
@@ -417,13 +417,13 @@ public class TranslateAndTTSController extends BaseController {
         TextToSpeech.stop();
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* =================== PHƯƠNG THỨC XỬ LÝ GHI ÂM/ SPEECH TO TEXT ================================================= */
+/* =================== PHƯƠNG THỨC XỬ LÝ GHI ÂM/ SPEECH TO TEXT ===================================================== */
     private final StringBuilder recognitionBuffer = new StringBuilder();
     private SpeechRecognizer recognizer;
     @FXML private Button recordButton;
@@ -577,13 +577,13 @@ public class TranslateAndTTSController extends BaseController {
         pt.play();
     }
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* ====================== PHƯƠNG THỨC XỬ LÝ PHẦN CHỌN NGÔN NGỮ DỊCH ============================================= */
+/* ====================== PHƯƠNG THỨC XỬ LÝ PHẦN CHỌN NGÔN NGỮ DỊCH ================================================= */
     @FXML private HBox sourceLangBox;
     @FXML private ToggleGroup sourceLangGroup;
     @FXML private MenuItem itemTrung;
@@ -740,18 +740,16 @@ public class TranslateAndTTSController extends BaseController {
     }
 
 
-    /* ============================================================================================================== */
+/* ================================================================================================================== */
 
 
 
 
 
-    /* ==================== PHƯƠNG THỨC XỬ LÝ NÚT BẤM CỦA TEXT AREA ================================================= */
+/* ==================== PHƯƠNG THỨC XỬ LÝ NÚT BẤM CỦA TEXT AREA ===================================================== */
     @FXML private Button clearInputButton;
     @FXML private Button copyButton;
     @FXML private StackPane copyNotificationLabel;
-
-
 
     // Xử lý phím xóa văn bản
     @FXML
@@ -789,12 +787,7 @@ public class TranslateAndTTSController extends BaseController {
         }
     }
 
-    /* ============================================================================================================== */
-
-
-
-
-
+/* ================================================================================================================== */
 
     // HIỆN CÁC THÔNG BÁO ALERT CẢNH BÁO
     private void showInfoAlert(String title, String content) {
