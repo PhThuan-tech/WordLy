@@ -92,11 +92,15 @@ Ngày 02/05/2025
 
 Ngày 03/05/2025
 1. Thay đổi giao diện toàn bộ các scence cho gọn.
-   
 2. Gộp các chức năng đặc biệt vào Advance Features cho đỡ nhiều nút
-
 3. Fix lỗi Game Wordle (loại bỏ DictionaryDev) và thêm gợi ý bằng tiếng việt
-  
 4. Mở rộng tính năng lưu các từ Syn and An vào trie
 Mấy file game_data của Bminh đag bị mất, t ko bt ai xóa nx chạy ko đc các game ấy.
 Animation chuyển giao diện thì t tìm hiểu bị chậm là do phần initialize ( kiểu theo cơ chế stack) nên là phần code trong intialize dài thì code sẽ chạy tuần tự rất lâu, nên là chia nhỏ ra snhé
+
+Ngày 4 -> 6 /05/2025
+1. Thay đổi giao diện GameView, Xóa các comment ko cần thiết.
+2. Phần TTS chạy ổn định hơn, có thêm chức năng SpeechToText, chuyển đổi dịch nhiều loại ngôn ngữ, chức năng đọc file văn bản để dịch.
+3. Fix đc lỗi ko đọc đc file txt ( Nguyên nhân là do thêm đuôi .txt trong gitignore chỉ cần xóa trong .gitignore là chạy đc các game sử dụng)
+Nhiệm vụ cuối là tìm lỗi ở các giao diện và comment ở các dòng code quan trọng như lấy API, đọc file đuôi .txt, sử dụng interface, abstract như thế nào. Đặc biệt là comment cả phần try-catch(xử lí ngoại lệ ntn nên tìm hiểu xem thường thì code sẽ xảy ra loại nào ví dụ như Lỗi dường dẫn URL, Lỗi mạng, Trang web đúng URL nhưng bị sập hoặc hết key dùng API).
+Sắp xong r ae ơi, cố lên còn ôn lý thuyết cuối kì nữa !!

@@ -20,7 +20,7 @@
       <Label fx:id="previousScoreLabel" layoutX="487.0" layoutY="145.0" styleClass="info-label" text="Điểm ván trước: 0" />
       <!-- *** KẾT THÚC THÊM LABEL *** -->
       <Label fx:id="scoreLabel" layoutX="242.0" layoutY="145.0" styleClass="info-label" text="Điểm hiện tại: 0" /> <!-- Đã sửa text mặc định cho rõ ràng hơn -->
-      <Label fx:id="timerLabel" layoutX="825.0" layoutY="145.0" styleClass="timer-label" text="⏳ 30s" />
+      <Label fx:id="timerLabel" layoutX="825.0" layoutY="145.0" styleClass="timer-label" text="⏳ 90s" />
 
      <!-- Nhập từ -->
      <TextField fx:id="inputField" layoutX="242.0" layoutY="222.0" prefHeight="48.0" prefWidth="626.0" promptText="Nhập từ bạn đoán..." styleClass="input-field" />
@@ -33,7 +33,7 @@
      </HBox>
 
      <!-- Kết quả đoán -->
-     <Label fx:id="resultLabel" layoutX="500.0" layoutY="296.0" styleClass="result-label" text="" />
+     <Label fx:id="resultLabel" layoutX="372.0" layoutY="287.0" prefHeight="26.0" prefWidth="362.0" styleClass="result-label" text="" />
      <!-- Độ khó -->
      <HBox alignment="CENTER" layoutX="579.0" layoutY="225.0" spacing="10">
          <Label styleClass="info-label" text="🎯 Độ khó:" />

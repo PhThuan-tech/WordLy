@@ -21,6 +21,7 @@ public class QuoteProvider {
 
     private static final Random random = new Random();
 
+    // lay ngau nhien theo tung dong.
     public static String getRandomQuote() {
         return QUOTES.get(random.nextInt(QUOTES.size()));
     }
