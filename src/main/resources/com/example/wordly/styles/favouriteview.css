@@ -1,0 +1,59 @@
+.table-view {
+    -fx-background-color: #d1f2c4; /* Xanh lá hơi đậm hơn */
+    -fx-border-color: #519c5f;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+/* Header cột */
+.table-view .column-header-background {
+    -fx-background-color: #519c5f; /* Xanh lá đậm */
+}
+
+.table-view .column-header {
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #5D4037;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Các dòng dữ liệu */
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:filled {
+    -fx-background-color: #e9ffe5; /* xanh rất nhạt */
+}
+
+.table-row-cell:filled:selected,
+.table-row-cell:focused:selected {
+    -fx-background-color: #98d88b; /* xanh đậm hơn khi được chọn */
+    -fx-text-fill: #5D4037; /* nâu đậm */
+}
+
+/* Cell text */
+.table-cell {
+    -fx-text-fill: #5D4037; /* Màu nâu đẹp */
+    -fx-font-size: 13px;
+    -fx-padding: 6px;
+}
+
+.history-title {
+    -fx-text-fill: #5D4037; /* Nâu đậm */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Bo góc */
+.table-view, .table-row-cell, .table-cell {
+    -fx-background-radius: 5;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #c7f0ba;
+}

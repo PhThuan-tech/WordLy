@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordly.controllerForUI.SearchViewController">
+
+    <stylesheets>
+        <URL value="@../styles/home.css" />
+    </stylesheets>
+
+    <left>
+        <VBox prefWidth="170.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="155.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="WORDLY">
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+            </Label>
+
+            <Button contentDisplay="RIGHT" graphicTextGap="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackMain" prefHeight="40.0" text="Back">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/back.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" disable="true" graphicTextGap="28.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" text="Search">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/dictionary.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToFavourite" prefHeight="40.0" text="Favourite">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/bookmark.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="20.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGoToHistory" prefHeight="40.0" text="History" textAlignment="CENTER">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/history.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="18.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoEdit" prefHeight="40.0" text="Edit Word" textAlignment="CENTER">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/editword.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button contentDisplay="RIGHT" graphicTextGap="37.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGotoGame" prefHeight="40.0" prefWidth="151.0" text="Game">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/game.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+         <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#GoToAdvanceFeature" prefHeight="61.0" prefWidth="150.0" text="Advance Features" wrapText="true">
+            <graphic>
+               <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/features.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+        </VBox>
+    </left>
+
+    <!-- Center Content Area -->
+    <center>
+        <StackPane prefHeight="600.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+        <children>
+        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
+            </padding>
+         <AnchorPane prefHeight="94.0" prefWidth="790.0">
+            <children>
+                   <TextField fx:id="searchBar" layoutX="-2.0" layoutY="10.0" prefHeight="29.0" prefWidth="718.0" promptText="Enter word to search..." />
+                   <ListView fx:id="suggestionList" layoutX="-2.0" layoutY="40.0" maxHeight="150.0" prefHeight="86.0" prefWidth="718.0" visible="false" />
+                   <Button fx:id="searchButton" layoutX="676.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSearchButtonOnClick" prefHeight="30.0" prefWidth="57.0">
+                       <graphic>
+                           <ImageView fitHeight="13.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../icons/find.png" />
+                               </image>
+                           </ImageView>
+                       </graphic>
+                   </Button>
+
+                  <Label fx:id="statusLabel" layoutX="152.0" layoutY="-10.0" prefHeight="20.0" prefWidth="490.0" style="-fx-text-fill: red; -fx-font-weight: bold;" />
+            </children>
+         </AnchorPane>
+            <!-- Word Details Row using GridPane for alignment -->
+            <!-- Word Details Row using GridPane for alignment -->
+            <GridPane alignment="TOP_RIGHT" hgap="10.0" prefHeight="30.0" prefWidth="757.0" vgap="5.0">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="108.60000762939453" minWidth="93.39998779296874" prefWidth="108.60000762939453" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="54.8000061035156" prefWidth="100.59996337890625" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="188.79999389648435" minWidth="48.80000000000001" prefWidth="86.39992065429689" />
+                    <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="184.00001831054686" minWidth="29.600000000000023" prefWidth="73.60001220703123" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.39995727539065" minWidth="47.39998779296877" prefWidth="81.99996948242188" />
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="315.9999938964844" minWidth="43.999926757812545" prefWidth="284.0000305175782" />
+                     <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <Label text="Pronunciation:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="proLabel" text="[pronunciation]" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Button fx:id="speakButton" mnemonicParsing="false" onAction="#handleSpeakButtonOnAction" prefHeight="42.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../icons/Audio.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Label prefHeight="20.0" prefWidth="60.0" text="Type:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <Label fx:id="typeLabel" text="[type]" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+
+                <Button fx:id="addToFavouriteButton" mnemonicParsing="false" onAction="#handleAddToFavourite" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/bookmark.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="searchDatabaseButton" mnemonicParsing="false" onAction="#handleGoToSearchOnDatabase" prefHeight="64.0" prefWidth="64.0" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="6" GridPane.rowIndex="0">
+                    <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../icons/offline.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </GridPane>
+
+
+            <Label style="-fx-font-weight: bold;" text="Meaning:" />
+            <TextArea fx:id="meaningText" editable="false" prefHeight="50.0" prefWidth="790.0" promptText="Meaning will appear here..." wrapText="true" VBox.vgrow="ALWAYS" />
+
+            <Label style="-fx-font-weight: bold;" text="Example:" />
+            <TextArea fx:id="exampleText" editable="false" prefHeight="100.0" promptText="Example usage will appear here..." wrapText="true" VBox.vgrow="SOMETIMES" />
+
+        </VBox>
+            <StackPane fx:id="notificationContainer" alignment="TOP_CENTER" mouseTransparent="true">
+                <children>
+                    <StackPane fx:id="saveSuccessfullyNotification" maxHeight="50" maxWidth="300.0" opacity="0" prefHeight="50" prefWidth="300" style="-fx-background-color: #B0F2B4; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
+                        <children>
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Đã thêm từ vào danh sách yêu thích ✅" />
+                        </children>
+                        <StackPane.margin>
+                            <Insets top="30" />
+                        </StackPane.margin>
+                    </StackPane>
+
+                    <StackPane fx:id="saveFailNotification" maxHeight="50" maxWidth="300.0" opacity="0" prefHeight="50" prefWidth="300" style="-fx-background-color: #F2B4B4; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
+                        <children>
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Từ này đã có trong danh sách yêu thích ❌" />
+                        </children>
+                        <StackPane.margin>
+                            <Insets top="30" />
+                        </StackPane.margin>
+                    </StackPane>
+                </children>
+            </StackPane>
+
+        </children>
+        </StackPane>
+    </center>
+</BorderPane>

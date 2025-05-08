@@ -1,0 +1,97 @@
+/* --- Thanh điều hướng bên trái --- */
+.navigation-menu {
+    -fx-pref-width: 180px; /* Điều chỉnh chiều rộng nếu cần */
+    -fx-spacing: 8px; /* Khoảng cách giữa các nút */
+    -fx-padding: 15px; /* Padding xung quanh VBox */
+    -fx-background-color: #e8e8e8; /* Màu nền nhẹ */
+    -fx-alignment: top-center; /* Căn chỉnh các nút */
+}
+
+.app-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 25px 0; /* Khoảng cách dưới tiêu đề */
+    -fx-alignment: center;
+}
+
+.nav-button {
+    -fx-pref-height: 45px; /* Chiều cao nút */
+    -fx-max-width: Infinity; /* Chiếm hết chiều rộng VBox */
+    -fx-font-size: 14px;
+    -fx-alignment: center-left; /* Căn chữ và icon sang trái */
+    -fx-graphic-text-gap: 15px; /* Khoảng cách giữa icon và text */
+    -fx-padding: 0 15px; /* Padding trong nút */
+    -fx-background-color: transparent; /* Nền trong suốt ban đầu */
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #444; /* Màu chữ */
+}
+
+.nav-button:hover {
+    -fx-background-color: #dcdcdc; /* Màu nền khi hover */
+    -fx-cursor: hand;
+}
+
+/* Định dạng nút khi đang được chọn/disable */
+.nav-button:disabled {
+    -fx-background-color: #cccccc; /* Màu nền đậm hơn cho nút disable */
+    -fx-opacity: 1.0; /* Giữ độ rõ nét */
+    -fx-text-fill: #111; /* Màu chữ đậm hơn */
+    -fx-font-weight: bold;
+}
+.nav-button:disabled .nav-icon{
+    /* Có thể thay đổi icon hoặc hiệu ứng cho nút disable nếu muốn */
+    /* -fx-opacity: 0.7; */
+}
+
+
+.nav-icon {
+    /* CSS cho ImageView bên trong nút */
+    /* fitHeight/fitWidth đã đặt trong FXML, có thể điều chỉnh ở đây nếu muốn */
+    /* -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 1, 1); /* Đổ bóng nhẹ cho icon */
+}
+
+/* --- Khu vực chọn game ở giữa --- */
+.game-selection-container {
+    -fx-padding: 30px; /* Padding xung quanh khu vực chọn game */
+    -fx-spacing: 25px; /* Khoảng cách giữa các hàng game */
+    -fx-alignment: top-center; /* Căn các HBox game vào giữa theo chiều dọc */
+}
+
+.game-entry-box {
+    -fx-spacing: 20px; /* Khoảng cách giữa nút game và mô tả */
+    -fx-alignment: center-left; /* Căn các phần tử trong HBox */
+    -fx-max-width: 600px; /* Giới hạn chiều rộng của mỗi hàng game */
+    -fx-padding: 10px; /* Padding cho mỗi hàng game */
+    -fx-border-color: #d0d0d0; /* Viền nhẹ */
+    -fx-border-width: 0 0 1px 0; /* Chỉ viền dưới */
+}
+.game-entry-box:last-child {
+    -fx-border-width: 0; /* Bỏ viền cho hàng cuối */
+}
+
+.game-button {
+    -fx-pref-width: 150px; /* Chiều rộng cố định cho nút game */
+    -fx-pref-height: 55px; /* Chiều cao nút game */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #4CAF50; /* Màu nền xanh lá */
+    -fx-text-fill: white; /* Chữ trắng */
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.game-button:hover {
+    -fx-background-color: #45a049; /* Màu đậm hơn khi hover */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 2, 2); /* Đổ bóng */
+}
+
+.game-description-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+    -fx-padding: 0 0 0 10px; /* Chút padding bên trái label */
+    -fx-alignment: center-left; /* Căn chữ trong label */
+    /* wrapText và HBox.hgrow đã đặt trong FXML */
+}

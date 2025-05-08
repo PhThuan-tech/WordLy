@@ -1,0 +1,170 @@
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom right, #edf5e1, #f0ebe1);
+    -fx-font-family: 'Poppins', 'Segoe UI', sans-serif; /* Sử dụng font từ CSS thứ hai. Bạn cần đảm bảo font này có sẵn trong hệ thống hoặc thêm vào dự án. */
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.label[text="WORDLY"] {
+    -fx-font-size: 36px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #558B2F;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0.5, 0, 2);
+    -fx-padding: 10px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.button {
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 5, 0.2, 1, 1);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #7CB342;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, 0.4, 1, 1);
+}
+
+.button:pressed {
+    -fx-background-color: #689F38;
+    -fx-translate-y: 0.5px;
+}
+
+.button[text="Search"] {
+    -fx-background-color: #FF5722;
+}
+.button[text="Search"]:hover {
+    -fx-background-color: #E64A19;
+}
+
+#speakButton {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+}
+#speakButton:hover {
+    -fx-background-color: transparent;
+}
+#speakButton:pressed {
+     -fx-background-color: transparent;
+}
+
+#addToFavouriteButton {
+    -fx-background-color: transparent;
+     -fx-effect: none;
+}
+#addToFavouriteButton:hover {
+    -fx-background-color: transparent;
+}
+#addToFavouriteButton:pressed {
+    -fx-background-color: transparent;
+}
+
+
+.button[text="Text To Speech"] {
+    -fx-background-color: #607D8B;
+    -fx-font-size: 13px;
+    -fx-padding: 8px;
+    -fx-wrap-text: true;
+}
+.button[text="Text To Speech"]:hover {
+    -fx-background-color: #546E7A;
+}
+
+.setting-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.setting-button:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
+
+.setting-button:pressed {
+    -fx-translate-y: 0.5px;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent; /* Đảm bảo vẫn trong suốt khi nhấn */
+}
+
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+}
+
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+}
+
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px;
+}
+
+.list-view {
+    -fx-background-color: #e8f5e9;
+    -fx-border-color: #c8e6c9;
+}
+
+.game-item {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0, 0);
+    -fx-cursor: pointer;
+    -fx-transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.game-item:hover {
+    -fx-border-color: #007bff; /* Đổi màu viền khi hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.2), 15, 0.2, 0, 0); /* Đổ bóng màu khi hover */
+}
+
+/* Styling cho nút Play */
+.game-button {
+    -fx-background-color: #007bff; /* Màu nền xanh dương */
+    -fx-text-fill: white;       /* Màu chữ trắng */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;     /* Bo góc nút */
+    -fx-padding: 10px 20px;     /* Padding cho nút */
+    -fx-cursor: hand;           /* Con trỏ tay */
+     -fx-background-radius: 5px; /* Đảm bảo bo góc cho background */
+     -fx-border-color: transparent;
+     -fx-pref-width: Infinity;
+}
+
+.game-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.game-button:pressed {
+    -fx-background-color: #004085;
+}
+
+.game-item ImageView {
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+     -fx-border-radius: 5px;
+}

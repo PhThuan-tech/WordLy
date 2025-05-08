@@ -1,0 +1,42 @@
+/* chat.css */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-padding: 10;           /* khoảng cách chung */
+}
+
+.list-cell {
+    -fx-background-color: transparent;   /* xóa nền mặc định */
+    -fx-padding: 0;                      /* cell lồng đúng kích thước nội dung */
+}
+
+/* Khi một cell bị chọn (nếu có), cũng transparent */
+.list-cell:filled:selected,
+.list-cell:filled:selected:focused {
+    -fx-background-color: transparent;
+}
+
+/* lớp chung cho bubble */
+.message-bubble {
+    -fx-wrap-text: true;
+    -fx-padding: 8 12;         /* trong: 8px trên/dưới, 12px trái/phải */
+    -fx-background-radius: 16; /* bo góc */
+    -fx-font-size: 14px;
+    -fx-max-width: 300px;      /* giới hạn chiều rộng */
+}
+
+/* bubble của user (căn phải, nền xanh nhạt) */
+.user-bubble {
+    -fx-background-color: #DCF8C6;
+    -fx-text-fill: black;
+}
+
+/* bubble của bot (căn trái, nền trắng) */
+.bot-bubble {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+/* bỏ scrollbar dơ nếu muốn */
+.list-view .scroll-bar {
+    -fx-opacity: 0.5;
+}

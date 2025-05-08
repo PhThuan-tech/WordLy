@@ -1,0 +1,292 @@
+/* --- Header --- */
+.header-box {
+    -fx-background-color: #2c3e50; /* Màu nền header */
+    /* padding đã đặt trong FXML, hoặc đặt ở đây: -fx-padding: 12px 20px; */
+}
+
+.nav-button { /* Nút Back */
+    -fx-background-color: transparent;
+    -fx-text-fill: #ecf0f1; /* Màu chữ sáng */
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.nav-button:hover {
+    -fx-background-color: #34495e; /* Màu nền khi hover */
+    -fx-cursor: hand;
+}
+
+.title-label { /* Tiêu đề DEFINITION CHALLENGE */
+    -fx-text-fill: #ffffff; /* Chữ trắng */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-alignment: center; /* Căn giữa trong không gian còn lại */
+    -fx-padding: 0 10px; /* Padding ngang */
+}
+
+/* --- Center Content --- */
+.center-content-box {
+    -fx-background-color: #ecf0f1; /* Màu nền nội dung */
+    /* padding đã đặt trong FXML, hoặc đặt ở đây: -fx-padding: 20px 30px; */
+}
+
+.question-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495e; /* Màu chữ đậm hơn */
+}
+
+.word-label {
+    -fx-font-size: 48px; /* Có thể giảm nhẹ nếu cần */
+    -fx-font-weight: bold;
+    -fx-text-fill: #2980b9; /* Màu xanh dương */
+    -fx-padding: 5px 0; /* Giảm padding dọc */
+}
+
+.score-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e67e22; /* Màu cam cho điểm */
+    -fx-padding-bottom: 10px; /* Khoảng cách dưới điểm */
+}
+
+.options-vbox {
+    -fx-padding: 10px 40px; /* Giảm padding dọc, giữ ngang */
+    /* spacing và alignment đã đặt trong FXML */
+}
+
+.option-button {
+    /* maxWidth đặt trong FXML */
+    -fx-pref-height: 50px; /* Chiều cao nút, có thể giảm nếu cần */
+    -fx-min-height: 40px;
+    -fx-font-size: 14px; /* Cỡ chữ trong nút */
+    -fx-text-fill: #333; /* Màu chữ nút */
+    -fx-background-color: #ffffff; /* Nền trắng */
+    -fx-border-color: #bdc3c7; /* Viền xám nhạt */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 15px; /* Padding trong nút */
+    -fx-alignment: center-left; /* Căn chữ trong nút sang trái */
+}
+
+.option-button:hover {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #7f8c8d;
+    -fx-cursor: hand;
+}
+
+/* Thêm style cho trạng thái nút khi được chọn hoặc đúng/sai nếu cần */
+.option-button-correct {
+    -fx-background-color: #2ecc71; /* Xanh lá */
+    -fx-text-fill: white;
+    -fx-border-color: #27ae60;
+}
+
+.option-button-incorrect {
+    -fx-background-color: #e74c3c; /* Đỏ */
+    -fx-text-fill: white;
+    -fx-border-color: #c0392b;
+}
+
+.option-button:disabled { /* Khi đã chọn xong */
+    -fx-opacity: 0.7;
+}
+
+
+.feedback-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    /* Màu chữ sẽ được đặt trong code (ví dụ: xanh cho đúng, đỏ cho sai) */
+    /* -fx-text-fill: green; or -fx-text-fill: red;
+    -fx-padding: 10px 0; /* Khoảng đệm */
+    -fx-min-height: 25px; /* Đảm bảo có không gian */
+}
+
+.action-button { /* Nút NEXT WORD */
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db; /* Màu xanh dương */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 20px;
+}
+
+.action-button:hover {
+    -fx-background-color: #2980b9;
+    -fx-cursor: hand;
+}
+
+/* DEFINITION GAME STYLE */
+
+.game-root-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.game-top-bar {
+    -fx-background-color: #e9ecef;
+    -fx-border-color: transparent transparent #dee2e6 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 20 10 20;
+}
+
+
+.back-button-game {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 5 15 5 15;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.back-button-game:hover {
+    -fx-background-color: #5a6268;
+}
+
+.back-button-game:pressed {
+    -fx-background-color: #545b62;
+}
+
+.game-info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057;
+}
+
+.game-score-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0056b3;
+}
+
+
+/* ---- Content Area Styles ---- */
+
+.game-content-area {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 5);
+}
+
+.game-instruction-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #343a40;
+    -fx-font-weight: normal;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.game-target-word-label {
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0d6efd;
+    -fx-padding: 5 0 5 0;
+}
+
+/* ---- Buttons ---- */
+
+.game-options-grid {
+    -fx-background-color: transparent;
+}
+
+.game-option-button {
+    -fx-font-size: 15px;
+    -fx-text-fill: #212529;
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #ffffff 0%, #f1f3f5 100%);
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 15px;
+    -fx-pref-height: 80px;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+    -fx-cursor: hand;
+
+    -fx-transition: -fx-background-color 0.2s ease-in-out, -fx-border-color 0.2s ease-in-out;
+}
+
+.game-option-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f8f9fa 0%, #e9ecef 100%);
+    -fx-border-color: #adb5bd;
+}
+
+.game-option-button:pressed {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #e9ecef 0%, #dee2e6 100%);
+    -fx-border-color: #adb5bd;
+}
+
+/* ---- Styles for Feedback ---- */
+
+/* Nút được chọn ĐÚNG */
+.game-option-button.correct {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #d1e7dd 0%, #a3cfbb 100%);
+    -fx-border-color: #52a971;
+    -fx-text-fill: #0f5132;
+    -fx-font-weight: bold;
+}
+
+/* Nút được chọn SAI */
+.game-option-button.incorrect {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f8d7da 0%, #f1b0b7 100%);
+    -fx-text-fill: #58151c;
+    -fx-font-weight: normal;
+}
+
+.game-option-button.dimmed {
+    -fx-opacity: 0.65;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 2, 0, 0, 2);
+}
+
+
+.game-option-button:disabled {
+    -fx-opacity: 0.7;
+    -fx-cursor: default;
+}
+
+.game-option-button.correct:disabled,
+.game-option-button.incorrect:disabled {
+    -fx-opacity: 0.8;
+}
+
+/* ---- Feedback Label ---- */
+
+.game-feedback-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-min-height: 30px;
+}
+
+.game-feedback-label.correct {
+    -fx-text-fill: #198754;
+}
+
+.game-feedback-label.incorrect {
+    -fx-text-fill: #dc3545;
+}
+
+/* ---- Next Button ---- */
+
+.game-next-button {
+    -fx-background-color: #198754;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-padding: 10 30 10 30;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.game-next-button:hover {
+    -fx-background-color: #157347;
+}
+
+.game-next-button:pressed {
+    -fx-background-color: #146c43;
+}
