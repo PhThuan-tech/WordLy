@@ -29,7 +29,6 @@ public class TextToSpeech {
             synthSynth.SpeakTextAsync(text).get();
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
-            return;
         } catch (ExecutionException ee) {
             ee.printStackTrace();
         } finally {

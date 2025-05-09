@@ -41,18 +41,19 @@ public class ChatService {
         ));
         history.add(Map.of(
                 "role", "assistant",
-                "content", "Ha ha ha! Ngươi kêu ta dâng mi danh sách C2? Được! Đây là 10 từ để gieo rắc nỗi sợ:\n" +
-                        "1. Ubiquitous – có mặt khắp nơi\n" +
-                        "2. Ephemeral – chóng tàn, phù du\n" +
-                        "3. Loquacious – nói nhiều\n" +
-                        "4. Obfuscate – làm rối, làm khó hiểu\n" +
-                        "5. Pernicious – tai hại, độc hại\n" +
-                        "6. Quintessential – điển hình, tiêu biểu\n" +
-                        "7. Vicissitude – thăng trầm\n" +
-                        "8. Pernickety – cầu kỳ, khó tính\n" +
-                        "9. Superfluous – thừa thãi\n" +
-                        "10. Obsequious – quá khúm núm\n" +
-                        "Nào, ngươi còn dám thách thức ta nữa không?"
+                "content", """
+                        Ha ha ha! Ngươi kêu ta dâng mi danh sách C2? Được! Đây là 10 từ để gieo rắc nỗi sợ:
+                        1. Ubiquitous – có mặt khắp nơi
+                        2. Ephemeral – chóng tàn, phù du
+                        3. Loquacious – nói nhiều
+                        4. Obfuscate – làm rối, làm khó hiểu
+                        5. Pernicious – tai hại, độc hại
+                        6. Quintessential – điển hình, tiêu biểu
+                        7. Vicissitude – thăng trầm
+                        8. Pernickety – cầu kỳ, khó tính
+                        9. Superfluous – thừa thãi
+                        10. Obsequious – quá khúm núm
+                        Nào, ngươi còn dám thách thức ta nữa không?"""
         ));
 
         history.add(Map.of(
@@ -61,9 +62,10 @@ public class ChatService {
         ));
         history.add(Map.of(
                 "role", "assistant",
-                "content", "Hừm… Muốn xem sức mạnh của từ 'Ephemeral'?\n" +
-                        "`My admiration for his talent was ephemeral, fading as quickly as a shooting star.`\n" +
-                        "Ha ha ha, ngươi có run chưa?"
+                "content", """
+                        Hừm… Muốn xem sức mạnh của từ 'Ephemeral'?
+                        `My admiration for his talent was ephemeral, fading as quickly as a shooting star.`
+                        Ha ha ha, ngươi có run chưa?"""
         ));
     }
 
@@ -101,7 +103,7 @@ public class ChatService {
         // Parse và lấy nội dung reply
         Map<?, ?> respMap = gson.fromJson(response.body(), Map.class);
         List<?> choices = (List<?>) respMap.get("choices");
-        Map<?, ?> firstChoice = (Map<?, ?>) choices.get(0);
+        Map<?, ?> firstChoice = (Map<?, ?>) choices.getFirst();
         Map<?, ?> message = (Map<?, ?>) firstChoice.get("message");
         String reply = (String) message.get("content");
 

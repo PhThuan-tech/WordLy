@@ -3,6 +3,7 @@ package com.example.wordly.API;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,30 +17,7 @@ public class Translator {
 
     public static String translate(String text, String from , String to) {
         try {
-            String route;
-            if (from == null || from.isEmpty() || from.equalsIgnoreCase("auto")) {
-                route = "/translate?api-version=3.0&to=" + to;
-            } else {
-                route = "/translate?api-version=3.0&from=" + from + "&to=" + to;
-            }
-
-            URL url = new URL(ENDPOINT + route);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Ocp-Apim-Subscription-Key", API_KEY);
-            conn.setRequestProperty("Ocp-Apim-Subscription-Region", REGION);
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setDoOutput(true);
-
-            JsonArray requestBodyArray = new JsonArray();
-            JsonObject textObj = new JsonObject();
-            textObj.addProperty("text", text);
-            requestBodyArray.add(textObj);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = requestBodyArray.toString().getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
+            HttpURLConnection conn = getHttpURLConnection(text, from, to);
 
             int responseCode = conn.getResponseCode();
             if (responseCode != 200) {
@@ -68,5 +46,34 @@ public class Translator {
             e.printStackTrace();
             return "Error during translation: " + e.getMessage();
         }
+    }
+
+    @NotNull
+    private static HttpURLConnection getHttpURLConnection(String text, String from, String to) throws IOException {
+        String route;
+        if (from == null || from.isEmpty() || from.equalsIgnoreCase("auto")) {
+            route = "/translate?api-version=3.0&to=" + to;
+        } else {
+            route = "/translate?api-version=3.0&from=" + from + "&to=" + to;
+        }
+
+        URL url = new URL(ENDPOINT + route);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Ocp-Apim-Subscription-Key", API_KEY);
+        conn.setRequestProperty("Ocp-Apim-Subscription-Region", REGION);
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        conn.setDoOutput(true);
+
+        JsonArray requestBodyArray = new JsonArray();
+        JsonObject textObj = new JsonObject();
+        textObj.addProperty("text", text);
+        requestBodyArray.add(textObj);
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBodyArray.toString().getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+        return conn;
     }
 }
