@@ -9,6 +9,7 @@ import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.util.BinaryData;
 
+import com.example.wordly.API.AppConfig;
 import com.example.wordly.API.TextToSpeech;
 import com.example.wordly.API.Translator;
 import javafx.animation.*;
@@ -61,10 +62,10 @@ public class TranslateAndTTSController extends BaseController {
 
 
 /* ======================== API, ENDPOINT CỦA VISION VÀ SPEECH ====================================================== */
-    private static final String AZURE_VISION_ENDPOINT = "https://phamthaic3.cognitiveservices.azure.com/";
-    private static final String AZURE_VISION_SUBSCRIPTION_KEY = "PYdx4cObbMBRA7HnXlw5OkigfrGJ14ORRnp15JywiJzAx2e1UmFSJQQJ99BDACqBBLyXJ3w3AAAFACOGVj20";
-    private static final String AZURE_SPEECH_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";
-    private static final String AZURE_SPEECH_REGION = "southeastasia";
+    private static final String AZURE_VISION_ENDPOINT = AppConfig.get("AZURE_VISION_ENDPOINT");
+    private static final String AZURE_VISION_SUBSCRIPTION_KEY = AppConfig.get("AZURE_VISION_KEY");
+    private static final String AZURE_SPEECH_KEY = AppConfig.get("AZURE_SPEECH_KEY");
+    private static final String AZURE_SPEECH_REGION = AppConfig.get("AZURE_SPEECH_REGION");
 
 /* ================================================================================================================== */
 

@@ -1,0 +1,16 @@
+AZURE_TTS_KEY=your-text-to-speech-key
+AZURE_TTS_REGION=your-region
+
+AZURE_TRANSLATOR_KEY=your-translator-key
+AZURE_TRANSLATOR_REGION=your-region
+
+AZURE_CHAT_KEY=your-openai-key
+AZURE_CHAT_ENDPOINT=https://your-endpoint.cognitiveservices.azure.com/
+AZURE_CHAT_DEPLOYMENT=your-deployment-id
+AZURE_CHAT_API_VERSION=2024-02-15-preview
+
+AZURE_VISION_KEY=your-vision-key
+AZURE_VISION_ENDPOINT=https://your-endpoint.cognitiveservices.azure.com/
+
+AZURE_SPEECH_KEY=your-speech-key
+AZURE_SPEECH_REGION=your-region

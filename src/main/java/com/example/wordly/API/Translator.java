@@ -10,9 +10,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class Translator {
-    private static final String API_KEY = "6mmnlV67g5ndE3grbHYBMMUDMpN0jalMBIPktVIOszGUnUmgjBGrJQQJ99BDACqBBLyXJ3w3AAAbACOGD9zi";
+    private static final String API_KEY = AppConfig.get("AZURE_TRANSLATOR_KEY");
+    private static final String REGION  = AppConfig.get("AZURE_TRANSLATOR_REGION");
     private static final String ENDPOINT = "https://api.cognitive.microsofttranslator.com";
-    private static final String REGION = "southeastasia";
 
     public static String translate(String text, String from , String to) {
         try {
