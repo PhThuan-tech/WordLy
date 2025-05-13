@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatService {
-    private static final String API_KEY = "EiIbTHoA0DRlG5f35TOSraET7jSorzUrsuC7OKYDy5JpU0UIPnglJQQJ99BDACfhMk5XJ3w3AAAAACOGtWcU";
-    private static final String ENDPOINT = "https://phamd-ma2tvlvx-swedencentral.cognitiveservices.azure.com/";
-    private static final String DEPLOYMENT_ID = "gpt-4.1";
-    private static final String API_VERSION = "2024-02-15-preview";
+    private static final String API_KEY = AppConfig.get("AZURE_CHAT_KEY");
+    private static final String ENDPOINT = AppConfig.get("AZURE_CHAT_ENDPOINT");
+    private static final String DEPLOYMENT_ID = AppConfig.get("AZURE_CHAT_DEPLOYMENT");
+    private static final String API_VERSION = AppConfig.get("AZURE_CHAT_API_VERSION");
 
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final Gson gson = new Gson();
