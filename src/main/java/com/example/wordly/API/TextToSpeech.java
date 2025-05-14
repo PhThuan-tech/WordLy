@@ -5,8 +5,8 @@ import com.microsoft.cognitiveservices.speech.*;
 import java.util.concurrent.ExecutionException;
 
 public class TextToSpeech {
-    private static final String API_KEY = "7yjH0bCYVrqCNfQ1YVTPKny3YiXc1BdjT7kwhoohEwRF3EKB6xkRJQQJ99BDACqBBLyXJ3w3AAAYACOGqnah";      // your key
-    private static final String REGION  = "southeastasia";
+    private static final String API_KEY = AppConfig.get("AZURE_TTS_KEY");
+    private static final String REGION  = AppConfig.get("AZURE_TTS_REGION");
 
     private static SpeechSynthesizer synthSynth;
     private static final Object lock = new Object();

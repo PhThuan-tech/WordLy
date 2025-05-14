@@ -27,6 +27,14 @@
 - **Chat-bot**: Tích hợp API từ **Gemini** để luyện giao tiếp tiếng Anh.
 - **Tính năng nâng cao**: Hỗ trợ **Text-to-Speech**, tra từ đồng/trái nghĩa, và các công cụ học tập khác.
 
+## 🔧 Thiết lập cấu hình API
+
+1. Tạo file `config.properties` tại thư mục gốc dự án
+2. Dán các API key và endpoint theo mẫu file `config.properties.example`
+3. Không commit file `config.properties` lên GitHub
+
+👉 Nếu bạn chưa có key, hãy đăng ký tại [Azure Portal](https://portal.azure.com)
+
 ## 🛠️ Hướng dẫn cài đặt
 1. Cài đặt IntelliJ IDEA và Scene Builder.
 1. Tải mã nguồn từ [GitHub WordLy](https://github.com/PhThuan-tech/WordLy/tree/main)
