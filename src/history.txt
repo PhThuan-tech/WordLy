@@ -67,3 +67,104 @@ training	verb	/ˈtɹeɪnɪŋ/	To practice an ability.
 teleport	noun	/ˈtɛləpɔː(ɹ)t/	A teleporter.
 telephone	noun	/ˈtɛləfəʊn/	A telecommunication device (originally mechanical, and now electronic) used for two-way talking with another person (now often shortened to phone).
 mobile	noun	/ˈməʊbaɪl/	A kinetic sculpture or decorative arrangement made of items hanging so that they can move independently from each other.
+pronunciation	noun	/pɹəˌnaʊn.siˈeɪ.ʃən/	The formal or informal way in which a word is made to sound when spoken.
+bacon	noun	/ˈbeɪ.kən/	Cured meat from the sides, belly or back of a pig.
+backward	noun	/ˈbæk.wə(ɹ)d/	The state behind or past.
+wand	noun	/wɒnd/	A hand-held narrow rod, usually used for pointing or instructing, or as a traditional emblem of authority.
+drone	noun	/dɹəʊn/	A male ant, bee or wasp, which does not work but can fertilize the queen bee.
+drop	noun	/dɹɒp/	A small quantity of liquid, just large enough to hold its own round shape via surface tension, especially one that falls from a source of liquid.
+drill	noun	/dɹɪl/	A tool used to remove material so as to create a hole, typically by plunging a rotating cutting bit into a stationary workpiece.
+dig	noun	/dɪɡ/	An archeological or paleontological investigation, or the site where such an investigation is taking place.
+dick	noun	/dɪk/	A male person.
+deeply	adverb	/ˈdiːpli/	At depth, in a deep way.
+fasten	verb	/ˈfɑːsn̩/	To attach or connect in a secure manner.
+fallback	noun	/ˈfɔːl.bæk/	An act of falling back.
+meteor	noun	/ˈmiːtɪɔː/	A fast-moving streak of light in the night sky caused by the entry of extraterrestrial matter into the earth's atmosphere: A shooting star or falling star.
+thunderstorm	noun	/ˈθʌn.də(ɹ)ˌstɔː(ɹ)m/	A storm consisting of thunder and lightning produced by a cumulonimbus, usually accompanied with heavy rain, wind, and sometimes hail; and in rarer cases sleet, freezing rain, or snow.
+cane	noun	[kʰeɪn]	A plant with simple stems, like bamboo or sugar cane, or the stem thereof
+sugarcane	noun	N/A	A tropical grass of the genus Saccharum (especially the species Saccharum officinarum) having stout, fibrous, jointed stalks, the sap of which is a source of sugar.
+grass	noun	[ɡɹ̠äːs]	Any plant of the family Poaceae, characterized by leaves that arise from nodes in the stem and leaf bases that wrap around the stem, especially those grown as ground cover rather than for grain.
+greek	noun	/ɡɹiːk/	An inhabitant, resident, or person of descent from Greece.
+english	noun	/ˈɪŋ.ɡlɪʃ/	Spinning or rotary motion given to a ball around the vertical axis, as in billiards or bowling.
+hit	noun	/hɪt/	A blow; a punch; a striking against; the collision of one body against another; the stroke that touches anything.
+hike	noun	/haɪk/	A long walk.
+bike	noun	[bɐɪk]	A vehicle that has two wheels, one behind the other, a steering handle, and a saddle seat or seats and is usually propelled by the action of a rider’s feet upon pedals.
+sport	noun	/spɔːt/	Any activity that uses physical exertion or skills competitively under a set of rules that is not based on aesthetics.
+station	noun	/ˈsteɪʃən/	A stopping place.
+unbreakable	noun	N/A	Something that cannot be broken.
+broken	verb	/ˈbɹəʊkən/	To separate into two or more pieces, to fracture or crack, by a process that cannot easily be reversed for reassembly.
+brick	noun	/bɹɪk/	A hardened rectangular block of mud, clay etc., used for building.
+energy	noun	/ˈɛnəd͡ʒi/	The impetus behind all motion and all activity.
+shown	verb	/ˈʃəʊn/	To display, to have somebody see (something).
+trowel	noun	/ˈtɹaʊ.əl/	A mason’s tool, used in spreading and dressing mortar, and breaking bricks to shape them.
+mortar	noun	/ˈmɔːtə(ɹ)/	A mixture of lime or cement, sand and water used for bonding building blocks.
+bonding	verb	N/A	To connect, secure or tie with a bond; to bind.
+bind	noun	/baɪnd/	That which binds or ties.
+ties	noun	N/A	A knot; a fastening.
+knot	noun	/nɒt/	A looping of a piece of string or of any other long, flexible material that cannot be untangled without passing one or both ends of the material through its loops.
+looping	verb	N/A	To form something into a loop.
+loop	noun	/luːp/	A length of thread, line or rope that is doubled over to make an opening.
+doubled	verb	/ˈdʌbl̩d/	To multiply by two.
+multiply	noun	/ˈmʌltɪplaɪ/	An act or instance of multiplying.
+instance	noun	/ˈɪnstəns/	Urgency of manner or words; an urgent request; insistence.
+manner	noun	/ˈmænə/	Mode of action; way of performing or doing anything
+perform	verb	/pəˈfɔːm/	To do something; to execute.
+execute	verb	/ˈɛksɪˌkjuːt/	To kill as punishment for capital crimes.
+implant	noun	/ɪmˈplɑːnt/	Anything surgically implanted in the body, such as a tissue graft or prosthesis, particularly breast implants.
+bubble	noun	/ˈbʌb.əl/	A spherically contained volume of air or other gas, especially one made from soapy liquid.
+gum	noun	/ɡʌm/	(often in the plural) The flesh around the teeth.
+gun	noun	/ɡʌn/	A device for projecting a hard object very forcefully; a firearm or cannon.
+purple	noun	/ˈpɜː(ɹ).pəl/	A colour/color that is a dark blend of red and blue; dark magenta.
+oranges	noun	N/A	An evergreen tree of the genus Citrus such as Citrus sinensis.
+strawberry	noun	/ˈstɹɔːb(ə)ɹi/	The sweet, usually red, edible fruit of certain plants of the genus Fragaria.
+edible	noun	/ˈɛdɪbl/	Anything edible.
+anything	noun	/ˈɛ.nə.θɪŋ/	Someone or something of importance.
+importance	noun	/ɪmˈpɔːtəns/	The quality or condition of being important or worthy of note.
+condition	noun	/kənˈdɪʃən/	A logical clause or phrase that a conditional statement uses. The phrase can either be true or false.
+logical	adjective	/ˈlɒdʒɪkəɫ/	In agreement with the principles of logic.
+logic	noun	/ˈlɒdʒɪk/	A method of human thought that involves thinking in a linear, step-by-step manner about how a problem can be solved. Logic is the basis of many principles including the scientific method.
+linear	adjective	/ˈlɪn.i.ə/	Having the form of a line; straight or roughly straight; following a direct course.
+straight	noun	/stɹeɪt/	Something that is not crooked or bent such as a part of a road or track.
+crooked	verb	/kɹʊkt/	To bend, or form into a hook.
+hook	noun	/huːk/	A rod bent into a curved shape, typically with one end free and the other end secured to a rope or other attachment.
+rod	noun	/ɹɒd/	A straight, round stick, shaft, bar, cane, or staff.
+fishing	noun	/ˈfɪʃɪŋ/	The act of catching fish.
+catching	verb	/ˈkætʃɪŋ/	(heading) To capture, overtake.
+capture	noun	/ˈkæp.t͡ʃə/	An act of capturing; a seizing by force or stratagem.
+seizing	verb	/ˈsizɪŋ/	To deliberately take hold of; to grab or capture.
+force	noun	/fɔːs/	Strength or energy of body or mind; active power; vigour; might; capacity of exercising an influence or producing an effect.
+vigour	noun	/ˈvɪɡə/	Active strength or force of body or mind; capacity for exertion, physically, intellectually, or morally; energy.
+buses	noun	N/A	A motor vehicle for transporting large numbers of people along roads.
+numerous	adjective	/ˈnjuːməɹəs/	Indefinitely large numerically, many.
+type	noun	/taɪp/	A grouping based on shared characteristics; a class.
+based	verb	/beɪst/	To give as its foundation or starting point; to lay the foundation of.
+foundation	noun	/faʊnˈdeɪʃən/	The act of founding, fixing, establishing, or beginning to erect.
+helpful	adjective	/ˈhɛlp.fəl/	Furnishing help; giving aid; useful.
+giving	verb	/ˈɡɪvɪŋ/	(ditransitive) To move, shift, provide something abstract or concrete to someone or something or somewhere.
+donate	verb	/dəʊˈneɪt/	To make a donation; to give away something of value to support or contribute towards a cause or for the benefit of another.
+donation	noun	/dəʊˈneɪʃən/	A voluntary gift or contribution for a specific cause.
+donkey	noun	/ˈdɒŋki/	A domestic animal, Equus asinus asinus, similar to a horse
+similar	noun	/ˈsɪmələ/	That which is similar to, or resembles, something else, as in quality, form, etc.
+similarity	noun	/sɪmɪˈlæɹɪti/	Closeness of appearance to something else.
+appearance	noun	/əˈpɪəɹəns/	The act of appearing or coming into sight; the act of becoming visible to the eye.
+sight	noun	/saɪt/	(in the singular) The ability to see.
+sightseeing	verb	N/A	To go sightseeing; to visit places of interest in a city, town or geographical area.
+geographic	adjective	/d͡ʒiəˈɡɹæfɪk/	Pertaining to geography (or to geographics)
+geography	noun	/dʒɪˈɒɡɹəfi/	A description of the earth: a treatise or textbook on geography; an atlas or gazetteer.
+gazetteer	noun	N/A	Journalist
+journey	noun	/ˈd͡ʒɜːni/	A set amount of travelling, seen as a single unit; a discrete trip, a voyage.
+amount	noun	/əˈmaʊnt/	The total, aggregate or sum of material (not applicable to discrete numbers or units or items in standard English).
+aggregate	noun	N/A	A mass, assemblage, or sum of particulars; something consisting of elements but considered as a whole.
+assemblage	noun	N/A	The process of assembling or bringing together.
+bringing	verb	/ˈbɹɪŋɪŋ/	(ditransitive) To transport toward somebody/somewhere.
+transport	noun	N/A	An act of transporting; conveyance.
+conveyance	noun	/kənˈveɪn̩s/	An act or instance of conveying.
+instant	noun	/ˈɪnstənt/	A very short period of time; a moment.
+convert	noun	/ˈkɒn.vəːt/	A person who has converted to a religion.
+converting	verb	N/A	To transform or change (something) into another form, substance, state, or product.
+converted	verb	/kənˈvɜːtɪd/	To transform or change (something) into another form, substance, state, or product.
+changing	verb	/ˈtʃeɪndʒɪŋ/	To become something different.
+rabbit	noun	/ˈɹæbət/	A mammal of the family Leporidae, with long ears, long hind legs and a short, fluffy tail.
+search	noun	/sɜːt͡ʃ/	An attempt to find something.
+time	noun	/tɑem/	The inevitable progression into the future with the passing of present and past events.
+shirt	noun	/ʃɜːt/	An article of clothing that is worn on the upper part of the body, and often has sleeves, either long or short, that cover the arms.

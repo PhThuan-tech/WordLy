@@ -12,30 +12,32 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+//API datamuse ngoai tim tu dong nghia, trai nghia thi con co tim tu dong am, tu nhieu nghia
+// su dung fetch du lieu giong API dictionaryDEV.
+
 public class DatamuseService {
-    /**
-     * in ra tu dong nghia.
-     * @param word tu can tim.
-     * @return tra ve tu dong nghia.
-     */
+    // fetch duong dan lay ra danh sach cac tu dong nghia.
     public static List<String> getSynonyms(String word) {
         return fetchWords("https://api.datamuse.com/words?rel_syn=" + word);
     }
 
-    /**
-     * in ra tu trai nghia.
-     * @param word tu can tim.
-     * @return tra ve tu trai nghia.
-     */
+    // fetch duong dan lay ra danh sach cac tu trai nghia.
     public static List<String> getAntonyms(String word) {
         return fetchWords("https://api.datamuse.com/words?rel_ant=" + word);
     }
 
+    /**
+     * Lay URL de su dung
+     * @param apiUrl su dung URL, HttpURLConnection.
+     * @return tra ve danh sach cac tu theo phan hoi.
+     */
     private static List<String> fetchWords(String apiUrl) {
         List<String> words = new ArrayList<>();
+        // thuong se xay ra ngoai le MalformedURLException: Duong dan sai ki tu
+        // Loi mang(khi ko co internet)
+        // JSONException : dung duong dan nhung trang web bi loi (error 404 not found)
         try {
-            URL url = new URL(apiUrl);
-            JSONArray jsonArray = getObjects(url);
+            JSONArray jsonArray = getObjects(apiUrl);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject obj = jsonArray.getJSONObject(i);
                 words.add(obj.getString("word"));
@@ -48,10 +50,12 @@ public class DatamuseService {
     }
 
     @NotNull
-    private static JSONArray getObjects(URL url) throws IOException {
+    private static JSONArray getObjects(String apiUrl) throws IOException {
+        URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod("GET"); // xu li yeu cau lay = GET
 
+        // doc du lieu thanh tung dong de lay ra cac tu, sau do append vao line.
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
         StringBuilder response = new StringBuilder();
@@ -61,6 +65,8 @@ public class DatamuseService {
         }
         reader.close();
 
-        return new JSONArray(response.toString());
+        // them doi tuong vao words de tra ve danh sach cac tu.
+        JSONArray jsonArray = new JSONArray(response.toString());
+        return jsonArray;
     }
 }

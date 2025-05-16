@@ -19,7 +19,7 @@ public class ChatService {
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final Gson gson = new Gson();
 
-    // Lịch sử cuộc hội thoại chứa few-shot để định hình phong cách
+    // Lịch sử cuộc hội thoại để định hình phong cách chat của ai
     private static final List<Map<String, String>> history = new ArrayList<>();
 
     static {

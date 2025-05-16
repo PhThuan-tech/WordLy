@@ -22,7 +22,7 @@ import javafx.util.Duration;
 
 
 public class FavouriteController extends BaseController {
-    // Các hàm chuyển đổi các giao diện qua lại.
+/* =================== PHƯƠNG THỨC CHUYỂN VIEW ====================================================================== */
     @FXML
     public void handleBackMain(ActionEvent actionEvent) {
         switchScene(actionEvent, "/com/example/wordly/view/MainView.fxml");
@@ -53,38 +53,16 @@ public class FavouriteController extends BaseController {
         switchScene(actionEvent, "/com/example/wordly/View/Advance_Features.fxml");
     }
 
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button yesButton;
-
-    @FXML
-    private Button noButton;
-
-    @FXML
-    private AnchorPane confirmationDialog;
-    @FXML
-    private BorderPane rootPane;
+/* ================================================================================================================== */
 
 
+
+/* ======================= THAM CHIẾU TỪ VÀO BẢNG ========================================================================== */
     @FXML public TableView<WordEntry> tableView;
     @FXML public TableColumn<WordEntry, String> wordCol;
     @FXML public TableColumn<WordEntry, String> typeCol;
     @FXML public TableColumn<WordEntry, String> pronCol;
     @FXML public TableColumn<WordEntry, String> meaningCol;
-    @FXML private TextField searchField;
-    @FXML private Button btnSwitchView;
-    @FXML
-    private void handleDeleteButton() {
-        confirmationDialog.setVisible(true);
-    }
-
-
-    private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
-    private FilteredList<WordEntry> filteredData;
-    private boolean showFavouriteWords = true;
-
     @FXML
     public void mappingTable() {
         wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
@@ -94,6 +72,14 @@ public class FavouriteController extends BaseController {
 
         tableView.setItems(wordList);
     }
+/* ================================================================================================================== */
+
+
+
+
+/* ======================= CHUYỂN ĐỔI VIEW ========================================================================== */
+    @FXML private Button btnSwitchView;
+    private boolean showFavouriteWords = true;
 
     private void updateSwitchbutton() {
         if (showFavouriteWords) {
@@ -121,7 +107,11 @@ public class FavouriteController extends BaseController {
         st.setAutoReverse(true);
         st.play();
     }
+/* ================================================================================================================== */
 
+
+
+/* ====================== HIỂN THỊ TỪ VÀO BẢNG ====================================================================== */
     private void loadFavourites() {
         wordList.clear();
         FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
@@ -133,14 +123,18 @@ public class FavouriteController extends BaseController {
         NewAddedWordDAO newAddedWordDAO = new NewAddedWordDAO();
         wordList.addAll(newAddedWordDAO.getAddedWords());
     }
+/* ================================================================================================================== */
 
-    private void deleteSelectedWord() {
-        WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
-        if (selectedWord != null) {
-            FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
-            favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
-            wordList.remove(selectedWord);
-        }
+
+
+/* ============================= XỬ LÝ XÓA TỪ KHỎI BẢNG ============================================================= */
+    @FXML private Button yesButton;
+    @FXML private Button noButton;
+    @FXML private AnchorPane confirmationDialog;
+    @FXML private Button deleteButton;
+
+    @FXML private void handleDeleteButton() {
+        confirmationDialog.setVisible(true);
     }
 
     @FXML
@@ -154,9 +148,31 @@ public class FavouriteController extends BaseController {
         });
     }
 
+    private void deleteSelectedWord() {
+        WordEntry selectedWord = tableView.getSelectionModel().getSelectedItem();
+        if (selectedWord != null) {
+            FavouriteWordDAO favouriteWordDAO = new FavouriteWordDAO();
+            favouriteWordDAO.removeFavouriteWord(selectedWord.getWord());
+            wordList.remove(selectedWord);
+        }
+    }
+
+/* ================================================================================================================== */
+
+
+
+/* ============================== VIEW KHỞI TẠO ===================================================================== */
+    @FXML private BorderPane rootPane;
+    private ObservableList<WordEntry> wordList = FXCollections.observableArrayList();
+    private FilteredList<WordEntry> filteredData;
+    @FXML private TextField searchField;
+
     @FXML
     public void initialize() {
+        /** hiệu ứng nút bấm khi di chuột cho view **/
         applyHoverEffectToAllButtons(rootPane);
+        /** ------------------------------------------------------------------------------- **/
+
         confirmationDialog.setVisible(false);
 
         // hiện hộp thoại
@@ -190,5 +206,6 @@ public class FavouriteController extends BaseController {
         updateSwitchbutton();
     }
 
+/* ================================================================================================================== */
 }
 

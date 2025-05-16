@@ -1,102 +1,75 @@
-Ngày 05/04/2025 
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-3776AB?style=for-the-badge&logo=OpenJFX&logoColor=white)
+![GitHub](https://img.shields.io/badge/Repo-WordLy-blue?style=for-the-badge&logo=github)
+# Ứng dụng hỗ trợ học tiếng Anh sử dụng ngôn ngữ Java
 
-1 Cải thiện giao diện sử dụng CSS (Tông màu, cỡ chữ, nút bấm, ...)
+## 📑 Mục lục
+- [👨‍💻 Nhóm tác giả](#-nhóm-tác-giả)
+- [📝 Mô tả](#-mô-tả)
+- [🛠️ Hướng dẫn cài đặt](#-hướng-dẫn-cài-)
+- [📖 Hướng dẫn sử dụng](#-hướng-dẫn-sử-dụng)
+- [🚀 Tính năng nâng cao](#-tính-năng-nâng-cao)
+- [🎯 Dự định tương lai](#-dự-định-tương-lai)
+- [🤝 Đóng góp](#-đóng-góp)
+- [📅 Trạng thái dự án](#-trạng-thái-dự-án)
+- [📝 Ghi chú](#-ghi-chú)
 
-2 Tạo các Controller của mỗi giao diện khác nhau (Cái này tôi xử lí đc lỗi ko thể return đc main)
+## 👨‍💻 Nhóm tác giả
+**Nhóm Tam-Thái-Tử**  
+- Trịnh Bình Minh – `24022413`  
+- Phạm Văn Vương Thuận – `24022461`  
+- Phạm Danh Thái – `24022449`  
 
-3 Tạo được khung chương trình của mỗi giao diện chuyển đổi qua lại
+## 📝 Mô tả
+Ứng dụng được thiết kế để hỗ trợ học tiếng Anh, phát triển bằng **Java** với thư viện **JavaFX** và **CSS**, dựa trên mô hình **MVC**. Ứng dụng tích hợp các tính năng sau:
+- **Tra từ điển**: Sử dụng API từ [dictionaryapi.dev](https://api.dictionaryapi.dev) để tra từ, cung cấp **phiên âm**, **loại từ**, **âm thanh**, **định nghĩa**, và **ví dụ sử dụng**.
+- **Quiz ôn tập**: Các trò chơi giúp người dùng ôn tập từ vựng và kiến thức.
+- **Chat-bot**: Tích hợp API từ **Gemini** để luyện giao tiếp tiếng Anh.
+- **Tính năng nâng cao**: Hỗ trợ **Text-to-Speech**, tra từ đồng/trái nghĩa, và các công cụ học tập khác.
 
-4 Xóa API của google dịch - TextToSpeechController, TextToSpeechView 
+## 🛠️ Hướng dẫn cài đặt
+1. Cài đặt IntelliJ IDEA và Scene Builder.
+1. Tải mã nguồn từ [GitHub WordLy](https://github.com/PhThuan-tech/WordLy/tree/main)
+2. Mở project trong IDE.
+3. Chạy file chính là WordlyApplication để khởi động ứng dụng.
 
-Mỗi hôm tôi học thêm tí Javafx và CSS để xử lí các nút bấm nữa, mấy cái chức năng và giao diện nào Bình Minh với Thái chưa làm đc thì cứ Note tại đây hoặc nhắn trong nhóm để mn còn xử lí cùng
+## 📖 Hướng dẫn sử dụng
 
-Hiện tại thì merge r pull còn 1 số lỗi tôi chưa tìm đc cách xử lí ( tôi đọc trên github và chatgpt thì xóa mấy dòng ở các file lỗi sẽ fix đc, Mở github lên r mấy oog thấy có mấy chỗ bôi đỏ là dòng cần xóa)
+### 🔍 Tra từ (Tab Search)
+- Nhập từ cần tra để nhận **phiên âm**, **loại từ**, **âm thanh**, **định nghĩa**, và **ví dụ**.
+- Có thể tra cứu từ điển tiếng anh online và offline
+- Từ đã tra được lưu vào file `history.txt` và hiển thị trong tab **History**.
+- Người dùng có thể đánh dấu từ yêu thích, lưu vào file `favourite.txt` và xem trong tab **Favourite**.
 
-Ngày 08/04/2025 
+### ➕ Thêm từ mới (Tab Edit Word)
+- Người dùng có thể tự tạo và thêm từ mới vào cơ sở dữ liệu.
 
-1 Cải thiện giao diện CSS : các nút bấm , màu sắc.
+### 🎮 Tab Game (Trò chơi ôn tập)
+Ứng dụng cung cấp các mini-game tương tác để giúp bạn ôn tập từ vựng một cách hiệu quả:
+1.  **Definition Game**: Trò chơi trắc nghiệm, yêu cầu người chơi chọn định nghĩa đúng nhất cho một từ cho trước từ bốn lựa chọn.
+2.  **Wordle**: Một phiên bản của trò chơi đoán từ Wordle nổi tiếng, trong đó bạn cần đoán từ tiếng Anh dựa trên định nghĩa gợi ý (thường là tiếng Việt).
+3.  **Scramble Word**: Sắp xếp lại các chữ cái bị xáo trộn để tạo thành từ có nghĩa.
 
-2 Thêm chức năng Speak của mỗi từ vựng
+### 🚀 Tính năng nâng cao
+- 🗣️ **Text-to-Speech**: Chuyển đổi **âm thanh**, **hình ảnh**, hoặc **văn bản** thành bản dịch. Hỗ trợ đọc văn bản.
+- 🔍 **Word Finding**: Tra từ **đồng nghĩa** hoặc **trái nghĩa** trong tab Word Finding.
+- 🤖 **Chat Bot**: Luyện giao tiếp tiếng Anh với *Quái vật tiếng Anh* qua tab Chat Bot.
 
-3 Chỉnh sửa giao diện Favourite, History và How to Use,
+## 🎯 Dự định tương lai
+🚀 Tối ưu hiệu năng
 
-Merge vào testing ko bị lỗi =)) làm vc tuần 7 lần commit là ổn r mấy ôg - tôi ngồi code đau lưng quá 
+✨ Thêm mini game và dạng bài tập mới
 
+🎨 Nâng cấp giao diện thân thiện hơn với người dùng
 
-Ngày 09/04/2025 :
-1 Thêm chức năng hiển thị lịch ở tab History
+## 🤝 Đóng góp
+Mọi ý kiến đóng góp từ người dùng đều được đón nhận và sử dụng để cải thiện ứng dụng trong tương lai.
 
-Ngày 12/04/2025 :
+## 📅 Trạng thái dự án
+- **Ngày thực hiện**: 13/03/2025
+- **Ngày hoàn thành**: 07/05/2025
 
-1 Thêm giao diện GameView và các chức năng chuyển giao diện
-
-2 Cải thiện giao diện màn hình chính và searchView
-
-3 Sử dụng API của Amuse để tìm từ đồng nghĩa và tìm từ trái nghĩa ( nằm trong giao diện SearchView)
-
-4 Thêm / fix dependency jfonix , okhttp, google.com trong dependency và import trong module info ( xử lí bằng cách xóa depedency r copy chạy lại)
-
-!!! Cần cải thiện thêm phần chuyển giao diện nên dùng tính kế thừa thay vì copy_code trong từng giao diện khác nhau ( coming soon )
-
-Ngày 15/04/2025 :
-
-1 Tạo được lớp cơ sở BaseController để sử dụng lại đoạn code chuyển giao diện.
-
-2 Thái resolved được phần làm Edit and add Word và xử lí đc giao diện favourite.
-
-3 Thử nghiệm game đoán từ Wordle, chưa lấy đc từ ngẫu nhiên từ Dictionarydev hoặc APImuse.
-
-Ngày 20/04/2025 :
-
-1 Sửa đổi lại đồng bộ các giao diện. 
-
-2 Thêm các icons, audio ngắn trong game và màn hình chính
-
-3 Fix bug lỗi merge của thái 
-
-Ngày 28/04/2025
-
-1 Fix lại lỗi âm thanh nhạc troll bị đè vào nhau - nhạc troll nào thế, phần nhạc trol ở main tôi fix r mà.
-
-2 Tạo giao diện setting nhạc nền và fix đc lỗi chuyển giao diện nhạc ko bật
-
-3 Tạo game scramble word(đoán từ được tráo sẵn) và thêm nhiều tính năng khác
-
-4 sửa lại giao diện historyView và giao diện EditWord để xem các từ đã chỉnh sửa - phần word added tôi nhét ở favourite nhé.
-
-5 Tạo chat bot
-
-Ngày 30/04/2025
-
-1 Thái thêm phần translate, tts và đọc images dùng api Azure, xóa vài cái không quan trọng đi(không liên quan đến file của mng nhé).
-
-2 Tôi đã training lại con bot để nó thông minh hơn, giờ nó là quái vật Tiếng Anh nhé =))).
-
-3 Phần tts đang có vấn đề khi đọc quá nhiều văn bản -> application sẽ unresponse (đơ) cho đến khi đọc hết văn bản thì sẽ hết, cái này hình như do resquest lớn đâm ra app không load đc tôi sẽ tìm cách fix, nma ae fix đc thì alo nhé.
-
-4 Có vài giao diện đang hơi sơ sài + chuyển giao diện đang chưa mượt.
-
-Ngày  01.05.2025
-
-1. Bình Minh thêm chức năng dừng nhạc ở MAINVIEW khi ấn các nút khác.
-2. Cải thiện tốc độ xử lí khi thực hiện chuyển tab (Sử dụng THREAD - Xử lí đồng thời). Tạm thời mới áp dụng cho HISTORY TAB.
-3. BOT đang có vấn đề khi đang chat nếu user có ấn enter thì đang bị kéo theo câu trả lời (Tự test đi, không thể miêu tả kĩ được).
-
-Ngày 02/05/2025
-
-1. Thêm đọc image ocr, hủy voice.
-2. Training lại promt cho bot, promt của user.
-3. Sửa phần bình minh bảo, sẽ không kéo theo câu trả lời nữa.
-4. Giao diện đang sơ sài + chuyển vẫn không mượt :v
-5. Phần tts nếu cho nhiều từ, hết bị đơ, nhưng lại không dừng lại bằng nút được (ít từ thì nút dừng được). Tôi sẽ tìm cách fix.
-
-Ngày 03/05/2025
-1. Thay đổi giao diện toàn bộ các scence cho gọn.
-   
-2. Gộp các chức năng đặc biệt vào Advance Features cho đỡ nhiều nút
-
-3. Fix lỗi Game Wordle (loại bỏ DictionaryDev) và thêm gợi ý bằng tiếng việt
-  
-4. Mở rộng tính năng lưu các từ Syn and An vào trie
-Mấy file game_data của Bminh đag bị mất, t ko bt ai xóa nx chạy ko đc các game ấy.
-Animation chuyển giao diện thì t tìm hiểu bị chậm là do phần initialize ( kiểu theo cơ chế stack) nên là phần code trong intialize dài thì code sẽ chạy tuần tự rất lâu, nên là chia nhỏ ra snhé
+## 📝 Ghi chú
+- Ứng dụng được xây dựng và đóng góp bởi 3 sinh viên nhằm hỗ trợ học tiếng Anh.
+- Một số tính năng có thể còn hạn chế và sẽ được cải thiện trong tương lai.
+- Mã nguồn tham khảo từ các tài liệu, hướng dẫn, và công cụ hỗ trợ (AI, Google, v.v.).

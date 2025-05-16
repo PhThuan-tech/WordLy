@@ -134,7 +134,8 @@ public class WordleController extends BaseController {
             return;
         }
 
-        /* king qua ko hieu sao fix dc loi nay :v
+        /* kinh qua ko hieu sao fix dc loi nay :v
+            Loi nay la Ko co trong tu dien nhung dong ho van chay
         if (!game.isValidWord(guess)) {
             messageLabel.setText("Từ '" + guess + "' không có trong từ điển!");
             return;
@@ -218,7 +219,6 @@ public class WordleController extends BaseController {
 
     public void setGameDifficulty(GameDifficulty difficulty) {
         System.out.println("Setting difficulty to: " + difficulty.name());
-        // Stop current game/timer before changing difficulty
         if (countdownTimer != null) {
             countdownTimer.stop();
         }
@@ -237,9 +237,6 @@ public class WordleController extends BaseController {
         game.setDifficulty(difficulty.getWordLength(), difficulty.getMaxAttempts(), filteredList);
         resetGame();
     }
-
-
-    // --- FXML Action Handlers for Difficulty Buttons ---
 
     @FXML public void handleEasyMode() {
         setGameDifficulty(GameDifficulty.EASY);
@@ -301,7 +298,6 @@ public class WordleController extends BaseController {
         if (countdownTimer != null) {
             countdownTimer.stop();
         }
-        // Reset score and level
         currentLevel = 1;
         totalScore = 0;
         setGameDifficulty(currentDifficulty);
@@ -309,69 +305,49 @@ public class WordleController extends BaseController {
 
     // --- UI Animation ---
     private void animateCell(Label cell) {
-        // Create a scale transition for a pop-out effect
         ScaleTransition st = new ScaleTransition(Duration.millis(200), cell);
-        st.setFromX(0.8); // Start slightly smaller
+        st.setFromX(0.8);
         st.setFromY(0.8);
-        st.setToX(1.0);   // Scale back to normal size
+        st.setToX(1.0);
         st.setToY(1.0);
-        st.setCycleCount(1); // Play once
-        st.play(); // Start the animation
+        st.setCycleCount(1);
+        st.play();
     }
 
     private Label getCell(int row, int col) {
-        // Iterate through all children in the grid pane
         for (javafx.scene.Node node : grid.getChildren()) {
-            // Get row and column indices, defaulting to 0 if not set (though typically set by grid.add)
             Integer r = GridPane.getRowIndex(node);
             Integer c = GridPane.getColumnIndex(node);
-
-            // Check if the current node is at the desired row and column
-            // Handle null indices by defaulting to 0, as children added without explicit indices might be at 0,0
             if ((r == null ? 0 : r) == row && (c == null ? 0 : c) == col) {
-                return (Label) node; // Cast the node to a Label and return it
+                return (Label) node;
             }
         }
-        return null; // Return null if no cell found at the given coordinates
+        return null;
     }
     @FXML
     public void handleHint() {
         System.out.println("Hint button clicked. Positional hints used: " + game.getPositionalHintCount());
-
-        // Check if a hint can be used before attempting to get one
         if (!game.canUsePositionalHint()) {
             messageLabel.setText("Đã dùng hết " + game.getMaxPositionalHints() + " lượt gợi ý vị trí hoặc không còn vị trí nào để gợi ý.");
-            hintButton.setDisable(true); // Ensure button is disabled
-            return; // Do not proceed if no hints are available
+            hintButton.setDisable(true);
+            return;
         }
 
-        // Request a positional hint index from the game logic
         int indexToReveal = game.getPositionalHintIndex();
-
         if (indexToReveal != -1) {
-            // Hint successfully provided (index is valid)
             char hintChar = game.getSecretWord().charAt(indexToReveal);
             messageLabel.setText("💡 Gợi ý vị trí: Kí tự thứ " + (indexToReveal + 1) + " là '" + Character.toUpperCase(hintChar) + "'");
-
-            // Optional: Deduct score for using hint
-            // This score deduction is handled in the Controller as it affects totalScore (UI state)
-            totalScore = Math.max(0, totalScore - 15); // Deduct some points, ensure score doesn't go below 0
-            scoreLabel.setText("Score: " + totalScore); // Update score display on UI
-
+            totalScore = Math.max(0, totalScore - 15);
+            scoreLabel.setText("Score: " + totalScore);
             System.out.println("Positional hint given at index " + indexToReveal + ". Hint count: " + game.getPositionalHintCount());
 
         } else {
-            // This case should ideally be caught by canUsePositionalHint(), but included defensively.
             messageLabel.setText("Không còn gì để gợi ý vị trí nữa rồi 🫡");
             System.err.println("handleHint called but getPositionalHintIndex returned -1 (no available hint).");
         }
-
-        // After attempting to give a hint, check if the button should now be disabled
-        // This handles disabling the button *after* the last hint is used.
         if (!game.canUsePositionalHint()) {
             hintButton.setDisable(true);
-            // Append a message indicating hints are exhausted if a hint was just given
-            if (indexToReveal != -1) { // Only append if a hint was actually given
+            if (indexToReveal != -1) {
                 messageLabel.setText(messageLabel.getText() + " (Đã dùng hết " + game.getMaxPositionalHints() + " lượt gợi ý vị trí)");
             }
         }
@@ -396,6 +372,7 @@ public class WordleController extends BaseController {
             hintLabel.setText("👉 Không có gợi ý cho từ này 🥲");
         }
     }
+
     // phan am thanh de xu li nhat =))
     private void playWinSound() {
         URL winSoundURL = getClass().getResource("/com/example/wordly/audio/WinGame.mp3");
